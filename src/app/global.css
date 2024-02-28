@@ -1,0 +1,333 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0");
+
+:root {
+  --white: #ffffff;
+  --red: #ff0000;
+  --black: #000000;
+  --black-o80: rgba(0, 0, 0, 0.8);
+  --green: #119726;
+  --primary-color-1: #2a7ee4;
+  --primary-color-2: #1559ab;
+  --primary-color-3: #02e5f6;
+  --primary-color-4: #092a3b;
+  --primary-color-5: #fbb72c;
+  --primary-color-6: #f09235;
+  --white-gray: #f9f9f9;
+  --bg-white: #f1f1f1;
+  --bg-gray: #f5f6f8;
+  --del-gray: #868181;
+  --bg-white-o30: rgba(241, 241, 241, 0.3);
+  --bg-white-o50: rgba(241, 241, 241, 0.5);
+  --bg-white-o80: rgba(241, 241, 241, 0.8);
+  --bg-blue-o10: rgba(42, 126, 228, 0.1);
+  --bg-blue-o30: rgba(42, 126, 228, 0.3);
+  --outline-gray: #eaeaea;
+  --dark-gray: #2c2c2c;
+  --dark-gray-2: #1e1e1e;
+  --dark-gray-70: #4a4a4a;
+  --dark-gray-o50: rgba(44, 44, 44, 0.5);
+  --luminos-blue: #0235f6;
+  --pink: #ff685f;
+  --bg-pink: #fffbf8;
+  --outline-pink: #f9ede5;
+  --dollar-red: #d0021c;
+  --dollar-red2: #ea4c2d;
+  --fire-orange: #ff9f40;
+  --yellow-light: #ffefdf;
+  --dark-blue: #114a91;
+
+  --scroll-thumb: #bababa;
+  --scroll-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 -1px rgba(0, 0, 0, 0.1) inset;
+
+  --border-color-1: rgba(0, 0, 0, 0.175);
+  --box-shadow-1: 0 8px 60px 0 rgba(103, 151, 255, 0.11),
+    0 12px 90px 0 rgba(103, 151, 255, 0.11);
+
+  --dark1: #0000004d;
+  --dark2: #181c20;
+  --dark3: #212529;
+  --dark4: #2d3135;
+  --dark5: #424549;
+  --dark6: #404346;
+  --dark7: #9c9c9c;
+  --dark8: #dae0e7;
+  --dark9: #262a2e;
+  --dark10: #363636;
+
+  /* --red1: #ffdab9; */
+  --red1: rgb(255, 8, 0, 0.1);
+  --red2: #fa8072;
+  --red3: #fe2712;
+  --red4: #ff0800;
+  --red5: #dd3545;
+  --red6: #c6303e;
+  --red7: #ae0c00;
+  --red8: #92000a;
+  --red9: #550000;
+  --red10: #440000;
+  --red11: #330000;
+
+  --green1: #e6f1d8;
+  --green2: #e5f8ed;
+  --green3: #afd788;
+  --green4: #00ac47;
+  --green5: #28a745;
+  --green6: #24963e;
+  --green7: #006600;
+  --green8: #005500;
+  --green9: #004400;
+  --green10: #003300;
+  --green11: #002200;
+  --green12: #001100;
+
+  --blue1: #e9edf2;
+  --blue2: #add8e6;
+  --blue3: #00aae4;
+  --blue4: #0892d0;
+  --blue5: #007aff;
+  --blue6: #377dff;
+  --blue7: #004f98;
+  --blue8: #0033aa;
+  --blue9: #1034a6;
+  --blue10: #191970;
+  --blue11: #000036;
+
+  --yellow1: rgb(255, 193, 7, 0.1);
+  --yellow5: #ffc107;
+  --yellow6: #e5ad06;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-white);
+}
+
+::-webkit-scrollbar {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark7);
+}
+
+html {
+  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+main {
+  margin: 154px auto 24px;
+  min-height: calc(100vh - (280px + 154px + 24px));
+}
+
+h1 {
+  /* 32px */
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  /* 24px */
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  /* 20px */
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h4 {
+  /* 18px */
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+h5 {
+  /* 16px */
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: justify;
+}
+
+ul li {
+  list-style: none;
+}
+
+.btn {
+  text-decoration: none;
+  cursor: pointer;
+  height: 48px;
+  display: inline-block;
+  padding: 0;
+  border-radius: 8px;
+}
+
+.btn .status-layer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: inherit;
+}
+
+.btn .status-layer span {
+  /* font-weight: bold; */
+  margin: auto;
+}
+
+.btn:hover {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  box-shadow: 0 -1px 3px 1px rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:active .status-layer {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn--filled.pri {
+  background-color: var(--primary-color-1);
+  color: white;
+  font-size: 16px;
+  padding: 0 24px 0 24px;
+}
+
+.btn.btn--filled.pri:hover {
+  background-color: var(--primary-color-2);
+}
+
+.btn.btn--filled.sec {
+  background-color: var(--primary-color-6);
+  color: white;
+  font-size: 16px;
+  padding: 0 24px 0 24px;
+}
+
+.btn.btn--filled.sec:hover {
+  background-color: orange;
+}
+
+.btn.btn--outlined.pri {
+  background-color: white;
+  color: var(--primary-color-1);
+  border: 1px solid var(--primary-color-1);
+  font-size: 16px;
+  padding: 0 24px 0 24px;
+}
+
+.btn.btn--outlined.sec {
+  background-color: white;
+  color: var(--primary-color-6);
+  border: 1px solid var(--primary-color-6);
+  font-size: 16px;
+  padding: 0 24px 0 24px;
+}
+
+.btn-admin {
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--outline-gray);
+  font-size: 0.875rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-admin:focus {
+  box-shadow: 0 0 0 0 rgba(var(--dark7), 0.5);
+}
+
+.btn-admin p {
+  padding: 0 0 0 4px;
+  text-align: center;
+}
+
+.btn-primary {
+  color: var(--white);
+  background-color: var(--blue6);
+}
+
+.btn-primary:hover {
+  background-color: var(--blue7);
+}
+
+.btn-primary:active {
+  background-color: var(--blue5);
+  border-color: var(--blue9);
+}
+
+.btn-white {
+  color: var(--dark7);
+  border-color: var(--outline-gray);
+}
+
+.btn-white:hover {
+  box-shadow: inset 0px 0px 0px 1px var(--primary-color-2);
+  color: var(--primary-color-2);
+}
+
+.btn-outline-danger {
+  color: var(--dollar-red);
+  border-color: var(--dollar-red);
+}
+
+.btn-outline-danger:hover {
+  color: var(--white);
+  background-color: var(--dollar-red);
+  border-color: var(--dollar-red);
+}
+
+.btn-outline-danger:active {
+  background-color: var(--dollar-red);
+  border-color: var(--dollar-red);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
