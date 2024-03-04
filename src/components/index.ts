@@ -1,1 +1,1 @@
-export { default as Carousel } from "./carousel";
+export { default as CustomerCarousel } from "./customer/carousel";

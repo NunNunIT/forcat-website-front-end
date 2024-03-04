@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 // use components
-import { Footer, Header } from "../partials";
+import { CustomerFooter, CustomerHeader } from "@/partials";
 
 // use styles
 import "./global.css";
@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header></Header>
+        <CustomerHeader></CustomerHeader>
         {children}
-        <Footer></Footer>
+        <CustomerFooter></CustomerFooter>
       </body>
     </html>
   );

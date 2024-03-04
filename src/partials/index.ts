@@ -1,2 +1,2 @@
-export { default as Footer } from "./footer";
-export { default as Header } from "./header";
+export { default as CustomerFooter } from "./customer/footer";
+export { default as CustomerHeader } from "./customer/header";
