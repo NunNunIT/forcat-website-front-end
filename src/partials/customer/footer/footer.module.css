@@ -1,11 +1,13 @@
 .footer-container {
   width: 100%;
-  height: 280px;
+  min-height: 280px;
+
   display: flex;
   flex-direction: column;
-  background-color: var(--primary-color-2);
   align-items: center;
   justify-content: space-between;
+  
+  background-color: var(--primary-color-2);
 }
 
 .footer-container p {
@@ -40,65 +42,69 @@
 }
 
 .footer--top {
-  width: 80%;
-  max-width: 1152px;
+  width: min(100%, 1152px);
+  padding-inline: 1rem;
+  padding-top: 2rem;
+
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 32px;
-  /* gap: auto; */
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer__company-name {
+  width: calc((100% + 1rem) * 0.25 - 1rem);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  width: 22%;
-  margin-right: 5%;
+  gap: .75rem;
 }
 
 .footer__company-name--disable {
+  width: 100%;
+
   display: none;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  width: 100%;
+  gap: .25rem;
 }
 
 .footer__content--column {
-  width: 45%;
+  width: calc((100% + 1rem) * 0.25 - 1rem);
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: .75rem;
 }
 
 .footer__help-content--column {
-  width: 50%;
+  width: calc((100% + 1rem) * 0.25 - 1rem);
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  text-align: start;
+  gap: .75rem;
 }
 
 .footer__content--column2 {
+  width: calc((100% + 1rem) * 0.25 - 1rem);
+
   display: flex;
-  width: 42%;
-  justify-content: space-evenly;
-  gap: 4%;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  gap: 1rem;
 }
 
 .footer__contact-content--column {
-  width: 24%;
+  width: calc((100% + 1rem) * 0.25 - 1rem);
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 0;
+  gap: .75rem;
 }
 
 .footer__logo {
-  object-fit: cover;
-  height: 64px;
+  width: min(100%, 25rem);
+  object-fit: contain;
 }
 
 .footer__content-title {
@@ -134,7 +140,8 @@
 }
 
 .footer__container--bottom {
-  width: 80%;
+  width: 100%;
+  padding-inline: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -150,25 +157,23 @@
 
 @media only screen and (max-width: 64rem) {
   .footer__logo {
-    height: 52px;
+    /* height: 52px; */
   }
 
   .footer__company-name {
-    width: auto;
-    margin-right: 0;
+    width: calc((100% + 1rem) * 0.5 - 1rem);
   }
 
   .footer__content--column {
-    width: 60%;
+    width: calc((100% + 1rem) * 0.5 - 1rem);
+  }
+
+  .footer__help-content--column {
+    width: calc((100% + 1rem) * 0.5 - 1rem);
   }
 
   .footer__contact-content--column {
-    width: 30%;
-  }
-
-  .footer__content--column2 {
-    justify-content: space-around;
-    gap: 12px;
+    width: calc((100% + 1rem) * 0.5 - 1rem);
   }
 }
 
