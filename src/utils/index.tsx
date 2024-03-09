@@ -2,4 +2,8 @@ function printHello() {
   console.log("Helllllllo");
 }
 
-export { printHello };
+function parseNumToCurrencyStr(price: number) {
+  return price.toLocaleString("vi-VN");
+}
+
+export { printHello, parseNumToCurrencyStr };
