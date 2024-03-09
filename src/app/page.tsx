@@ -9,10 +9,13 @@ import "./page.css";
 export default function Home() {
   return (
     <>
-      {/* <CustomerSlider></CustomerSlider>
-      <CustomerCategories></CustomerCategories> */}
-      {/* <CustomerCarousel></CustomerCarousel> */}
-      <main className="content-container">This is main content</main>
+      <CustomerSlider></CustomerSlider>
+      <CustomerCategories></CustomerCategories> 
+      
+      <main className="content-container">
+        This is main content
+        <CustomerCarousel></CustomerCarousel>
+      </main>
     </>
   );
 }
