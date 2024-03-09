@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Logo from "@/components/common/logo";
+import Logo from "@/components/customer/logo";
 
 // use bind from classnames
 import classNames from "classnames/bind";
@@ -27,7 +27,6 @@ export default function Footer() {
             src="/imgs/set-logo.png"
             alt="social-media" />
         </div>
-        {/* <div className={cx("footer__content--column2")}> */}
         <div className={cx("footer__content--column")}>
           <div className={cx("footer__content-title")}>
             <h3>VỀ FORCAT.</h3>
@@ -59,7 +58,6 @@ export default function Footer() {
               Chính sách trả hàng & hoàn tiền
             </a>
           </div>
-          {/* </div> */}
         </div>
         <div className={cx("footer__contact-content--column")}>
           <div className={cx("footer__content-title")}>

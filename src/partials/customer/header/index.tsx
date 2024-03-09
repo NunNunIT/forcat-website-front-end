@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Logo, StarRating } from "@/components/common";
+import { Logo, StarRating } from "@/components/customer";
 import {
   HeaderMenuProductItemProps,
   HeaderMenuSubCategoryItemProps,
