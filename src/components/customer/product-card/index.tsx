@@ -8,7 +8,7 @@ import styles from "./style.module.css";
 // use classnames
 const cx = classNames.bind(styles);
 
-export default function Product() {
+export default function CustomerProductCard() {
   // const { name, url, description } = props;
   return (
     <div className={cx("product-card")}>

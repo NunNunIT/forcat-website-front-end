@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0");
+@import 'material-icons/iconfont/material-icons.css';
 
 :root {
   --white: #ffffff;
@@ -134,14 +133,14 @@ body {
 }
 
 main {
-  margin: 154px auto 24px;
+  margin: 178px auto 24px;
   min-height: calc(100vh - (280px + 154px + 24px));
 }
 
 h1 {
   /* 32px */
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h2 {

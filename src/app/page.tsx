@@ -13,7 +13,7 @@ import { CustomerProductCard } from "@/components";
 // use css
 import "./page.css";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className="content-container">
       {/* <CustomerSlider></CustomerSlider>
