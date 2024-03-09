@@ -584,6 +584,8 @@ img.dropdown-cart__img--empty {
       background-color: var(--white);
       box-shadow: 0px .5rem .5rem var(--black-o20);
 
+      cursor: default;
+
       & .cate-dropdown__wrapper {
         & .cate-dropdown__info {
           width: calc((100% - .75rem) * .25 - .75rem);
