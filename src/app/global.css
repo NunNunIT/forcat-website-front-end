@@ -54,6 +54,7 @@
   --dark8: #dae0e7;
   --dark9: #262a2e;
   --dark10: #363636;
+  --dark11: #d7d7d7; 
 
   /* --red1: #ffdab9; */
   --red1: rgb(255, 8, 0, 0.1);
@@ -106,7 +107,7 @@
 }
 
 body {
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
