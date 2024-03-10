@@ -1,17 +1,12 @@
 @import 'material-icons/iconfont/material-icons.css';
 
 :root {
+  /* some var */
   --white: #ffffff;
   --red: #ff0000;
   --black: #000000;
   --black-o80: rgba(0, 0, 0, 0.8);
   --green: #119726;
-  --primary-color-1: #2a7ee4;
-  --primary-color-2: #1559ab;
-  --primary-color-3: #02e5f6;
-  --primary-color-4: #092a3b;
-  --primary-color-5: #fbb72c;
-  --primary-color-6: #f09235;
   --white-gray: #f9f9f9;
   --bg-white: #f1f1f1;
   --bg-gray: #f5f6f8;
@@ -43,6 +38,41 @@
   --box-shadow-1: 0 8px 60px 0 rgba(103, 151, 255, 0.11),
     0 12px 90px 0 rgba(103, 151, 255, 0.11);
 
+  /* primary */
+  --primary-mau0-1: #7A3B00;
+  --primary-mau0-2: #AB6E48;
+  --primary-mau0-3: #FFC988;
+  --primary-mau0-4: #7F9F80;
+  --primary-mau0-5: #C4D6B0;
+
+  --primary-mau1-1: #FAD46A;
+  --primary-mau1-2: #FFF4D8;
+  --primary-mau1-3: #6C5442;
+  --primary-mau1-4: #619D5C;
+  --primary-mau1-5: #DAECE8;
+
+  --primary-mau2-1: #51453C;
+  --primary-mau2-2: #766E68;
+  --primary-mau2-3: #FFFFFF;
+  --primary-mau2-4: #D6D0C6;
+  --primary-mau2-5: #917E70;
+  --primary-mau2-6: #6DC1ED;
+
+  --primary-mau3-1: #64261B;
+  --primary-mau3-2: #92A898;
+  --primary-mau3-3: #FDF6E4;
+  --primary-mau3-4: #FFD569;
+  --primary-mau3-5: #859874;
+  --primary-mau3-6: #DAECE8;
+
+  --primary-mau4-1: #3D1E00;
+  --primary-mau4-2: #AB6E48;
+  --primary-mau4-3: #FFC988;
+  --primary-mau4-4: #619D5C;
+  --primary-mau4-5: #C4D6B0;
+  --primary-mau4-6: #DAECE8;
+
+  /* dark */
   --dark1: #0000004d;
   --dark2: #181c20;
   --dark3: #212529;
@@ -54,7 +84,7 @@
   --dark9: #262a2e;
   --dark10: #363636;
 
-  /* --red1: #ffdab9; */
+  /* red */
   --red1: rgb(255, 8, 0, 0.1);
   --red2: #fa8072;
   --red3: #fe2712;
@@ -67,6 +97,7 @@
   --red10: #440000;
   --red11: #330000;
 
+  /* green */
   --green1: #e6f1d8;
   --green2: #e5f8ed;
   --green3: #afd788;
@@ -80,6 +111,7 @@
   --green11: #002200;
   --green12: #001100;
 
+  /* blue */
   --blue1: #e9edf2;
   --blue2: #add8e6;
   --blue3: #00aae4;
@@ -92,6 +124,7 @@
   --blue10: #191970;
   --blue11: #000036;
 
+  /* yellow */
   --yellow1: rgb(255, 193, 7, 0.1);
   --yellow5: #ffc107;
   --yellow6: #e5ad06;
