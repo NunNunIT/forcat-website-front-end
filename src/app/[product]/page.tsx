@@ -2,7 +2,11 @@
 import Link from "next/link";
 
 // import components
-import { CustomerRating, CustomerRatingFull } from "@/components";
+import {
+  CustomerProductSlider,
+  CustomerRating,
+  CustomerRatingFull,
+} from "@/components";
 
 // import css
 import "./page.css";
@@ -16,55 +20,7 @@ export default function ProductPage({
     <main className="product">
       <div className="product-content">
         <div className="product-content--left product-content-left">
-          <section className="product-content-left__slider slider">
-            <img
-              className="slider__main-image"
-              src="/imgs/test.png"
-              alt="Slider main image"
-            />
-            <div className="slider__thumbnails">
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-              <img
-                className="slider__thumbnail"
-                src="/imgs/test.png"
-                alt="Slider main image"
-              />
-            </div>
-          </section>
+          <CustomerProductSlider></CustomerProductSlider>
           <section className="product-content-left__specifications specifications">
             <div className="specifications__title">
               <h4>Thông số kỹ thuật</h4>

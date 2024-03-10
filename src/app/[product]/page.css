@@ -28,33 +28,6 @@ section {
     top: 170px;
 }
 
-.slider {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.slider__main-image {
-    width: 100%;
-    border: 1px solid var(--outline1);
-    border-radius: 6px;
-    object-fit: contain;
-}
-
-.slider__thumbnails {
-    overflow: hidden;
-    display: flex;
-    gap: 8px;
-}
-
-.slider__thumbnail {
-    width: 18%;
-    padding: 2px;
-    border: 1px solid var(--outline1);
-    border-radius: 4px;
-    object-fit: contain;
-}
-
 .specifications {
     padding-top: 8px;
     border-top: 2px solid var(--outline1);
