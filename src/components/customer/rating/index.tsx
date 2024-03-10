@@ -7,7 +7,12 @@ import styles from "./styles.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function CustomerRating({ fontSize }: { fontSize: TRating }) {
+export default function CustomerRating({
+  fontSize,
+  ...props
+}: {
+  fontSize: TRating;
+}) {
   const starStyle = {
     fontSize: fontSize,
   };

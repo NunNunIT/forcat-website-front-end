@@ -2,20 +2,13 @@
 import Link from "next/link";
 
 // import components
-import {
-  CustomerProductSlider,
-  CustomerRating,
-  CustomerRatingFull,
-} from "@/components";
+import { CustomerProductSlider, CustomerRating } from "@/components";
+import { ProductBuyForm } from "./components";
 
 // import css
 import "./page.css";
 
-export default function ProductPage({
-  params,
-}: {
-  params: { product: string };
-}) {
+export default function ProductPage() {
   return (
     <main className="product">
       <div className="product-content">
@@ -76,109 +69,7 @@ export default function ProductPage({
             src="/imgs/bow.png"
             alt="This is a bow"
           />
-          <section className="product-content-right__buy-info buy-info">
-            <h1 className="buy-info__product-name">
-              Điện thoại Xiaomi Redmi Note 12 (8GB/128GB)
-            </h1>
-            <CustomerRatingFull fontSize="24px"></CustomerRatingFull>
-            <div className="buy-info__unit-price-div">
-              <p className="buy-info__unit-price">3.000.000đ</p>
-              <p className="buy-info__discount-amount">-20%</p>
-            </div>
-            <div className="buy-info__variants variants">
-              <h4 className="variants__title">Loại sản phẩm</h4>
-              <div className="variants__group">
-                <Link className="variants__item variant-item" href="#">
-                  <img
-                    className="variant-item__tick"
-                    src="/imgs/tick.png"
-                    alt="This is a tick icon"
-                  />
-                  <img
-                    className="variant-item__image"
-                    src="/imgs/test.png"
-                    alt="Variant item"
-                  />
-                  <span className="variant-item__name">7 màu</span>
-                </Link>
-                <Link className="variants__item variant-item" href="#">
-                  <img
-                    className="variant-item__image"
-                    src="/imgs/test.png"
-                    alt="Variant item"
-                  />
-                  <span className="variant-item__name">7 màu</span>
-                </Link>
-                <Link className="variants__item variant-item" href="#">
-                  <img
-                    className="variant-item__image"
-                    src="/imgs/test.png"
-                    alt="Variant item"
-                  />
-                  <span className="variant-item__name">7 màu</span>
-                </Link>
-                <Link className="variants__item variant-item" href="#">
-                  <img
-                    className="variant-item__image"
-                    src="/imgs/test.png"
-                    alt="Variant item"
-                  />
-                  <span className="variant-item__name">7 màu cầu vồng </span>
-                </Link>
-                <Link className="variants__item variant-item" href="#">
-                  <img
-                    className="variant-item__image"
-                    src="/imgs/test.png"
-                    alt="Variant item"
-                  />
-                  <span className="variant-item__name">7 màu</span>
-                </Link>
-              </div>
-            </div>
-            <div className="buy-info__quantity">
-              <h4>Số lượng</h4>
-              <div className="buy-info__quantity-input-group quantity-input-group">
-                <button
-                  className="quantity-input-group__btn-remove btn-quantity"
-                  type="button">
-                  <span className="material-icons-round">remove</span>
-                </button>
-                <input
-                  className="quantity-input-group__input input-quantity"
-                  type="text"
-                  value="1"
-                />
-                <button
-                  className="quantity-input-group__btn-add btn-quantity"
-                  type="button">
-                  <span className="material-icons-round">add</span>
-                </button>
-                <p className="buy-info__is-stock">789 sản phẩm có thể mua</p>
-              </div>
-            </div>
-            <div className="buy-info__total-price-div">
-              <h4>Tạm tính</h4>
-              <p className="buy-info__total-price">3.000.000đ</p>
-            </div>
-            <div className="buy-info__buy-btns buy-btns">
-              <button
-                className="buy-btns__add-cart add-cart-btn buy-btn"
-                type="button">
-                <span className="material-icons-round fill buy-btn-icon">
-                  add_shopping_cart
-                </span>
-                <span className="buy-btn-text">Thêm vào giỏ hàng</span>
-              </button>
-              <button
-                className="buy-btns__buy-now buy-now-btn buy-btn"
-                type="button">
-                <span className="material-icons-round fill buy-btn-icon">
-                  savings
-                </span>
-                <span className="buy-btn-text">Mua ngay</span>
-              </button>
-            </div>
-          </section>
+          <ProductBuyForm></ProductBuyForm>
           <section className="product-content-right__product-description product-description">
             <h4 className="product-description__title">Mô tả sản phẩm</h4>
             <div className="product-description__content product-description-content">
