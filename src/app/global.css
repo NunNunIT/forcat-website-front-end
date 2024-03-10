@@ -72,6 +72,15 @@
   --primary-mau4-5: #C4D6B0;
   --primary-mau4-6: #DAECE8;
 
+  /* outline */
+  --outline1: rgb(235, 235, 240);
+  --outline2: #FF4343;
+
+  /* background */
+  --bg1: rgba(36, 36, 36, 0.7);
+  --bg2: rgb(245, 245, 250);
+
+
   /* dark */
   --dark1: #0000004d;
   --dark2: #181c20;
@@ -83,6 +92,7 @@
   --dark8: #dae0e7;
   --dark9: #262a2e;
   --dark10: #363636;
+  --dark11: rgb(128, 128, 137);
 
   /* red */
   --red1: rgb(255, 8, 0, 0.1);
