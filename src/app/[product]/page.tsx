@@ -3,7 +3,7 @@ import Link from "next/link";
 
 // import components
 import { CustomerProductSlider, CustomerRating } from "@/components";
-import { ProductBuyForm } from "./components";
+import { ProductBuyForm } from "./partials";
 
 // import css
 import "./page.css";

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames/bind";
 
 // import css
-import styles from "./styles.module.css";
+import styles from "./product-variant.module.css";
 
 // use css
 const cx = classNames.bind(styles);

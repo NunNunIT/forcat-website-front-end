@@ -2,6 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
+import { useState } from "react";
 
 // import components
 import {
@@ -17,6 +18,12 @@ import styles from "./styles.module.css";
 const cx = classNames.bind(styles);
 
 export default function ProductBuyForm() {
+  const [quantityValue, setQuantityValue] = useState(1);
+
+  const handleQuantityChange = (changedValue: number) => {
+    setQuantityValue(changedValue);
+  };
+
   return (
     <section className={cx("product-buy-form", "product")}>
       <h1 className={cx("product__name")}>
@@ -70,7 +77,13 @@ export default function ProductBuyForm() {
       </div>
       <div className={cx("product__quantity")}>
         <h4>Số lượng</h4>
-        <CustomerQuantityInputGroup></CustomerQuantityInputGroup>
+        <CustomerQuantityInputGroup
+          initValue={{
+            defaultValue: quantityValue,
+            minValue: 1,
+            maxValue: 100,
+            onValueChange: handleQuantityChange,
+          }}></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>789 sản phẩm có thể mua</p>
       </div>
       <div className={cx("product__total-price-div")}>
@@ -78,22 +91,18 @@ export default function ProductBuyForm() {
         <p className={cx("product__total-price")}>3.000.000đ</p>
       </div>
       <div className={cx("product__buy-btns", "buy-btns")}>
-        <button
-          className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}
-          type="button">
-          <span className={cx("material-icons-round", "fill", " buy-btn-icon")}>
+        <div className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}>
+          <span className={cx("material-icons-round", " buy-btn-icon")}>
             add_shopping_cart
           </span>
-          <span className={cx("buy-btn-text")}>Thêm vào giỏ hàng</span>
-        </button>
-        <button
-          className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}
-          type="button">
-          <span className={cx("material-icons-round", "fill", "buy-btn-icon")}>
+          <span className={cx("buy-btn-text")}>Giỏ hàng</span>
+        </div>
+        <div className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}>
+          <span className={cx("material-icons-round", "buy-btn-icon")}>
             savings
           </span>
           <span className={cx("buy-btn-text")}>Mua ngay</span>
-        </button>
+        </div>
       </div>
     </section>
   );

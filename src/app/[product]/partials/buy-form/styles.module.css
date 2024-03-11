@@ -1,4 +1,4 @@
-.product-buy-form {
+.product {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -60,11 +60,14 @@
 }
 
 .buy-btn {
-    padding: 8px 12px;
-    border-radius: 4px;
+    cursor: pointer;
+    height: 48px;
+    padding: 0px 12px;
+    border-radius: 8px;
     background-color: transparent;
     color: var(--white);
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 12px;
 }

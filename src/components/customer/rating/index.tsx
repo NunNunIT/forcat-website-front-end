@@ -2,7 +2,7 @@
 import classNames from "classnames/bind";
 
 // import css
-import styles from "./styles.module.css";
+import styles from "./rating.module.css";
 
 // use css
 const cx = classNames.bind(styles);

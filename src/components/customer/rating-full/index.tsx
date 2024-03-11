@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { CustomerRating } from "@/components";
 
 // import css
-import styles from "./styles.module.css";
+import styles from "./rating-full.module.css";
 
 // use css
 const cx = classNames.bind(styles);
