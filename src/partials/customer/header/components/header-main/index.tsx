@@ -35,7 +35,7 @@ export default function HeaderMain() {
           title="Giỏ hàng"
         >
           <div className={cx("header__cart")}>
-            <span className="material-icons-outlined">shopping_cart</span>
+            <span className="material-icons">shopping_cart</span>
           </div>
         </a>
         <div className={cx("dropdown-cart__content-container")}>

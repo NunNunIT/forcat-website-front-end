@@ -9,7 +9,7 @@ export default function Logo(props: LogoProps) {
   return (
     <Link href="/">
       <img className={props.className}
-        src={`/imgs/logo${props.white ? '-white' : ''}.png`}
+        src={`/logo${props.white ? '-white' : '-brown'}.png`}
         alt="Logo" />
     </Link>
   )

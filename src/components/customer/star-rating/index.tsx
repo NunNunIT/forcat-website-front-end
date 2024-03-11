@@ -3,6 +3,11 @@ interface starRatingProps {
   className?: string;
 }
 
+// use bind css class to the component
+import classNameNames from "classnames/bind";
+import styles from "./star-rating.module.css";
+const cx = classNameNames.bind(styles);
+
 export default function StarRating(props: starRatingProps) {
   let rating = props.rating;
 
@@ -13,15 +18,15 @@ export default function StarRating(props: starRatingProps) {
         .map((_, index) => {
           if (rating >= 0.75) {
             rating--;
-            return <span key={index} className="material-icons">grade</span>; // Filled star
+            return <span key={index} className={`material-icons ` + cx("star")}>grade</span>; // Filled star
           }
           
           if (rating >= 0.25) { 
             rating = 0;
-            return <span key={index} className="material-icons-outlined">star_half</span>; // Half star
+            return <span key={index} className={`material-icons-outlined ` + cx("star")}>star_half</span>; // Half star
           }
 
-          return <span key={index} className="material-icons-outlined">grade</span>; // Outlined star
+          return <span key={index} className={`material-icons-outlined ` + cx("star")}>grade</span>; // Outlined star
         })}
     </div>
   );
