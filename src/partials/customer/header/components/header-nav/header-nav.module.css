@@ -56,10 +56,12 @@
 }
 
 .dropdown-help__content-container {
-  display: none;
-  position: absolute;
-  z-index: 1;
   width: 17.5rem;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+
+  display: none;
   border-radius: 0 0 .75rem .75rem;
   padding-top: .5rem;
 }
@@ -269,6 +271,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .header__nav {
+    margin-bottom: .75rem;
+  }
+
   .header__nav-container {
     padding-inline: .75rem;
   }

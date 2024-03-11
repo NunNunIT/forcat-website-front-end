@@ -56,6 +56,30 @@ const headerCategories: (CategoryProps)[] = [
             price: 10000,
             rating: 4.6,
           },
+          {
+            id: "5",
+            name: "Hạt 5",
+            price: 10000,
+            rating: 4.6,
+          },
+          {
+            id: "5",
+            name: "Hạt 5",
+            price: 10000,
+            rating: 4.6,
+          },
+          {
+            id: "5",
+            name: "Hạt 5",
+            price: 10000,
+            rating: 4.6,
+          },
+          {
+            id: "5",
+            name: "Hạt 5",
+            price: 10000,
+            rating: 4.6,
+          },
         ]
       },
       {

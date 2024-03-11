@@ -66,7 +66,8 @@ function HeaderMenuSubCategoryItem(props: HeaderMenuSubCategoryItemProps): JSX.E
     <li key={id} className={cx("cate-dropdown__wrapper")}>
       <a className={cx("cate-dropdown__info")} href={`/search/results?category_id=${id}`}>
         <img className={cx("cate-dropdown__img")} src={`/imgs/categories/${id}.png`} alt={`${id}_Image`} />
-        <span>{title} ({products?.length ?? 0})</span>
+        <span className={cx("cate-dropdown__sub-cate")}>{title}</span>{" "}
+        <span>({products?.length ?? 0})</span>
       </a>
       <div className={cx("cate-dropdown__content")}>
         <div className={cx("cate-dropdown__title")}>

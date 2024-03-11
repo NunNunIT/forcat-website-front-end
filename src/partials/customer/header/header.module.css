@@ -19,7 +19,7 @@
 }
 
 .header__container {
-  width: 80%;
+  width: min(80%, 1152px);
   padding-inline: 1rem;
 }
 
@@ -27,14 +27,6 @@
 @media only screen and (max-width: 1024px) {
   .header__container {
     width: 90%;
-  }
-
-  .header__menu {
-    gap: .5rem;
-  }
-
-  .menu__item {
-    padding: .5rem;
   }
 }
 
@@ -49,38 +41,11 @@
     padding-inline: .75rem;
   }
 
-  .header__nav {
-    margin-bottom: .75rem;
-  }
-
-  .header__logo {
-    width: 11.25rem;
-  }
-
-  .header__search-bar {
-    width: 70%;
-    height: 90%;
-    border-radius: .75rem 0 0 .75rem;
-    margin-left: 5%;
-  }
-
-  .header__search-btn {
-    width: 18%;
-  }
-
-  .header__main .material-symbols-outlined {
-    font-size: 2rem;
-  }
-
-  .header__main .header__search-btn .material-symbols-outlined {
-    font-size: 1.5rem;
-  }
-
   .header a,
   .header p {
     font-size: 0.8125rem;
   }
-
+/* 
   .header__cate-dropdown {
     min-height: 450px;
   }
@@ -109,7 +74,7 @@
 
   .dropdown-noti__content-container {
     margin-left: -275px;
-  }
+  } */
 }
 
 /*Responsive-tablet-portrait*/

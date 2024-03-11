@@ -39,7 +39,6 @@ export interface HeaderMenuProductItemProps {
   rating: number,
   price: number,
   price__discount?: number,
-  // category_id: string,
   subCategory_id: string,
 }
 
@@ -47,7 +46,6 @@ export interface HeaderMenuSubCategoryItemProps {
   id: string,
   title: string,
   url_img: string,
-  // length_products: number,
   products: ProductProps[],
   children?: React.ReactNode,
 }
