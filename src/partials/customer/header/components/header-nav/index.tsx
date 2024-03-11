@@ -1,15 +1,16 @@
-// import Link 
+// import libs
 import Link from "next/link";
+import classNameNames from "classnames/bind";
 
 // import components
-import { Logo } from "@/components/customer";
+import { CustomerLogo } from "@/components/customer";
 
-// use bind from classnames
-import classNameNames from "classnames/bind";
+// import css
 import styles from "./header-nav.module.css";
+
 const cx = classNameNames.bind(styles);
 
-export default function HeaderNav() {
+export default function CustomerHeaderNav() {
   return (
     <nav className={cx("header__nav")}>
       <div className={cx("header__nav-container")}>
@@ -32,7 +33,7 @@ export default function HeaderNav() {
           </a>
         </div>
         <div className={cx("header--mobile__logo")}>
-          <Logo white />
+          <CustomerLogo white />
         </div>
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>

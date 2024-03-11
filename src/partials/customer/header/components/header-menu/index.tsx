@@ -1,30 +1,31 @@
-// import default component from next
+// import libs
 import Link from "next/link";
+import classNameNames from "classnames/bind";
 
 // import function from utils
 import { parseNumToCurrencyStr } from "@/utils"
 
 // import interface
 import {
-  CategoryProps,
-  HeaderLinkProps,
-  SubCategoryProps,
-  ProductProps,
-  HeaderMenuProps,
-  HeaderMenuCategoryItemProps,
-  HeaderMenuSubCategoryItemProps,
-  HeaderMenuProductItemProps,
-} from "@/types";
+  ICategoryProps,
+  IHeaderLinkProps,
+  ISubCategoryProps,
+  IProductProps,
+  IHeaderMenuProps,
+  IHeaderMenuCategoryItemProps,
+  IHeaderMenuSubCategoryItemProps,
+  IHeaderMenuProductItemProps,
+} from "@/types/interfaces";
 
 // import components
-import { StarRating } from "@/components/customer";
+import { CustomerStarRating } from "@/components/customer";
 
-// use blind from classnames
-import classNameNames from "classnames/bind";
+// import css
 import styles from "./header-menu.module.css";
+
 const cx = classNameNames.bind(styles);
 
-function HeaderMenuProductItem(props: HeaderMenuProductItemProps): JSX.Element {
+function HeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.Element {
   const { id, name, rating, price, price__discount, subCategory_id } = props;
   const discountPrice = price__discount || price;
 
@@ -40,7 +41,7 @@ function HeaderMenuProductItem(props: HeaderMenuProductItemProps): JSX.Element {
         alt={name}
       />
       <div className={cx("cate-dropdown__product-rating")}>
-        <StarRating className={cx("cate-dropdown__product-star")} rating={rating} />
+        <CustomerStarRating className={cx("cate-dropdown__product-star")} rating={rating} />
         <span>({rating})</span>
       </div>
       <span className={cx("cate-dropdown__product-name")}>{name}</span>
@@ -58,7 +59,7 @@ function HeaderMenuProductItem(props: HeaderMenuProductItemProps): JSX.Element {
   );
 }
 
-function HeaderMenuSubCategoryItem(props: HeaderMenuSubCategoryItemProps): JSX.Element {
+function HeaderMenuSubCategoryItem(props: IHeaderMenuSubCategoryItemProps): JSX.Element {
   const { id, title, products } = props;
   const hasProducts: boolean = products?.length > 0;
 
@@ -79,7 +80,7 @@ function HeaderMenuSubCategoryItem(props: HeaderMenuSubCategoryItemProps): JSX.E
         </div>
         {hasProducts && (
           <div className={cx("cate-dropdown__products")}>
-            {products.map((product: ProductProps) => (
+            {products.map((product: IProductProps) => (
               <HeaderMenuProductItem
                 subCategory_id={id}
                 {...product}
@@ -101,7 +102,7 @@ function HeaderMenuSubCategoryItem(props: HeaderMenuSubCategoryItemProps): JSX.E
   );
 }
 
-function HeaderMenuCategoryItem(props: HeaderMenuCategoryItemProps): JSX.Element {
+function HeaderMenuCategoryItem(props: IHeaderMenuCategoryItemProps): JSX.Element {
   return (
     <li key={props.id} className={cx("menu__item")}>
       <div className={cx("menu__cate")}>
@@ -113,13 +114,13 @@ function HeaderMenuCategoryItem(props: HeaderMenuCategoryItemProps): JSX.Element
   );
 }
 
-export default function HeaderMenu(props: HeaderMenuProps): JSX.Element {
+export default function CustomerHeaderMenu(props: IHeaderMenuProps): JSX.Element {
   return (
     <ul className={cx("header__menu")}>
-      {props.categories.map((category: CategoryProps) => (
+      {props.categories.map((category: ICategoryProps) => (
         <HeaderMenuCategoryItem id={category.id} title={category.name} iconData={category.iconData}>
           {category.subCategories && <ul className={cx("menu__cate-dropdown")}>
-            {category.subCategories.map((subCategory: SubCategoryProps) => (
+            {category.subCategories.map((subCategory: ISubCategoryProps) => (
               <HeaderMenuSubCategoryItem
                 id={subCategory.id}
                 title={subCategory.name}
@@ -130,7 +131,7 @@ export default function HeaderMenu(props: HeaderMenuProps): JSX.Element {
         </HeaderMenuCategoryItem>
       ))}
 
-      {props.links.map((link: HeaderLinkProps) => (
+      {props.links.map((link: IHeaderLinkProps) => (
         <li key={link.title} className={cx("menu__item")}>
           <Link className={cx("menu__cate")}
             href={link.url}>

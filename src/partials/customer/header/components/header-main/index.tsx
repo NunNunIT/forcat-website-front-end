@@ -1,16 +1,19 @@
+// import libs
+import styles from "./header-main.module.css";
+
 // import components
-import { Logo } from "@/components/customer";
+import { CustomerLogo } from "@/components/customer";
 
 // use bind from classnames
 import classNameNames from "classnames/bind";
-import styles from "./header-main.module.css";
+
 const cx = classNameNames.bind(styles);
 
-export default function HeaderMain() {
+export default function CustomerHeaderMain() {
   return (
     <div className={cx("header__main")}>
       <div className={cx("header__logo-container")}>
-        <Logo className={cx("header__logo")} />
+        <CustomerLogo className={cx("header__logo")} />
       </div>
       <form
         className={cx("header__search-bar-wrapper")}

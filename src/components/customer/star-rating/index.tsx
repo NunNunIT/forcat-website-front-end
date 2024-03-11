@@ -1,14 +1,15 @@
-interface starRatingProps {
-  rating: number;
-  className?: string;
-}
-
-// use bind css class to the component
+// import libs
 import classNameNames from "classnames/bind";
+
+// import components
+import { IStarRatingProps } from "@/types/interfaces";
+
+// import css
 import styles from "./star-rating.module.css";
+
 const cx = classNameNames.bind(styles);
 
-export default function StarRating(props: starRatingProps) {
+export default function StarRating(props: IStarRatingProps) {
   let rating = props.rating;
 
   return (

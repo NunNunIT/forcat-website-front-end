@@ -1,12 +1,13 @@
-// import Link
+// import libs
 import Link from "next/link";
+import classNames from "classnames/bind";
 
 // import components
-import { Logo } from "@/components/customer";
+import { CustomerLogo } from "@/components/customer";
 
-// use bind from classnames
-import classNames from "classnames/bind";
+// import css
 import styles from "./footer.module.css";
+
 const cx = classNames.bind(styles);
 
 export default function Footer() {
@@ -14,7 +15,7 @@ export default function Footer() {
     <footer className={cx("footer")}>
       <div className={cx("footer__container")}>
         <div className={cx("footer__company-name")}>
-          <Logo className={cx("footer__logo")} white />
+          <CustomerLogo className={cx("footer__logo")} white />
           <span>Cửa hàng điện máy FORCAT.</span>
           <img
             className={cx("footer__social-media")}

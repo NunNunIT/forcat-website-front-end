@@ -1,2 +1,2 @@
-export { default as Logo } from "./logo"
-export { default as StarRating } from "./star-rating"
+export { default as CustomerLogo } from "./logo"
+export { default as CustomerStarRating } from "./star-rating"

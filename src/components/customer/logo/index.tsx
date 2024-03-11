@@ -1,11 +1,10 @@
+// import libs
 import Link from "next/link";
 
-interface LogoProps {
-  className?: string,
-  white?: boolean
-}
+// import interface
+import { ILogoProps } from "@/types/interfaces";
 
-export default function Logo(props: LogoProps) {
+export default function Logo(props: ILogoProps) {
   return (
     <Link href="/">
       <img className={props.className}

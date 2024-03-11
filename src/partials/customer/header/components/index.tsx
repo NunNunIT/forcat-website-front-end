@@ -1,5 +1,3 @@
-import HeaderNav from "./header-nav";
-import HeaderMain from "./header-main";
-import HeaderMenu from "./header-menu";
-
-export { HeaderNav, HeaderMain, HeaderMenu };
+export { default as CustomerHeaderNav } from './header-nav';
+export { default as CustomerHeaderMain } from './header-main';
+export { default as CustomerHeaderMenu } from './header-menu';

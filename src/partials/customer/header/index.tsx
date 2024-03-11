@@ -1,14 +1,14 @@
 // import interface
 import {
-  HeaderLinkProps,
-  CategoryProps,
-} from "@/types";
+  IHeaderLinkProps,
+  ICategoryProps,
+} from "@/types/interfaces";
 
 // import components
 import {
-  HeaderNav,
-  HeaderMain,
-  HeaderMenu,
+  CustomerHeaderNav,
+  CustomerHeaderMain,
+  CustomerHeaderMenu,
 } from "./components";
 
 // use bind from classnames
@@ -16,7 +16,7 @@ import classNameNames from "classnames/bind";
 import styles from "./header.module.css";
 const cx = classNameNames.bind(styles);
 
-const headerCategories: (CategoryProps)[] = [
+const headerCategories: (ICategoryProps)[] = [
   {
     id: "1",
     name: "Thực phẩm",
@@ -325,7 +325,7 @@ const headerCategories: (CategoryProps)[] = [
   },
 ]
 
-const headerLinks: HeaderLinkProps[] = [
+const headerLinks: IHeaderLinkProps[] = [
   {
     title: "Sản phẩm HOT",
     iconData: "local_fire_department",
@@ -348,10 +348,10 @@ const headerLinks: HeaderLinkProps[] = [
 export default function Header() {
   return (
     <header className={cx("header")}>
-      <HeaderNav />
+      <CustomerHeaderNav />
       <div className={cx("header__container")}>
-        <HeaderMain />
-        <HeaderMenu categories={headerCategories} links={headerLinks} />
+        <CustomerHeaderMain />
+        <CustomerHeaderMenu categories={headerCategories} links={headerLinks} />
       </div>
     </header >
   );
