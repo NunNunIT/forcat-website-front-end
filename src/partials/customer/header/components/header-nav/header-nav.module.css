@@ -93,7 +93,7 @@
 }
 
 .dropdown-help:hover a {
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 .header__about-account {
@@ -168,7 +168,7 @@
 }
 
 .dropdown-noti:hover .header__notifications {
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 .unauth-user__img {
@@ -222,7 +222,7 @@
 }
 
 .header__support-info__hotline:hover {
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 .header__logo--top {
@@ -247,7 +247,7 @@
 
 .header__auth:hover {
   cursor: pointer;
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 .header__auth img {
@@ -257,11 +257,11 @@
 }
 
 .header__auth-login:hover {
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 .header__auth-register:hover {
-  color: var(--dark11);
+  color: var(--dark12);
 }
 
 @media only screen and (max-width: 1024px) {
