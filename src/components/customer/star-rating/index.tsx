@@ -1,9 +1,6 @@
 // import libs
 import classNameNames from "classnames/bind";
 
-// import components
-import { IStarRatingProps } from "@/types/interfaces";
-
 // import css
 import styles from "./star-rating.module.css";
 

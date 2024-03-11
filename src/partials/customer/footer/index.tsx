@@ -3,7 +3,7 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 
 // import components
-import { CustomerLogo } from "@/components/customer";
+import { CustomerLogo } from "@/components";
 
 // import css
 import styles from "./footer.module.css";

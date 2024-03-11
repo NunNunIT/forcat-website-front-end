@@ -1,15 +1,9 @@
-// import interface
-import {
-  IHeaderLinkProps,
-  ICategoryProps,
-} from "@/types/interfaces";
-
 // import components
 import {
   CustomerHeaderNav,
   CustomerHeaderMain,
-  CustomerHeaderMenu,
-} from "./components";
+  CustomerHeaderMenu
+} from "./partials/";
 
 // use bind from classnames
 import classNameNames from "classnames/bind";

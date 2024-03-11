@@ -2,7 +2,7 @@
 import classNameNames from "classnames/bind";
 
 // import components
-import { CustomerLogo } from "@/components/customer";
+import { CustomerLogo } from "@/components";
 
 // import css
 import styles from "./header-main.module.css";

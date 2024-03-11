@@ -7,17 +7,17 @@ interface IVariant {
   };
 }
 
-export interface IStarRatingProps {
+interface IStarRatingProps {
   rating: number;
   className?: string;
 }
 
-export interface ILogoProps {
+interface ILogoProps {
   className?: string,
   white?: boolean
 }
 
-export interface IProductProps {
+interface IProductProps {
   id: string,
   name: string,
   rating: number,
@@ -25,13 +25,13 @@ export interface IProductProps {
   price__discount?: number,
 }
 
-export interface ISubCategoryProps {
+interface ISubCategoryProps {
   id: string,
   name: string,
   products: IProductProps[],
 }
 
-export interface ICategoryProps {
+interface ICategoryProps {
   id: string,
   name: string,
   iconData?: string,
@@ -39,7 +39,7 @@ export interface ICategoryProps {
   subCategories?: ISubCategoryProps[]
 }
 
-export interface IHeaderLinkProps {
+interface IHeaderLinkProps {
   title: string,
   url: string,
   iconData?: string,
@@ -47,12 +47,12 @@ export interface IHeaderLinkProps {
   children?: React.ReactNode,
 }
 
-export interface IHeaderMenuProps {
+interface IHeaderMenuProps {
   categories: ICategoryProps[],
   links: IHeaderLinkProps[],
 }
 
-export interface IHeaderMenuProductItemProps {
+interface IHeaderMenuProductItemProps {
   id: string,
   name: string,
   rating: number,
@@ -61,7 +61,7 @@ export interface IHeaderMenuProductItemProps {
   subCategory_id: string,
 }
 
-export interface IHeaderMenuSubCategoryItemProps {
+interface IHeaderMenuSubCategoryItemProps {
   id: string,
   title: string,
   url_img: string,
@@ -69,7 +69,7 @@ export interface IHeaderMenuSubCategoryItemProps {
   children?: React.ReactNode,
 }
 
-export interface IHeaderMenuCategoryItemProps {
+interface IHeaderMenuCategoryItemProps {
   id: string,
   title: string,
   url?: string,

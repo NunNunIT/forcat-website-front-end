@@ -5,20 +5,8 @@ import classNameNames from "classnames/bind";
 // import function from utils
 import { parseNumToCurrencyStr } from "@/utils"
 
-// import interface
-import {
-  ICategoryProps,
-  IHeaderLinkProps,
-  ISubCategoryProps,
-  IProductProps,
-  IHeaderMenuProps,
-  IHeaderMenuCategoryItemProps,
-  IHeaderMenuSubCategoryItemProps,
-  IHeaderMenuProductItemProps,
-} from "@/types/interfaces";
-
 // import components
-import { CustomerStarRating } from "@/components/customer";
+import { CustomerStarRating } from "@/components";
 
 // import css
 import styles from "./header-menu.module.css";
