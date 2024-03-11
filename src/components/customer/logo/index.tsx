@@ -4,7 +4,7 @@ import Link from "next/link";
 // import interface
 import { ILogoProps } from "@/types/interfaces";
 
-export default function Logo(props: ILogoProps) {
+export default function CustomerLogo(props: ILogoProps) {
   return (
     <Link href="/">
       <img className={props.className}

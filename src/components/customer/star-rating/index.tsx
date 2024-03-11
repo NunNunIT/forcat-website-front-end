@@ -9,7 +9,7 @@ import styles from "./star-rating.module.css";
 
 const cx = classNameNames.bind(styles);
 
-export default function StarRating(props: IStarRatingProps) {
+export default function CustomerStarRating(props: IStarRatingProps) {
   let rating = props.rating;
 
   return (
