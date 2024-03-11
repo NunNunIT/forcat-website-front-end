@@ -1,11 +1,11 @@
 // import libs
-import styles from "./header-main.module.css";
+import classNameNames from "classnames/bind";
 
 // import components
 import { CustomerLogo } from "@/components/customer";
 
-// use bind from classnames
-import classNameNames from "classnames/bind";
+// import css
+import styles from "./header-main.module.css";
 
 const cx = classNameNames.bind(styles);
 
