@@ -325,8 +325,10 @@ export default function Header() {
   return (
     <header className={cx("header")}>
       <HeaderNav />
-      <HeaderMain />
-      <HeaderMenu categories={headerCategories} links={headerLinks} />
+      <div className={cx("header__container")}>
+        <HeaderMain />
+        <HeaderMenu categories={headerCategories} links={headerLinks} />
+      </div>
     </header >
   );
 }

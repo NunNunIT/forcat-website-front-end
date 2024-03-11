@@ -73,7 +73,7 @@ function HeaderMenuSubCategoryItem(props: HeaderMenuSubCategoryItemProps): JSX.E
           <span>Sản phẩm bán chạy nhất</span>
           <a className={cx("cate-dropdown__title-link")} href={`/search/results?category_id=${props}`}>
             <span>Xem tất cả</span>
-            <span className="material-symbols-outlined">chevron_right</span>
+            <span className="material-icons-outlined">chevron_right</span>
           </a>
         </div>
         {hasProducts && (
@@ -105,7 +105,7 @@ function HeaderMenuCategoryItem(props: HeaderMenuCategoryItemProps): JSX.Element
     <li key={props.id} className={cx("menu__item")}>
       <div className={cx("menu__cate")}>
         <span className={cx("menu__item-p")}>{props.title}</span>
-        {props.children && <span className="material-symbols-outlined">expand_more</span>}
+        {props.children && <span className="material-icons-outlined">expand_more</span>}
       </div>
       {props.children}
     </li>
@@ -134,7 +134,7 @@ export default function HeaderMenu(props: HeaderMenuProps): JSX.Element {
           <Link className={cx("menu__cate")}
             href={link.url}>
             <span className={cx("menu__item-p")}>{link.title}</span>
-            {link.iconData && <span className={"filled-icon material-symbols-outlined " + cx(link.className)}>
+            {link.iconData && <span className={"material-icons " + cx(link.className)}>
               {link.iconData}
             </span>}
           </Link>

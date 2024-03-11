@@ -9,18 +9,23 @@ const cx = classNameNames.bind(styles);
 export default function HeaderMain() {
   return (
     <div className={cx("header__main")}>
-      <Logo className={cx("header__logo")} />
+      <div className={cx("header__logo-container")}>
+        <Logo className={cx("header__logo")} />
+      </div>
       <form
-        className={cx("header__search-bar")}
+        className={cx("header__search-bar-wrapper")}
         action="/search/results"
         method="GET"
       >
-        <input type="search"
-          name="searchKey"
-          placeholder="Bạn tìm gì..." />
-        <button className={cx("header__search-btn")} type="submit">
-          <span className="material-symbols-outlined">search</span>
-        </button>
+        <div className={cx("header__search-bar")}>
+          <input className={cx("header__search-input")}
+          type="search"
+            name="searchKey"
+            placeholder="Bạn tìm gì..." />
+          <button className={cx("header__search-btn")} type="submit">
+            <span className="material-icons-outlined">search</span>
+          </button>
+        </div>
       </form>
 
       <div className={cx("dropdown-cart")}>
@@ -30,7 +35,7 @@ export default function HeaderMain() {
           title="Giỏ hàng"
         >
           <div className={cx("header__cart")}>
-            <span className="material-symbols-outlined">shopping_cart</span>
+            <span className="material-icons-outlined">shopping_cart</span>
           </div>
         </a>
         <div className={cx("dropdown-cart__content-container")}>

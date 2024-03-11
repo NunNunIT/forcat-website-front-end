@@ -16,7 +16,7 @@ export default function HeaderNav() {
         <div className={cx("header__support-info")}>
           <div className={cx("dropdown-help")}>
             <a href="#">
-              <span className="material-symbols-outlined">help</span>
+              <span className="material-icons-outlined">help</span>
               Hỗ trợ
             </a>
             <div className={cx("dropdown-help__content-container")}>
@@ -27,17 +27,17 @@ export default function HeaderNav() {
             </div>
           </div>
           <a href="#" className={cx("header__support-info__hotline")}>
-            <span className="material-symbols-outlined">call</span>
+            <span className="material-icons-outlined">call</span>
             Hotline: 1900 123 789
           </a>
         </div>
-        <div className={cx("header__logo--top")}>
+        <div className={cx("header--mobile__logo")}>
           <Logo white />
         </div>
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
             <a href="/notification/order" className={cx("header__notifications")}>
-              <span className="material-symbols-outlined">notifications</span>
+              <span className="material-icons-outlined">notifications</span>
               Thông báo
             </a>
             <div className={cx("dropdown-noti__content-container")}>
@@ -56,20 +56,20 @@ export default function HeaderNav() {
             </div>
           </div >
           <div className={cx("header__auth")}>
-            <span className="material-symbols-outlined">account_circle</span>
+            <span className="material-icons-outlined">account_circle</span>
             <Link href="/auth/login" className={cx("header__auth-login")}> Đăng nhập</Link>
             <span>|</span>
             <Link href="/auth/register" className={cx("header__auth-register")}>Đăng ký</Link>
           </div>
-        </div >
-      </div>
-      <div className={cx("header__nav--disable")}>
-        <a href="/notification/order" className={cx("noti--disable")}>
-          <span className="material-symbols-outlined" title="Thông báo">notifications</span>
-        </a>
-        <a href="#" className={cx("help--disable")}>
-          <span className="material-symbols-outlined" title="Hỗ trợ">help</span>
-        </a>
+        </div>
+        <div className={cx("header--mobile__noti-support")}>
+          <a href="/notification/order" className={cx("noti--mobile")}>
+            <span className="material-icons-outlined" title="Thông báo">notifications</span>
+          </a>
+          <a href="#" className={cx("help--mobile")}>
+            <span className="material-icons-outlined" title="Hỗ trợ">help</span>
+          </a>
+        </div>
       </div>
     </nav>
   )

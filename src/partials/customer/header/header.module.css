@@ -18,23 +18,15 @@
   text-decoration: none;
 }
 
+.header__container {
+  width: 80%;
+  padding-inline: 1rem;
+}
+
 /* 1024px - Mini PC */
-@media only screen and (max-width: 64rem) {
-  .dropdown-noti__content-container {
-    width: 360px;
-    margin-left: -260px;
-  }
-
-  .cate-dropdown__products a {
-    width: 31%;
-  }
-
-  .dropdown-noti__content-container {
-    margin-left: -270px;
-  }
-
-  .header__search-btn {
-    width: 20%;
+@media only screen and (max-width: 1024px) {
+  .header__container {
+    width: 90%;
   }
 
   .header__menu {
@@ -47,10 +39,14 @@
 }
 
 /* 76.75rem - Tablet */
-@media only screen and (max-width: 48rem) {
+@media only screen and (max-width: 768px) {
   .header {
-    /* height: 140px; */
     font-size: 0.8125rem;
+  }
+
+  .header__container {
+    width: 90%;
+    padding-inline: .75rem;
   }
 
   .header__nav {
@@ -78,15 +74,6 @@
 
   .header__main .header__search-btn .material-symbols-outlined {
     font-size: 1.5rem;
-  }
-
-  .header__support-info {
-    gap: 10px;
-  }
-
-  .header__cart__number-badge {
-    left: -1.25rem;
-    top: -0.875rem;
   }
 
   .header a,
@@ -126,10 +113,9 @@
 }
 
 /*Responsive-tablet-portrait*/
-@media only screen and (max-width: 40rem) {
-  .header {
-    height: 130px;
-    font-size: 0.8125rem;
+/* @media only screen and (max-width: 480px) {
+  .header__container {
+    padding-inline: .75rem;
   }
 
   .header__nav {
@@ -150,7 +136,6 @@
     margin-right: 4%;
   }
 
-
   .header__support-info {
     display: none;
   }
@@ -158,71 +143,29 @@
   .header__about-account .header__notifications {
     display: none;
   }
-}
+} */
 
 /*Responsive-smartphone*/
-@media only screen and (max-width: 26rem) {
-  .header {
-    height: .5rem;
-  }
-
-  .header__nav {
-    height: 44px;
+@media only screen and (max-width: 480px) {
+  .header__container {
+    width: 100%;
+    padding-inline: .5rem;
   }
 
   .header__nav a {
     font-size: 0.875rem;
   }
 
-  .header__nav--disable {
-    display: flex;
-  }
-
-  .header__logo--top {
-    display: block;
-  }
-
   .header__search-bar {
     width: 90%;
-    /* height: 75%; */
-    margin-left: 0;
-    margin-right: 0;
   }
 
   .header__search-btn {
     width: 20%;
   }
 
-  .header__main .header__search-btn .material-symbols-outlined {
-    font-size: 1.25rem;
-  }
-
-  .header__support-info {
-    display: none;
-  }
-
-  .header__about-account .header__notifications {
-    display: none;
-  }
-
-  .header__search-btn .material-symbols-outlined {
-    font-size: 1.25rem;
-  }
-
-  .header__cart .material-symbols-outlined {
-    font-size: 1.8125rem;
-  }
-
   .header__menu {
     display: none;
-  }
-
-  .header__nav a.help--disable {
-    display: flex;
-  }
-
-  .header__nav a.noti--disable {
-    display: flex;
   }
 
   .header__auth {

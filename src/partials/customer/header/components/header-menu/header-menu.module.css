@@ -1,6 +1,5 @@
 .header__menu {
-  width: min(100%, 1152px);
-  padding-inline: 1rem;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   position: relative;
@@ -235,4 +234,14 @@
 .active-menu-item {
   color: var(--primary-color-2) !important;
   box-shadow: inset 0 -2px 0 0 var(--primary-color-2);
+}
+
+@media only screen and (max-width: 1024px) {}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 480px) {
+  .header__menu {
+    display: none;
+  }
 }
