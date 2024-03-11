@@ -1,110 +1,94 @@
-// use bind from classnames
+// import libs
+import Link from "next/link";
 import classNames from "classnames/bind";
 
-// use scss
-import styles from "./styles.module.css";
+// import components
+import { CustomerLogo } from "@/components";
+
+// import css
+import styles from "./footer.module.css";
 
 const cx = classNames.bind(styles);
 
 export default function Footer() {
   return (
-    <footer className={cx("footer-container")}>
-      <div className={cx("footer--top")}>
+    <footer className={cx("footer")}>
+      <div className={cx("footer__container")}>
         <div className={cx("footer__company-name")}>
-          <img
-            className={cx("footer__logo")}
-            src="/imgs/logo-white.png"
-            alt="logo"
-          />
-          <p>Cửa hàng điện máy TECHTWO.</p>
+          <CustomerLogo className={cx("footer__logo")} white />
+          <span>Cửa hàng điện máy FORCAT.</span>
           <img
             className={cx("footer__social-media")}
             src="/imgs/set-logo.png"
             alt="social-media"
           />
         </div>
-        <div className={cx("footer__company-name--disable")}>
-          <img
-            className={cx("footer__logo")}
-            src="/imgs/logo-white.png"
-            alt="logo"
-          />
-          <p>Cửa hàng điện máy TECHTWO.</p>
-          <img
-            className={cx("footer__social-media")}
-            src="/imgs/set-logo.png"
-            alt="social-media"
-          />
-        </div>
-        <div className={cx("footer__content--column2")}>
-          <div className={cx("footer__content--column")}>
-            <div className={cx("footer__content-title")}>
-              <h3>VỀ TECHTWO.</h3>
-            </div>
-            <div className={cx("footer__content-main")}>
-              <a href="/about-us" className={cx("footer__list-test")}>
-                Giới thiệu về TECHTWO.
-              </a>
-              <a href="#" className={cx("footer__list-test")}>
-                Điều khoản chung
-              </a>
-              <a href="/privacy-policy" className={cx("footer__list-test")}>
-                Chính sách bảo mật
-              </a>
-            </div>
+        <div className={cx("footer__about")}>
+          <div className={cx("footer__title")}>
+            <h3>VỀ FORCAT.</h3>
           </div>
-          <div className={cx("footer__help-content--column")}>
-            <div className={cx("footer__content-title")}>
-              <h3>HỖ TRỢ</h3>
-            </div>
-            <div className={cx("footer__content-main")}>
-              <a href="#" className={cx("footer__list-test")}>
-                Trung tâm trợ giúp
-              </a>
-              <a href="#" className={cx("footer__list-test")}>
-                Chính sách bảo hành
-              </a>
-              <a href="#" className={cx("footer__list-test")}>
-                Chính sách trả hàng & hoàn tiền
-              </a>
-            </div>
+          <div className={cx("footer__list")}>
+            <a href="/about-us" className={cx("footer__list-item")}>
+              Giới thiệu về FORCAT.
+            </a>
+            <a href="#" className={cx("footer__list-item")}>
+              Điều khoản chung
+            </a>
+            <a href="/privacy-policy" className={cx("footer__list-item")}>
+              Chính sách bảo mật
+            </a>
           </div>
         </div>
-
-        <div className={cx("footer__contact-content--column")}>
-          <div className={cx("footer__content-title")}>
+        <div className={cx("footer__help")}>
+          <div className={cx("footer__title")}>
+            <h3>HỖ TRỢ</h3>
+          </div>
+          <div className={cx("footer__list")}>
+            <a href="#" className={cx("footer__list-item")}>
+              Trung tâm trợ giúp
+            </a>
+            <a href="#" className={cx("footer__list-item")}>
+              Chính sách bảo hành
+            </a>
+            <a href="#" className={cx("footer__list-item")}>
+              Chính sách trả hàng
+            </a>
+          </div>
+        </div>
+        <div className={cx("footer__contact")}>
+          <div className={cx("footer__title")}>
             <h3>LIÊN HỆ</h3>
           </div>
-          <div className={cx("footer__content-main")}>
-            <div className={cx("footer__content-item")}>
-              <span className={"material-symbols-outlined"}>location_on</span>
-              <a
+          <div className={cx("footer__list")}>
+            <div className={cx("footer__list-item")}>
+              <span className='material-icons-outlined'>location_on</span>
+              <Link
                 href="https://maps.app.goo.gl/GbwxfoKVzvYoN1hn9"
                 target="_blank"
-                className={cx("footer__list-test")}>
+                className={cx("footer__list-item")}
+              >
                 Linh Trung, Thủ Đức, Hồ Chí Minh
-              </a>
+              </Link>
             </div>
-            <div className={cx("footer__content-item")}>
-              <span className={"material-symbols-outlined"}>call</span>
-              <span className={cx("footer__list-test", "phone")}>
+            <div className={cx("footer__list-item")}>
+              <span className='material-icons-outlined'>call</span>
+              <span className={cx("footer__list-item", "phone")}>
                 1900 123 789
               </span>
             </div>
-            <div className={cx("footer__content-item")}>
-              <span className={"material-symbols-outlined"}>mail</span>
+            <div className={cx("footer__list-item")}>
+              <span className='material-icons-outlined'>mail</span>
               <a
-                href="mailto:techtwo.customercare@gmail.com"
-                className={cx("footer__list-test")}>
-                techtwo.customercare@gmail.com
+                href="mailto:FORCAT.customercare@gmail.com"
+                className={cx("footer__list-item")}
+              >
+                forcat.customercare@gmail.com
               </a>
             </div>
           </div>
         </div>
-      </div>
-      <div className={cx("footer--bottom")}>
-        <div className={cx("footer__container--bottom")}>
-          <p> 2023 - Bản quyền thuộc Công ty TECHTWO.</p>
+        <div className={cx("footer__copyright")}>
+          <span>2024 - Bản quyền thuộc của hàng FORCAT.</span>
         </div>
       </div>
     </footer>

@@ -6,6 +6,7 @@
   --red: #ff0000;
   --black: #000000;
   --black-o80: rgba(0, 0, 0, 0.8);
+  --black-o20: rgba(0, 0, 0, 0.2);
   --green: #119726;
   --white-gray: #f9f9f9;
   --bg-white: #f1f1f1;
@@ -95,6 +96,7 @@
   --dark9: #262a2e;
   --dark10: #363636;
   --dark11: rgb(128, 128, 137);
+  --dark12: #d7d7d7; 
 
   /* red */
   --red1: rgb(255, 8, 0, 0.1);
@@ -178,8 +180,8 @@ body {
 }
 
 main {
-  margin: 178px auto 24px;
-  min-height: calc(100vh - (280px + 154px + 24px));
+  margin: 1rem auto 0 auto;
+  min-height: calc(100vh - (280px + 152px + 1rem));
 }
 
 h1 {
@@ -376,6 +378,6 @@ input[type="number"] {
   /* Firefox */
 }
 
-.material-symbols-outlined.fill {
-  font-variation-settings: "FILL" 1;
+[class*="-price"]:after {
+  content: " đ";
 }
