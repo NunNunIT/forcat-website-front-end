@@ -8,3 +8,5 @@ export { default as CustomerProductVariant } from "./customer/product-variant";
 export { default as CustomerQuantityInputGroup } from "./customer/quantity-input-group";
 export { default as CustomerRating } from "./customer/rating";
 export { default as CustomerRatingFull } from "./customer/rating-full";
+export { default as CustomerStarRating } from "./customer/star-rating";
+export { default as CustomerLogo } from "./customer/logo";
