@@ -1,6 +1,4 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
-import { CustomerCarousel } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 // use css
@@ -11,8 +9,6 @@ export default function Home() {
     <>
       <CustomerSlider></CustomerSlider>
       <CustomerCategories></CustomerCategories>
-      {/* <CustomerCarousel></CustomerCarousel> */}
-      {/* <main className="content-container">This is main content</main> */}
     </>
   );
 }
