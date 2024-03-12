@@ -6,6 +6,7 @@
   --red: #ff0000;
   --black: #000000;
   --black-o80: rgba(0, 0, 0, 0.8);
+  --black-o20: rgba(0, 0, 0, 0.2);
   --green: #119726;
   --primary-color-1: #2a7ee4;
   --primary-color-2: #1559ab;
@@ -96,6 +97,9 @@
   --yellow1: rgb(255, 193, 7, 0.1);
   --yellow5: #ffc107;
   --yellow6: #e5ad06;
+
+  --swiper-navigation-color: var(--dark3);
+  --swiper-navigation-size: 1em !important;
 }
 
 * {
@@ -330,4 +334,45 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
   /* Firefox */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  width: calc(var(--swiper-navigation-size) / 60 * 27);
+  height: var(--swiper-navigation-size);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 2em !important;
+  height: 2em !important;
+  border: 1px solid var(--bg-white-o80);
+  border-radius: 50%;
+  background-color: var(--bg-white-o80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  opacity: 0.5;
+  background-color: var(--dark3);
+  color: var(--green1);
 }

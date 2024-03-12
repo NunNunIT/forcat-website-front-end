@@ -3,6 +3,8 @@ import React from "react";
 import Link from 'next/link'
 import styles from "./style.module.css";
 import classNames from "classnames/bind";
+import Image from "next/image";
+import { pid } from "process";
 
 const cx = classNames.bind(styles);
 export default function Product({ ...props }) {
