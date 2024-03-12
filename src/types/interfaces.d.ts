@@ -71,7 +71,6 @@ interface IHeaderMenuProductItemProps {
 interface IHeaderMenuSubCategoryItemProps {
   id: string;
   title: string;
-  url_img: string;
   products: IProductProps[];
   children?: React.ReactNode;
 }

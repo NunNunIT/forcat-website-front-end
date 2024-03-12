@@ -25,10 +25,12 @@
   align-items: center;
   width: 100%;
   padding-inline: 2rem;
+
+  justify-content: center;
 }
 
 .header__search-bar {
-  width: 100%;
+  width: 80%;
   height: 3rem;
   background-color: white;
   border-radius: .5rem 0 0 .5rem;
@@ -85,7 +87,11 @@
   position: relative;
 }
 
-.header__cart__number-badge {
+.header__cart span {
+  font-size: 3rem;
+}
+
+.header__cart span.header__cart-number {
   font-size: 0.625rem;
   font-weight: 500;
   position: absolute;

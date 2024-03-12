@@ -51,25 +51,25 @@ const headerCategories: (ICategoryProps)[] = [
             rating: 4.6,
           },
           {
-            id: "5",
+            id: "6",
             name: "Hạt 5",
             price: 10000,
             rating: 4.6,
           },
           {
-            id: "5",
+            id: "7",
             name: "Hạt 5",
             price: 10000,
             rating: 4.6,
           },
           {
-            id: "5",
+            id: "8",
             name: "Hạt 5",
             price: 10000,
             rating: 4.6,
           },
           {
-            id: "5",
+            id: "9",
             name: "Hạt 5",
             price: 10000,
             rating: 4.6,
@@ -105,7 +105,7 @@ const headerCategories: (ICategoryProps)[] = [
             rating: 4,
           },
           {
-            id: "9",
+            id: "11",
             name: "Pate 5",
             price: 10000,
             rating: 4,
