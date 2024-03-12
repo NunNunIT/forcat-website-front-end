@@ -10,6 +10,8 @@ import styles from "./style.module.css";
 import Product from "@/components/customer/category card";
 import { productData } from "./data";
 
+
+
 const cx = classNames.bind(styles);
 
 export default function Categories() {

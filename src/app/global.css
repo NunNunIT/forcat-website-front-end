@@ -1,19 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0");
+@import "material-icons/iconfont/material-icons.css";
 
 :root {
+  /* some var */
   --white: #ffffff;
   --red: #ff0000;
   --black: #000000;
   --black-o80: rgba(0, 0, 0, 0.8);
   --black-o20: rgba(0, 0, 0, 0.2);
   --green: #119726;
-  --primary-color-1: #2a7ee4;
-  --primary-color-2: #1559ab;
-  --primary-color-3: #02e5f6;
-  --primary-color-4: #092a3b;
-  --primary-color-5: #fbb72c;
-  --primary-color-6: #f09235;
   --white-gray: #f9f9f9;
   --bg-white: #f1f1f1;
   --bg-gray: #f5f6f8;
@@ -45,6 +39,51 @@
   --box-shadow-1: 0 8px 60px 0 rgba(103, 151, 255, 0.11),
     0 12px 90px 0 rgba(103, 151, 255, 0.11);
 
+  /* primary */
+  --primary-mau0-1: #7a3b00;
+  --primary-mau0-2: #ab6e48;
+  --primary-mau0-3: #ffc988;
+  --primary-mau0-4: #7f9f80;
+  --primary-mau0-5: #c4d6b0;
+
+  --primary-mau1-1: #fad46a;
+  --primary-mau1-2: #fff4d8;
+  --primary-mau1-3: #6c5442;
+  --primary-mau1-4: #619d5c;
+  --primary-mau1-5: #daece8;
+
+  --primary-mau2-1: #51453c;
+  --primary-mau2-2: #766e68;
+  --primary-mau2-3: #ffffff;
+  --primary-mau2-4: #d6d0c6;
+  --primary-mau2-5: #917e70;
+  --primary-mau2-6: #6dc1ed;
+
+  --primary-mau3-1: #64261b;
+  --primary-mau3-2: #92a898;
+  --primary-mau3-3: #fdf6e4;
+  --primary-mau3-4: #ffd569;
+  --primary-mau3-5: #859874;
+  --primary-mau3-6: #daece8;
+
+  --primary-mau4-1: #3d1e00;
+  --primary-mau4-2: #ab6e48;
+  --primary-mau4-3: #ffc988;
+  --primary-mau4-4: #619d5c;
+  --primary-mau4-5: #c4d6b0;
+  --primary-mau4-6: #daece8;
+
+  /* outline */
+  --outline1: rgb(235, 235, 240);
+  --outline2: #ff4343;
+
+  /* background */
+  --bg1: rgba(36, 36, 36, 0.7);
+  --bg2: rgb(245, 245, 250);
+  --bg3: rgba(0, 0, 0, 0.32);
+  --bg4: rgba(0, 0, 0, 0.6);
+
+  /* dark */
   --dark1: #0000004d;
   --dark2: #181c20;
   --dark3: #212529;
@@ -55,8 +94,10 @@
   --dark8: #dae0e7;
   --dark9: #262a2e;
   --dark10: #363636;
+  --dark11: rgb(128, 128, 137);
+  --dark12: #d7d7d7;
 
-  /* --red1: #ffdab9; */
+  /* red */
   --red1: rgb(255, 8, 0, 0.1);
   --red2: #fa8072;
   --red3: #fe2712;
@@ -69,6 +110,7 @@
   --red10: #440000;
   --red11: #330000;
 
+  /* green */
   --green1: #e6f1d8;
   --green2: #e5f8ed;
   --green3: #afd788;
@@ -82,6 +124,7 @@
   --green11: #002200;
   --green12: #001100;
 
+  /* blue */
   --blue1: #e9edf2;
   --blue2: #add8e6;
   --blue3: #00aae4;
@@ -94,6 +137,7 @@
   --blue10: #191970;
   --blue11: #000036;
 
+  /* yellow */
   --yellow1: rgb(255, 193, 7, 0.1);
   --yellow5: #ffc107;
   --yellow6: #e5ad06;
@@ -138,14 +182,14 @@ body {
 }
 
 main {
-  margin: 154px auto 24px;
-  min-height: calc(100vh - (280px + 154px + 24px));
+  margin: 1rem auto 0 auto;
+  min-height: calc(100vh - (280px + 152px + 1rem));
 }
 
 h1 {
   /* 32px */
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h2 {
@@ -375,4 +419,7 @@ input[type="number"] {
   opacity: 0.5;
   background-color: var(--dark3);
   color: var(--green1);
+}
+[class*="-price"]:after {
+  content: " đ";
 }

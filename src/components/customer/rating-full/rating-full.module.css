@@ -1,0 +1,17 @@
+.rating {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.rating__average {
+    font-weight: 500;
+}
+
+.rating__stars {
+    color: var(--fire-orange);
+}
+
+.rating__numbers {
+    color: var(--dark-gray);
+}
