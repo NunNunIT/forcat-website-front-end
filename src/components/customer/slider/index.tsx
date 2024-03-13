@@ -1,14 +1,16 @@
 "use client";
-import classNames from "classnames/bind";
-import styles from "./styles.module.css";
-import React, { useRef, useState } from "react";
+// import libs
 import { Swiper, SwiperSlide } from "swiper/react";
+import classNames from "classnames/bind";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+// import components
+import CustomerSliderCard from "@/components/customer/slider card";
+import { Slider_Image_Data } from "./dataslider";
+// import css
+import styles from "./styles.module.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import CustomerSliderCard from "@/components/customer/slider card";
-import { Slider_Image_Data } from "./dataslider";
 
 const cx = classNames.bind(styles);
 

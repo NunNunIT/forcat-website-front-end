@@ -1,16 +1,18 @@
 "use client";
-import React, { useRef, useState } from "react";
+// import libs
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import classNames from "classnames/bind";
-import styles from "./style.module.css";
+
+// import components
 import Product from "@/components/customer/category card";
 import { productData } from "./data";
 
-
+// import css
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import styles from "./style.module.css";
 
 const cx = classNames.bind(styles);
 
@@ -29,14 +31,12 @@ export default function Categories() {
     <div className={cx("CustomerCatogories")}>
       <Swiper
         breakpoints={{
-          // when window width is >= 640px
           200: {
             slidesPerView: 2,
           },
           640: {
             slidesPerView: 3,
           },
-          // when window width is >= 768px
           768: {
             slidesPerView: 4,
           },
@@ -46,7 +46,6 @@ export default function Categories() {
         }}
         spaceBetween={10}
         centeredSlides={false}
-        // pagination={{}}
         navigation={true}
         modules={[Pagination, Navigation]}
         className="mySwiper"
