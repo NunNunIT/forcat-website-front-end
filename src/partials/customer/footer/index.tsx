@@ -1,5 +1,6 @@
 // import libs
 import Link from "next/link";
+import Image from "next/image"
 import classNames from "classnames/bind";
 
 // import components
@@ -16,12 +17,24 @@ export default function Footer() {
       <div className={cx("footer__container")}>
         <div className={cx("footer__company-name")}>
           <CustomerLogo className={cx("footer__logo")} white />
-          <span>Cửa hàng điện máy FORCAT.</span>
-          <img
-            className={cx("footer__social-media")}
-            src="/imgs/set-logo.png"
-            alt="social-media"
-          />
+          <span>Cửa hàng đồ dùng cho mèo FORCAT.</span>
+          <div className={cx("footer__social-media")}>
+            <a href="https://www.facebook.com/forcat.official" target="_blank">
+              <Image src="/icon-facebook.svg"
+                alt="Icon mạng xã hội Facebook"
+              />
+            </a>{" "}
+            <a href="https://www.instagram.com/forcat_shop/" target="_blank">
+              <Image src="/icon-instagram.svg"
+                alt="Icon mạng xã hội Instagram"
+              />
+            </a>{" "}
+            <a href="https://www.tiktok.com/@forcat.shop7" target="_blank">
+              <Image src="/icon-tiktok.svg"
+                alt="Icon mạng xã hội Tiktok"
+              />
+            </a>
+          </div>
         </div>
         <div className={cx("footer__about")}>
           <div className={cx("footer__title")}>
@@ -78,11 +91,10 @@ export default function Footer() {
             </div>
             <div className={cx("footer__list-item")}>
               <span className='material-icons-outlined'>mail</span>
-              <a
-                href="mailto:FORCAT.customercare@gmail.com"
+              <a href="mailto:forcatshop.contact@gmail.com"
                 className={cx("footer__list-item")}
               >
-                forcat.customercare@gmail.com
+                forcatshop.contact@gmail.com
               </a>
             </div>
           </div>

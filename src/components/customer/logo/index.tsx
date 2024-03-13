@@ -1,10 +1,11 @@
 // import libs
 import Link from "next/link";
+import Image from "next/image"
 
 export default function CustomerLogo(props: ILogoProps) {
   return (
     <Link href="/">
-      <img className={props.className}
+      <Image className={props.className}
         src={`/logo${props.white ? '-white' : '-brown'}.png`}
         alt="Logo" />
     </Link>
