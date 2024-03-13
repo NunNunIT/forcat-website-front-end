@@ -52,7 +52,19 @@
   font-weight: bold;
 }
 
-.footer__social-media a:hover img {
+.footer__list-social-media {
+  display: flex;
+  gap: .25rem;
+}
+
+.footer__social-media-container {
+  display: block;
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.footer__list-social-media a:hover img {
   filter: drop-shadow(0 4px 8px var(--white-o2));
 }
 
@@ -107,11 +119,6 @@
 .footer__list-item.phone:hover {
   font-weight: 700;
   cursor: pointer;
-}
-
-.footer__social-media {
-  object-fit: contain;
-  height: 1.5rem;
 }
 
 /* Copyright */
