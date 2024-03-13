@@ -39,11 +39,6 @@
   font-size: 1.25rem;
 }
 
-.footer__logo {
-  height: 4rem;
-  object-fit: contain;
-}
-
 .footer__company-name {
   grid-area: CompanyName;
 
@@ -55,11 +50,6 @@
 
 .footer__company-name span {
   font-weight: bold;
-}
-
-.footer__social-media img {
-  width: 2.5rem;
-  aspect-ratio: 1/1;
 }
 
 .footer__social-media a:hover img {

@@ -22,16 +22,22 @@ export default function Footer() {
             <a href="https://www.facebook.com/forcat.official" target="_blank">
               <Image src="/icon-facebook.svg"
                 alt="Icon mạng xã hội Facebook"
+                width={40}
+                height={40}
               />
             </a>{" "}
             <a href="https://www.instagram.com/forcat_shop/" target="_blank">
               <Image src="/icon-instagram.svg"
                 alt="Icon mạng xã hội Instagram"
+                width={40}
+                height={40}
               />
             </a>{" "}
             <a href="https://www.tiktok.com/@forcat.shop7" target="_blank">
               <Image src="/icon-tiktok.svg"
                 alt="Icon mạng xã hội Tiktok"
+                width={40}
+                height={40}
               />
             </a>
           </div>
