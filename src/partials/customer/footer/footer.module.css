@@ -53,6 +53,19 @@
   gap: .75rem;
 }
 
+.footer__company-name span {
+  font-weight: bold;
+}
+
+.footer__social-media img {
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+}
+
+.footer__social-media a:hover img {
+  filter: drop-shadow(0 4px 8px var(--white-o2));
+}
+
 .footer__about {
   grid-area: About;
 

@@ -3,6 +3,7 @@
 :root {
   /* some var */
   --white: #ffffff;
+  --white-o2: rgba(255, 255, 255, 0.2);
   --red: #ff0000;
   --black: #000000;
   --black-o80: rgba(0, 0, 0, 0.8);
