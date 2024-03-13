@@ -1,4 +1,5 @@
 // import libs
+import Image from "next/image"
 import classNameNames from "classnames/bind";
 
 // import components
@@ -44,9 +45,10 @@ export default function CustomerHeaderMain() {
         <div className={cx("dropdown-cart__content-container")}>
           <div className={cx("dropdown-cart__content")}>
             <div className={cx("dropdown-cart__unauth-user")}>
-              <img
-                className={cx("unauth-user__img")}
+              <Image className={cx("unauth-user__img")}
                 src="/imgs/unauth-user.png" alt="unauth-user"
+                width={80}
+                height={80}
               />
               <span className={cx("unauth-content__cart")}>Đăng nhập để xem Giỏ hàng</span>
             </div>

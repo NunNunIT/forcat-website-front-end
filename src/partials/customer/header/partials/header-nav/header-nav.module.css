@@ -171,9 +171,14 @@
   color: var(--dark12);
 }
 
-.unauth-user__img {
-  object-fit: contain;
+.unauth-user__img-container {
+  position: relative;
   width: 5rem;
+  aspect-ratio: 1/1;
+}
+
+.unauth-user__img-container img {
+  object-fit: contain;
 }
 
 .unauth-content__noti {
