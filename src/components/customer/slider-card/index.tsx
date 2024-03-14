@@ -7,16 +7,20 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 const cx = classNames.bind(styles);
-export default function CustomerSliderCard({ ...props }) {
-  const { url, description } = props;
+export default function CustomerSliderCard({
+  variant,
+  ...props
+}: {
+  variant: ISliderCardProps;
+}) {
   return (
     <div className={cx("image_container")}>
       <Image
         className={cx("image_container-img")}
         width={1280}
         height={200}
-        src={url}
-        alt={description}
+        src={variant.url}
+        alt={variant.description}
       />
     </div>
   );

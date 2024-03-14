@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import classNames from "classnames/bind";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 // import components
-import CustomerSliderCard from "@/components/customer/slider card";
+import CustomerSliderCard from "@/components/customer/slider-card";
 import { Slider_Image_Data } from "./dataslider";
 // import css
 import styles from "./styles.module.css";
@@ -17,7 +17,12 @@ const cx = classNames.bind(styles);
 export default function CustomerSlider() {
   const SLIDER_CARD = Slider_Image_Data.map((item) => (
     <SwiperSlide key={item.id}>
-      <CustomerSliderCard url={item.imageurl} description={item.description} />
+      <CustomerSliderCard
+        variant={{
+          url: item.imageurl,
+          description: item.description,
+        }}
+      />
     </SwiperSlide>
   ));
   return (

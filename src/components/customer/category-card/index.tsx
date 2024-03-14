@@ -8,19 +8,24 @@ import Image from "next/image";
 import styles from "./style.module.css";
 
 const cx = classNames.bind(styles);
-export default function Product({ ...props }) {
-  const { name, url, description } = props;
+
+export default function CustomerCategoryCard({
+  variant,
+  ...props
+}: {
+  variant: ICategoryCardProps;
+}) {
   return (
     <div className={cx("card")}>
       <Link href="#" className={cx("custom-link")}>
         <Image
           className={cx("product--image")}
-          src={url}
+          src={variant.url}
           width={1200}
           height={120}
           alt="product image"
         />
-        <p className={cx("card-Name")}>{name}</p>
+        <p className={cx("card-Name")}>{variant.name}</p>
       </Link>
     </div>
   );

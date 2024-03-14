@@ -82,3 +82,14 @@ interface IHeaderMenuCategoryItemProps {
   iconData?: string;
   children?: React.ReactNode;
 }
+
+interface ICategoryCardProps {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface ISliderCardProps {
+  url: string;
+  description: string;
+}

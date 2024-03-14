@@ -5,7 +5,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import classNames from "classnames/bind";
 
 // import components
-import Product from "@/components/customer/category card";
+import CustomerCategoryCard from "@/components/customer/category-card";
 import { productData } from "./data";
 
 // import css
@@ -19,10 +19,12 @@ const cx = classNames.bind(styles);
 export default function Categories() {
   const PRODUCT = productData.map((item) => (
     <SwiperSlide key={item.id}>
-      <Product
-        name={item.name}
-        url={item.imageurl}
-        description={item.description}
+      <CustomerCategoryCard
+        variant={{
+          name: item.name,
+          url: item.imageurl,
+          description: item.description,
+        }}
       />
     </SwiperSlide>
   ));
