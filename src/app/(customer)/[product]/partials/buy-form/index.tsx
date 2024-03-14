@@ -12,7 +12,7 @@ import {
 } from "@/components";
 
 // import css
-import styles from "./styles.module.css";
+import styles from "./buy-form.module.css";
 
 // use css
 const cx = classNames.bind(styles);
@@ -35,7 +35,7 @@ export default function ProductBuyForm() {
         <p className={cx("product__discount-amount")}>-20%</p>
       </div>
       <div className={cx("product__variants", "variants")}>
-        <h4 className={cx("variants__title")}>Loại sản phẩm</h4>
+        <h3 className={cx("variants__title")}>Loại sản phẩm</h3>
         <div className={cx("variants__group")}>
           <CustomerProductVariant
             variant={{
@@ -76,7 +76,7 @@ export default function ProductBuyForm() {
         </div>
       </div>
       <div className={cx("product__quantity")}>
-        <h4>Số lượng</h4>
+        <h3>Số lượng</h3>
         <CustomerQuantityInputGroup
           initValue={{
             defaultValue: quantityValue,
@@ -87,7 +87,7 @@ export default function ProductBuyForm() {
         <p className={cx("product__is-stock")}>789 sản phẩm có thể mua</p>
       </div>
       <div className={cx("product__total-price-div")}>
-        <h4>Tạm tính</h4>
+        <h3>Tạm tính</h3>
         <p className={cx("product__total-price")}>3.000.000đ</p>
       </div>
       <div className={cx("product__buy-btns", "buy-btns")}>

@@ -96,7 +96,7 @@
   --dark9: #262a2e;
   --dark10: #363636;
   --dark11: rgb(128, 128, 137);
-  --dark12: #d7d7d7; 
+  --dark12: #d7d7d7;
 
   /* red */
   --red1: rgb(255, 8, 0, 0.1);
@@ -185,9 +185,9 @@ main {
 }
 
 h1 {
-  /* 32px */
-  font-size: 2rem;
-  font-weight: 600;
+  /* 28px */
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
 h2 {
