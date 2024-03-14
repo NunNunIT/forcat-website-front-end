@@ -18,22 +18,31 @@ export default function Footer() {
         <div className={cx("footer__company-name")}>
           <CustomerLogo className={cx("footer__logo")} white />
           <span>Cửa hàng đồ dùng cho mèo FORCAT.</span>
-          <div className={cx("footer__social-media")}>
-            <a href="https://www.facebook.com/forcat.official" target="_blank">
-              <Image src="/icon-facebook.svg"
-                alt="Icon mạng xã hội Facebook"
-              />
-            </a>{" "}
-            <a href="https://www.instagram.com/forcat_shop/" target="_blank">
-              <Image src="/icon-instagram.svg"
-                alt="Icon mạng xã hội Instagram"
-              />
-            </a>{" "}
-            <a href="https://www.tiktok.com/@forcat.shop7" target="_blank">
-              <Image src="/icon-tiktok.svg"
-                alt="Icon mạng xã hội Tiktok"
-              />
-            </a>
+          <div className={cx("footer__list-social-media")}>
+            <Link href="https://www.facebook.com/forcat.official" target="_blank">
+              <span className={cx("footer__social-media-container")}>
+                <Image src="/icon-facebook.svg"
+                  alt="Icon mạng xã hội Facebook"
+                  fill
+                />
+              </span>
+            </Link>{" "}
+            <Link href="https://www.instagram.com/forcat_shop/" target="_blank">
+              <span className={cx("footer__social-media-container")}>
+                <Image src="/icon-instagram.svg"
+                  alt="Icon mạng xã hội Instagram"
+                  fill
+                />
+              </span>
+            </Link>{" "}
+            <Link href="https://www.tiktok.com/@forcat.shop7" target="_blank">
+              <span className={cx("footer__social-media-container")}>
+                <Image src="/icon-tiktok.svg"
+                  alt="Icon mạng xã hội Tiktok"
+                  fill
+                />
+              </span>
+            </Link>
           </div>
         </div>
         <div className={cx("footer__about")}>

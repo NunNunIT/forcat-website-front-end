@@ -7,7 +7,10 @@ export default function CustomerLogo(props: ILogoProps) {
     <Link href="/">
       <Image className={props.className}
         src={`/logo${props.white ? '-white' : '-brown'}.png`}
-        alt="Logo" />
+        alt="Logo"
+        width={140}
+        height={48}
+      />
     </Link>
   )
 }
