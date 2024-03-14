@@ -83,3 +83,9 @@
     text-align: center;
     font-weight: 500;
 }
+
+@media only screen and (max-width: 64rem) {
+    .product-description-content__image {
+        height: 480px !important;
+    }
+}

@@ -293,3 +293,22 @@ section {
     font-size: 1.25rem;
     color: var(--blue6);
 }
+
+@media only screen and (max-width: 64rem) {
+    .product {
+        width: 90%;
+    }
+
+    .product-content {
+        grid-template-columns: 380px 1fr;
+    }
+
+    .image-overview__container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .video-overview__container {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
