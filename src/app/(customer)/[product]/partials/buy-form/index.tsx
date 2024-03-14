@@ -29,7 +29,8 @@ export default function ProductBuyForm() {
       <h1 className={cx("product__name")}>
         Điện thoại Xiaomi Redmi Note 12 (8GB/128GB)
       </h1>
-      <CustomerRatingFull fontSize="24px"></CustomerRatingFull>
+      <CustomerRatingFull
+        initValue={{ fontSize: "24px", rating: 3.5 }}></CustomerRatingFull>
       <div className={cx("product__unit-price-div")}>
         <p className={cx("product__unit-price")}>3.000.000đ</p>
         <p className={cx("product__discount-amount")}>-20%</p>

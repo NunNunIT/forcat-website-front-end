@@ -82,3 +82,8 @@ interface IHeaderMenuCategoryItemProps {
   iconData?: string;
   children?: React.ReactNode;
 }
+
+interface IRating {
+  fontSize: TRating;
+  rating: number;
+}
