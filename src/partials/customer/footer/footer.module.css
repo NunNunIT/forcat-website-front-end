@@ -39,11 +39,6 @@
   font-size: 1.25rem;
 }
 
-.footer__logo {
-  height: 4rem;
-  object-fit: contain;
-}
-
 .footer__company-name {
   grid-area: CompanyName;
 
@@ -51,6 +46,26 @@
   flex-direction: column;
   align-items: center;
   gap: .75rem;
+}
+
+.footer__company-name span {
+  font-weight: bold;
+}
+
+.footer__list-social-media {
+  display: flex;
+  gap: .25rem;
+}
+
+.footer__social-media-container {
+  display: block;
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.footer__list-social-media a:hover img {
+  filter: drop-shadow(0 4px 8px var(--white-o2));
 }
 
 .footer__about {
@@ -104,11 +119,6 @@
 .footer__list-item.phone:hover {
   font-weight: 700;
   cursor: pointer;
-}
-
-.footer__social-media {
-  object-fit: contain;
-  height: 1.5rem;
 }
 
 /* Copyright */

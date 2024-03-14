@@ -1,9 +1,14 @@
 // import libs
 import Link from "next/link";
+import Image from "next/image";
 
 // import components
 import { CustomerProductSlider, CustomerRating } from "@/components";
-import { ProductBuyForm } from "./partials";
+import {
+  ProductBuyForm,
+  ProductDescription,
+  ProductSpecification,
+} from "./partials";
 
 // import css
 import "./page.css";
@@ -14,120 +19,20 @@ export default function ProductPage() {
       <div className="product-content">
         <div className="product-content--left product-content-left">
           <CustomerProductSlider></CustomerProductSlider>
-          <section className="product-content-left__specifications specifications">
-            <div className="specifications__title">
-              <h4>Thông số kỹ thuật</h4>
-              <div className="specifications__see-more">
-                <p>Xem thêm</p>
-                <span className="material-icons-round">arrow_forward_ios</span>
-              </div>
-            </div>
-            <div className="specifications__table">
-              <div className="specifications__item">
-                <div className="specifications__type">Dung lượng pin</div>
-                <div className="specifications__info">5000 mAh</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Chip set</div>
-                <div className="specifications__info">
-                  Snapdragon 685 8 nhân
-                </div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">
-                  Loại/ Công nghệ màn hình
-                </div>
-                <div className="specifications__info">AMOLED</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Type</div>
-                <div className="specifications__info">Info</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Type</div>
-                <div className="specifications__info">Info</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Type</div>
-                <div className="specifications__info">Info</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Type</div>
-                <div className="specifications__info">Info</div>
-              </div>
-              <div className="specifications__item">
-                <div className="specifications__type">Type</div>
-                <div className="specifications__info">Info</div>
-              </div>
-            </div>
-          </section>
+          <ProductSpecification></ProductSpecification>
         </div>
 
         <div className="product-content--right product-content-right">
-          <img
-            className="decoration__bow"
-            src="/imgs/bow.png"
-            alt="This is a bow"
-          />
+          <div className="decoration__bow">
+            <Image src="/imgs/bow.png" alt="This is a bow" fill={true} />
+          </div>
           <ProductBuyForm></ProductBuyForm>
-          <section className="product-content-right__product-description product-description">
-            <h4 className="product-description__title">Mô tả sản phẩm</h4>
-            <div className="product-description__content product-description-content">
-              <h5 className="product-description-content__title">
-                Vẻ ngoài thời trang cùng màu sắc mới mẻ
-              </h5>
-              <p className="product-description-content__paragraph">
-                Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các
-                cạnh cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa
-                mặt lưng và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm
-                giác cầm nắm thoải mái.
-              </p>
-              <img
-                className="product-description-content__image"
-                src="/imgs/test.png"
-                alt="Anh san pham"
-              />
-              <p className="product-description-content__image-caption">
-                Hình ảnh điện thoại redme
-              </p>
-              <h5 className="product-description-content__title">
-                Vẻ ngoài thời trang cùng màu sắc mới mẻ
-              </h5>
-              <p className="product-description-content__paragraph">
-                Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các
-                cạnh cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa
-                mặt lưng và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm
-                giác cầm nắm thoải mái.
-              </p>
-              <h5 className="product-description-content__title">
-                Vẻ ngoài thời trang cùng màu sắc mới mẻ
-              </h5>
-              <p className="product-description-content__paragraph">
-                Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các
-                cạnh cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa
-                mặt lưng và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm
-                giác cầm nắm thoải mái.
-              </p>
-              <h5 className="product-description-content__title">
-                Vẻ ngoài thời trang cùng màu sắc mới mẻ
-              </h5>
-              <p className="product-description-content__paragraph">
-                Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các
-                cạnh cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa
-                mặt lưng và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm
-                giác cầm nắm thoải mái.
-              </p>
-            </div>
-            <div className="product-description__see-more see-more-btn">
-              <div className="see-more-btn__gradient"></div>
-              <div className="see-more-btn__text">Xem thêm</div>
-            </div>
-          </section>
+          <ProductDescription></ProductDescription>
         </div>
       </div>
 
       <section className="product-review">
-        <h4>Đánh giá từ khách hàng</h4>
+        <h3>Đánh giá từ khách hàng</h3>
         <div className="product-review__head">
           <div className="product-review__overview review-overview">
             <h5>Tổng quan</h5>
