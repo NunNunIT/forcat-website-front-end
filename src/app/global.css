@@ -1,4 +1,4 @@
-@import 'material-icons/iconfont/material-icons.css';
+@import "material-icons/iconfont/material-icons.css";
 
 :root {
   /* some var */
@@ -41,49 +41,48 @@
     0 12px 90px 0 rgba(103, 151, 255, 0.11);
 
   /* primary */
-  --primary-mau0-1: #7A3B00;
-  --primary-mau0-2: #AB6E48;
-  --primary-mau0-3: #FFC988;
-  --primary-mau0-4: #7F9F80;
-  --primary-mau0-5: #C4D6B0;
+  --primary-mau0-1: #7a3b00;
+  --primary-mau0-2: #ab6e48;
+  --primary-mau0-3: #ffc988;
+  --primary-mau0-4: #7f9f80;
+  --primary-mau0-5: #c4d6b0;
 
-  --primary-mau1-1: #FAD46A;
-  --primary-mau1-2: #FFF4D8;
-  --primary-mau1-3: #6C5442;
-  --primary-mau1-4: #619D5C;
-  --primary-mau1-5: #DAECE8;
+  --primary-mau1-1: #fad46a;
+  --primary-mau1-2: #fff4d8;
+  --primary-mau1-3: #6c5442;
+  --primary-mau1-4: #619d5c;
+  --primary-mau1-5: #daece8;
 
-  --primary-mau2-1: #51453C;
-  --primary-mau2-2: #766E68;
-  --primary-mau2-3: #FFFFFF;
-  --primary-mau2-4: #D6D0C6;
-  --primary-mau2-5: #917E70;
-  --primary-mau2-6: #6DC1ED;
+  --primary-mau2-1: #51453c;
+  --primary-mau2-2: #766e68;
+  --primary-mau2-3: #ffffff;
+  --primary-mau2-4: #d6d0c6;
+  --primary-mau2-5: #917e70;
+  --primary-mau2-6: #6dc1ed;
 
-  --primary-mau3-1: #64261B;
-  --primary-mau3-2: #92A898;
-  --primary-mau3-3: #FDF6E4;
-  --primary-mau3-4: #FFD569;
+  --primary-mau3-1: #64261b;
+  --primary-mau3-2: #92a898;
+  --primary-mau3-3: #fdf6e4;
+  --primary-mau3-4: #ffd569;
   --primary-mau3-5: #859874;
-  --primary-mau3-6: #DAECE8;
+  --primary-mau3-6: #daece8;
 
-  --primary-mau4-1: #3D1E00;
-  --primary-mau4-2: #AB6E48;
-  --primary-mau4-3: #FFC988;
-  --primary-mau4-4: #619D5C;
-  --primary-mau4-5: #C4D6B0;
-  --primary-mau4-6: #DAECE8;
+  --primary-mau4-1: #3d1e00;
+  --primary-mau4-2: #ab6e48;
+  --primary-mau4-3: #ffc988;
+  --primary-mau4-4: #619d5c;
+  --primary-mau4-5: #c4d6b0;
+  --primary-mau4-6: #daece8;
 
   /* outline */
   --outline1: rgb(235, 235, 240);
-  --outline2: #FF4343;
+  --outline2: #ff4343;
 
   /* background */
   --bg1: rgba(36, 36, 36, 0.7);
   --bg2: rgb(245, 245, 250);
   --bg3: rgba(0, 0, 0, 0.32);
   --bg4: rgba(0, 0, 0, 0.6);
-
 
   /* dark */
   --dark1: #0000004d;

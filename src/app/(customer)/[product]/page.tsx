@@ -39,14 +39,16 @@ export default function ProductPage() {
               <div className="review-overview__info">
                 <span className="review-overview__average">4.8</span>
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
               </div>
               <p className="review-overview__total">(Tất cả 1234 đánh giá)</p>
             </div>
             <div className="review-overview__detail review-overview-detail">
               <div className="review-overview-detail__row">
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
                 <div className="review-overview-detail__progress-div">
                   <div className="review-overview-detail__progress-bar"></div>
                 </div>
@@ -54,7 +56,8 @@ export default function ProductPage() {
               </div>
               <div className="review-overview-detail__row">
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
                 <div className="review-overview-detail__progress-div">
                   <div className="review-overview-detail__progress-bar"></div>
                 </div>
@@ -62,7 +65,8 @@ export default function ProductPage() {
               </div>
               <div className="review-overview-detail__row">
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
                 <div className="review-overview-detail__progress-div">
                   <div className="review-overview-detail__progress-bar"></div>
                 </div>
@@ -70,7 +74,8 @@ export default function ProductPage() {
               </div>
               <div className="review-overview-detail__row">
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
                 <div className="review-overview-detail__progress-div">
                   <div className="review-overview-detail__progress-bar"></div>
                 </div>
@@ -78,7 +83,8 @@ export default function ProductPage() {
               </div>
               <div className="review-overview-detail__row">
                 <CustomerRating
-                  initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+                  initValue={{ fontSize: "24px", rating: 4 }}
+                ></CustomerRating>
                 <div className="review-overview-detail__progress-div">
                   <div className="review-overview-detail__progress-bar"></div>
                 </div>
@@ -225,7 +231,8 @@ export default function ProductPage() {
                       initValue={{
                         fontSize: "24px",
                         rating: 4,
-                      }}></CustomerRating>
+                      }}
+                    ></CustomerRating>
                   </div>
                   <div className="review-item__variant">Phân loại: 7 màu</div>
                 </div>
@@ -291,7 +298,8 @@ export default function ProductPage() {
                       initValue={{
                         fontSize: "24px",
                         rating: 4,
-                      }}></CustomerRating>
+                      }}
+                    ></CustomerRating>
                   </div>
                   <div className="review-item__variant">Phân loại: 7 màu</div>
                 </div>
@@ -357,7 +365,8 @@ export default function ProductPage() {
                       initValue={{
                         fontSize: "24px",
                         rating: 4,
-                      }}></CustomerRating>
+                      }}
+                    ></CustomerRating>
                   </div>
                   <div className="review-item__variant">Phân loại: 7 màu</div>
                 </div>
