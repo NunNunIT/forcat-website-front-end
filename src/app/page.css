@@ -1,7 +1,93 @@
 .content-container {
-    width: 80%;
-    max-width: 1152px;
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
+  width: 80%;
+  max-width: 1152px;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+.content-container {
+  width: 80%;
+  margin: 24px auto;
+  max-width: 1152px;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+section {
+  max-width: 1152px;
+}
+
+.tip-products-wrapper {
+  padding: 12px;
+  border-radius: 4px;
+  display: inherit;
+  flex-direction: column;
+}
+
+.tip-products-wrapper.new-products {
+  /* background-color: var(--white); */
+  margin-top: 154px;
+  background: #ab6e48;
+  background: -moz-linear-gradient(top, #ab6e48 0%, #7f3e00 100%);
+  background: -webkit-linear-gradient(top, #ab6e48 0%, #7f3e00 100%);
+  background: linear-gradient(to right, #ab6e48 0%, #7f3e00 100%);
+}
+
+.tip-products-wrapper.new-products .tip-products__img {
+  background-image: url("/imgs/banner/bannerNew.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* .tip-products-wrapper.sale-products {
+  background: #ffa62e;
+  background: -moz-linear-gradient(left, #ffa62e 0%, #ea4c2d 100%);
+  background: -webkit-linear-gradient(left, #ffa62e 0%, #ea4c2d 100%);
+  background: linear-gradient(to right, #ffa62e 0%, #ea4c2d 100%) !important;
+} */
+
+.tip-products__label {
+  display: flex;
+  padding: 12px 0px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: var(--white);
+}
+
+.tip-products__more {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.tip-products__see-all-btn {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 18px;
+}
+
+.see-all-btn:hover,
+.tip-products__see-all-btn:hover {
+  color: yellow;
+}
+
+.tip-products__more:hover {
+  color: yellow;
+}
+
+.tip-products__content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* margin-top: 24px; */
+}
+
+.tip-products__item {
+  flex: 0 0 19%;
 }
