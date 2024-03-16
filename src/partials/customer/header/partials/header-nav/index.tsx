@@ -23,7 +23,9 @@ export default function CustomerHeaderNav() {
             </Link>
             <div className={cx("dropdown-help__content-container")}>
               <div className={cx("dropdown-help__content")}>
-                <Image src="/imgs/qr-zalo.png" alt="help" fill />
+                <div className={cx("dropdown-help__qr-code-container")}>
+                  <Image src="/imgs/qr-zalo.png" alt="help" fill />
+                </div>
                 <p>Quét mã QR để gửi thông tin cần hỗ trợ đến chúng tôi</p>
               </div>
             </div>

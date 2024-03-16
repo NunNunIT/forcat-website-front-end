@@ -23,7 +23,7 @@ export default function CustomerHeaderMain() {
       >
         <div className={cx("header__search-bar")}>
           <input className={cx("header__search-input")}
-          type="search"
+            type="search"
             name="searchKey"
             placeholder="Bạn tìm gì..." />
           <button className={cx("header__search-btn")} type="submit">
@@ -45,11 +45,12 @@ export default function CustomerHeaderMain() {
         <div className={cx("dropdown-cart__content-container")}>
           <div className={cx("dropdown-cart__content")}>
             <div className={cx("dropdown-cart__unauth-user")}>
-              <Image className={cx("unauth-user__img")}
-                src="/imgs/unauth-user.png" alt="unauth-user"
-                width={80}
-                height={80}
-              />
+              <div className={cx("unauth-user__img-container")}>
+                <Image className={cx("unauth-user__img")}
+                  src="/imgs/unauth-user.png" alt="unauth-user"
+                  fill
+                />
+              </div>
               <span className={cx("unauth-content__cart")}>Đăng nhập để xem Giỏ hàng</span>
             </div>
             <div className={cx("unauth-content__btn")}>

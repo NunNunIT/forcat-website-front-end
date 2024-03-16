@@ -218,6 +218,10 @@
   color: var(--pink);
 }
 
+.menu__item .menu__news {
+  color: var(--luminos-blue);
+}
+
 .menu__item:hover {
   color: var(--primary-mau0-2);
   box-shadow: inset 0 -2px 0 0 var(--primary-mau0-2);
@@ -266,7 +270,7 @@
 
 @media only screen and (max-width: 1024px) {
   .header__menu {
-    gap: .5rem;
+    display: none;
   }
 
   .menu__item {
@@ -288,8 +292,4 @@
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .header__menu {
-    display: none;
-  }
-}
+@media only screen and (max-width: 480px) {}
