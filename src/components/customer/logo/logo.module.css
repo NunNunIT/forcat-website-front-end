@@ -1,5 +1,6 @@
 .logo__container {
   position: relative;
+  width: 80%;
   aspect-ratio: 140/48;
 
   display: block;

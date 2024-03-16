@@ -6,9 +6,9 @@
   width: 80%;
   max-width: 1152px;
   min-height: 280px;
+
   margin: 0 auto;
   padding-top: 2rem;
-  padding-inline: 1rem;
 
   display: grid;
   grid-template-areas:
@@ -162,7 +162,6 @@
   .footer__container {
     width: 90%;
     padding-top: 1rem;
-    padding-inline: .75rem;
 
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
@@ -186,10 +185,6 @@
 
   .footer__company-name {
     align-items: center;
-  }
-
-  .footer__logo {
-    height: 3rem;
   }
 }
 
