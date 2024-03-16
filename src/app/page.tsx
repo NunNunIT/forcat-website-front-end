@@ -5,7 +5,7 @@ import Link from "next/link";
 // import Carousel from 'react-bootstrap/Carousel';
 
 // import global components
-// import { CustomerCarousel } from "@/components";
+import { CustomerCarousel } from "@/components";
 // import { CustomerSlider } from "@/components";
 // import { CustomerCategories } from "@/components";
 import { CustomerProductCard } from "@/components";
@@ -18,7 +18,7 @@ export default function HomePage() {
     <main className="content-container">
       {/* <CustomerSlider></CustomerSlider>
       <CustomerCategories></CustomerCategories> */}
-      {/* <CustomerCarousel></CustomerCarousel> */}
+      <CustomerCarousel></CustomerCarousel>
       <section className="tip-products-wrapper new-products">
         <div className="tip-products__img">
           <img src="/imgs/banner.png" alt="banner-new" />
