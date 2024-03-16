@@ -378,7 +378,3 @@ input[type="number"] {
   -moz-appearance: textfield;
   /* Firefox */
 }
-
-[class*="-price"]:after {
-  content: " đ";
-}
