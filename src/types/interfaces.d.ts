@@ -83,6 +83,11 @@ interface IHeaderMenuCategoryItemProps {
   children?: React.ReactNode;
 }
 
+interface IRating {
+  fontSize: TRating;
+  rating: number;
+}
+
 interface IArticleDescriptionContentPRops {
   type: string;
   content: string;

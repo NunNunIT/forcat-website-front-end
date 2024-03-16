@@ -20,7 +20,6 @@
 
 .header__container {
   width: min(80%, 1152px);
-  padding-inline: 1rem;
 }
 
 /* 1024px - Mini PC */
@@ -38,83 +37,18 @@
 
   .header__container {
     width: 90%;
-    padding-inline: .75rem;
   }
 
   .header a,
   .header p {
     font-size: 0.8125rem;
   }
-/* 
-  .header__cate-dropdown {
-    min-height: 450px;
-  }
-
-  .cate-dropdown__products a {
-    width: 31%;
-  }
-
-  .cate-dropdown__content-wrapper {
-    gap: .75rem;
-  }
-
-  .menu__item {
-    height: 40px;
-    padding: .75rem 0;
-  }
-
-  .cate-dropdown__product-rating span {
-    font-size: 0.8125rem;
-  }
-
-  .header__cart__number-badge {
-    left: 1.5rem;
-    top: -0.7rem;
-  }
-
-  .dropdown-noti__content-container {
-    margin-left: -275px;
-  } */
 }
-
-/*Responsive-tablet-portrait*/
-/* @media only screen and (max-width: 480px) {
-  .header__container {
-    padding-inline: .75rem;
-  }
-
-  .header__nav {
-    padding: 6px 0;
-  }
-
-  .header__logo {
-    display: none;
-  }
-
-  .header__search-bar {
-    width: 75%;
-    margin-left: 0;
-  }
-
-  .header__search-btn {
-    width: 12%;
-    margin-right: 4%;
-  }
-
-  .header__support-info {
-    display: none;
-  }
-
-  .header__about-account .header__notifications {
-    display: none;
-  }
-} */
 
 /*Responsive-smartphone*/
 @media only screen and (max-width: 480px) {
   .header__container {
     width: 100%;
-    padding-inline: .5rem;
   }
 
   .header__nav a {

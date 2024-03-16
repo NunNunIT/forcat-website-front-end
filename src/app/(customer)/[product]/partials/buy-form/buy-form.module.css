@@ -4,6 +4,10 @@
     gap: 8px;
 }
 
+.product__name {
+    padding-right: 10.5%;
+}
+
 .product__unit-price-div {
     display: flex;
     align-items: center;
@@ -86,4 +90,10 @@
 
 .buy-now-btn {
     background-color: var(--dollar-red2);
+}
+
+@media only screen and (max-width: 64rem) {
+    .variants__group {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
