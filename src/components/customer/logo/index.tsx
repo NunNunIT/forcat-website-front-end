@@ -13,10 +13,10 @@ export default function CustomerLogo(props: ILogoProps) {
   return (
     <Link href="/" className={cx("logo__container") + " " + className}>
       <Image className={cx("logo__img")}
-        src={`/logo${props.white ? '-white' : '-brown'}.png`}
+        src={`/logo${props.white ? '-white' : '-brown'}.webp`}
         alt="Logo"
         fill
       />
     </Link>
-  )
+  );
 }

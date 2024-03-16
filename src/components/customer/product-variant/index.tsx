@@ -19,10 +19,6 @@ export default function CustomerProductVariant({
 }) {
   const pathname = usePathname();
   const isActive = pathname === variant.url ? "variant__active" : "";
-  console.log("pathname: " + pathname);
-  console.log("variant.url: " + variant.url);
-  console.log("isActive: " + isActive);
-  console.log("cx: " + cx("variant", isActive));
 
   return (
     <Link className={cx("variant", isActive)} href={variant.url}>
