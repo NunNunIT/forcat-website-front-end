@@ -1,5 +1,6 @@
 // import libs
 import Link from "next/link";
+import Image from "next/image"
 import classNameNames from "classnames/bind";
 
 // import function from utils
@@ -18,16 +19,15 @@ function CustomerHeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.
   const discountPrice = price__discount || price;
 
   return (
-    <a
-      key={id}
-      className={cx("cate-dropdown__product-link")}
+    <Link className={cx("cate-dropdown__product-link")}
       href={`/search?sub_category_id=${subCategory_id}`}
     >
-      <img
-        className={cx("cate-dropdown__product-img")}
-        src={`/imgs/product_image/P${id}/P${id}_avt.jpg`}
-        alt={name}
-      />
+      <span className={cx("cate-dropdown__product-img-container")}>
+        <Image src={`/imgs/product_image/P${id}/P${id}_avt.jpg`}
+          alt={name}
+          fill
+        />
+      </span>
       <div className={cx("cate-dropdown__product-rating")}>
         <CustomerStarRating className={cx("cate-dropdown__product-star")} rating={rating} />
         <span>({rating})</span>
@@ -43,7 +43,7 @@ function CustomerHeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.
           </del>
         )}
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -53,18 +53,24 @@ function CustomerHeaderMenuSubCategoryItem(props: IHeaderMenuSubCategoryItemProp
 
   return (
     <li className={cx("cate-dropdown__wrapper")}>
-      <a className={cx("cate-dropdown__info")} href={`/search/results?category_id=${id}`}>
-        <img className={cx("cate-dropdown__img")} src={`/imgs/categories/${id}.png`} alt={`${id}_Image`} />
+      <Link className={cx("cate-dropdown__info")} href={`/search/results?category_id=${id}`}>
+        <span className={cx("cate-dropdown__img-container")}>
+          <Image src={`/imgs/categories/${id}.png`} alt={`${id}_Image`}
+            fill
+          />
+        </span>
         <span className={cx("cate-dropdown__sub-cate")}>{title}</span>{" "}
         <span>({products?.length ?? 0})</span>
-      </a>
+      </Link>
       <div className={cx("cate-dropdown__content")}>
         <div className={cx("cate-dropdown__title")}>
           <span>Sản phẩm bán chạy nhất</span>
-          <a className={cx("cate-dropdown__title-link")} href={`/search/results?category_id=${props}`}>
+          <Link className={cx("cate-dropdown__title-link")}
+            href={`/search/results?category_id=${props}`}
+          >
             <span>Xem tất cả</span>
             <span className="material-icons-outlined">chevron_right</span>
-          </a>
+          </Link>
         </div>
         {hasProducts && (
           <div className={cx("cate-dropdown__products")}>
@@ -79,9 +85,12 @@ function CustomerHeaderMenuSubCategoryItem(props: IHeaderMenuSubCategoryItemProp
 
         {!hasProducts && (
           <div className={cx("cate-dropdown__products--not-found")}>
-            <img className={cx("cate-dropdown__products--not-found__img")}
-              src="/imgs/nothing-result.png"
-              alt="Not found result" />
+            <span className={cx("cate-dropdown__products--not-found__img-container")}>
+              <Image src="/imgs/nothing-result.png"
+                alt="Not found result"
+                fill
+              />
+            </span>
             <span className={cx("cate-dropdown__products--not-found__text")}>Không tìm thấy sản phẩm!</span>
           </div>
         )}
