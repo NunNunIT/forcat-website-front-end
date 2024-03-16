@@ -69,6 +69,7 @@
 
 .see-more-btn {
     cursor: pointer;
+    position: relative;
 }
 
 .see-more-btn__gradient {
@@ -84,4 +85,14 @@
     width: 100%;
     text-align: center;
     font-weight: 500;
+}
+
+@media only screen and (max-width: 26rem) {
+    .specifications {
+        border: none;
+    }
+
+    .see-more-btn__gradient {
+        bottom: 24px;
+    }
 }

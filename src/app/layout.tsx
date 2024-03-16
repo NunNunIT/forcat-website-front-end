@@ -8,12 +8,12 @@ import { CustomerFooter, CustomerHeader } from "@/partials";
 import "./global.css";
 
 export const metadata: Metadata = {
-  applicationName: "TechTwo.",
+  applicationName: "ForCat",
   referrer: "origin-when-cross-origin",
-  keywords: ["Cửa hàng điện máy", "Điện máy"],
+  keywords: ["Cửa hàng phụ kiện thú cưng"],
   title: {
-    template: "TechTwo. %s",
-    default: "TechTwo.",
+    template: "ForCat. %s",
+    default: "ForCat.",
   },
   description:
     "Chào mừng bạn đến với TECHTWO - địa chỉ mua sắm trực tuyến hàng đầu về điện máy! Khám phá thế giới công nghệ với sự đa dạng và chất lượng tốt nhất từ máy tính, điện thoại di động đến các sản phẩm gia dụng thông minh. Mua sắm an toàn, thuận tiện và tiết kiệm ngay hôm nay với các ưu đãi độc quyền. TECHTWO - Nơi nâng cao cuộc sống thông qua công nghệ!.",
@@ -25,18 +25,14 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default function CustomerLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body>
-        <CustomerHeader />
-        {children}
-        <CustomerFooter />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
