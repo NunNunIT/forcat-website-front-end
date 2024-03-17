@@ -6,7 +6,6 @@ body {
 
 .mobile-account-container {
 	display: flex;
-	margin-top: 112px;
 	justify-content: center;
 	align-items: center;
 	width: 100% !important;
@@ -30,11 +29,16 @@ body {
 	font-size: 32px;
 }
 
-span.image-container img {
+.image-container {
+	position: relative;
 	width: 8rem;
 	height: 8rem;
 	border-radius: 50%;
 	object-fit: cover;
+}
+
+.avatarimg {
+	border-radius: 50%;
 }
 
 .avatar {
@@ -123,11 +127,14 @@ span.image-container img {
 	color: var(--white);
 	font-size: 18px;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .side-menu li {
 	padding: 10px;
 }
+
+
 /* Popup logout */
 .mobile-account__popup {
 	display: block;
@@ -214,7 +221,7 @@ a.btn.btn--filled.pri.btn-logout {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding:  0 18px;
+	padding: 0 18px;
 	font-size: 0.875rem;
 	height: 42px;
 }

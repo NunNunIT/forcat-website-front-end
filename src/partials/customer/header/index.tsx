@@ -279,7 +279,7 @@ const headerCategories: (ICategoryProps)[] = [
             id: "9",
             name: "Nhà cào 3",
             price: 10000,
-            rating: 4,
+            rating: 0,
           },
         ]
       },

@@ -1,17 +1,12 @@
-"use client";
-
 // import libs
-import React, { useEffect, useRef } from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 // import components
 import { CustomerSidebarAccount } from "@/components";
 // import css
 import "./page.css";
 
-
 export default function InformationPage() {
-
     return (
         <main className="account-container">
             {/* <%- include("../../components/sidebar_account") %> */}
@@ -19,11 +14,11 @@ export default function InformationPage() {
             <section className="purchase__main" id="info">
                 <div className="purchase__main__item">
                     <div className="purchase-item">
-                        <div className="purchase-item--top)}">
+                        <div className="purchase-item--top">
                             <div className="purchase-item__info">
                                 <h3>Thông tin cá nhân</h3>
                             </div>
-                            <h3 className="purchase-item__status"> <a href="/account/edit-information">Sửa</a></h3>
+                            <h3 className="purchase-item__status"> <Link href="/account/edit-information">Sửa</Link></h3>
                         </div>
                         <div className="purchase-item__main">
                             <div className="purchase-item__element">
@@ -82,7 +77,6 @@ export default function InformationPage() {
                     </div>
                 </div>
             </section>
-
         </main>
     )
 }

@@ -4,10 +4,8 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
 import Link from 'next/link'
 import classNames from "classnames/bind";
-import styles from "./styles.module.css";
-
-
-
+import styles from "./carousel.module.css";
+import { CustomerStarRating } from '@/components';
 
 
 const cx = classNames.bind(styles);
@@ -230,8 +228,7 @@ const CustomerCarousel = () => {
                   <Image
                     src="/imgs/test.png"
                     alt="<%= product.product_name %>"
-                    width={500}
-                    height={500}
+                    fill={true}
                     draggable="false"
                   />
                 </div>
@@ -242,10 +239,11 @@ const CustomerCarousel = () => {
                   </span>
                   {/* <% if (product.product_rate) { %> */}
                   <div className={cx("carousel__card-rate")}>
+                    <CustomerStarRating rating={5} />
+                    {/* <span className={cx("material-icons-outline fill")}>star</span>
                     <span className={cx("material-icons fill")}>star</span>
                     <span className={cx("material-icons fill")}>star</span>
-                    <span className={cx("material-icons fill")}>star</span>
-                    <span className={cx("material-icons fill")}>star</span>
+                    <span className={cx("material-icons fill")}>star</span> */}
                     {/* <% for (let i = 0; i < Math.floor(product.product_rate); i++) { %>
 								<span className={cx("material-symbols-outlined")}>star</span>
 								<% } %>
@@ -253,7 +251,7 @@ const CustomerCarousel = () => {
 								<% if (product.product_rate % 1 !== 0.5) { %>
 								<% if (product.product_rate - Math.floor(product.product_rate) > 0) { %> */}
 
-                    <span className={cx("material-icons ")}>star_half</span>
+                    {/* <span className={cx("material-icons ")}>star_half</span> */}
                     {/* // <% } %>
 								// <% for (let i = 0; i < Math.floor(5 - Math.ceil(product.product_rate)); i++) { %> */}
                     {/* // <span className={cx("material-symbols-outlined" style="font-variation-settings: 'FILL' 0")}>star</span>
