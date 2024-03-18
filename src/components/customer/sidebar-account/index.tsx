@@ -62,7 +62,7 @@ const CustomerSidebarAccount: React.FC = () => {
             </ul>
             <ul className={cx("side-menu")}>
                 <li className={cx("side-menu__ele")} >
-                    <a href="/account/changePassword">
+                    <a href="/account/change-password">
                         <span className={cx("material-icons-outlined")}>
                             settings
                         </span>
