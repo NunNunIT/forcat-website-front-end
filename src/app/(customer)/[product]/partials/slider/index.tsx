@@ -91,7 +91,7 @@ export default function CustomerProductSlider(prop) {
     setCurrentIndex(newIndex);
     setMainImageSrc(thumbnails[newIndex]);
     handleMouseOver(newIndex); // Update hovered state and potentially class
-   
+
     if (currentIndex < thumbnails.length - 2 && newIndex % 2 == 1)
       handleScrollLeft();
   };
@@ -126,7 +126,7 @@ export default function CustomerProductSlider(prop) {
 
         {currentIndex > 0 && (
           <div
-            className={cx("slider__btn", "slider__back")}
+            className={cx("slider__btn", "slider__back", prop.desktopOnly)}
             onClick={handleClickLeft}>
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_back_ios
@@ -136,7 +136,7 @@ export default function CustomerProductSlider(prop) {
 
         {currentIndex < thumbnails.length - 1 && (
           <div
-            className={cx("slider__btn", "slider__forward")}
+            className={cx("slider__btn", "slider__forward", prop.desktopOnly)}
             onClick={handleClickRight}>
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_forward_ios

@@ -32,3 +32,23 @@
 .input-quantity:hover {
     background-color: var(--bg2);
 }
+
+@media only screen and (max-width: 26rem) {
+    .quantity-input-group {
+        gap: 0px;
+    }
+
+    .btn-quantity {
+        width: 24px;
+        height: 24px;
+    }
+
+    .input-quantity {
+        width: 36px;
+        height: 24px;
+    }
+
+    .quantity-input-group__icon {
+        font-size: 1.25rem;
+    }
+}

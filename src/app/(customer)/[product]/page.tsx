@@ -21,7 +21,9 @@ export default function ProductPage() {
     <main className="product">
       <div className="product-content">
         <div className="product-content--left product-content-left">
-          <ProductSlider mobileOnly="mobile-hidden"></ProductSlider>
+          <ProductSlider
+            mobileOnly="mobile-hidden"
+            desktopOnly="desktop-hidden"></ProductSlider>
           <ProductBuyForm mobileOnly="desktop-hidden"></ProductBuyForm>
           <ProductSpecification></ProductSpecification>
           <ProductDescription mobileOnly="desktop-hidden"></ProductDescription>
@@ -29,7 +31,11 @@ export default function ProductPage() {
 
         <div className="product-content--right product-content-right mobile-hidden">
           <div className="decoration__bow">
-            <Image src="/imgs/bow.png" alt="This is a bow" fill={true} />
+            <Image
+              src="/imgs/product-page/bow.png"
+              alt="This is a bow"
+              fill={true}
+            />
           </div>
           <ProductBuyForm></ProductBuyForm>
           <ProductDescription></ProductDescription>

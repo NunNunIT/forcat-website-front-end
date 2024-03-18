@@ -1,0 +1,29 @@
+.cart {
+    width: 80%;
+    max-width: 1152px;
+    display: grid;
+    grid-template-columns: 850px 1fr;
+    gap: 12px;
+    position: relative;
+}
+
+@media only screen and (max-width: 64rem) {
+    .cart {
+        width: 90%;
+        grid-template-columns: 650px 1fr;
+    }
+}
+
+@media only screen and (max-width: 48rem) {
+    .cart {
+        grid-template-columns: none;
+    }
+}
+
+@media only screen and (max-width: 26rem) {
+    .cart {
+        width: 100%;
+        margin: 0;
+    }
+
+}
