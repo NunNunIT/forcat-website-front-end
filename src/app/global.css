@@ -393,23 +393,18 @@ input[type="number"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--bg-white-o80);
+  border-radius: 50%;
+  background-color: var(--bg-white-o80);
   color: var(--swiper-navigation-color, var(--swiper-theme-color));
-  margin-right: 2rem;
-  margin-left: 2rem;
-}
-
-.swiper-wrapper {
-  display: flex;
-  align-items: center;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  width: 2em !important;
-  height: 2em !important;
-  border: 1px solid var(--bg-white-o80);
-  border-radius: 50%;
-  background-color: var(--bg-white-o80);
+  width: 2.5em !important;
+  height: 2.5em !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -421,6 +416,7 @@ input[type="number"] {
   background-color: var(--dark3);
   color: var(--green1);
 }
+
 [class*="-price"]:after {
   content: " đ";
 }

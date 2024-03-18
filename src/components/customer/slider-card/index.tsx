@@ -19,6 +19,7 @@ export default function CustomerSliderCard({
         className={cx("image_container-img")}
         width={1280}
         height={200}
+        // fill={true}
         src={variant.url}
         alt={variant.description}
       />

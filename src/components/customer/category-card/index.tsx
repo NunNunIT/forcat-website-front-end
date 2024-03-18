@@ -10,22 +10,22 @@ import styles from "./style.module.css";
 const cx = classNames.bind(styles);
 
 export default function CustomerCategoryCard({
-  variant,
+  initValue,
   ...props
 }: {
-  variant: ICategoryCardProps;
+  initValue: ICategoryCardProps;
 }) {
   return (
-    <div className={cx("card")}>
-      <Link href="#" className={cx("custom-link")}>
+    <div className={cx("categoryCard")}>
+      <Link href="#" className={cx("categoryCard__link")}>
         <Image
-          className={cx("product--image")}
-          src={variant.url}
-          width={1200}
-          height={120}
+          className={cx("categoryCard__link-image")}
+          src={initValue.url}
           alt="product image"
+          width={1200}
+          height={100}
         />
-        <p className={cx("card-Name")}>{variant.name}</p>
+        <p className={cx("categoryCard__link-name")}>{initValue.name}</p>
       </Link>
     </div>
   );

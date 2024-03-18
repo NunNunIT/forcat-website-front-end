@@ -20,7 +20,7 @@ export default function Categories() {
   const PRODUCT = productData.map((item) => (
     <SwiperSlide key={item.id}>
       <CustomerCategoryCard
-        variant={{
+        initValue={{
           name: item.name,
           url: item.imageurl,
           description: item.description,
@@ -30,25 +30,29 @@ export default function Categories() {
   ));
 
   return (
-    <div className={cx("CustomerCatogories")}>
+    <div className={cx("customer_categories")}>
       <Swiper
         breakpoints={{
           200: {
             slidesPerView: 2,
+            spaceBetween: 10,
           },
           640: {
             slidesPerView: 3,
+            spaceBetween: 10,
           },
           768: {
-            slidesPerView: 4,
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
           1024: {
-            slidesPerView: 7,
+            slidesPerView: 5,
+            spaceBetween: 20,
           },
         }}
-        spaceBetween={10}
         centeredSlides={false}
         navigation={true}
+        loop={true}
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
