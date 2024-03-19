@@ -5,12 +5,12 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 
 // import css
-import styles from "./description.module.css";
+import styles from "./specification.module.css";
 
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductSpecification() {
+export default function ProductSpecification(prop) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
 
   const handleSeeMore = () => {
@@ -18,7 +18,7 @@ export default function ProductSpecification() {
   };
 
   return (
-    <section className={cx("specifications")}>
+    <section className={cx("specifications", prop.mobileOnly)}>
       <div className={cx("specifications__title")}>
         <h3>Thông số kỹ thuật</h3>
         <div className={cx("specifications__see-more")} onClick={handleSeeMore}>

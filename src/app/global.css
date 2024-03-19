@@ -183,7 +183,7 @@ body {
 }
 
 main {
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto;
   min-height: calc(100vh - (280px + 152px + 1rem));
 }
 
@@ -221,6 +221,24 @@ p {
   font-size: 1rem;
   font-weight: 400;
   text-align: justify;
+}
+
+@media only screen and (max-width: 64rem) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 48rem) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 26rem) {
+  html {
+    font-size: 12px;
+  }
 }
 
 ul li {

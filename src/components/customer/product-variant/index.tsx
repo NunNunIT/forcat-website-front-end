@@ -24,7 +24,7 @@ export default function CustomerProductVariant({
     <Link className={cx("variant", isActive)} href={variant.url}>
       <img
         className={cx("variant__tick")}
-        src="/imgs/tick.png"
+        src="/imgs/product-page/tick.png"
         alt="Decoration tick"
       />
       <img

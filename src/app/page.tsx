@@ -1,16 +1,13 @@
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
-import { CustomerProductCard } from "@/components";
 //import libs
 import React from "react";
 import Link from "next/link";
 
-// import Carousel from 'react-bootstrap/Carousel';
-
 // import global components
-
-// import { CustomerSlider } from "@/components";
-// import { CustomerCategories } from "@/components";
+import { CustomerCarousel } from "@/components";
+import { CustomerProductCard } from "@/components";
+import { CustomerHeader, CustomerFooter } from "@/partials";
 
 // use css
 import "./page.css";
@@ -18,13 +15,11 @@ import "./page.css";
 export default function HomePage() {
   return (
     <>
+      <CustomerHeader />
       <CustomerSlider></CustomerSlider>
       <CustomerCategories></CustomerCategories>
-
       <main className="content-container">
-        {/* <CustomerSlider></CustomerSlider>
-      <CustomerCategories></CustomerCategories> */}
-        {/* <CustomerCarousel></CustomerCarousel> */}
+        <CustomerCarousel></CustomerCarousel>
         <section className="tip-products-wrapper new-products">
           <div className="tip-products__img">
             <img src="/imgs/banner.png" alt="banner-new" />
@@ -52,6 +47,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+      <CustomerFooter />
     </>
   );
 }
