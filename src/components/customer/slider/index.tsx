@@ -40,6 +40,7 @@ export default function CustomerSlider() {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
+          loop={true}
         >
           {SLIDER_CARD}
         </Swiper>
@@ -47,4 +48,3 @@ export default function CustomerSlider() {
     </>
   );
 }
-
