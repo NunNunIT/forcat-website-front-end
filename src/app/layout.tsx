@@ -1,9 +1,6 @@
 // use metadata
 import type { Metadata } from "next";
 
-// use components
-import { CustomerFooter, CustomerHeader, CustomerAppBar } from "@/partials";
-
 // use styles
 import "./global.css";
 
@@ -32,12 +29,7 @@ export default function CustomerLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <CustomerHeader />
-        {children}
-        <CustomerFooter />
-        <CustomerAppBar></CustomerAppBar>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -27,6 +27,5 @@ function convertDateFormat(inputDate: string): string {
 	return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
-export { printHello, parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat};
+export { parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat};
 
-export { parseNumToCurrencyStr, convertDateStrToDDMMYYYY };

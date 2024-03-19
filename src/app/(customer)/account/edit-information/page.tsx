@@ -5,7 +5,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { CustomerSidebarAccount } from "@/components";
 import Link from 'next/link'
 import { convertDateFormat, convertDateFormatYMD } from "@/utils";
-import { EditInformationForm } from "./partials";
 // import css
 import "./page.css";
 

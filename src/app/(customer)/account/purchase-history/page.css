@@ -502,26 +502,27 @@ span.image-container img {
 
 /* purchase-history */
 body {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: var(--bg-white);
-	box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-white);
+    box-sizing: border-box;
+    
 }
 
+
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .account-container {
-	width: 80%;
-	max-width: 1152px;
-	padding: 0;
-	margin: 24px;
-	display: flex;
-	gap: 12px;
-	align-items: flex-start;
+    width: 80%;
+    max-width: 1152px;
+    padding: 0;
+    margin: 24px auto;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
 }
 
 .purchase__main {

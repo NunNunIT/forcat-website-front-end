@@ -1,1 +1,0 @@
-export { default as EditInformationForm } from "./edit-form";
