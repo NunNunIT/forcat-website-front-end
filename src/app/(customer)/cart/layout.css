@@ -24,6 +24,8 @@
     .cart {
         width: 100%;
         margin: 0;
+        background-color: var(--white);
+        gap: 0px;
     }
 
 }
