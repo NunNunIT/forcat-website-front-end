@@ -2,12 +2,8 @@
 import React from "react";
 import Link from "next/link";
 
-// import Carousel from 'react-bootstrap/Carousel';
-
 // import global components
 import { CustomerCarousel } from "@/components";
-// import { CustomerSlider } from "@/components";
-// import { CustomerCategories } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
 
@@ -19,8 +15,6 @@ export default function HomePage() {
     <>
       <CustomerHeader />
       <main className="content-container">
-        {/* <CustomerSlider></CustomerSlider>
-      <CustomerCategories></CustomerCategories> */}
         <CustomerCarousel></CustomerCarousel>
         <section className="tip-products-wrapper new-products">
           <div className="tip-products__img">
