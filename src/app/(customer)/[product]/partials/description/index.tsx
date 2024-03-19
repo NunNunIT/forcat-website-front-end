@@ -25,7 +25,8 @@ export default function ProductDescription(prop) {
         <div className={cx("product-description__see-more")}>
           <p
             className={cx("product-description__see-more-text")}
-            onClick={handleSeeMore}>
+            onClick={handleSeeMore}
+          >
             {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
           </p>
           {isSeeMoreActive ? (
@@ -40,7 +41,8 @@ export default function ProductDescription(prop) {
           "product-description__content",
           "product-description-content",
           isSeeMoreActive ? "full-height" : ""
-        )}>
+        )}
+      >
         <h5 className={cx("product-description-content__title")}>
           Vẻ ngoài thời trang cùng màu sắc mới mẻ
         </h5>

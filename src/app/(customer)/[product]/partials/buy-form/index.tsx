@@ -30,7 +30,8 @@ export default function ProductBuyForm(prop) {
         Điện thoại Xiaomi Redmi Note 12 (8GB/128GB)
       </h1>
       <CustomerRatingFull
-        initValue={{ fontSize: "24px", rating: 3.5 }}></CustomerRatingFull>
+        initValue={{ fontSize: "24px", rating: 3.5 }}
+      ></CustomerRatingFull>
       <div className={cx("product__unit-price-div")}>
         <p className={cx("product__unit-price")}>3.000.000đ</p>
         <p className={cx("product__discount-amount")}>-20%</p>
@@ -43,37 +44,43 @@ export default function ProductBuyForm(prop) {
               name: "7 sắc cầu vồng",
               url: "/7-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "7 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
           <CustomerProductVariant
             variant={{
               name: "8 sắc cầu vồng",
               url: "/8-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "8 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
           <CustomerProductVariant
             variant={{
               name: "9 sắc cầu vồng",
               url: "/9-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "7 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
           <CustomerProductVariant
             variant={{
               name: "10 sắc cầu vồng",
               url: "/10-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "8 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
           <CustomerProductVariant
             variant={{
               name: "11 sắc cầu vồng",
               url: "/11-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "7 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
           <CustomerProductVariant
             variant={{
               name: "12 sắc cầu vồng",
               url: "/12-sac-cau-vong",
               image: { url: "/imgs/test.png", alt: "8 sắc cầu vồng" },
-            }}></CustomerProductVariant>
+            }}
+          ></CustomerProductVariant>
         </div>
       </div>
       <div className={cx("product__quantity")}>
@@ -84,7 +91,8 @@ export default function ProductBuyForm(prop) {
             minValue: 1,
             maxValue: 100,
             onValueChange: handleQuantityChange,
-          }}></CustomerQuantityInputGroup>
+          }}
+        ></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>789 sản phẩm có thể mua</p>
       </div>
       <div className={cx("product__total-price-div")}>
