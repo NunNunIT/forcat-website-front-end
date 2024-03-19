@@ -132,17 +132,20 @@
     background: red;
     color: #fff;
     padding: 3px 10px;
+    z-index: 10;
 }
 
 .carousel .carousel__card .carousel__card--img {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     height: 200px;
     padding: 24px;
     background: white;
     border-radius: 8px 8px 0 0;
+    margin: auto;
 }
 
 .carousel .carousel__card--top {

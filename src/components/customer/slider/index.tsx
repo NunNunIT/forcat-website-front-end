@@ -1,5 +1,5 @@
 "use client";
-import Carousel from "react-bootstrap/Carousel";
+// import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import classNames from "classnames/bind";
@@ -11,7 +11,7 @@ export default function Slider() {
   return (
     <>
       <div className={cx("slider")}>
-        <Carousel>
+        {/* <Carousel>
           <Carousel.Item interval={1000}>
             <img
               className={cx("slider_img")}
@@ -40,7 +40,7 @@ export default function Slider() {
               alt="Slider_image 4"
             />
           </Carousel.Item>
-        </Carousel>
+        </Carousel> */}
       </div>
     </>
   );
