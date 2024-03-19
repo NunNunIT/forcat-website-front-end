@@ -333,6 +333,12 @@ const headerLinks: IHeaderLinkProps[] = [
     className: "menu__promo"
   },
   {
+    title: "Bài viết",
+    iconData: "newspaper",
+    url: "/news",
+    className: "menu__news",
+  },
+  {
     title: "Về chúng tôi",
     url: "a",
     className: "menu__about-us"

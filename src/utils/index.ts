@@ -1,8 +1,4 @@
-function printHello() {
-  console.log("Helllllllo");
-}
-
-function parseNumToCurrencyStr(price: number) {
+function parseNumToCurrencyStr(price: number): string {
   return price.toLocaleString("vi-VN");
 }
 
@@ -32,3 +28,5 @@ function convertDateFormat(inputDate: string): string {
 }
 
 export { printHello, parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat};
+
+export { parseNumToCurrencyStr, convertDateStrToDDMMYYYY };

@@ -221,6 +221,24 @@ p {
   text-align: justify;
 }
 
+@media only screen and (max-width: 64rem) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 48rem) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 26rem) {
+  html {
+    font-size: 12px;
+  }
+}
+
 ul li {
   list-style: none;
 }
@@ -377,8 +395,4 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
   /* Firefox */
-}
-
-[class*="-price"]:after {
-  content: " đ";
 }
