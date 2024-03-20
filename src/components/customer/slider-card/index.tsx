@@ -8,20 +8,18 @@ import styles from "./styles.module.css";
 
 const cx = classNames.bind(styles);
 export default function CustomerSliderCard({
-  variant,
+  initValue,
   ...props
 }: {
-  variant: ISliderCardProps;
+  initValue: ISliderCardProps;
 }) {
   return (
-    <div className={cx("slider_card-container")}>
+    <div className={cx("customerSlider_card-container")}>
       <Image
-        className={cx("slider_card-img")}
-        width={1280}
-        height={200}
-        // fill={true}
-        src={variant.url}
-        alt={variant.description}
+        className={cx("customerSlider_card-img")}
+        fill={true}
+        src={initValue.url}
+        alt={initValue.description}
       />
     </div>
   );

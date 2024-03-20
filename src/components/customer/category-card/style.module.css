@@ -1,5 +1,5 @@
 .categoryCard-container {
-  box-shadow: 4px 4px 8px 0 var(--black-o20);
+  box-shadow: 3px 3px 4px 0 var(--black-o20);
   border: 1px solid var(--outline1);
   margin: auto 1rem;
   text-align: center;

@@ -18,7 +18,7 @@ export default function CustomerSlider() {
   const SLIDER_CARD = Slider_Image_Data.map((item) => (
     <SwiperSlide key={item.id}>
       <CustomerSliderCard
-        variant={{
+        initValue={{
           url: item.imageurl,
           description: item.description,
         }}
@@ -27,7 +27,7 @@ export default function CustomerSlider() {
   ));
   return (
     <>
-      <div className={cx("slider-container")}>
+      <div className={cx("customerSlider-container")}>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
