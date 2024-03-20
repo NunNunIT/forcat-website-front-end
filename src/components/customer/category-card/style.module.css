@@ -1,4 +1,4 @@
-.categoryCard {
+.categoryCard-container {
   box-shadow: 4px 4px 8px 0 var(--black-o20);
   border: 1px solid var(--outline1);
   margin: auto 1rem;
@@ -11,7 +11,7 @@
 }
 .categoryCard__link-image {
   width: 100%;
-  height: 80%;
+  height: 100%;
   object-fit: cover;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -19,9 +19,10 @@
 .categoryCard__link-name {
   font-size: 18px;
   text-align: center;
-  margin-top: 1rem;
+  /* margin-top: 1rem;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem; */
+  padding-top: 1rem;
 }
 .categoryCard__link {
   color: inherit;

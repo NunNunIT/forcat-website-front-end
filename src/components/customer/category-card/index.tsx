@@ -16,15 +16,16 @@ export default function CustomerCategoryCard({
   initValue: ICategoryCardProps;
 }) {
   return (
-    <div className={cx("categoryCard")}>
+    <div className={cx("categoryCard-container")}>
       <Link href="#" className={cx("categoryCard__link")}>
-        <Image
-          className={cx("categoryCard__link-image")}
-          src={initValue.url}
-          alt="product image"
-          width={1200}
-          height={100}
-        />
+        <div className="categoryCard-image-div">
+          <Image
+            className={cx("categoryCard__link-image")}
+            src={initValue.url}
+            alt="product image"
+            fill={true}
+          />
+        </div>
         <p className={cx("categoryCard__link-name")}>{initValue.name}</p>
       </Link>
     </div>

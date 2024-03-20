@@ -14,9 +14,9 @@ export default function CustomerSliderCard({
   variant: ISliderCardProps;
 }) {
   return (
-    <div className={cx("image_container")}>
+    <div className={cx("slider_card-container")}>
       <Image
-        className={cx("image_container-img")}
+        className={cx("slider_card-img")}
         width={1280}
         height={200}
         // fill={true}
