@@ -19,8 +19,51 @@ export default function SearchResultPage() {
       <section className="search-result__filter">
         <div className="search-result__filter-normal">
           <h5 className="search-result__filter-normal__title">Bộ lọc:</h5>
+
           <div className="search-result__filter-normal__content">
             <p>Danh mục</p>
+            <span className="material-icons-round dropdown-button">
+              expand_more
+            </span>
+            <div className="dropdown-content">
+              <div className="filter-list">
+                <div className="dropdown-options">
+                  <input
+                    className="filter-option"
+                    type="radio"
+                    id="type1"
+                    value="type1"
+                  />
+                  <label htmlFor="type1" className="filter-label">
+                    Phân loại 1
+                  </label>
+                </div>
+                <div className="dropdown-options">
+                  {/* <input className="filter-option" type="radio" id="type2" value="type2"> */}
+                  {/* <label for="type2" className="filter-label">Phân loại 2</label> */}
+                </div>
+                <div className="dropdown-options">
+                  {/* <input className="filter-option" type="radio" id="type3" value="type3"> */}
+                  {/* <label for="type3" className="filter-label">Phân loại 3</label> */}
+                </div>
+                <div className="dropdown-options">
+                  {/* <input className="filter-option" type="radio" id="type4" value="type"> */}
+                  {/* <label for="type4" className="filter-label">Phân loại 4</label> */}
+                </div>
+              </div>
+              <div className="filter-dropdown__button">
+                <button className="btn btn--outlined pri" type="submit">
+                  Hủy bộ lọc này
+                </button>
+                <button className="btn btn--filled pri" type="submit">
+                  Xem <strong>13</strong> sản phẩm
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="search-result__filter-normal__content">
+            <p>Giá tiền</p>
             <span className="material-icons-round dropdown-button">
               expand_more
             </span>
@@ -62,40 +105,6 @@ export default function SearchResultPage() {
             </form>
           </div>
 
-          <div className="search-result__filter-normal__content">
-            <p>Giá tiền</p>
-            <span className="material-icons-round dropdown-button">
-              expand_more
-            </span>
-            <div className="dropdown-content">
-              <div className="filter-list">
-                <div className="dropdown-options">
-                  {/* <input className="filter-option" type="radio" id="type1" value="type1"> */}
-                  {/* <label for="type1" className="filter-label">Phân loại 1</label> */}
-                </div>
-                <div className="dropdown-options">
-                  {/* <input className="filter-option" type="radio" id="type2" value="type2"> */}
-                  {/* <label for="type2" className="filter-label">Phân loại 2</label> */}
-                </div>
-                <div className="dropdown-options">
-                  {/* <input className="filter-option" type="radio" id="type3" value="type3"> */}
-                  {/* <label for="type3" className="filter-label">Phân loại 3</label> */}
-                </div>
-                <div className="dropdown-options">
-                  {/* <input className="filter-option" type="radio" id="type4" value="type"> */}
-                  {/* <label for="type4" className="filter-label">Phân loại 4</label> */}
-                </div>
-              </div>
-              <div className="filter-dropdown__button">
-                <button className="btn btn--outlined pri" type="submit">
-                  Hủy bộ lọc này
-                </button>
-                <button className="btn btn--filled pri" type="submit">
-                  Xem <strong>13</strong> sản phẩm
-                </button>
-              </div>
-            </div>
-          </div>
           <div className="search-result__filter-normal__content">
             <p>Đánh giá</p>
             <span className="material-icons-round dropdown-button">
