@@ -434,7 +434,3 @@ input[type="number"] {
   background-color: var(--dark3);
   color: var(--green1);
 }
-
-[class*="-price"]:after {
-  content: " đ";
-}
