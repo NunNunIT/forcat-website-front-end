@@ -43,8 +43,12 @@ function convertOrderStatusToStr(order_status: string): string {
 	return 'Unexpected Order Status';
 }
 
+function isActiveClass(src_str: string, des_str: string): string {
+	return src_str === des_str ? 'is-active' : '';
+}
+
 export {
 	parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat,
-	convertOrderStatusToStr
+	convertOrderStatusToStr, isActiveClass
 };
 

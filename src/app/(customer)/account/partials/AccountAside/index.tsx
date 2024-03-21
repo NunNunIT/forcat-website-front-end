@@ -1,8 +1,10 @@
 'use client'
 
 // import libs
-import Image from 'next/image'
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import classNames from "classnames/bind";
+import { isActiveClass } from '@/utils';
 
 // import css
 import styles from "./account-aside.module.css";
@@ -12,7 +14,7 @@ const cx = classNames.bind(styles);
 
 const fetchData = {
   user_name: 'Lê Trung Hiếu',
-  avatar_url: '/imgs/test.png'
+  avatar_url: '/imgs/test.png',
 }
 
 const asideNavData = [
@@ -37,6 +39,7 @@ const asideNavData = [
 ]
 
 export default function CustomerAccountAside() {
+  const pathName = usePathname();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleLogoutBtnClick = () => {
@@ -57,7 +60,9 @@ export default function CustomerAccountAside() {
       <nav>
         <ul className={cx("account__aside-nav")}>
           {asideNavData.map(navData => <li key={navData.id}>
-            <a href={navData.url} className={cx("account__aside-nav-item")}>
+            <a href={navData.url}
+              className={cx("account__aside-nav-item", isActiveClass(navData.url, pathName))}
+            >
               <span className="material-icons">{navData.iconData}</span>
               <span>{navData.text}</span>
             </a>

@@ -3,6 +3,7 @@
 // import libs
 import React, { useState } from "react";
 import { CustomerOrderItem } from "./partials";
+import { isActiveClass } from "@/utils";
 
 // import css
 import "./page.css";
@@ -41,10 +42,6 @@ export default function PurchaseHistoryPage() {
   const [statusPurchaseHistory, setStatusPurchaseHistory] = useState('all');
 
   const orders = (() => fetchData)();
-
-  const isActiveClass = (src_str: string, des_str: string): string => {
-    return src_str === des_str ? 'is-active' : '';
-  }
 
   return (
     <main className="account-purchase-history__main">
