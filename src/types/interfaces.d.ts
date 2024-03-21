@@ -116,3 +116,17 @@ interface IArticleProps {
   article_date: string;
   article_slug?: string[];
 }
+
+interface ProductItemInOrderItemProps {
+  product_id: string,
+  quantity: number,
+  unit_price: number,
+  price_discount?: number,
+}
+
+interface OrderItemProps {
+  order_id: string,
+  order_status: string,
+  order_total_price: number,
+  order_detail: ProductItemInOrderItemProps[],
+}

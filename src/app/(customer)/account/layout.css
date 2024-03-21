@@ -1,0 +1,16 @@
+button {
+  cursor: pointer;
+  height: 3rem;
+}
+
+.account-container {
+  width: 80%;
+  max-width: 1152px;
+  position: relative;
+
+  display: grid;
+  grid-template-areas: "aside main";
+  grid-template-columns: 1fr 3fr;
+  margin: 1rem auto;
+  gap: 1rem;
+}

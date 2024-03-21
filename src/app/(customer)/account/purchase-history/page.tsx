@@ -1,65 +1,86 @@
 "use client";
 
 // import libs
-import React, { useRef, useEffect, useState } from "react";
-import Image from 'next/image'
-import Link from 'next/link'
-// import components
-import { CustomerSidebarAccount } from "@/components";
-import { CustomerPurchaseItem } from "@/components";
+import React, { useState } from "react";
+import { CustomerOrderItem } from "./partials";
+
 // import css
 import "./page.css";
 
+const fetchData: OrderItemProps[] = [
+  {
+    order_id: 'DH001', order_status: 'unpaid', order_total_price: 23600000, order_detail: [
+      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
+      { product_id: 'P002', quantity: 2, unit_price: 12000000, price_discount: 11800000 },
+    ]
+  },
+  {
+    order_id: 'DH002', order_status: 'delivering', order_total_price: 23600000, order_detail: [
+      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
+    ]
+  },
+  {
+    order_id: 'DH003', order_status: 'finished', order_total_price: 23600000, order_detail: [
+      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
+    ]
+  },
+  {
+    order_id: 'DH004', order_status: 'cancel', order_total_price: 23600000, order_detail: [
+      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
+    ]
+  },
+  {
+    order_id: 'DH005', order_status: 'unpaid', order_total_price: 2360000, order_detail: [
+      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
+    ]
+  },
+]
 
 
 export default function PurchaseHistoryPage() {
-	const [purchaseHistory, setPurchaseHistory] = useState([
-        { id: 1, status: 'Đã hủy' },
-        { id: 2, status: 'Chờ thanh toán' },
-        { id: 3, status: 'Hoàn thành' },
-        { id: 4, status: 'Đang giao hàng' },
-        // ... more items ...
-    ]);
+  const [statusPurchaseHistory, setStatusPurchaseHistory] = useState('all');
 
-	const cancelPurchase = (id) => {
-        setPurchaseHistory(purchaseHistory.map(item => 
-            item.id === id ? { ...item, status: 'Đã hủy' } : item
-        ));
-    };
-	
-    return (
-        <main className="account-container">
-		{/* <%- include("../../components/sidebar_account") %> */}
-        <CustomerSidebarAccount></CustomerSidebarAccount>
-		<div className="purchase__main">
-			<div className="purchase__status-container">
-				<nav className="purchase__status">
-					<a href="/account/purchase" id="purchase__status-all">Tất cả</a>
-					<a href="/account/purchase?order_status=Chờ%20thanh%20toán" id="purchase__status-payment">Chờ thanh toán</a>
-					<a href="/account/purchase?order_status=Đang%20giao%20hàng" id="purchase__status-deliver">Đang giao hàng</a>
-					<a href="/account/purchase?order_status=Hoàn%20thành" id="purchase__status-finish">Hoàn thành</a>
-					<a href="/account/purchase?order_status=Đã%20hủy" id="purchase__status-cancel">Đã hủy</a>
-				</nav>
-			</div>
+  const orders = (() => fetchData)();
 
-			<section className="purchase__main__item">
-				{/* <% if (purchaseHistory && purchaseHistory.length > 0) { %>
-				<% for(let i = 0; i < purchaseHistory.length; i++) { %>
-				<%- include('../../components/purchase-item', { purchaseHistory: purchaseHistory[i], toCurrency: formatFunction.toCurrency, index: i }) %>
-				<% } %>
-				<% } else { %> */}
+  const isActiveClass = (src_str: string, des_str: string): string => {
+    return src_str === des_str ? 'is-active' : '';
+  }
 
-				{/* <div className="purchase-empty">
-					<img src="/imgs/empty_order.png" alt="empty_order"/>
-					<p>Chưa có đơn hàng</p>
-				</div> */}
-				{purchaseHistory.map((item, index) => (
-                        <CustomerPurchaseItem key={index} status={item.status} cancelPurchase={() => cancelPurchase(item.id)}/>
-                ))}
+  return (
+    <main className="account-purchase-history__main">
+      <nav className="purchase-history__status-container">
+        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'all')}`}
+          onClick={() => setStatusPurchaseHistory('all')}
+        >
+          Tất cả
+        </button>
+        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'unpaid')}`}
+          onClick={() => setStatusPurchaseHistory('unpaid')}
+        >
+          Chờ thanh toán
+        </button>
+        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'delivering')}`}
+          onClick={() => setStatusPurchaseHistory('delivering')}
+        >
+          Đang giao hàng
+        </button>
+        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'finished')}`}
+          onClick={() => setStatusPurchaseHistory('finished')}
+        >
+          Hoàn thành
+        </button>
+        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'cancel')}`}
+          onClick={() => setStatusPurchaseHistory('cancel')}
+        >
+          Đã hủy
+        </button>
+      </nav>
 
-
-			</section>
-		</div>
-	</main>
-    )
+      <section className="purchase-history__purchase-item-list">
+        {orders.map((order: OrderItemProps, index: number) =>
+          <CustomerOrderItem key={index} {...order} />)
+        }
+      </section>
+    </main>
+  )
 }

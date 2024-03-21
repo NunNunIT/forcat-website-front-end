@@ -1,5 +1,5 @@
 function parseNumToCurrencyStr(price: number): string {
-  return price.toLocaleString("vi-VN");
+	return price.toLocaleString("vi-VN");
 }
 
 function cleanDateFormatInput(inputDate: string): string {
@@ -27,5 +27,24 @@ function convertDateFormat(inputDate: string): string {
 	return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
-export { parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat};
+function convertOrderStatusToStr(order_status: string): string {
+	switch (order_status.toLowerCase()) {
+		case 'all':
+			return 'Tất cả';
+		case 'unpaid':
+			return 'Chưa thanh toán';
+		case 'delivering':
+			return 'Đang giao';
+		case 'finished':
+			return 'Hoàn thành';
+		case 'cancel':
+			return 'Đã hủy';
+	}
+	return 'Unexpected Order Status';
+}
+
+export {
+	parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat,
+	convertOrderStatusToStr
+};
 
