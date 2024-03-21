@@ -83,7 +83,47 @@ interface IHeaderMenuCategoryItemProps {
   children?: React.ReactNode;
 }
 
+interface ICategoryCardProps {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface ISliderCardProps {
+  url: string;
+  description: string;
+}
+
 interface IRating {
   fontSize: TRating;
   rating: number;
+}
+
+interface IArticleDescriptionContentPRops {
+  type: string;
+  content: string;
+}
+
+interface IArticleDescriptionMediaPRops {
+  type: string;
+  url: string;
+  alt: string;
+  caption: string;
+}
+
+interface IArticleProps {
+  article_id: string;
+  article_name: string;
+  article_type: string;
+  article_short_description: string;
+  article_description?: (
+    | IArticleDescriptionContentPRops
+    | IArticleDescriptionMediaPRops
+  )[];
+  article_info: {
+    author: string;
+    published_date: string;
+  };
+  article_date: string;
+  article_slug?: string[];
 }

@@ -11,7 +11,7 @@ import styles from "./description.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductDescription() {
+export default function ProductDescription(prop) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
 
   const handleSeeMore = () => {
@@ -19,13 +19,14 @@ export default function ProductDescription() {
   };
 
   return (
-    <section className={cx("product-description")}>
+    <section className={cx("product-description", prop.mobileOnly)}>
       <div className={cx("product-description__title-div")}>
         <h3 className={cx("product-description__title")}>Mô tả sản phẩm</h3>
         <div className={cx("product-description__see-more")}>
           <p
             className={cx("product-description__see-more-text")}
-            onClick={handleSeeMore}>
+            onClick={handleSeeMore}
+          >
             {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
           </p>
           {isSeeMoreActive ? (
@@ -40,7 +41,8 @@ export default function ProductDescription() {
           "product-description__content",
           "product-description-content",
           isSeeMoreActive ? "full-height" : ""
-        )}>
+        )}
+      >
         <h5 className={cx("product-description-content__title")}>
           Vẻ ngoài thời trang cùng màu sắc mới mẻ
         </h5>
