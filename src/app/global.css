@@ -27,6 +27,7 @@
   --pink: #ff685f;
   --bg-pink: #fffbf8;
   --outline-pink: #f9ede5;
+  --outline-gray: #dadce0;
   --dollar-red: #d0021c;
   --dollar-red2: #ea4c2d;
   --fire-orange: #ff9f40;
@@ -219,6 +220,10 @@ p {
   font-size: 1rem;
   font-weight: 400;
   text-align: justify;
+}
+
+a {
+  text-decoration: none;
 }
 
 ul li {

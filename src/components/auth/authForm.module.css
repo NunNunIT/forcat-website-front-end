@@ -1,0 +1,115 @@
+.form-auth{
+  max-width: 80vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  gap: 10px;
+  /* margin: 0 auto; */
+}
+
+.form-auth__input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0 10px 0;
+}
+
+.form-auth input{
+  padding: 16px;
+  background-color: var(--bg);
+  color: var(--textColor);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-auth__title{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px 0 20px 0;
+  gap: 12px;
+}
+
+.form-auth label{
+  text-align: left;
+  font-weight: 600;
+}
+
+.form-auth__title a{
+  color: var(--dark7)
+}
+
+.form-auth__title a:hover{
+  color: var(--dark6)
+}
+
+.form-auth .form-button{
+  padding: 20px 0;
+  width: 100%;
+  cursor: pointer;
+  background-color: var(--primary-mau3-1);
+  color: var(--white);
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
+  opacity: 0.95;
+}
+
+.form-button:hover {
+  opacity: 1;
+}
+
+.form-auth__social-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.form-auth__social-media p {
+  color: var(--dark6);
+  font-weight: 700;
+}
+
+
+.form-auth__social-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.form-auth__social-buttons button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  margin-right: 10px;
+  background-color: #f0f0f0; /* Màu nền */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  overflow: hidden; /* Để cắt hình ảnh trong phần nút */
+}
+
+.form-auth__social-buttons button:hover {
+  background-color: #e0e0e0; /* Màu nền hover */
+}
+
+.form-auth__social-buttons button:focus {
+  outline: none;
+}
+
+.social-image {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.error {
+  color: red;
+}

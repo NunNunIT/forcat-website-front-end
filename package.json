@@ -1,5 +1,5 @@
 {
-  "name": "techtwo",
+  "name": "forcat",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
+    "install": "^0.13.0",
     "material-icons": "^1.13.12",
-    "next": "14.1.0",
+    "mongoose": "^8.2.2",
+    "npm": "^10.2.5",
+    "next": "14.0.4",
+    "next-auth": "^5.0.0-beta.3",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.5"

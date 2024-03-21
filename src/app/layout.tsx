@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 // use components
-import { CustomerFooter, CustomerHeader } from "@/partials";
+import { CustomerFooter, CustomerHeader} from "@/partials";
 
 // use styles
 import "./global.css";
