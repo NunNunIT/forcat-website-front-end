@@ -83,6 +83,17 @@ interface IHeaderMenuCategoryItemProps {
   children?: React.ReactNode;
 }
 
+interface ICategoryCardProps {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface ISliderCardProps {
+  url: string;
+  description: string;
+}
+
 interface IRating {
   fontSize: TRating;
   rating: number;
