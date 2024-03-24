@@ -1,3 +1,5 @@
+import { CustomerSlider } from "@/components";
+import { CustomerCategories } from "@/components";
 //import libs
 import React from "react";
 import Link from "next/link";
@@ -14,6 +16,8 @@ export default function HomePage() {
   return (
     <>
       <CustomerHeader />
+      <CustomerSlider></CustomerSlider>
+      <CustomerCategories></CustomerCategories>
       <main className="content-container">
         <CustomerCarousel></CustomerCarousel>
         <section className="tip-products-wrapper new-products">

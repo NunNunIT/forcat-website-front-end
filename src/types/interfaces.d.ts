@@ -11,7 +11,6 @@ interface IQuantityInputGroup {
   defaultValue: number;
   minValue: number;
   maxValue: number;
-  onValueChange: any; // callback to take value from component
 }
 
 interface IStarRatingProps {
@@ -81,6 +80,17 @@ interface IHeaderMenuCategoryItemProps {
   url?: string;
   iconData?: string;
   children?: React.ReactNode;
+}
+
+interface ICategoryCardProps {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface ISliderCardProps {
+  url: string;
+  description: string;
 }
 
 interface IRating {

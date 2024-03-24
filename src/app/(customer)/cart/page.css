@@ -319,8 +319,12 @@ section {
         width: 40%;
     }
 
+    .cart-bill-footer {
+        bottom: 64px;
+    }
+
     .cart-footer-btns {
-        width: 40%;
+        width: 32%;
     }
 
     .cart-footer-btns__btn {

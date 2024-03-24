@@ -77,9 +77,35 @@ function convertOrderStatusToIconData(order_status: string): string {
   return "Unexpected Order Status";
 }
 
+function convertMoneyToNumber(money: string): number {
+  return Number(money.replaceAll("đ", "").replaceAll(".", ""));
+}
+
+function convertNumberToMoney(number: number): string {
+  // Check if the provided number is valid
+  if (isNaN(number)) {
+    return "Invalid number";
+  }
+
+  // Format the number as currency using toLocaleString
+  const currency = number
+    .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+    .replace(/₫/g, "đ");
+
+  // Return the formatted currency string
+  return currency;
+}
+
 export {
-  parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat,
-  convertOrderStatusToStr, isActiveClass, convertDateToFormatHHMMDDMMYYYY, convertPaymentToStr,
+  parseNumToCurrencyStr,
+  cleanDateFormatInput,
+  convertDateFormatYMD,
+  convertDateFormat,
+  convertMoneyToNumber,
+  convertNumberToMoney,
+  convertOrderStatusToStr,
+  isActiveClass,
+  convertDateToFormatHHMMDDMMYYYY,
+  convertPaymentToStr,
   convertOrderStatusToIconData,
 };
-
