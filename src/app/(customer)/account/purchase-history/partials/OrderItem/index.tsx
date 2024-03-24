@@ -1,41 +1,18 @@
 // import libs
-import Image from "next/image";
+import Link from "next/link";
 import classNames from "classnames/bind";
-import { convertOrderStatusToStr, parseNumToCurrencyStr } from '@/utils';
+import {
+  convertOrderStatusToStr, parseNumToCurrencyStr,
+  convertOrderStatusToIconData,
+} from '@/utils';
+
+// import components
+import { CustomerProductItemInOrderItem } from "@/components";
 
 // import css
 import styles from "./order-item.module.css";
 
 const cx = classNames.bind(styles);
-
-function ProductItemInOrderItem(props: ProductItemInOrderItemProps) {
-  const { url, product_name, product_sub_category, quantity, unit_price, price_discount } = props;
-  const price_final = price_discount ?? unit_price;
-
-  return (
-    <div className={cx("product-item")}>
-      <div className={cx("product-item__img-container")}>
-        <Image src={url ?? '/imgs/test.png'}
-          alt={`Hình ảnh sản phẩm của ${product_name ?? 'sản phẩm cho mèo'}`}
-          fill
-        />
-      </div>
-      <div className={cx("product-item__detail")}>
-        <h5>{product_name ?? 'Sản phẩm cho mèo'}</h5>
-        <span>Phân loại hàng: {product_sub_category ?? 'Hàng nhỏ'}</span>
-        <span>x{quantity}</span>
-      </div>
-      <div className={cx("product-item__prices")}>
-        {price_discount && <span className={cx("product-item__price-base")}>
-          {parseNumToCurrencyStr(unit_price)} đ
-        </span>}
-        <span className={cx("product-item__price-discounted")}>
-          {parseNumToCurrencyStr(price_final)} đ
-          </span>
-      </div>
-    </div>
-  )
-}
 
 export default function OrderItem(props: OrderItemProps) {
   const { order_id, order_status, order_total_price, order_detail } = props;
@@ -46,6 +23,7 @@ export default function OrderItem(props: OrderItemProps) {
         Đơn hàng:
         <span className={cx("order-item__id")}>{order_id}</span>
         <span className={cx("order-item__status", order_status)}>
+          <span className="material-icons">{convertOrderStatusToIconData(order_status)}</span>
           {convertOrderStatusToStr(order_status)}
         </span>
       </span>
@@ -53,7 +31,7 @@ export default function OrderItem(props: OrderItemProps) {
       <div className={cx("order-item__product-list")}>
         {order_detail.map(
           (product: ProductItemInOrderItemProps, index: number) =>
-            <ProductItemInOrderItem key={index} {...product} />
+            <CustomerProductItemInOrderItem key={index} {...product} />
         )}
       </div>
       <hr />
@@ -62,8 +40,14 @@ export default function OrderItem(props: OrderItemProps) {
           Thành tiền: {parseNumToCurrencyStr(order_total_price)} đ
         </div>
         <div className={cx("order-item__button-wrapper")}>
-          <button className={cx("order-item__button")}>Xem chi tiết</button>
-          <button className={cx("order-item__button")}>Đánh giá</button>
+          <Link className={`btn btn--outlined pri ${cx("order-item__button")}`}
+            href={`/account/purchase-history/${order_id}`}
+          >
+            <span>Xem chi tiết</span>
+          </Link>
+          <button className={`btn btn--filled sec ${cx("order-item__button")}`}>
+            <span>Đánh giá</span>
+          </button>
         </div>
       </div>
     </div>

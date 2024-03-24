@@ -1,6 +1,63 @@
 button {
   cursor: pointer;
+
+  background: transparent;
+}
+
+.btn {
   height: 3rem;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  padding: 0 !important;
+
+  background: transparent;
+  color: black;
+
+  cursor: pointer;
+  font-weight: bold;
+
+  transition: .1s ease-in-out;
+}
+
+.btn>span {
+  line-height: 1rem;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
+}
+
+.btn.btn--outlined.pri {
+  border: 2px solid var(--primary-mau0-2);
+
+  color: var(--primary-mau0-2);
+}
+
+.btn.btn--filled.pri {
+  background: var(--primary-mau0-2);
+  color: white;
+}
+
+.btn.btn--filled.pri:hover {
+  background: var(--primary-mau0-2);
+}
+
+.btn.btn--filled.sec {
+  background: var(--fire-orange);
+  color: white;
+}
+
+.btn.btn--filled.sec:hover {
+  background: var(--fire-orange);
 }
 
 .account-container {
@@ -13,4 +70,29 @@ button {
   grid-template-columns: 1fr 3fr;
   margin: 1rem auto;
   gap: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .account-container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .account-container {
+    grid-template-columns: 4fr 8fr;
+  }
+
+  .purchase-history__status {
+    padding-inline: .25rem;
+  }
+}
+
+@media screen and (max-width: 416px) {
+  .account-container {
+    width: 100%;
+
+    display: block;
+    padding-inline: 1rem;
+  }
 }
