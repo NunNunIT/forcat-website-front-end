@@ -27,5 +27,13 @@ function convertDateFormat(inputDate: string): string {
 	return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
-export { parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat};
+function isValidEmail(email: string): boolean {
+	// Regex pattern để kiểm tra định dạng email
+	const emailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	
+	// Kiểm tra xem email có phù hợp với định dạng không
+	return emailPattern.test(email);
+  }
+
+export { parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat, isValidEmail};
 

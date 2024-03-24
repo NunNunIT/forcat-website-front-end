@@ -58,8 +58,8 @@ export default function CustomerHeaderMain() {
               </span>
             </div>
             <div className={cx("unauth-content__btn")}>
-              <a href="/auth/login">Đăng nhập</a>
-              <a href="/auth/register">Đăng ký</a>
+              <a href="/login">Đăng nhập</a>
+              <a href="/register">Đăng ký</a>
             </div>
           </div>
         </div>

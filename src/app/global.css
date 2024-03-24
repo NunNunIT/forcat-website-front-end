@@ -224,6 +224,14 @@ p {
   text-align: justify;
 }
 
+a {
+  text-decoration: none;
+}
+
+.text-error {
+  color: var(--red)
+}
+
 @media only screen and (max-width: 64rem) {
   html {
     font-size: 14px;

@@ -5,7 +5,7 @@
   text-align: center;
   padding: 20px;
   gap: 10px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 
 .form-auth__input-content {
@@ -19,7 +19,7 @@
   padding: 16px;
   background-color: var(--bg);
   color: var(--textColor);
-  border: none;
+  border: 1px solid var(--outline-gray);
   border-radius: 5px;
   font-size: 16px;
 }
@@ -110,6 +110,12 @@
   position: relative;
 }
 
-.error {
-  color: red;
+.form-auth__input-content {
+  position: relative;
+}
+
+.form-error {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
 }

@@ -12,14 +12,14 @@
 .auth__forms-wrap {
 	background-color: #ffffff;
 	/* Màu nền trắng */
-	padding: 40px;
+	padding: 20px;
 	/* Khoảng cách bên trong phần tử */
 	box-sizing: border-box;
 	/* Tính cả border vào kích thước tổng */
 	border-radius: 8px;
 	border: 2px solid var(--outline-gray);
 	transition: all 0.3s ease;
-	margin: 0 auto;
+	width: 100%;
 }
 
 .auth__image {

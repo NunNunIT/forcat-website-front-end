@@ -1,52 +1,104 @@
 "use client";
 
 import styles from "../authForm.module.css";
-import { useFormState } from "react-dom";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Link from "next/link";
 
 import classNames from "classnames/bind";
-import Image from "next/image";
-
-import {BACKEND_URL} from '@/utils/common_const.ts';
+import { isValidEmail } from "@/utils/index";
+import { BACKEND_URL } from "@/utils/common_const";
+import OAuth from "../oAuth/oAuth";
 
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
-  // const [username, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  // Initial state
+  const initialForms = {
+    user_name: "",
+    user_email: "",
+    user_password: "",
+    passwordRepeat: "",
+  };
 
-  // const [state, formAction] = useFormState(register, undefined);
+  const [formData, setFormData] = useState(initialForms);
+  const [errors, setErrors] = useState(initialForms);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   state?.success && router.push("/");
-  // }, [state?.success, router]);
-
-  const [formData, setFormData] = useState({})
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  console.log(formData)
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const res = await fetch(BACKEND_URL + '/auth/sign-up', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData), // Assuming formData is an object
-    });
+    setErrors(initialForms);
 
-    const data = await res.json();
-    console.log(data)
+    // Check for validation
+    let isValid = true;
+    const newErrors = { ...initialForms };
+
+    if (!formData.user_name) {
+      newErrors.user_name = "Họ tên không được bỏ trống!";
+      isValid = false;
+    }
+
+    if (!formData.user_email) {
+      newErrors.user_email = "Email không được bỏ trống!";
+      isValid = false;
+    } else if (!isValidEmail(formData.user_email)) {
+      newErrors.user_email = "Email không đúng định dạng!";
+      isValid = false;
+    }
+
+    if (!formData.user_password) {
+      newErrors.user_password = "Mật khẩu không được bỏ trống!";
+      isValid = false;
+    } else if (formData.user_password.length < 8) {
+      newErrors.user_password = "Độ dài mật khẩu phải trên 8 ký tự!";
+      isValid = false;
+    }
+
+    if (!formData.passwordRepeat) {
+      newErrors.passwordRepeat = "Xác nhận mật khẩu không được bỏ trống!";
+      isValid = false;
+    } else if (formData.passwordRepeat.length < 8) {
+      newErrors.passwordRepeat = "Độ dài mật khẩu phải trên 8 ký tự!";
+      isValid = false;
+    }
+
+    if (formData.user_password && formData.passwordRepeat && formData.passwordRepeat != formData.user_password) {
+      newErrors.passwordRepeat = "Mật khẩu không trùng khớp!";
+      newErrors.user_password = "Mật khẩu không trùng khớp!";
+      isValid = false;
+    }
+
+    // Update state with errors
+    setErrors(newErrors);
+
+    if (isValid) {
+      try {
+        setLoading(true);
+        setErrors(initialForms);
+        const res = await fetch(BACKEND_URL + "/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData), // Assuming formData is an object
+        });
+        const data = await res.json();
+        setLoading(false);
+
+        if (data.status != 200) {
+          newErrors.user_email = "Email đã được sử dụng!";
+          setErrors(newErrors);
+          return;
+        }
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+      }
+    }
   };
 
   return (
@@ -70,6 +122,9 @@ const RegisterForm = () => {
           id="user_name"
           onChange={handleChange}
         />
+        {errors.user_name && (
+          <p className={cx("text-error", "form-error")}>{errors.user_name}</p>
+        )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
@@ -81,6 +136,9 @@ const RegisterForm = () => {
           id="user_email"
           onChange={handleChange}
         />
+        {errors.user_email && (
+          <p className={cx("text-error", "form-error")}>{errors.user_email}</p>
+        )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
@@ -92,6 +150,11 @@ const RegisterForm = () => {
           id="user_password"
           onChange={handleChange}
         />
+        {errors.user_password && (
+          <p className={cx("text-error", "form-error")}>
+            {errors.user_password}
+          </p>
+        )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
@@ -100,32 +163,27 @@ const RegisterForm = () => {
           type="password"
           placeholder="Nhập lại mật khẩu"
           name="passwordRepeat"
+          id="passwordRepeat"
+          onChange={handleChange}
         />
+        {errors.passwordRepeat && (
+          <p className={cx("text-error", "form-error")}>
+            {errors.passwordRepeat}
+          </p>
+        )}
       </div>
 
-      {/* {error && (
-        <div className={cx("error")}>
-          {error}
-        </div>
-      )} */}
+      <button disabled={loading} className={cx("form-button")}>
+        <h3>{loading ? "Đang xử lý..." : "Đăng ký"}</h3>
+      </button>
 
-      <button className={cx("form-button")}><h3>Đăng ký</h3></button>
+      {error && (
+          <p className={cx("text-error")}>
+            Lỗi !!! Vui lòng thử lại sau
+          </p>
+      )}
 
-      <div className={cx("form-auth__social-media")}>
-        <p> Hoặc đăng ký bằng</p>
-        <div className={cx("form-auth__social-buttons")}>
-          <button className={cx("social-image")}>
-            <Image src="/imgs/social_media/google-icon.jpg" alt="Google" fill />
-          </button>
-          <button className={cx("social-image")}>
-            <Image
-              src="/imgs/social_media//facebook-icon.svg"
-              alt="Facebook"
-              fill
-            />
-          </button>
-        </div>
-      </div>
+      < OAuth />
     </form>
   );
 };
