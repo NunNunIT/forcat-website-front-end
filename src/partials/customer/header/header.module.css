@@ -1,7 +1,7 @@
 .header {
   width: 100vw;
   position: sticky;
-  top: -40px;
+  top: -2.5rem;
   left: 0;
   right: 0;
   z-index: 9999;
@@ -19,7 +19,8 @@
 }
 
 .header__container {
-  width: min(80%, 1152px);
+  width: 80%;
+  max-width: 1152px;
 }
 
 /* 1024px - Mini PC */
@@ -30,48 +31,12 @@
 }
 
 /* 76.75rem - Tablet */
-@media only screen and (max-width: 768px) {
-  .header {
-    font-size: 0.8125rem;
-  }
-
-  .header__container {
-    width: 90%;
-  }
-
-  .header a,
-  .header p {
-    font-size: 0.8125rem;
-  }
-}
+@media only screen and (max-width: 768px) {}
 
 /*Responsive-smartphone*/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 416px) {
   .header__container {
     width: 100%;
-  }
-
-  .header__nav a {
-    font-size: 0.875rem;
-  }
-
-  .header__search-bar {
-    width: 90%;
-  }
-
-  .header__search-btn {
-    width: 20%;
-  }
-
-  .header__menu {
-    display: none;
-  }
-
-  .header__auth {
-    display: none;
-  }
-
-  .header__cart__number-badge {
-    left: 1.8rem;
+    padding-inline: 1rem;
   }
 }

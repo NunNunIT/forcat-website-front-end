@@ -35,9 +35,7 @@ export default function CustomerHeaderNav() {
             Hotline: 1900 123 789
           </Link>
         </div>
-        <div className={cx("header--mobile__logo")}>
-          <CustomerLogo white />
-        </div>
+        <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
             <Link href="/notification/order" className={cx("header__notifications")}>
