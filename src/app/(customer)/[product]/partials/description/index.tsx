@@ -11,7 +11,7 @@ import styles from "./description.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductDescription() {
+export default function ProductDescription(prop) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
 
   const handleSeeMore = () => {
@@ -19,7 +19,7 @@ export default function ProductDescription() {
   };
 
   return (
-    <section className={cx("product-description")}>
+    <section className={cx("product-description", prop.mobileOnly)}>
       <div className={cx("product-description__title-div")}>
         <h3 className={cx("product-description__title")}>Mô tả sản phẩm</h3>
         <div className={cx("product-description__see-more")}>

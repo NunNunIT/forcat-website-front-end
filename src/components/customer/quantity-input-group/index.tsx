@@ -45,7 +45,10 @@ export default function CustomerQuantityInputGroup({
       <div
         className={cx("quantity-input-group__btn-remove", "btn-quantity")}
         onClick={decreaseValue}>
-        <span className="material-icons-round">remove</span>
+        <span
+          className={cx("material-icons-round", "quantity-input-group__icon")}>
+          remove
+        </span>
       </div>
       <input
         ref={inputRef}
@@ -60,7 +63,10 @@ export default function CustomerQuantityInputGroup({
       <div
         className={cx("quantity-input-group__btn-add", "btn-quantity")}
         onClick={increaseValue}>
-        <span className="material-icons-round">add</span>
+        <span
+          className={cx("material-icons-round", "quantity-input-group__icon")}>
+          add
+        </span>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ import styles from "./buy-form.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductBuyForm() {
+export default function ProductBuyForm(prop) {
   const [quantityValue, setQuantityValue] = useState(1);
 
   const handleQuantityChange = (changedValue: number) => {
@@ -25,7 +25,7 @@ export default function ProductBuyForm() {
   };
 
   return (
-    <section className={cx("product-buy-form", "product")}>
+    <section className={cx("product-buy-form", "product", prop.mobileOnly )}>
       <h1 className={cx("product__name")}>
         Điện thoại Xiaomi Redmi Note 12 (8GB/128GB)
       </h1>

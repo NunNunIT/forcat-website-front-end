@@ -153,7 +153,6 @@
   }
 
   .product-tumb {
-    height: 140px;
     padding: 18px 12px 12px 12px;
   }
 
@@ -199,6 +198,10 @@
   .product-card {
     width: 49%;
     height: 332px;
+  }
+
+  .product-tumb {
+    height: 160px;
   }
 
   .seacrh-result__main-card {

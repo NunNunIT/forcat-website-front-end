@@ -134,3 +134,10 @@ section {
 .banner-img {
   border-radius: 8px;
 }
+
+@media only screen and (max-width: 26rem) {
+  .content-container {
+    width: 100%;
+    margin: 8px auto;
+  }
+}
