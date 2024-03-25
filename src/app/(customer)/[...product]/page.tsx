@@ -1,5 +1,6 @@
 // import libs
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 // import partials
 import {
@@ -25,10 +26,7 @@ async function getProduct(slug) {
     `http://127.0.0.1:3001/api/product/${slug[0]}/${slug[1]}`
   );
 
-  // if (!res.ok) {
-  //   // This will activate the closest `error.js` Error Boundary
-  //   throw new Error("Failed to fetch data");
-  // }
+  if (!res.ok || slug[2]) return notFound();
 
   return res.json();
 }

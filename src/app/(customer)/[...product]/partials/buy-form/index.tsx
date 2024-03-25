@@ -22,7 +22,9 @@ const cx = classNames.bind(styles);
 
 function filterCurrentVariant(productInfo, currentVariantSlug) {
   return productInfo.product_variants.filter(
-    (variant) => variant.variant_name == decodeURIComponent(currentVariantSlug)
+    (variant) =>
+      variant.variant_name ==
+      decodeURIComponent(currentVariantSlug.replaceAll("-", " "))
   )[0];
 }
 
@@ -83,7 +85,9 @@ export default function ProductBuyForm({
               <ProductVariant
                 variant={{
                   name: item.variant_name,
-                  url: `/${productInfo.product_slug}/${item.variant_name}`,
+                  url: `/${
+                    productInfo.product_slug
+                  }/${item.variant_name.replaceAll(" ", "-")}`,
                   image: {
                     url: item.variant_ims[0],
                     alt: `${productInfo.product_name} - ${item.variant_name}`,
