@@ -19,7 +19,7 @@ export default function CartQuantityInputGroup({
   ...props
 }: {
   initValue: IQuantityInputGroup;
-  calcPrices: any;
+  calcPrices?: any;
 }) {
   // handle value
   const [inputValue, setInputValue] = useState(initValue.defaultValue);
@@ -59,7 +59,7 @@ export default function CartQuantityInputGroup({
   };
 
   useEffect(() => {
-    calcPrices();
+    if (calcPrices) calcPrices();
     calcProductPrice();
   });
 

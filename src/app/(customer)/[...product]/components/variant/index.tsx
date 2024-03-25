@@ -23,7 +23,10 @@ export default function CustomerProductVariant({
   const isActive = pathname == variant.url ? "variant__active" : "";
 
   return (
-    <Link className={cx("variant", isActive)} href={variant.url}>
+    <Link
+      className={cx("variant", isActive)}
+      href={variant.url}
+      title={variant.name}>
       <div
         className={cx("variant__tick-div", isActive ? "variant__display" : "")}>
         <Image

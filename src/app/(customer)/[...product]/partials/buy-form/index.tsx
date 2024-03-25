@@ -2,14 +2,14 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // import components
 import { CustomerQuantityInputGroup, CustomerRatingFull } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import { convertNumberToMoney } from "@/utils";
+import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -36,12 +36,23 @@ export default function ProductBuyForm({
   currentVariantSlug: string;
   mobileOnly?: string;
 }) {
-  const [quantityValue, setQuantityValue] = useState(1);
+  const currentVariant = filterCurrentVariant(productInfo, currentVariantSlug);
 
-  const currentVariant = filterCurrentVariant(
-    productInfo,
-    currentVariantSlug
+  const [quantityValue, setQuantityValue] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(
+    convertNumberToMoney(currentVariant.price)
   );
+  const unitPriceRef = useRef(null);
+
+  const handleQuantityChange = () => {
+    const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
+    const total = unitPrice * quantityValue;
+    setTotalPrice(convertNumberToMoney(total));
+  };
+
+  useEffect(() => {
+    handleQuantityChange();
+  }, [quantityValue]);
 
   return (
     <section className={cx("product-buy-form", "product", mobileOnly)}>
@@ -52,7 +63,7 @@ export default function ProductBuyForm({
           rating: productInfo.product_avg_rating,
         }}></CustomerRatingFull>
       <div className={cx("product__unit-price-div")}>
-        <p className={cx("product__unit-price")}>
+        <p className={cx("product__unit-price")} ref={unitPriceRef}>
           {convertNumberToMoney(currentVariant.price)}
         </p>
         <p className={cx("product__discount-amount")}>
@@ -84,14 +95,15 @@ export default function ProductBuyForm({
             defaultValue: quantityValue,
             minValue: 1,
             maxValue: 100,
-          }}></CustomerQuantityInputGroup>
+          }}
+          takeQuantity={setQuantityValue}></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>
           {currentVariant.in_stock} sản phẩm có thể mua
         </p>
       </div>
       <div className={cx("product__total-price-div")}>
         <h3>Tạm tính</h3>
-        <p className={cx("product__total-price")}>3.000.000đ</p>
+        <p className={cx("product__total-price")}>{totalPrice}</p>
       </div>
       <div className={cx("product__buy-btns", "buy-btns")}>
         <div className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}>

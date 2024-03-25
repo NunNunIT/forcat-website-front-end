@@ -1,5 +1,6 @@
 .variant {
-    width: fit-content;
+    width: 100%;
+    height: 52px;
     padding: 4px 8px;
     border: 1px solid var(--outline1);
     border-radius: 8px;
@@ -40,6 +41,13 @@
 
 .variant__image-div {
     width: 48px;
-    aspect-ratio: 1 / 1;
+    height: 48px;
     position: relative;
+}
+
+.variant__name {
+    width: calc(100% - 48px - 8px - 8px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

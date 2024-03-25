@@ -49,9 +49,19 @@ function isActiveClass(src_str: string, des_str: string): string {
 
 function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
   const locales = "vi-VN";
-  const timeOptions: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit" };
-  const dateOptions: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit", };
-  return `${date.toLocaleTimeString(locales, timeOptions)} ${date.toLocaleDateString(locales, dateOptions)}`;
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  return `${date.toLocaleTimeString(
+    locales,
+    timeOptions
+  )} ${date.toLocaleDateString(locales, dateOptions)}`;
 }
 
 function convertPaymentToStr(payment_type: string): string {
@@ -78,7 +88,9 @@ function convertOrderStatusToIconData(order_status: string): string {
 }
 
 function convertMoneyToNumber(money: string): number {
-  return Number(money.replaceAll("đ", "").replaceAll(".", ""));
+  return Number(
+    money.replaceAll("đ", "").replaceAll(".", "").replaceAll("&nbsp;", "")
+  );
 }
 
 function convertNumberToMoney(number: number): string {
