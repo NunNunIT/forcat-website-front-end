@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { useState, useEffect, useRef } from "react";
 
 // import components
-import { CustomerQuantityInputGroup, CustomerRatingFull } from "@/components";
+import { CustomerQuantityInputGroup, CustomerRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
@@ -57,11 +57,16 @@ export default function ProductBuyForm({
   return (
     <section className={cx("product-buy-form", "product", mobileOnly)}>
       <h1 className={cx("product__name")}>{productInfo.product_name}</h1>
-      <CustomerRatingFull
-        initValue={{
-          fontSize: "24px",
-          rating: productInfo.product_avg_rating,
-        }}></CustomerRatingFull>
+      <div className={cx("product__rating", "rating")}>
+        <span className={cx("rating__average")}>
+          {productInfo.product_avg_rating}/5
+        </span>
+        <CustomerRating
+          initValue={{
+            fontSize: "24px",
+            rating: productInfo.product_avg_rating,
+          }}></CustomerRating>
+      </div>
       <div className={cx("product__unit-price-div")}>
         <p className={cx("product__unit-price")} ref={unitPriceRef}>
           {convertNumberToMoney(currentVariant.price)}

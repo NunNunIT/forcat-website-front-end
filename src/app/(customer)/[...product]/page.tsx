@@ -50,6 +50,7 @@ export default async function ProductPage({
   const productDetails = res.data.product?.product_detail;
   const productDescription = res.data.product?.product_description;
   const productReviews = res.data.product?.recent_reviews;
+  const productId = res.data.product?.product_id;
 
   return (
     <main className="product">
@@ -88,7 +89,7 @@ export default async function ProductPage({
 
       <section className="product-review">
         <h3>Đánh giá từ khách hàng</h3>
-        <ProductReviewHeader></ProductReviewHeader>
+        <ProductReviewHeader productId={productId}></ProductReviewHeader>
 
         <div className="product-review__filter review-filter">
           <h5>Lọc đánh giá theo</h5>
