@@ -13,9 +13,8 @@ const cx = classNameNames.bind(styles);
 export default function CustomerHeaderMain() {
   return (
     <div className={cx("header__main")}>
-      <div className={cx("header__logo-container")}>
-        <CustomerLogo className={cx("header__logo")} />
-      </div>
+      <CustomerLogo className={cx("header__logo")} />
+
       <form
         className={cx("header__search-bar-wrapper")}
         action="/search/results"

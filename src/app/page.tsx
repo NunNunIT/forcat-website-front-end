@@ -18,7 +18,7 @@ export default function HomePage() {
       <CustomerHeader />
       <CustomerSlider></CustomerSlider>
       <CustomerCategories></CustomerCategories>
-      <main className="content-container">
+      {/* <main className="content-container">
         <CustomerCarousel></CustomerCarousel>
         <section className="tip-products-wrapper new-products">
           <div className="tip-products__img">
@@ -46,7 +46,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </main>
+      </main> */}
       <CustomerFooter />
     </>
   );
