@@ -16,7 +16,11 @@
     outline: 2px solid var(--outline2);
 }
 
-.variant__active .variant__tick {
+.variant__active .variant__tick-div {
+    display: block;
+}
+
+.variant__display {
     display: block;
 }
 
@@ -24,15 +28,18 @@
     outline: 2px solid var(--outline2);
 }
 
-.variant__tick {
+.variant__tick-div {
     width: 20px;
+    aspect-ratio: 1 / 1;
     display: none;
-    position: absolute;
+    position: absolute !important;
     top: -6px;
     right: -4px;
+    position: relative;
 }
 
-.variant__image {
+.variant__image-div {
     width: 48px;
-    object-fit: contain;
+    aspect-ratio: 1 / 1;
+    position: relative;
 }

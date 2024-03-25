@@ -18,9 +18,9 @@ export default function CustomerRatingFull({
 }) {
   return (
     <div className={cx("rating")}>
-      <span className={cx("rating__average")}>5/5</span>
+      <span className={cx("rating__average")}>{initValue.rating}/5</span>
       <CustomerRating initValue={initValue}></CustomerRating>
-      <span className={cx("rating__numbers")}>(100)</span>
+      <span className={cx("rating__numbers")}>(ko co data)</span>
     </div>
   );
 }

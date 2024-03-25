@@ -2,34 +2,28 @@
 
 // import libs
 import classNames from "classnames/bind";
-import Image from "next/image";
 import { useState, useRef } from "react";
+import { CldImage } from "next-cloudinary";
 
 // import css
 import styles from "./slider.module.css";
 
+// import interface
+import { ISliderImage } from "../../interfaces";
+
 // use css
 const cx = classNames.bind(styles);
 
-// some test data
-const thumbnails = [
-  "/imgs/test.png",
-  "/imgs/test2.png",
-  "/imgs/test2.png",
-  "/imgs/test2.png",
-  "/imgs/test.png",
-  "/imgs/test.png",
-  "/imgs/test2.png",
-  "/imgs/test2.png",
-  "/imgs/test.png",
-  "/imgs/test2.png",
-  "/imgs/test2.png",
-  "/imgs/test.png",
-  "/imgs/test.png",
-  "/imgs/test.png",
-];
-
-export default function CustomerProductSlider(prop) {
+export default function CustomerProductSlider({
+  productImgs,
+  desktopOnly,
+  mobileOnly,
+  ...prop
+}: {
+  productImgs: ISliderImage[];
+  desktopOnly?: string;
+  mobileOnly?: string;
+}) {
   // border thumbnail when hovered
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(0);
@@ -38,10 +32,17 @@ export default function CustomerProductSlider(prop) {
   };
 
   // change main image src when hovered
-  const [mainImageSrc, setMainImageSrc] = useState(thumbnails[0]);
+  const [mainImageSrc, setMainImageSrc] = useState(
+    productImgs[productImgs.length - 1].link_avt
+  );
+  const [mainImageAlt, setMainImageAlt] = useState(
+    productImgs[productImgs.length - 1].alt
+  );
+
   const handleMouseOver = (index: number) => {
     setHoveredIndex(index);
-    setMainImageSrc(thumbnails[index]);
+    setMainImageSrc(productImgs[index].link);
+    setMainImageAlt(productImgs[index].alt);
   };
 
   // scroll thumbnails container when button is clicked
@@ -85,14 +86,15 @@ export default function CustomerProductSlider(prop) {
 
     // Handle edge case: Decrementing from first index
     if (newIndex < 0) {
-      newIndex = thumbnails.length - 1; // Wrap around to last index
+      newIndex = productImgs.length - 1; // Wrap around to last index
     }
 
     setCurrentIndex(newIndex);
-    setMainImageSrc(thumbnails[newIndex]);
+    setMainImageSrc(productImgs[newIndex].link);
+    setMainImageAlt(productImgs[newIndex].alt);
     handleMouseOver(newIndex); // Update hovered state and potentially class
 
-    if (currentIndex < thumbnails.length - 2 && newIndex % 2 == 1)
+    if (currentIndex < productImgs.length - 2 && newIndex % 2 == 1)
       handleScrollLeft();
   };
 
@@ -101,12 +103,13 @@ export default function CustomerProductSlider(prop) {
     let newIndex = currentIndex + 1;
 
     // Handle edge case: Incrementing past last index
-    if (newIndex >= thumbnails.length) {
+    if (newIndex >= productImgs.length) {
       newIndex = 0; // Wrap around to first index
     }
 
     setCurrentIndex(newIndex);
-    setMainImageSrc(thumbnails[newIndex]);
+    setMainImageSrc(productImgs[newIndex].link);
+    setMainImageAlt(productImgs[newIndex].alt);
     handleMouseOver(newIndex); // Update hovered state and potentially class
 
     if (currentIndex > 2 && newIndex % 2 == 0) handleScrollRight();
@@ -116,17 +119,17 @@ export default function CustomerProductSlider(prop) {
     <section className={cx("slider")}>
       <div className={cx("slider__main-container")}>
         <div className={cx("slider__main-image-div")}>
-          <Image
+          <CldImage
             className={cx("slider__main-image")}
             src={mainImageSrc}
-            alt="Slider main image"
+            alt={mainImageAlt}
             fill={true}
           />
         </div>
 
         {currentIndex > 0 && (
           <div
-            className={cx("slider__btn", "slider__back", prop.desktopOnly)}
+            className={cx("slider__btn", "slider__back", desktopOnly)}
             onClick={handleClickLeft}>
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_back_ios
@@ -134,9 +137,9 @@ export default function CustomerProductSlider(prop) {
           </div>
         )}
 
-        {currentIndex < thumbnails.length - 1 && (
+        {currentIndex < productImgs.length - 1 && (
           <div
-            className={cx("slider__btn", "slider__forward", prop.desktopOnly)}
+            className={cx("slider__btn", "slider__forward", desktopOnly)}
             onClick={handleClickRight}>
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_forward_ios
@@ -145,23 +148,23 @@ export default function CustomerProductSlider(prop) {
         )}
 
         <div className={cx("slider__current-index")}>
-          {hoveredIndex + 1}/{thumbnails.length}
+          {hoveredIndex + 1}/{productImgs.length}
         </div>
       </div>
 
       <div className={cx("slider__thumbnails-div")}>
         <div className={cx("slider__thumbnails")} ref={thumbnailsContainer}>
-          {thumbnails.map((url, index) => (
+          {productImgs.slice(0, productImgs.length - 1).map((img, index) => (
             <div className={cx("slider__thumbnail-div")}>
-              <Image
+              <CldImage
                 key={index}
                 className={cx(
                   "slider__thumbnail",
                   isHovered(index, hoveredIndex)
                 )}
                 onMouseOver={() => handleMouseOver(index)}
-                src={url}
-                alt="Slider thumbnails"
+                src={img.link}
+                alt={img.alt}
                 fill={true}
               />
             </div>
@@ -169,7 +172,7 @@ export default function CustomerProductSlider(prop) {
         </div>
 
         <div
-          className={cx("slider__btn", "slider__back", prop.mobileOnly)}
+          className={cx("slider__btn", "slider__back", mobileOnly)}
           onClick={handleScrollLeft}>
           <span className={cx("material-icons-round", "slider__icon")}>
             arrow_back_ios
@@ -177,7 +180,7 @@ export default function CustomerProductSlider(prop) {
         </div>
 
         <div
-          className={cx("slider__btn", "slider__forward", prop.mobileOnly)}
+          className={cx("slider__btn", "slider__forward", mobileOnly)}
           onClick={handleScrollRight}>
           <span className={cx("material-icons-round", "slider__icon")}>
             arrow_forward_ios

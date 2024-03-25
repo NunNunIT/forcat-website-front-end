@@ -4,7 +4,6 @@ export { default as CustomerCategories } from "./customer/categories";
 export { default as CustomerCategoryCard } from "./customer/category-card";
 export { default as CustomerSliderCard } from "./customer/slider-card";
 export { default as CustomerProductCard } from "./customer/product-card";
-export { default as CustomerProductVariant } from "./customer/product-variant";
 export { default as CustomerPurchaseItem } from "./customer/purchase-item";
 export { default as CustomerQuantityInputGroup } from "./customer/quantity-input-group";
 export { default as CustomerRating } from "./customer/rating";

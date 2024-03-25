@@ -5,13 +5,22 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import { useState } from "react";
 
+// import interfaces
+import { IDescriptionRow } from "../../interfaces";
+
 // import css
 import styles from "./description.module.css";
 
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductDescription(prop) {
+export default function ProductDescription({
+  productDescription,
+  mobileOnly,
+}: {
+  productDescription: IDescriptionRow[];
+  mobileOnly?: string;
+}) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
 
   const handleSeeMore = () => {
@@ -19,14 +28,13 @@ export default function ProductDescription(prop) {
   };
 
   return (
-    <section className={cx("product-description", prop.mobileOnly)}>
+    <section className={cx("product-description", mobileOnly)}>
       <div className={cx("product-description__title-div")}>
         <h3 className={cx("product-description__title")}>Mô tả sản phẩm</h3>
         <div className={cx("product-description__see-more")}>
           <p
             className={cx("product-description__see-more-text")}
-            onClick={handleSeeMore}
-          >
+            onClick={handleSeeMore}>
             {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
           </p>
           {isSeeMoreActive ? (
@@ -41,9 +49,19 @@ export default function ProductDescription(prop) {
           "product-description__content",
           "product-description-content",
           isSeeMoreActive ? "full-height" : ""
-        )}
-      >
-        <h5 className={cx("product-description-content__title")}>
+        )}>
+        {productDescription.map((row, index) => {
+          if (row.type == "title") {
+            return (
+              <h5
+                className={cx("product-description-content__title")}
+                key={index}>
+                {row.content}
+              </h5>
+            );
+          }
+        })}
+        {/* <h5 className={cx("product-description-content__title")}>
           Vẻ ngoài thời trang cùng màu sắc mới mẻ
         </h5>
         <p className={cx("product-description-content__paragraph")}>
@@ -62,34 +80,7 @@ export default function ProductDescription(prop) {
         </div>
         <p className={cx("product-description-content__image-caption")}>
           Hình ảnh điện thoại redme
-        </p>
-        <h5 className={cx("product-description-content__title")}>
-          Vẻ ngoài thời trang cùng màu sắc mới mẻ
-        </h5>
-        <p className={cx("product-description-content__paragraph")}>
-          Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các cạnh
-          cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa mặt lưng
-          và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm giác cầm nắm
-          thoải mái.
-        </p>
-        <h5 className={cx("product-description-content__title")}>
-          Vẻ ngoài thời trang cùng màu sắc mới mẻ
-        </h5>
-        <p className={cx("product-description-content__paragraph")}>
-          Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các cạnh
-          cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa mặt lưng
-          và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm giác cầm nắm
-          thoải mái.
-        </p>
-        <h5 className={cx("product-description-content__title")}>
-          Vẻ ngoài thời trang cùng màu sắc mới mẻ
-        </h5>
-        <p className={cx("product-description-content__paragraph")}>
-          Redmi Note 12 được tạo hình bằng một vẻ ngoài quen thuộc với các cạnh
-          cùng hai mặt vát phẳng tinh tế, những vị trí giao nhau giữa mặt lưng
-          và bộ khung cũng sẽ được bo cong nhẹ để mang lại cảm giác cầm nắm
-          thoải mái.
-        </p>
+        </p> */}
       </div>
       <div className={cx("product-description__see-more", "see-more-btn")}>
         {!isSeeMoreActive && (

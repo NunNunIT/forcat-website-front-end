@@ -24,7 +24,9 @@ export default function ProductReviewHeader() {
             <CustomerRating
               initValue={{ fontSize: "24px", rating: 5 }}></CustomerRating>
           </div>
-          <p className={cx("review-overview__total")}>(Tất cả 1234 đánh giá)</p>
+          <p className={cx("review-overview__total")}>
+            (Tất cả ko co data đánh giá)
+          </p>
         </div>
         <div
           className={cx("review-overview__detail", "review-overview-detail")}>
@@ -34,7 +36,7 @@ export default function ProductReviewHeader() {
             <div className={cx("review-overview-detail__progress-div")}>
               <div className={cx("review-overview-detail__progress-bar")}></div>
             </div>
-            <span className={cx("review-overview-detail__numbers")}>123</span>
+            <span className={cx("review-overview-detail__numbers")}>ko</span>
           </div>
           <div className={cx("review-overview-detail__row")}>
             <CustomerRating
@@ -42,7 +44,7 @@ export default function ProductReviewHeader() {
             <div className={cx("review-overview-detail__progress-div")}>
               <div className={cx("review-overview-detail__progress-bar")}></div>
             </div>
-            <span className={cx("review-overview-detail__numbers")}>123</span>
+            <span className={cx("review-overview-detail__numbers")}>ko</span>
           </div>
           <div className={cx("review-overview-detail__row")}>
             <CustomerRating
@@ -50,7 +52,7 @@ export default function ProductReviewHeader() {
             <div className={cx("review-overview-detail__progress-div")}>
               <div className={cx("review-overview-detail__progress-bar")}></div>
             </div>
-            <span className={cx("review-overview-detail__numbers")}>123</span>
+            <span className={cx("review-overview-detail__numbers")}>ko</span>
           </div>
           <div className={cx("review-overview-detail__row")}>
             <CustomerRating
@@ -58,7 +60,7 @@ export default function ProductReviewHeader() {
             <div className={cx("review-overview-detail__progress-div")}>
               <div className={cx("review-overview-detail__progress-bar")}></div>
             </div>
-            <span className={cx("review-overview-detail__numbers")}>123</span>
+            <span className={cx("review-overview-detail__numbers")}>ko</span>
           </div>
           <div className={cx("review-overview-detail__row")}>
             <CustomerRating
@@ -66,7 +68,7 @@ export default function ProductReviewHeader() {
             <div className={cx("review-overview-detail__progress-div")}>
               <div className={cx("review-overview-detail__progress-bar")}></div>
             </div>
-            <span className={cx("review-overview-detail__numbers")}>123</span>
+            <span className={cx("review-overview-detail__numbers")}>ko</span>
           </div>
         </div>
       </div>
