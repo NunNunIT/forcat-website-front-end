@@ -20,10 +20,6 @@ const cx = classNames.bind(styles);
 export default function ProductBuyForm(prop) {
   const [quantityValue, setQuantityValue] = useState(1);
 
-  const handleQuantityChange = (changedValue: number) => {
-    setQuantityValue(changedValue);
-  };
-
   return (
     <section className={cx("product-buy-form", "product", prop.mobileOnly )}>
       <h1 className={cx("product__name")}>
@@ -90,7 +86,6 @@ export default function ProductBuyForm(prop) {
             defaultValue: quantityValue,
             minValue: 1,
             maxValue: 100,
-            onValueChange: handleQuantityChange,
           }}
         ></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>789 sản phẩm có thể mua</p>

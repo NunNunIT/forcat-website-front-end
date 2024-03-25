@@ -2,20 +2,26 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // import css
 import styles from "./quantity-input-group.module.css";
 
+// import libs
+import { convertMoneyToNumber, convertNumberToMoney } from "@/utils";
+
 // use css
 const cx = classNames.bind(styles);
 
-export default function CustomerQuantityInputGroup({
+export default function CartQuantityInputGroup({
   initValue,
+  calcPrices,
   ...props
 }: {
   initValue: IQuantityInputGroup;
+  calcPrices: any;
 }) {
+  // handle value
   const [inputValue, setInputValue] = useState(initValue.defaultValue);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +44,27 @@ export default function CustomerQuantityInputGroup({
     inputRef.current?.select();
   };
 
+  // calc prices
+  const quantityInputGroupRef = useRef(null);
+  const calcProductPrice = () => {
+    const quantity = inputValue;
+    const current = quantityInputGroupRef.current;
+    const unitPrice = convertMoneyToNumber(
+      current.parentElement.previousSibling.querySelector(
+        ".cart-item__unit-price-after-discount"
+      ).innerHTML
+    );
+    const totalProductPrice = current.parentElement.nextSibling;
+    totalProductPrice.innerHTML = convertNumberToMoney(unitPrice * quantity);
+  };
+
+  useEffect(() => {
+    calcPrices();
+    calcProductPrice();
+  });
+
   return (
-    <div className={cx("quantity-input-group")}>
+    <div className={cx("quantity-input-group")} ref={quantityInputGroupRef}>
       <div
         className={cx("quantity-input-group__btn-remove", "btn-quantity")}
         onClick={decreaseValue}>

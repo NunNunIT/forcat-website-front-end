@@ -3,28 +3,47 @@ function parseNumToCurrencyStr(price: number): string {
 }
 
 function cleanDateFormatInput(inputDate: string): string {
-	// Use regular expression to remove unwanted characters
-	return inputDate.replace(/[^\d/]/g, '');
+  // Use regular expression to remove unwanted characters
+  return inputDate.replace(/[^\d/]/g, "");
 }
 
 function convertDateFormatYMD(inputDate: string): string {
-	// Use cleanDateFormatInput function to remove unwanted characters
-	var cleanedDate = cleanDateFormatInput(inputDate);
+  // Use cleanDateFormatInput function to remove unwanted characters
+  var cleanedDate = cleanDateFormatInput(inputDate);
 
-	// Convert date format to "yyyy-MM-dd" before assigning to input
-	var parts = cleanedDate.split("/");
+  // Convert date format to "yyyy-MM-dd" before assigning to input
+  var parts = cleanedDate.split("/");
 
-	var result = parts[2] + "-" + parts[1] + "-" + parts[0];
+  var result = parts[2] + "-" + parts[1] + "-" + parts[0];
 
-	return result;
+  return result;
 }
 
 function convertDateFormat(inputDate: string): string {
-	if (!inputDate) {
-		return "";
-	}
-	var parts = inputDate.split("-");
-	return parts[2] + "/" + parts[1] + "/" + parts[0];
+  if (!inputDate) {
+    return "";
+  }
+  var parts = inputDate.split("-");
+  return parts[2] + "/" + parts[1] + "/" + parts[0];
+}
+
+function convertMoneyToNumber(money: string): number {
+  return Number(money.replaceAll("đ", "").replaceAll(".", ""));
+}
+
+function convertNumberToMoney(number: number): string {
+  // Check if the provided number is valid
+  if (isNaN(number)) {
+    return "Invalid number";
+  }
+
+  // Format the number as currency using toLocaleString
+  const currency = number
+    .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+    .replace(/₫/g, "đ");
+
+  // Return the formatted currency string
+  return currency;
 }
 
 function isValidEmail(email: string): boolean {
@@ -35,5 +54,13 @@ function isValidEmail(email: string): boolean {
 	return emailPattern.test(email);
   }
 
-export { parseNumToCurrencyStr, cleanDateFormatInput, convertDateFormatYMD, convertDateFormat, isValidEmail};
+export {
+  parseNumToCurrencyStr,
+  cleanDateFormatInput,
+  convertDateFormatYMD,
+  convertDateFormat,
+  convertMoneyToNumber,
+  convertNumberToMoney,
+  isValidEmail
+};
 
