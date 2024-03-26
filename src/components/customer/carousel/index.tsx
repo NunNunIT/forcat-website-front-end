@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 import classNames from "classnames/bind";
 import styles from "./carousel.module.css";
-import { CustomerStarRating } from '@/components';
-
+import { CustomerStarRating } from "@/components";
 
 const cx = classNames.bind(styles);
-
-
 
 const CustomerCarousel = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -25,14 +22,17 @@ const CustomerCarousel = () => {
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
   const [cardPerView, setCardPerView] = useState(0);
 
-  const handleClick = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
     const carousel = carouselRef.current;
     const btn = event.currentTarget;
-    console.log('carousel:', carousel);
-    console.log('btn:', btn);
-    console.log('firstCardWidth:', firstCardWidth);
+    console.log("carousel:", carousel);
+    console.log("btn:", btn);
+    console.log("firstCardWidth:", firstCardWidth);
     if (carousel && btn) {
-      carousel.scrollLeft += btn.id === "left" ? -firstCardWidth : firstCardWidth;
+      carousel.scrollLeft +=
+        btn.id === "left" ? -firstCardWidth : firstCardWidth;
     }
   };
 
@@ -71,12 +71,16 @@ const CustomerCarousel = () => {
       // If the carousel is at the beginning, scroll to the end
       if (carousel.scrollLeft === 0) {
         carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
+        carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.offsetWidth;
         carousel.classList.remove("no-transition");
       }
       // If the carousel is at the end, scroll to the beginning
-      else if ((Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth)
-        || (Math.ceil(carousel.scrollLeft) - 1 === carousel.scrollWidth - carousel.offsetWidth)) {
+      else if (
+        Math.ceil(carousel.scrollLeft) ===
+          carousel.scrollWidth - carousel.offsetWidth ||
+        Math.ceil(carousel.scrollLeft) - 1 ===
+          carousel.scrollWidth - carousel.offsetWidth
+      ) {
         carousel.classList.add("no-transition");
         carousel.scrollLeft = carousel.offsetWidth;
         carousel.classList.remove("no-transition");
@@ -101,7 +105,9 @@ const CustomerCarousel = () => {
 
   useEffect(() => {
     if (carouselRef.current && carouselRef.current.children[0]) {
-      setFirstCardWidth(carouselRef.current.children[0].getBoundingClientRect().width);
+      setFirstCardWidth(
+        carouselRef.current.children[0].getBoundingClientRect().width
+      );
     }
   }, []);
 
@@ -113,11 +119,15 @@ const CustomerCarousel = () => {
     const wrapper = wrapperRef.current;
     const carousel = carouselRef.current;
     if (wrapper) {
-      const arrows = Array.from(wrapper.querySelectorAll(".arrow")) as HTMLElement[];
+      const arrows = Array.from(
+        wrapper.querySelectorAll(".arrow")
+      ) as HTMLElement[];
       setArrowBtns(arrows);
     }
     if (carousel) {
-      const firstCard = carousel.querySelector(".carousel__card") as HTMLElement;
+      const firstCard = carousel.querySelector(
+        ".carousel__card"
+      ) as HTMLElement;
       if (firstCard) {
         setFirstCardWidth(firstCard.offsetWidth);
       }
@@ -131,9 +141,12 @@ const CustomerCarousel = () => {
   useEffect(() => {
     const carousel = carouselRef.current;
     if (carousel) {
-      carouselChildrens.slice(-cardPerView).reverse().forEach((card: HTMLElement) => {
-        carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
-      });
+      carouselChildrens
+        .slice(-cardPerView)
+        .reverse()
+        .forEach((card: HTMLElement) => {
+          carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
+        });
     }
   }, [carouselChildrens, cardPerView]);
 
@@ -206,23 +219,28 @@ const CustomerCarousel = () => {
           </span>
         </div>
       </div>
-      <span id="left" onClick={handleClick} className={cx("left", "arrow", "arrow material-icons")}>
+      <span
+        id="left"
+        onClick={handleClick}
+        className={cx("left", "arrow", "arrow material-icons")}>
         keyboard_arrow_left
       </span>
 
-
       <div className={cx("carousel__list")}>
-        <ul ref={carouselRef} className={cx("carousel")}
-          onMouseDown={dragStart} onMouseMove={dragging} onMouseUp={dragStop} onMouseLeave={dragStop}
+        <ul
+          ref={carouselRef}
+          className={cx("carousel")}
+          onMouseDown={dragStart}
+          onMouseMove={dragging}
+          onMouseUp={dragStop}
+          onMouseLeave={dragStop}
           onScroll={infiniteScroll}>
           {/* <% products.forEach(function(product) { %> */}
           <li className={cx("carousel__card")}>
             <Link
               className={cx("carousel__card-main")}
               href="/search/<%= product.product_variant_id %>?category_id=<%= product.category_id %>">
-              <div className={cx("carousel__card--badge")}>
-                - 12.5 %
-              </div>
+              <div className={cx("carousel__card--badge")}>- 12.5 %</div>
               <div className={cx("carousel__card--top")}>
                 <div className={cx("carousel__card--img")}>
                   <Image
@@ -289,14 +307,16 @@ const CustomerCarousel = () => {
             </Link>
           </li>
 
-
           {/* <% }) %> */}
         </ul>
       </div>
-      <span id="right" onClick={handleClick} className={cx("arrow", "right", " arrow material-icons")}>
+      <span
+        id="right"
+        onClick={handleClick}
+        className={cx("arrow", "right", " arrow material-icons")}>
         keyboard_arrow_right
       </span>
     </div>
   );
-}
+};
 export default CustomerCarousel;

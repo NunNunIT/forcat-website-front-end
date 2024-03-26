@@ -108,6 +108,14 @@ function convertNumberToMoney(number: number): string {
   return currency;
 }
 
+function isValidEmail(email: string): boolean {
+  // Regex pattern để kiểm tra định dạng email
+  const emailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Kiểm tra xem email có phù hợp với định dạng không
+  return emailPattern.test(email);
+}
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -115,6 +123,7 @@ export {
   convertDateFormat,
   convertMoneyToNumber,
   convertNumberToMoney,
+  isValidEmail,
   convertOrderStatusToStr,
   isActiveClass,
   convertDateToFormatHHMMDDMMYYYY,
