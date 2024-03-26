@@ -11,7 +11,6 @@ interface IQuantityInputGroup {
   defaultValue: number;
   minValue: number;
   maxValue: number;
-  onValueChange: any; // callback to take value from component
 }
 
 interface IStarRatingProps {
@@ -83,6 +82,17 @@ interface IHeaderMenuCategoryItemProps {
   children?: React.ReactNode;
 }
 
+interface ICategoryCardProps {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface ISliderCardProps {
+  url: string;
+  description: string;
+}
+
 interface IRating {
   fontSize: TRating;
   rating: number;
@@ -115,4 +125,18 @@ interface IArticleProps {
   };
   article_date: string;
   article_slug?: string[];
+}
+
+interface ProductItemInOrderItemProps {
+  product_id: string,
+  quantity: number,
+  unit_price: number,
+  price_discount?: number,
+}
+
+interface OrderItemProps {
+  order_id: string,
+  order_status: string,
+  order_total_price: number,
+  order_detail: ProductItemInOrderItemProps[],
 }

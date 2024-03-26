@@ -1,4 +1,3 @@
-//import libs
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,7 +15,7 @@ import { CustomerCarousel } from "@/components";
 // use css
 import "./page.css";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <>
       <CustomerHeader />
@@ -56,8 +55,7 @@ export default function HomePage() {
             <Link
               className="banner-img--half"
               href="https://www.facebook.com/forcat.official"
-              target="_blank"
-            >
+              target="_blank">
               <Image
                 className="banner-img"
                 fill={true}
@@ -70,8 +68,7 @@ export default function HomePage() {
             <Link
               className="banner-img--half"
               href="https://www.facebook.com/lawsforpawsvietnam"
-              target="_blank"
-            >
+              target="_blank">
               <Image
                 className="banner-img"
                 fill={true}
