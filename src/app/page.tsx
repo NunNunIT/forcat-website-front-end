@@ -53,7 +53,11 @@ export default function HomePage() {
                 alt="banner-info"
               />
             </Link>
-            <Link className="banner-img--half" href="#">
+            <Link
+              className="banner-img--half"
+              href="https://www.facebook.com/forcat.official"
+              target="_blank"
+            >
               <Image
                 className="banner-img"
                 fill={true}
@@ -63,7 +67,11 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="banner-wrapper">
-            <Link className="banner-img--half" href="#">
+            <Link
+              className="banner-img--half"
+              href="https://www.facebook.com/lawsforpawsvietnam"
+              target="_blank"
+            >
               <Image
                 className="banner-img"
                 fill={true}

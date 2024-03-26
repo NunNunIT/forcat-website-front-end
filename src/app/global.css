@@ -245,6 +245,10 @@ ul li {
   list-style: none;
 }
 
+select {
+  -webkit-appearance: none;
+}
+
 .btn {
   text-decoration: none;
   cursor: pointer;
