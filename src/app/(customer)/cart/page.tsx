@@ -104,6 +104,14 @@ export default function CartPage() {
     setSelectedItem(selected.length);
   };
 
+  // delete cart item
+  const handleDeleteCartItem = (event) => {
+    const current = event.currentTarget;
+    const cartItem = current.parentElement;
+    cartItem.remove();
+    setAllItem(allItem - 1);
+  };
+
   useEffect(() => {
     calcPrices();
   }, []);
@@ -182,7 +190,9 @@ export default function CartPage() {
           <div className="cart-item__price cart-item-col mobile-hidden">
             10.000.000đ
           </div>
-          <div className="cart-item__remove-btn cart-item-col mobile-hidden">
+          <div
+            className="cart-item__remove-btn cart-item-col mobile-hidden"
+            onClick={handleDeleteCartItem}>
             <span className="material-icons-round">delete</span>
           </div>
         </div>
@@ -234,7 +244,9 @@ export default function CartPage() {
           <div className="cart-item__price cart-item-col mobile-hidden">
             10.000.000đ
           </div>
-          <div className="cart-item__remove-btn cart-item-col mobile-hidden">
+          <div
+            className="cart-item__remove-btn cart-item-col mobile-hidden"
+            onClick={handleDeleteCartItem}>
             <span className="material-icons-round">delete</span>
           </div>
         </div>
