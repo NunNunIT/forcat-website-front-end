@@ -13,9 +13,8 @@ const cx = classNameNames.bind(styles);
 export default function CustomerHeaderMain() {
   return (
     <div className={cx("header__main")}>
-      <div className={cx("header__logo-container")}>
-        <CustomerLogo className={cx("header__logo")} />
-      </div>
+      <CustomerLogo className={cx("header__logo")} />
+
       <form
         className={cx("header__search-bar-wrapper")}
         action="/search/results"
@@ -58,8 +57,8 @@ export default function CustomerHeaderMain() {
               </span>
             </div>
             <div className={cx("unauth-content__btn")}>
-              <a href="/auth/login">Đăng nhập</a>
-              <a href="/auth/register">Đăng ký</a>
+              <a href="/login">Đăng nhập</a>
+              <a href="/register">Đăng ký</a>
             </div>
           </div>
         </div>

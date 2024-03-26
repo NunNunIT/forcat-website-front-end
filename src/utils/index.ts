@@ -27,8 +27,70 @@ function convertDateFormat(inputDate: string): string {
   return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
+function convertOrderStatusToStr(order_status: string): string {
+  switch (order_status.toLowerCase()) {
+    case "all":
+      return "Tất cả";
+    case "unpaid":
+      return "Chờ thanh toán";
+    case "delivering":
+      return "Đang giao";
+    case "finished":
+      return "Hoàn thành";
+    case "cancel":
+      return "Đã hủy";
+  }
+  return "Unexpected Order Status";
+}
+
+function isActiveClass(src_str: string, des_str: string): string {
+  return src_str === des_str ? "is-active" : "";
+}
+
+function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
+  const locales = "vi-VN";
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  return `${date.toLocaleTimeString(
+    locales,
+    timeOptions
+  )} ${date.toLocaleDateString(locales, dateOptions)}`;
+}
+
+function convertPaymentToStr(payment_type: string): string {
+  switch (payment_type.toLowerCase()) {
+    case "credit_card":
+      return "thẻ tín dụng";
+  }
+
+  return "Unexpected Payment Type";
+}
+
+function convertOrderStatusToIconData(order_status: string): string {
+  switch (order_status.toLowerCase()) {
+    case "unpaid":
+      return "payment";
+    case "delivering":
+      return "local_shipping";
+    case "finished":
+      return "done_all";
+    case "cancel":
+      return "cancel";
+  }
+  return "Unexpected Order Status";
+}
+
 function convertMoneyToNumber(money: string): number {
-  return Number(money.replaceAll("đ", "").replaceAll(".", ""));
+  return Number(
+    money.replaceAll("đ", "").replaceAll(".", "").replaceAll("&nbsp;", "")
+  );
 }
 
 function convertNumberToMoney(number: number): string {
@@ -46,6 +108,14 @@ function convertNumberToMoney(number: number): string {
   return currency;
 }
 
+function isValidEmail(email: string): boolean {
+  // Regex pattern để kiểm tra định dạng email
+  const emailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Kiểm tra xem email có phù hợp với định dạng không
+  return emailPattern.test(email);
+}
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -53,4 +123,10 @@ export {
   convertDateFormat,
   convertMoneyToNumber,
   convertNumberToMoney,
+  isValidEmail,
+  convertOrderStatusToStr,
+  isActiveClass,
+  convertDateToFormatHHMMDDMMYYYY,
+  convertPaymentToStr,
+  convertOrderStatusToIconData,
 };

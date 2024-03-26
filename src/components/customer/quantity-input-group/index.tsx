@@ -2,7 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // import css
 import styles from "./quantity-input-group.module.css";
@@ -12,18 +12,25 @@ const cx = classNames.bind(styles);
 
 export default function CustomerQuantityInputGroup({
   initValue,
+  takeQuantity,
   ...props
 }: {
   initValue: IQuantityInputGroup;
+  takeQuantity?: any;
 }) {
   const [inputValue, setInputValue] = useState(initValue.defaultValue);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = +event.target.value;
 
-    if (newValue >= initValue.minValue && newValue <= initValue.maxValue)
+    if (newValue >= initValue.minValue && newValue <= initValue.maxValue) {
       setInputValue(newValue);
+    }
   };
+
+  useEffect(() => {
+    takeQuantity(inputValue);
+  }, [inputValue]);
 
   const decreaseValue = () => {
     if (inputValue > initValue.minValue) setInputValue(+inputValue - 1);

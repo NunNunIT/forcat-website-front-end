@@ -1,3 +1,6 @@
+import React from "react";
+import Carousel from "react-bootstrap/Carousel";
+import { CustomerCarousel } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 //import libs
@@ -15,7 +18,7 @@ import { CustomerHeader, CustomerFooter } from "@/partials";
 // use css
 import "./page.css";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <main className="content-container">
       {/* <CustomerSlider></CustomerSlider>
