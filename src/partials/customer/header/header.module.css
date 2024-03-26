@@ -11,7 +11,7 @@
   align-items: center;
 
   background-color: white;
-  box-shadow: 0 0 .5rem var(--black-o20);
+  box-shadow: 0 0 0.5rem var(--black-o20);
 }
 
 .header a {
@@ -38,5 +38,9 @@
   .header__container {
     width: 100%;
     padding-inline: 1rem;
+  }
+
+  .header {
+    top: -30px;
   }
 }
