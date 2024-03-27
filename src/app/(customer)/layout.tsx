@@ -13,8 +13,8 @@ export default function CustomerLayout({
     <>
       <CustomerHeader />
       {children}
-      <CustomerAppBar></CustomerAppBar>
       <CustomerFooter />
+      <CustomerAppBar></CustomerAppBar>
     </>
   );
 }
