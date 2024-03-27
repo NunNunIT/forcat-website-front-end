@@ -92,7 +92,8 @@ export default function ProductBuyForm({
                     url: item.variant_ims[0],
                     alt: `${productInfo.product_name} - ${item.variant_name}`,
                   },
-                }}></ProductVariant>
+                }}
+                key={index}></ProductVariant>
             );
           })}
         </div>

@@ -47,6 +47,10 @@ function isActiveClass(src_str: string, des_str: string): string {
   return src_str === des_str ? "is-active" : "";
 }
 
+function convertDateStrToDDMMYYYY(dateStr: string): string {
+  return dateStr.split("-").reverse().join("/");
+}
+
 function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
   const locales = "vi-VN";
   const timeOptions: Intl.DateTimeFormatOptions = {
@@ -127,6 +131,7 @@ export {
   convertOrderStatusToStr,
   isActiveClass,
   convertDateToFormatHHMMDDMMYYYY,
+  convertDateStrToDDMMYYYY,
   convertPaymentToStr,
   convertOrderStatusToIconData,
 };

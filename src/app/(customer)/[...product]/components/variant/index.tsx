@@ -15,9 +15,11 @@ const cx = classNames.bind(styles);
 
 export default function CustomerProductVariant({
   variant,
+  key,
   ...props
 }: {
   variant: IVariant;
+  key?: number;
 }) {
   const pathname = decodeURIComponent(usePathname());
   const isActive = pathname == variant.url ? "variant__active" : "";

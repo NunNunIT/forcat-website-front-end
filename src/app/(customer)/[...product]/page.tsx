@@ -107,7 +107,9 @@ export default async function ProductPage({
           <h5>Tất cả đánh giá</h5>
           <div className="reviews__group">
             {productReviews.map((review, index) => {
-              return <ProductReview review={review}></ProductReview>;
+              return (
+                <ProductReview review={review} key={index}></ProductReview>
+              );
             })}
           </div>
           <div className="reviews__pagination-div">

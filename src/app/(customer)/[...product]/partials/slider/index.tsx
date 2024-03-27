@@ -155,9 +155,8 @@ export default function CustomerProductSlider({
       <div className={cx("slider__thumbnails-div")}>
         <div className={cx("slider__thumbnails")} ref={thumbnailsContainer}>
           {productImgs.slice(0, productImgs.length - 1).map((img, index) => (
-            <div className={cx("slider__thumbnail-div")}>
+            <div className={cx("slider__thumbnail-div")} key={index}>
               <CldImage
-                key={index}
                 className={cx(
                   "slider__thumbnail",
                   isHovered(index, hoveredIndex)

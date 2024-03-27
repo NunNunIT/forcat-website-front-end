@@ -43,7 +43,8 @@ export default function EditInformationPage() {
       .then((response) => {
         if (response && response.ok) {
           // Redirect to /account/information if the update is successful
-          window.location.href = "/account/information";
+          if (typeof window !== "undefined")
+            window.location.href = "/account/information";
         } else {
           console.error("Update failed");
         }
@@ -52,7 +53,6 @@ export default function EditInformationPage() {
         console.error("Error:", error);
       });
   };
-
 
   const setError = (element: HTMLElement, message: string) => {
     const inputControl = element.parentElement;

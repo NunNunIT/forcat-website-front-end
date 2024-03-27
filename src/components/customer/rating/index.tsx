@@ -54,18 +54,6 @@ export default function CustomerRating({
                 star
               </span>
             );
-          // else if (
-          //   initValue.rating - index >= 0.5 &&
-          //   initValue.rating - index < 1
-          // )
-          //   return (
-          //     <span
-          //       key={index}
-          //       style={starStyle}
-          //       className={cx("material-icons-round", "star-half")}>
-          //       star_half
-          //     </span>
-          //   );
           else
             return (
               <span

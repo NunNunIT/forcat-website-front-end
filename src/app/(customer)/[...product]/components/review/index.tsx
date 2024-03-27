@@ -17,9 +17,15 @@ import styles from "./review.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductReview({ review }: { review: IReview }) {
+export default function ProductReview({
+  review,
+  key,
+}: {
+  review: IReview;
+  key?: number;
+}) {
   return (
-    <div className={cx("review-item")}>
+    <div className={cx("review-item")} key={key}>
       <div className={cx("review-item__info")}>
         <div className={cx("review-item__avatar-div")}>
           <Image
