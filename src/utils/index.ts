@@ -116,6 +116,19 @@ function convertNumberToMoney(number: number): string {
   return currency;
 }
 
+function convertDateToHourDayMonthYear(dateString: string): string {
+  const date = new Date(dateString);
+
+  const hours: string = ("0" + date.getUTCHours()).slice(-2);
+  const minutes: string = ("0" + date.getUTCMinutes()).slice(-2);
+
+  const day: string = ("0" + date.getUTCDate()).slice(-2);
+  const month: string = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+  const year: number = date.getUTCFullYear();
+
+  return `${hours}:${minutes} - ${day}/${month}/${year}`;
+}
+
 function isValidEmail(email: string): boolean {
   // Regex pattern để kiểm tra định dạng email
   const emailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -131,6 +144,7 @@ export {
   convertDateFormat,
   convertMoneyToNumber,
   convertNumberToMoney,
+  convertDateToHourDayMonthYear,
   isValidEmail,
   convertOrderStatusToStr,
   isActiveClass,

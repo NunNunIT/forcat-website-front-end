@@ -1,0 +1,91 @@
+"use client";
+
+// import libs
+import classNames from "classnames/bind";
+import { useState, useEffect } from "react";
+
+// import components
+import { ProductReviewItem } from "../../components";
+
+// import paritals
+import { ProductReviewHeader, ProductImageModal } from "./partials";
+
+// import css
+import styles from "./review.module.css";
+
+// use css
+const cx = classNames.bind(styles);
+
+export default function ProductReview({
+  productReviews,
+  productId,
+}: {
+  productReviews: any;
+  productId: any;
+}) {
+  const [isModalHidden, setIsModalHidden] = useState("none");
+  const handleOpenModal = () => {
+    setIsModalHidden("block");
+  };
+
+  return (
+    <section className={cx("product-review")}>
+      <h3>Đánh giá từ khách hàng</h3>
+      <ProductReviewHeader
+        productId={productId}
+        handleOpenModal={handleOpenModal}></ProductReviewHeader>
+
+      <div className={cx("product-review__filter", "review-filter")}>
+        <h5>Lọc đánh giá theo</h5>
+        <div className={cx("review-filter__group")}>
+          <div className={cx("review-filter__item")}>Mới nhất</div>
+          <div className={cx("review-filter__item")}>Có hình ảnh</div>
+          <div className={cx("review-filter__item")}>Có video</div>
+          <div className={cx("review-filter__item")}>5 sao</div>
+          <div className={cx("review-filter__item")}>4 sao</div>
+          <div className={cx("review-filter__item")}>3 sao</div>
+          <div className={cx("review-filter__item")}>2 sao</div>
+          <div className={cx("review-filter__item")}>1 sao</div>
+        </div>
+      </div>
+
+      <div className={cx("product-review__all-reviews", "reviews")}>
+        <h5>Tất cả đánh giá</h5>
+        <div className={cx("reviews__group")}>
+          {productReviews.map((review, index) => {
+            return (
+              <ProductReviewItem
+                review={review}
+                key={index}
+                handleOpenModal={handleOpenModal}></ProductReviewItem>
+            );
+          })}
+        </div>
+
+        <div className={cx("reviews__pagination-div")}>
+          <div className={cx("reviews__pagination", "pagination")}>
+            <div className={cx("pagination__btn")}>
+              <span className={cx("material-icons-round", "pagination__icon")}>
+                arrow_back_ios
+              </span>
+            </div>
+            <div className={cx("pagination__btn")}>1</div>
+            <div className={cx("pagination__btn")}>2</div>
+            <div className={cx("pagination__btn", "pagination__btn-disabled")}>
+              ...
+            </div>
+            <div className={cx("pagination__btn")}>3</div>
+            <div className={cx("pagination__btn")}>
+              <span className={cx("material-icons-round", "pagination__icon")}>
+                arrow_forward_ios
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ProductImageModal
+        isModalHidden={isModalHidden}
+        setIsModalHidden={setIsModalHidden}></ProductImageModal>
+    </section>
+  );
+}

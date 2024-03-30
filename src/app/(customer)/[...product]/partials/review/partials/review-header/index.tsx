@@ -16,8 +16,10 @@ const cx = classNames.bind(styles);
 
 export default function ProductReviewHeader({
   productId,
+  handleOpenModal,
 }: {
   productId: string;
+  handleOpenModal: any;
 }) {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
@@ -62,7 +64,9 @@ export default function ProductReviewHeader({
             <CustomerRating
               initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
             <div className={cx("review-overview-detail__progress-div")}>
-              <div className={cx("review-overview-detail__progress-bar")} style={{
+              <div
+                className={cx("review-overview-detail__progress-bar")}
+                style={{
                   width: `${
                     (data?.data?.reviewByStar["4"] / data?.data?.totalReviews) *
                     100
@@ -77,7 +81,9 @@ export default function ProductReviewHeader({
             <CustomerRating
               initValue={{ fontSize: "24px", rating: 3 }}></CustomerRating>
             <div className={cx("review-overview-detail__progress-div")}>
-              <div className={cx("review-overview-detail__progress-bar")} style={{
+              <div
+                className={cx("review-overview-detail__progress-bar")}
+                style={{
                   width: `${
                     (data?.data?.reviewByStar["3"] / data?.data?.totalReviews) *
                     100
@@ -92,7 +98,9 @@ export default function ProductReviewHeader({
             <CustomerRating
               initValue={{ fontSize: "24px", rating: 2 }}></CustomerRating>
             <div className={cx("review-overview-detail__progress-div")}>
-              <div className={cx("review-overview-detail__progress-bar")} style={{
+              <div
+                className={cx("review-overview-detail__progress-bar")}
+                style={{
                   width: `${
                     (data?.data?.reviewByStar["2"] / data?.data?.totalReviews) *
                     100
@@ -107,7 +115,9 @@ export default function ProductReviewHeader({
             <CustomerRating
               initValue={{ fontSize: "24px", rating: 1 }}></CustomerRating>
             <div className={cx("review-overview-detail__progress-div")}>
-              <div className={cx("review-overview-detail__progress-bar")}style={{
+              <div
+                className={cx("review-overview-detail__progress-bar")}
+                style={{
                   width: `${
                     (data?.data?.reviewByStar["1"] / data?.data?.totalReviews) *
                     100
@@ -124,7 +134,9 @@ export default function ProductReviewHeader({
         <h5>Tất cả hình ảnh</h5>
         <div className={cx("image-overview__container")}>
           <div className={cx("image-overview__item")}>
-            <div className={cx("image-overview__image-div")}>
+            <div
+              className={cx("image-overview__image-div")}
+              onClick={handleOpenModal}>
               <Image
                 className={cx("image-overview__image")}
                 src="/imgs/test.png"
@@ -134,8 +146,14 @@ export default function ProductReviewHeader({
             </div>
           </div>
           <div className={cx("image-overview__item")}>
-            <div className={cx("image-overview__gradient")}>Xem thêm</div>
-            <div className={cx("image-overview__image-div")}>
+            <div
+              className={cx("image-overview__gradient")}
+              onClick={handleOpenModal}>
+              Xem thêm
+            </div>
+            <div
+              className={cx("image-overview__image-div")}
+              onClick={handleOpenModal}>
               <Image
                 className={cx("image-overview__image")}
                 src="/imgs/test.png"

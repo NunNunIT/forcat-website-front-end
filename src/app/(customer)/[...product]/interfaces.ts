@@ -31,7 +31,7 @@ export interface IReview {
   review_rating: number;
   user_name: string;
   user_avt: string;
-  review_date: Date;
+  review_date: string;
   review_imgs: string;
   review_video: string;
   review_context: string;
