@@ -47,6 +47,10 @@ function isActiveClass(src_str: string, des_str: string): string {
   return src_str === des_str ? "is-active" : "";
 }
 
+function isActiveClassWithBool(bool: boolean): string {
+  return bool ? "is-active" : "";
+}
+
 function convertDateStrToDDMMYYYY(dateStr: string): string {
   return dateStr.split("-").reverse().join("/");
 }
@@ -134,4 +138,5 @@ export {
   convertDateStrToDDMMYYYY,
   convertPaymentToStr,
   convertOrderStatusToIconData,
+  isActiveClassWithBool,
 };
