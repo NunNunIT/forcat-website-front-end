@@ -1,8 +1,14 @@
 // use metadata
 import type { Metadata } from "next";
+import { Quicksand } from "next/font/google";
 
 // use styles
 import "./global.css";
+
+const quicksand = Quicksand({
+  weight: "500",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   applicationName: "ForCat",
@@ -28,7 +34,7 @@ export default function CustomerLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi" className={quicksand.className}>
       <body>{children}</body>
     </html>
   );

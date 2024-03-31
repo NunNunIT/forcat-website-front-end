@@ -25,6 +25,10 @@ export default function ProductReview({
 }) {
   const [isModalHidden, setIsModalHidden] = useState("none");
   const handleOpenModal = () => {
+    if (typeof window !== "undefined") {
+      const body = window.document.body;
+      body.style.overflow = 'hidden'
+    }
     setIsModalHidden("block");
   };
 

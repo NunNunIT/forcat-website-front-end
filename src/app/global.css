@@ -176,7 +176,6 @@ body {
 
 html {
   font-size: 16px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -437,6 +436,7 @@ input[type="number"] {
   align-items: center;
   opacity: 0.7;
 }
+
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   opacity: 0.5;
