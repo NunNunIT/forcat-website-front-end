@@ -87,7 +87,7 @@ export const productData = [
     id: 13,
     imageurl:
       "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    name: "Xẻng, bát ăn,...",
+    name: "Đồ vệ sinh",
     description: "Some text about the product..",
   },
 ];
