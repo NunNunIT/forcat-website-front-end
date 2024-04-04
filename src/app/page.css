@@ -134,3 +134,9 @@ section {
 .banner-img {
   border-radius: 8px;
 }
+
+@media screen and (max-width: 26rem) {
+  .content-container {
+    width: 100%;
+  }
+}
