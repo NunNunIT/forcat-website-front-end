@@ -1,322 +1,358 @@
-'use client'
+"use client";
 // import libs
 import React, { useRef, useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import components
-import { CustomerSidebarAccount } from "@/components";
-import Link from 'next/link'
+import Link from "next/link";
 import { convertDateFormat, convertDateFormatYMD } from "@/utils";
 // import css
 import "./page.css";
 
 export default function EditInformationPage() {
-	const [initialUserBirth, setInitialUserBirth] = useState<string>("");
-	const [datepickerShown, setDatepickerShown] = useState<boolean>(false);
-	const displayUserBirthRef = useRef<HTMLSpanElement>(null);
-	const userBirthInputRef = useRef<HTMLInputElement>(null);
-	const formRef = useRef<HTMLFormElement>(null);
-	const userNameRef = useRef<HTMLInputElement>(null);
-	const userEmailRef = useRef<HTMLInputElement>(null);
-	const userPhoneRef = useRef<HTMLInputElement>(null);
-	const userAddressRef = useRef<HTMLInputElement>(null);
+  const [initialUserBirth, setInitialUserBirth] = useState<string>("");
+  const [startDate, setStartDate] = useState(new Date());
+  const displayUserBirthRef = useRef<HTMLSpanElement>(null);
+  const userBirthInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const userEmailRef = useRef<HTMLInputElement>(null);
+  const userPhoneRef = useRef<HTMLInputElement>(null);
+  const userAddressRef = useRef<HTMLInputElement>(null);
 
-	const validateInputData = async () => {
-		// Validate input and send update request
-		// This is a placeholder function, replace with your actual validation and request sending logic
-		return fetch('/api/update', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				userName: userNameRef.current?.value,
-				userEmail: userEmailRef.current?.value,
-				userPhone: userPhoneRef.current?.value,
-				userAddress: userAddressRef.current?.value,
-			}),
-		});
-	};
+  const validateInputData = async () => {
+    // Validate input and send update request
+    // This is a placeholder function, replace with your actual validation and request sending logic
+    return fetch("/api/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userNameRef.current?.value,
+        userEmail: userEmailRef.current?.value,
+        userPhone: userPhoneRef.current?.value,
+        userAddress: userAddressRef.current?.value,
+      }),
+    });
+  };
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		validateInput().then(response => {
-			if (response && response.ok) {
-				// Redirect to /account/information if the update is successful
-				window.location.href = '/account/information';
-			} else {
-				console.error('Update failed');
-			}
-		}).catch(error => {
-			console.error('Error:', error);
-		});
-	};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    validateInput()
+      .then((response) => {
+        if (response && response.ok) {
+          // Redirect to /account/information if the update is successful
+          if (typeof window !== "undefined")
+            window.location.href = "/account/information";
+        } else {
+          console.error("Update failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-	const showDatePicker = () => {
-		if (!datepickerShown && displayUserBirthRef.current && userBirthInputRef.current) {
-			// Ẩn hiển thị span, hiển thị input và đặt giá trị của input từ span
-			displayUserBirthRef.current.style.display = "none";
-			userBirthInputRef.current.style.display = "inline-block";
+  const setError = (element: HTMLElement, message: string) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl?.querySelector(
+      ".error-message"
+    ) as HTMLElement;
 
-			// Sự kiện thay đổi giá trị input
-			userBirthInputRef.current.addEventListener("change", function () {
-				userBirthInputRef.current.value = (userBirthInputRef.current.value);
-				// Cập nhật giá trị trong span khi người dùng thay đổi giá trị trong input
-				displayUserBirthRef.current.textContent = convertDateFormat(userBirthInputRef.current.value);
+    if (errorDisplay) {
+      errorDisplay.innerText = message;
+    }
 
-				// Ẩn input, hiển thị span và đặt trạng thái datepickerShown
-				userBirthInputRef.current.style.display = "none";
-				displayUserBirthRef.current.style.display = "inline-block";
-				setDatepickerShown(false);
-			});
+    if (inputControl) {
+      inputControl.classList.add("error");
+      inputControl.classList.remove("error");
+    }
+  };
 
-			setDatepickerShown(true);
-		}
-	}
+  const setSuccess = (element: HTMLElement) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl?.querySelector(
+      ".error-message"
+    ) as HTMLElement;
 
-	const setError = (element: HTMLElement, message: string) => {
-		const inputControl = element.parentElement;
-		const errorDisplay = inputControl?.querySelector('.error-message') as HTMLElement;
+    if (errorDisplay) {
+      errorDisplay.innerText = "";
+    }
 
-		if (errorDisplay) {
-			errorDisplay.innerText = message;
-		}
+    if (inputControl) {
+      inputControl.classList.add("success");
+      inputControl.classList.remove("error");
+    }
+  };
 
-		if (inputControl) {
-			inputControl.classList.add('error');
-			inputControl.classList.remove('error');
-		}
-	}
+  const isValidUserName = (userName: string): boolean => {
+    const re =
+      /^[a-zA-Z\sàáạảãăắằẵặẳâầấậẩẫđèéẹẻẽêềếệểễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữìíịỉĩỳýỵỷỹ]+$/;
+    return re.test(String(userName).trim());
+  };
 
-	const setSuccess = (element: HTMLElement) => {
-		const inputControl = element.parentElement;
-		const errorDisplay = inputControl?.querySelector('.error-message') as HTMLElement;
+  const isValidPhoneNumber = (phoneNumber: string): boolean => {
+    const re = /^[0-9]{10}$/;
+    return re.test(String(phoneNumber).trim());
+  };
 
-		if (errorDisplay) {
-			errorDisplay.innerText = '';
-		}
+  const isValidEmail = (email: string): boolean => {
+    if (!email) {
+      return true;
+    }
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
 
-		if (inputControl) {
-			inputControl.classList.add('success');
-			inputControl.classList.remove('error');
-		}
-	}
+  const validateInput = (): Promise<Response | null> => {
+    return new Promise(async (resolve, reject) => {
+      const userNameValue = userNameRef.current?.value.trim();
+      const userEmailValue = userEmailRef.current?.value.trim();
+      const userPhoneValue = userPhoneRef.current?.value.trim();
 
-	const isValidUserName = (userName: string): boolean => {
-		const re = /^[a-zA-Z\sàáạảãăắằẵặẳâầấậẩẫđèéẹẻẽêềếệểễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữìíịỉĩỳýỵỷỹ]+$/;
-		return re.test(String(userName).trim());
-	}
+      let isAllValid = true;
 
-	const isValidPhoneNumber = (phoneNumber: string): boolean => {
-		const re = /^[0-9]{10}$/;
-		return re.test(String(phoneNumber).trim());
-	}
+      if (userNameValue === "") {
+        setError(userNameRef.current as HTMLElement, "Vui lòng nhập họ tên!");
+        isAllValid = false;
+      } else if (!isValidUserName(userNameValue)) {
+        setError(
+          userNameRef.current as HTMLElement,
+          "Họ tên không đúng định dạng!"
+        );
+        isAllValid = false;
+      } else {
+        setSuccess(userNameRef.current as HTMLElement);
+      }
 
-	const isValidEmail = (email: string): boolean => {
-		if (!email) {
-			return true;
-		}
-		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return re.test(String(email).toLowerCase());
-	}
+      if (!isValidEmail(userEmailValue)) {
+        setError(
+          userEmailRef.current as HTMLElement,
+          "Email không đúng định dạng!"
+        );
+        isAllValid = false;
+      } else {
+        setSuccess(userEmailRef.current as HTMLElement);
+      }
 
-	const validateInput = (): Promise<Response | null> => {
-		return new Promise(async (resolve, reject) => {
-			const userNameValue = userNameRef.current?.value.trim();
-			const userEmailValue = userEmailRef.current?.value.trim();
-			const userPhoneValue = userPhoneRef.current?.value.trim();
+      if (userPhoneValue === "") {
+        setError(
+          userPhoneRef.current as HTMLElement,
+          "Vui lòng nhập số điện thoại!"
+        );
+        isAllValid = false;
+      } else if (!isValidPhoneNumber(userPhoneValue)) {
+        setError(
+          userPhoneRef.current as HTMLElement,
+          "Số điện thoại không đúng định dạng!"
+        );
+        isAllValid = false;
+      } else {
+        setSuccess(userPhoneRef.current as HTMLElement);
+      }
 
-			let isAllValid = true;
+      if (isAllValid) {
+        try {
+          const response = await validateInputData();
+          resolve(response);
+        } catch (error) {
+          reject(error);
+        }
+      }
+    });
+  };
 
-			if (userNameValue === '') {
-				setError(userNameRef.current as HTMLElement, 'Vui lòng nhập họ tên!');
-				isAllValid = false;
-			} else if (!isValidUserName(userNameValue)) {
-				setError(userNameRef.current as HTMLElement, 'Họ tên không đúng định dạng!');
-				isAllValid = false;
-			} else {
-				setSuccess(userNameRef.current as HTMLElement);
-			}
+  const userName = React.useRef<HTMLInputElement>(null);
+  const userBirth = React.useRef<HTMLInputElement>(null);
+  const userSex = React.useRef<HTMLInputElement>(null);
+  const userEmail = React.useRef<HTMLInputElement>(null);
+  const userPhone = React.useRef<HTMLInputElement>(null);
+  const userAddress = React.useRef<HTMLInputElement>(null);
 
-			if (!isValidEmail(userEmailValue)) {
-				setError(userEmailRef.current as HTMLElement, 'Email không đúng định dạng!');
-				isAllValid = false;
-			} else {
-				setSuccess(userEmailRef.current as HTMLElement);
-			}
+  const sendUpdateRequest = async (): Promise<Response> => {
+    const userNameValue: string = userName.current?.value.trim() || "";
+    const userBirthValue: string = userBirth.current?.value.trim() || "";
+    const userSexValue: string = userSex.current?.value.trim() || "";
+    const userEmailValue: string = userEmail.current?.value.trim() || "";
+    const userPhoneValue: string = userPhone.current?.value.trim() || "";
+    const userAddressValue: string = userAddress.current?.value.trim() || "";
 
-			if (userPhoneValue === '') {
-				setError(userPhoneRef.current as HTMLElement, 'Vui lòng nhập số điện thoại!');
-				isAllValid = false;
-			} else if (!isValidPhoneNumber(userPhoneValue)) {
-				setError(userPhoneRef.current as HTMLElement, 'Số điện thoại không đúng định dạng!');
-				isAllValid = false;
-			} else {
-				setSuccess(userPhoneRef.current as HTMLElement);
-			}
+    const requestBody = {
+      user_name: userNameValue,
+      user_birth: userBirthValue,
+      user_sex: userSexValue,
+      user_email: userEmailValue,
+      user_phone: userPhoneValue,
+      user_address: userAddressValue,
+    };
 
-			if (isAllValid) {
-				try {
-					const response = await validateInputData();
-					resolve(response);
-				} catch (error) {
-					reject(error);
-				}
-			}
-		});
-	}
+    try {
+      const response: Response = await fetch("/account/edit-information", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
 
-	const userName = React.useRef<HTMLInputElement>(null);
-	const userBirth = React.useRef<HTMLInputElement>(null);
-	const userSex = React.useRef<HTMLInputElement>(null);
-	const userEmail = React.useRef<HTMLInputElement>(null);
-	const userPhone = React.useRef<HTMLInputElement>(null);
-	const userAddress = React.useRef<HTMLInputElement>(null);
+      return response;
+    } catch (error: any) {
+      console.error("Error sending update request:", error);
+      throw error;
+    }
+  };
 
-	const sendUpdateRequest = async (): Promise<Response> => {
-		const userNameValue: string = userName.current?.value.trim() || '';
-		const userBirthValue: string = userBirth.current?.value.trim() || '';
-		const userSexValue: string = userSex.current?.value.trim() || '';
-		const userEmailValue: string = userEmail.current?.value.trim() || '';
-		const userPhoneValue: string = userPhone.current?.value.trim() || '';
-		const userAddressValue: string = userAddress.current?.value.trim() || '';
+  useEffect(() => {
+    const userBirthDiv = document.querySelector(".userBirth");
 
-		const requestBody = {
-			user_name: userNameValue,
-			user_birth: userBirthValue,
-			user_sex: userSexValue,
-			user_email: userEmailValue,
-			user_phone: userPhoneValue,
-			user_address: userAddressValue
-		};
+    // Lưu trữ giá trị ban đầu của ngày sinh
+    const displayUserBirth = document.getElementById("displayUserBirth");
+    if (displayUserBirth) {
+      setInitialUserBirth(displayUserBirth.textContent || "");
+    }
 
-		try {
-			const response: Response = await fetch('/account/edit-information', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(requestBody),
-			});
+    let userBirthInput = document.getElementById(
+      "userBirth"
+    ) as HTMLInputElement;
 
-			return response;
-		} catch (error: any) {
-			console.error('Error sending update request:', error);
-			throw error;
-		}
-	}
+    // Kiểm tra nếu initialUserBirth có giá trị thì mới đặt giá trị cho userBirthInput
+    if (initialUserBirth) {
+      userBirthInput.value = convertDateFormatYMD(initialUserBirth);
+    }
+  }, [initialUserBirth]); // Thêm initialUserBirth vào mảng dependency
 
+  return (
+    <main className="account-information__main">
+      <section className="information__main">
+        <div className="information-item">
+          <div className="information-item--top">
+            <div className="information-item__info">
+              <h3>Thông tin cá nhân</h3>
+            </div>
+          </div>
+          <form
+            id="editForm"
+            action="/account/edit-information"
+            method="POST"
+            onSubmit={handleSubmit}
+            ref={formRef}>
+            <div className="information-item__main">
+              <div className="information-item__element">
+                <div className="information-item__product-detail">
+                  <div className="information-item__product-name">
+                    <label htmlFor="userName">
+                      Tên người dùng:
+                      <span className="red-start">*</span>
+                    </label>
+                    <div className="userName">
+                      <input
+                        type="text"
+                        id="userName"
+                        name="userName"
+                        autoComplete="off"
+                        placeholder="Nhập tên"
+                        ref={userNameRef}
+                      />
+                      <div className="error-message"></div>
+                    </div>
+                  </div>
 
-	useEffect(() => {
-		const userBirthDiv = document.querySelector(".userBirth");
-		userBirthDiv?.addEventListener("click", showDatePicker);
+                  <div className="information-item__product-name">
+                    <label htmlFor="userBirth">Ngày sinh:</label>
+                    <div className="userBirth">
+                      <span id="displayUserBirth" ref={displayUserBirthRef}>
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          dateFormat="dd/MM/yyyy"
+                        />
+                      </span>
+                      <div className="error-message"></div>
+                    </div>
+                  </div>
 
-		// Lưu trữ giá trị ban đầu của ngày sinh
-		const displayUserBirth = document.getElementById("displayUserBirth");
-		if (displayUserBirth) {
-			setInitialUserBirth(displayUserBirth.textContent || "");
-		}
+                  <div className="information-item__product-name">
+                    <label htmlFor="userSex">Giới tính:</label>
+                    <div className="userSex">
+                      <select
+                        className="localSelect"
+                        id="userSex"
+                        name="userSex"
+                        title="Chọn giới tính">
+                        <option value="Nữ">Nữ</option>
+                        <option value="Nam">Nam</option>
+                      </select>
+                    </div>
+                  </div>
 
-		let userBirthInput = document.getElementById("userBirth") as HTMLInputElement;
+                  <div className="information-item__product-name">
+                    <label htmlFor="userEmail">Email:</label>
+                    <div className="userEmail">
+                      <input
+                        type="text"
+                        id="userEmail"
+                        name="userEmail"
+                        autoComplete="off"
+                        placeholder="Nhập email"
+                        ref={userEmailRef}
+                      />
+                      <div className="error-message"></div>
+                    </div>
+                  </div>
 
-		// Kiểm tra nếu initialUserBirth có giá trị thì mới đặt giá trị cho userBirthInput
-		if (initialUserBirth) {
-			userBirthInput.value = convertDateFormatYMD(initialUserBirth);
-		}
-	}, []);
+                  <div className="information-item__product-name">
+                    <label htmlFor="userPhone">
+                      Số điện thoại:
+                      <span className="red-start">*</span>
+                    </label>
+                    <div className="userPhone">
+                      <input
+                        type="text"
+                        id="userPhone"
+                        name="userPhone"
+                        autoComplete="off"
+                        placeholder="Nhập số điện thoại"
+                        ref={userPhoneRef}
+                      />
+                      <div className="error-message"></div>
+                    </div>
+                  </div>
 
-	return (
-		<>
-			<CustomerSidebarAccount></CustomerSidebarAccount>
-			<section className="purchase__main" id="info">
-				<div className="purchase__main__item">
-					<div className="purchase-item">
-						<div className="purchase-item--top">
-							<div className="purchase-item__info">
-								<h3>Thông tin cá nhân</h3>
-							</div>
-						</div>
-						<form id="editForm" action="/account/edit-information" method="POST" onSubmit={handleSubmit} ref={formRef}>
-							<div className="purchase-item__main">
-								<div className="purchase-item__element">
-									<div className="purchase-item__product-detail">
+                  <div className="information-item__product-name">
+                    <label htmlFor="userAddress">Địa chỉ:</label>
+                    <div className="userAddress">
+                      <input
+                        type="text"
+                        id="userAddress"
+                        name="userAddress"
+                        autoComplete="off"
+                        placeholder="Nhập địa chỉ"
+                        ref={userAddressRef}
+                      />
+                      <div className="error-message"></div>
+                    </div>
+                  </div>
 
-										<div className="purchase-item__product-name">
-											<label htmlFor="userName">
-												Tên người dùng:
-												<span className="red-start">*</span>
-											</label>
-											<div className="userName">
-												<input type="text" id="userName" name="userName" autoComplete="off" placeholder="Nhập tên" ref={userNameRef} />
-												<div className="error-message"></div>
-											</div>
-										</div>
-
-										<div className="purchase-item__product-name">
-											<label htmlFor="userBirth">
-												Ngày sinh:
-											</label>
-											<div className="userBirth" onClick={showDatePicker}>
-												<span id="displayUserBirth" ref={displayUserBirthRef}>
-													user.user.user_birth
-												</span>
-												<input type="date" id="userBirth" name="userBirth" autoComplete="off" style={{ display: 'none' }} ref={userBirthInputRef} />
-												<div className="error-message"></div>
-											</div>
-										</div>
-
-										<div className="purchase-item__product-name">
-											<label htmlFor="userSex">
-												Giới tính:
-											</label>
-											<div className="userSex">
-												<select className="localSelect" id="userSex" name="userSex" title="Chọn giới tính">
-													<option value="Nữ">Nữ</option>
-													<option value="Nam">Nam</option>
-												</select>
-											</div>
-										</div>
-
-										<div className="purchase-item__product-name">
-											<label htmlFor="userEmail">
-												Email:
-											</label>
-											<div className="userEmail">
-												<input type="text" id="userEmail" name="userEmail" autoComplete="off" placeholder="Nhập email" ref={userEmailRef} />
-												<div className="error-message"></div>
-											</div>
-										</div>
-
-										<div className="purchase-item__product-name">
-											<label htmlFor="userPhone">
-												Số điện thoại:
-												<span className="red-start">*</span>
-											</label>
-											<div className="userPhone">
-												<input type="text" id="userPhone" name="userPhone" autoComplete="off" placeholder="Nhập số điện thoại" ref={userPhoneRef} />
-												<div className="error-message"></div>
-											</div>
-										</div>
-
-										<div className="purchase-item__product-name">
-											<label htmlFor="userAddress">
-												Địa chỉ:
-											</label>
-											<div className="userAddress">
-												<input type="text" id="userAddress" name="userAddress" autoComplete="off" placeholder="Nhập địa chỉ" ref={userAddressRef} />
-												<div className="error-message"></div>
-											</div>
-										</div>
-
-										<div className="popup__button">
-											<Link href="/account/information" className="btn btn--outlined pri btn-cancel-edit">Hủy</Link>
-											<button type="submit" id="saveButton" className="btn btn--filled pri localButton">Lưu</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</section>
-		</>
-	)
+                  <div className="popup__button">
+                    <Link
+                      href="/account/information"
+                      className="btn btn--outlined pri btn-cancel-edit">
+                      Hủy
+                    </Link>
+                    <button
+                      type="submit"
+                      id="saveButton"
+                      className="btn btn--filled pri btn-save">
+                      Lưu
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  );
 }

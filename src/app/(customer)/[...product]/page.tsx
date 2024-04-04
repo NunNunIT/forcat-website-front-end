@@ -8,11 +8,8 @@ import {
   ProductBuyForm,
   ProductDescription,
   ProductSpecification,
-  ProductReviewHeader,
+  ProductReview,
 } from "./partials";
-
-// import components
-import { ProductReview } from "./components";
 
 // import css
 import "./page.css";
@@ -84,54 +81,7 @@ export default async function ProductPage({
             productDescription={productDescription}></ProductDescription>
         </div>
       </div>
-
-      <section className="product-review">
-        <h3>Đánh giá từ khách hàng</h3>
-        <ProductReviewHeader productId={productId}></ProductReviewHeader>
-
-        <div className="product-review__filter review-filter">
-          <h5>Lọc đánh giá theo</h5>
-          <div className="review-filter__group">
-            <div className="review-filter__item">Mới nhất</div>
-            <div className="review-filter__item">Có hình ảnh</div>
-            <div className="review-filter__item">Có video</div>
-            <div className="review-filter__item">5 sao</div>
-            <div className="review-filter__item">4 sao</div>
-            <div className="review-filter__item">3 sao</div>
-            <div className="review-filter__item">2 sao</div>
-            <div className="review-filter__item">1 sao</div>
-          </div>
-        </div>
-
-        <div className="product-review__all-reviews reviews">
-          <h5>Tất cả đánh giá</h5>
-          <div className="reviews__group">
-            {productReviews.map((review, index) => {
-              return <ProductReview review={review}></ProductReview>;
-            })}
-          </div>
-          <div className="reviews__pagination-div">
-            <div className="reviews__pagination pagination">
-              <div className="pagination__btn">
-                <span className="material-icons-round pagination__icon">
-                  arrow_back_ios
-                </span>
-              </div>
-              <div className="pagination__btn">1</div>
-              <div className="pagination__btn">2</div>
-              <div className="pagination__btn pagination__btn-disabled">
-                ...
-              </div>
-              <div className="pagination__btn">3</div>
-              <div className="pagination__btn">
-                <span className="material-icons-round pagination__icon">
-                  arrow_forward_ios
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProductReview productReviews={productReviews} productId={productId}></ProductReview>
     </main>
   );
 }

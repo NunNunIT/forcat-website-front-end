@@ -30,7 +30,7 @@ export default function SearchResultPage() {
           <p className="search-result__main__count">
             Tìm thấy
             <span className="search-result__highlight"> 31</span> kết quả cho từ
-            khóa "<span className="search-result__key">mèo</span>"
+            khóa &quot;<span className="search-result__key">mèo</span>&quot;
           </p>
           <SearchResultSort />
         </div>

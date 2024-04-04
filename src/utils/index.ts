@@ -47,6 +47,14 @@ function isActiveClass(src_str: string, des_str: string): string {
   return src_str === des_str ? "is-active" : "";
 }
 
+function isActiveClassWithBool(bool: boolean): string {
+  return bool ? "is-active" : "";
+}
+
+function convertDateStrToDDMMYYYY(dateStr: string): string {
+  return dateStr.split("-").reverse().join("/");
+}
+
 function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
   const locales = "vi-VN";
   const timeOptions: Intl.DateTimeFormatOptions = {
@@ -108,6 +116,19 @@ function convertNumberToMoney(number: number): string {
   return currency;
 }
 
+function convertDateToHourDayMonthYear(dateString: string): string {
+  const date = new Date(dateString);
+
+  const hours: string = ("0" + date.getUTCHours()).slice(-2);
+  const minutes: string = ("0" + date.getUTCMinutes()).slice(-2);
+
+  const day: string = ("0" + date.getUTCDate()).slice(-2);
+  const month: string = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+  const year: number = date.getUTCFullYear();
+
+  return `${hours}:${minutes} - ${day}/${month}/${year}`;
+}
+
 function isValidEmail(email: string): boolean {
   // Regex pattern để kiểm tra định dạng email
   const emailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -123,10 +144,13 @@ export {
   convertDateFormat,
   convertMoneyToNumber,
   convertNumberToMoney,
+  convertDateToHourDayMonthYear,
   isValidEmail,
   convertOrderStatusToStr,
   isActiveClass,
   convertDateToFormatHHMMDDMMYYYY,
+  convertDateStrToDDMMYYYY,
   convertPaymentToStr,
   convertOrderStatusToIconData,
+  isActiveClassWithBool,
 };

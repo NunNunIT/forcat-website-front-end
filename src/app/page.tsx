@@ -9,12 +9,15 @@ import Image from "next/image";
 // import { CustomerSlider } from "@/components";
 // import { CustomerCategories } from "@/components";
 import { CustomerProductCard } from "@/components";
+import { CustomerSlider } from "@/components";
+import { CustomerCategories } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
 import { CustomerCarousel } from "@/components";
 
 // use css
 import "./page.css";
 
+export default function Home() {
 export default function Home() {
   return (
     <>
@@ -28,6 +31,19 @@ export default function Home() {
           <img src="/imgs/banner.png" alt="banner-new" />
         </div> */}
           <div className="tip-products">
+            <h1 className="tip-products__label">
+              <Link href="#" className="tip-products__title">
+                Hàng mới về
+              </Link>
+              <span className="tip-products__title-after"></span>
+            </h1>
+            <div className="tip-products__content">
+              <CustomerProductCard></CustomerProductCard>
+              <CustomerProductCard></CustomerProductCard>
+              <CustomerProductCard></CustomerProductCard>
+              <CustomerProductCard></CustomerProductCard>
+              <CustomerProductCard></CustomerProductCard>
+              <CustomerProductCard></CustomerProductCard>
             <h1 className="tip-products__label">
               <Link href="#" className="tip-products__title">
                 Hàng mới về

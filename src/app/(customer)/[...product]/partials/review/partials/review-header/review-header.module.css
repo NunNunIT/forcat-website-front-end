@@ -75,6 +75,7 @@
 }
 
 .image-overview__item {
+    cursor: pointer;
     width: 100%;
     position: relative;
 }

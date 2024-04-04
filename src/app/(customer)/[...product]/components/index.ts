@@ -1,2 +1,2 @@
-export { default as ProductReview } from "./review";
+export { default as ProductReviewItem } from "./review-item";
 export { default as ProductVariant } from "./variant";

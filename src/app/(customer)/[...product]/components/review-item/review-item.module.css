@@ -74,6 +74,7 @@
 }
 
 .review-item__image-div {
+    cursor: pointer;
     aspect-ratio: 1 / 1;
     position: relative;
 }

@@ -16,17 +16,22 @@ import "./page.css";
 export default function CartPage() {
   // handle checkbox
   const checkAll = useRef(null);
-  const checkboxes = Array.from(
-    window.document.querySelectorAll(".cart-checkbox")
-  );
+
+  let checkboxes;
+  if (typeof window !== "undefined")
+    checkboxes = Array.from(
+      window?.document.querySelectorAll(".cart-checkbox")
+    );
 
   // handle prices
   const [originalPrice, setOriginalPrice] = useState("0 đ");
   const [discountedPrice, setDiscountedPrice] = useState("0 đ");
   const [totalPrice, setTotalPrice] = useState("0 đ");
-  const cartItem = Array.from(
-    window.document.querySelectorAll(".cart-item")
-  ).slice(1);
+  let cartItem;
+  if (typeof window !== "undefined")
+    cartItem = Array.from(window.document.querySelectorAll(".cart-item")).slice(
+      1
+    );
 
   // handle count
   const [selectedItem, setSelectedItem] = useState(0);

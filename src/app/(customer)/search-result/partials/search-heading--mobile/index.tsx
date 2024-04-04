@@ -51,6 +51,7 @@ export default function SearchResultHeadingMobile() {
       });
     });
 
+<<<<<<< HEAD
     window.addEventListener("click", (e) => {
       modalArray.forEach((modal) => {
         if (e.target === modal) {
@@ -58,6 +59,16 @@ export default function SearchResultHeadingMobile() {
         }
       });
     });
+=======
+    if (typeof window !== "undefined")
+      window.addEventListener("click", (e) => {
+        modalArray.forEach((modal) => {
+          if (e.target === modal) {
+            modal.classList.remove("show");
+          }
+        });
+      });
+>>>>>>> main
 
     return () => {
       sortBtns.forEach((btn) => {
@@ -65,7 +76,12 @@ export default function SearchResultHeadingMobile() {
       });
       modalBtn.removeEventListener("click", () => {});
       cancelBtn.removeEventListener("click", () => {});
+<<<<<<< HEAD
       window.removeEventListener("click", () => {});
+=======
+      if (typeof window !== "undefined")
+        window.removeEventListener("click", () => {});
+>>>>>>> main
     };
   }, []);
   return (
@@ -75,24 +91,36 @@ export default function SearchResultHeadingMobile() {
           className={cx(
             "search-result__sort--disable",
             "search-result__sort--disable__cover"
+<<<<<<< HEAD
           )}
         >
+=======
+          )}>
+>>>>>>> main
           Nổi bật
         </p>
         <p
           className={cx(
             "search-result__sort--disable",
             "search-result__sort--disable__cover"
+<<<<<<< HEAD
           )}
         >
+=======
+          )}>
+>>>>>>> main
           Bán chạy
         </p>
         <p
           className={cx(
             "search-result__sort--disable",
             "search-result__sort--disable__cover"
+<<<<<<< HEAD
           )}
         >
+=======
+          )}>
+>>>>>>> main
           Giá <span className={cx("material-icons-round")}>swap_vert</span>
         </p>
         <span className={cx("material-icons-round")} id="btn-filter">
@@ -281,8 +309,12 @@ export default function SearchResultHeadingMobile() {
           <div className={cx("filter-popup__btn")}>
             <button
               className={cx("btn btn--outlined pri")}
+<<<<<<< HEAD
               id="btn-filter-cancel"
             >
+=======
+              id="btn-filter-cancel">
+>>>>>>> main
               Xóa bộ lọc
             </button>
             <button className={cx("btn btn--filled pri")} type="submit">

@@ -11,15 +11,26 @@ import { CustomerRating } from "@/components";
 // import interfaces
 import { IReview } from "../../interfaces";
 
+// import utils
+import { convertDateToHourDayMonthYear } from "@/utils";
+
 // import css
-import styles from "./review.module.css";
+import styles from "./review-item.module.css";
 
 // use css
 const cx = classNames.bind(styles);
 
-export default function ProductReview({ review }: { review: IReview }) {
+export default function ProductReviewItem({
+  review,
+  key,
+  handleOpenModal,
+}: {
+  review: IReview;
+  key?: number;
+  handleOpenModal: any;
+}) {
   return (
-    <div className={cx("review-item")}>
+    <div className={cx("review-item")} key={key}>
       <div className={cx("review-item__info")}>
         <div className={cx("review-item__avatar-div")}>
           <Image
@@ -48,11 +59,13 @@ export default function ProductReview({ review }: { review: IReview }) {
       </div>
       <div className={cx("review-item__content")}>
         <p className={cx("review-item__date")}>
-          Đã đánh giá vào {review.review_date.toString()}
+          Đã đánh giá vào {convertDateToHourDayMonthYear(review.review_date)}
         </p>
         <p className={cx("review-item__text")}>{review.review_context}</p>
         <div className={cx("review-item__image-group")}>
-          <div className={cx("review-item__image-div")}>
+          <div
+            className={cx("review-item__image-div")}
+            onClick={handleOpenModal}>
             <CldImage
               className={cx("review-item__image")}
               src={review.review_imgs}

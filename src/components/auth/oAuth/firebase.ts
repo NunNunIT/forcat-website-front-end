@@ -13,9 +13,14 @@ const firebaseConfig = {
   storageBucket: "for-cat-shop.appspot.com",
   messagingSenderId: "410983676433",
   appId: "1:410983676433:web:52ef8e6c4a3c3a97998fb0",
-  measurementId: "G-YKX9DMYKZ3"
+  measurementId: "G-YKX9DMYKZ3",
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+let app;
+if (typeof window !== "undefined") {
+  app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+}
+
+export { app };
