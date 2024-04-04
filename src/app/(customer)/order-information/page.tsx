@@ -144,8 +144,7 @@ export default function SearchResultPage() {
                 className="location__select"
                 id="city"
                 required
-                onChange={handleCityChange}
-              >
+                onChange={handleCityChange}>
                 <option value="" selected>
                   Chọn Tỉnh/Thành phố
                 </option>
@@ -160,8 +159,7 @@ export default function SearchResultPage() {
                 className="location__select"
                 id="district"
                 required
-                onChange={handleDistrictChange}
-              >
+                onChange={handleDistrictChange}>
                 <option value="" selected>
                   Chọn Quận/Huyện
                 </option>
@@ -197,8 +195,7 @@ export default function SearchResultPage() {
             <textarea
               className="note__text-area"
               name="note"
-              placeholder="Hãy nhập yêu cầu kèm theo (tùy chọn)..."
-            ></textarea>
+              placeholder="Hãy nhập yêu cầu kèm theo (tùy chọn)..."></textarea>
           </div>
 
           <div className="order-detail__pay-method pay-method">
@@ -271,7 +268,7 @@ export default function SearchResultPage() {
 
           <div className="order-pay__submit">
             <p>
-              Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo
+              Nhấn &quot;Đặt hàng&quot; đồng nghĩa với việc bạn đồng ý tuân theo
               <Link href="/privacy-policy">
                 {" "}
                 Điều khoản đặt hàng của Forcat.
