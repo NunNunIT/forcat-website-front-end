@@ -262,15 +262,30 @@ export default function CartWrapper({
     const buyList = [];
     selectedItems.forEach((item) => {
       const productId = item.querySelector("input[name='product_id']").value;
-      const variantId = item.querySelector(".cart-item__variant-select").value;
+      const productName = item.querySelector(
+        ".cart-item__text-info-name"
+      ).innerHTML;
+      const selectEle = item.querySelector(".cart-item__variant-select");
+      const variantId = selectEle.value;
+      const variantName = (
+        Array.from(selectEle.querySelectorAll("option")).find(
+          (item: any) => item.value == selectEle.value
+        ) as HTMLElement
+      ).innerHTML;
       const quantity =
         item.querySelector(".quantity-input-group__input").value !== ""
           ? item.querySelector(".quantity-input-group__input").value
           : item.querySelector(".quantity-input-group__input").placeholder;
+      const unitPrice = convertMoneyToNumber(
+        item.querySelector(".cart-item__unit-price-after-discount").innerHTML
+      );
       buyList.push({
         product_id: productId,
+        product_name: productName,
         variant_id: variantId,
+        variant_name: variantName,
         quantity: quantity,
+        unit_price: unitPrice,
       });
     });
 
