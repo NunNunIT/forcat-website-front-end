@@ -12,8 +12,8 @@ import "./page.css";
 
 // fetch data
 async function getCart() {
-  const res = await fetch(`${BACKEND_URL}/cart/660fc1b6ea2ab8e66f97ca63`, {
-    cache: "no-store",
+  const res = await fetch(`${BACKEND_URL}/cart/66101303292b6f70645d8c29`, {
+    next: { revalidate: 0 },
   });
 
   if (!res.ok) return notFound();
@@ -22,7 +22,7 @@ async function getCart() {
 }
 export default async function ProductPage() {
   const res = await getCart();
-  const userId = "660fc1b6ea2ab8e66f97ca63";
+  const userId = "66101303292b6f70645d8c29";
 
   return (
     <main className="cart">

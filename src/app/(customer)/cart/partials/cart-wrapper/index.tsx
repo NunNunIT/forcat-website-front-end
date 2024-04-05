@@ -35,12 +35,7 @@ export default function CartWrapper({
   };
 
   useEffect(() => {
-    window.addEventListener("load", handleChangePage);
     window.addEventListener("beforeunload", handleChangePage);
-    return () => {
-      window.removeEventListener("load", handleChangePage);
-      window.removeEventListener("beforeunload", handleChangePage);
-    };
   }, []);
 
   // handle checkbox
@@ -260,6 +255,32 @@ export default function CartWrapper({
     handleUpdateChangedItem(cartItemEle);
   };
 
+  const handleBuyItem = () => {
+    const selectedItems = cartItem.filter(
+      (item) => item.querySelector(".cart-checkbox").checked
+    );
+    const buyList = [];
+    selectedItems.forEach((item) => {
+      const productId = item.querySelector("input[name='product_id']").value;
+      const variantId = item.querySelector(".cart-item__variant-select").value;
+      const quantity =
+        item.querySelector(".quantity-input-group__input").value !== ""
+          ? item.querySelector(".quantity-input-group__input").value
+          : item.querySelector(".quantity-input-group__input").placeholder;
+      buyList.push({
+        product_id: productId,
+        variant_id: variantId,
+        quantity: quantity,
+      });
+    });
+
+    store.dispatch({
+      type: "addBuyItems",
+      payload: buyList,
+    });
+    console.log(store.getState().cart.buyItems);
+  };
+
   return (
     <Provider store={store}>
       <section className="cart-product-group">
@@ -398,13 +419,13 @@ export default function CartWrapper({
               </div>
               <div className="cart-item__quantity cart-item-col">
                 <div className="quantity-input-group">
-                  <div
+                  <button
                     className="quantity-input-group__btn-remove btn-quantity"
                     onClick={decreaseValue}>
                     <span className="material-icons-round quantity-input-group__icon">
                       remove
                     </span>
-                  </div>
+                  </button>
                   <input
                     className="quantity-input-group__input input-quantity"
                     type="number"
@@ -413,13 +434,13 @@ export default function CartWrapper({
                     max={100}
                     placeholder={cartItem.quantity}
                   />
-                  <div
+                  <button
                     className="quantity-input-group__btn-add btn-quantity"
                     onClick={increaseValue}>
                     <span className="material-icons-round quantity-input-group__icon">
                       add
                     </span>
-                  </div>
+                  </button>
                 </div>
               </div>
               <div className="cart-item__price cart-item-col mobile-hidden">
@@ -457,7 +478,7 @@ export default function CartWrapper({
           <div className="cart-bill-row__title">Tổng tiền</div>
           <div className="cart-bill-row__content">{totalPrice}</div>
         </div>
-        <div className="cart-bill-row cart-bill__btn">
+        <div className="cart-bill-row cart-bill__btn" onClick={handleBuyItem}>
           Mua hàng (<span className="checked-num">{selectedItem}</span>)
         </div>
         <div className="cart-bill-row cart-bill-policy">
@@ -493,7 +514,9 @@ export default function CartWrapper({
                 {totalPrice}
               </div>
             </div>
-            <div className="cart-footer-buy-group__buy-btn">
+            <div
+              className="cart-footer-buy-group__buy-btn"
+              onClick={handleBuyItem}>
               Mua hàng (<span className="checked-num">{selectedItem}</span>)
             </div>
           </div>

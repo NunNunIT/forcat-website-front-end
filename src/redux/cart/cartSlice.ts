@@ -1,6 +1,7 @@
 const initialState = {
   changedItems: [],
   deletedItems: [],
+  buyItems: [],
 };
 
 export default function cartReducers(state = initialState, action) {
@@ -40,6 +41,10 @@ export default function cartReducers(state = initialState, action) {
           : [...state.deletedItems, action.payload];
 
       return { ...state, deletedItems: updatedItems };
+    }
+
+    case "addBuyItems": {
+      return { ...state, buyItems: action.payload };
     }
 
     default:
