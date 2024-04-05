@@ -176,6 +176,7 @@ body {
 
 html {
   font-size: 16px;
+  line-height: 1.5;
 }
 
 body {
@@ -190,31 +191,31 @@ main {
 h1 {
   /* 40px */
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 h2 {
   /* 24px */
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h3 {
   /* 20px */
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h4 {
   /* 18px */
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h5 {
   /* 16px */
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 p {

@@ -37,6 +37,33 @@
     overflow: hidden;
 }
 
+.product-description-content h5 {
+    width: 100%;
+    font-weight: 600;
+}
+
+.product-description-content p {
+    width: 100%;
+    text-indent: 24px;
+}
+
+.product-description-content ul {
+    padding-left: 12px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.product-description-content li {
+    margin: 8px 0px;
+    display: flex;
+}
+
+.product-description-content li::before {
+    content: "•";
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 .product-description-content.full-height {
     max-height: none;
 }

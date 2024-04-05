@@ -1,7 +1,7 @@
 interface ProductVariant {
   variant_name: string;
   price: number;
-  variant_ims: string[];
+  variant_imgs: string[];
   discount_id: string;
   discount_amount: number;
   is_available: boolean;
@@ -17,13 +17,7 @@ export interface IBuyForm {
 
 export interface ISliderImage {
   link: string;
-  link_avt?: string;
   alt: string;
-}
-
-export interface IDescriptionRow {
-  type: string;
-  content: string;
 }
 
 export interface IReview {

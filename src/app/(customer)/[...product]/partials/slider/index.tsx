@@ -32,9 +32,7 @@ export default function CustomerProductSlider({
   };
 
   // change main image src when hovered
-  const [mainImageSrc, setMainImageSrc] = useState(
-    productImgs[productImgs.length - 1].link_avt
-  );
+  const [mainImageSrc, setMainImageSrc] = useState(productImgs[0].link);
   const [mainImageAlt, setMainImageAlt] = useState(
     productImgs[productImgs.length - 1].alt
   );

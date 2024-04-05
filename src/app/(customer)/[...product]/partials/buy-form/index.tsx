@@ -38,11 +38,14 @@ export default function ProductBuyForm({
   currentVariantSlug: string;
   mobileOnly?: string;
 }) {
-  const currentVariant = filterCurrentVariant(productInfo, currentVariantSlug);
+  const currentVariant =
+    currentVariantSlug != ""
+      ? filterCurrentVariant(productInfo, currentVariantSlug)
+      : productInfo.product_variants[0];
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
-    convertNumberToMoney(currentVariant.price)
+    convertNumberToMoney(currentVariant?.price ?? 0)
   );
   const unitPriceRef = useRef(null);
 
@@ -71,10 +74,10 @@ export default function ProductBuyForm({
       </div>
       <div className={cx("product__unit-price-div")}>
         <p className={cx("product__unit-price")} ref={unitPriceRef}>
-          {convertNumberToMoney(currentVariant.price)}
+          {convertNumberToMoney(currentVariant?.price ?? 0)}
         </p>
         <p className={cx("product__discount-amount")}>
-          -{currentVariant.discount_amount}%
+          -{currentVariant?.discount_amount ?? 0}%
         </p>
       </div>
       <div className={cx("product__variants", "variants")}>
@@ -89,7 +92,7 @@ export default function ProductBuyForm({
                     productInfo.product_slug
                   }/${item.variant_name.replaceAll(" ", "-")}`,
                   image: {
-                    url: item.variant_ims[0],
+                    url: item.variant_imgs[0],
                     alt: `${productInfo.product_name} - ${item.variant_name}`,
                   },
                 }}
@@ -108,7 +111,7 @@ export default function ProductBuyForm({
           }}
           takeQuantity={setQuantityValue}></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>
-          {currentVariant.in_stock} sản phẩm có thể mua
+          {currentVariant?.in_stock ?? 0} sản phẩm có thể mua
         </p>
       </div>
       <div className={cx("product__total-price-div")}>

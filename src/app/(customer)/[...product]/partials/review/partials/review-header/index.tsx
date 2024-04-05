@@ -10,6 +10,7 @@ import { CustomerRating } from "@/components";
 
 // import css
 import styles from "./review-header.module.css";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // use css
 const cx = classNames.bind(styles);
@@ -23,7 +24,7 @@ export default function ProductReviewHeader({
 }) {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    `http://127.0.0.1:3001/api/review/getOverview/${productId}`,
+    `${BACKEND_URL}/review/getOverview/${productId}`,
     fetcher
   );
 

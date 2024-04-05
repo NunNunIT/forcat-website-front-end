@@ -45,9 +45,11 @@ export default function ProductSpecification({
         {Object.keys(productDetails).map((key, index) => {
           return (
             <div className={cx("specifications__item")} key={index}>
-              <div className={cx("specifications__type")}>{key}</div>
+              <div className={cx("specifications__type")}>
+                {productDetails[key].name}
+              </div>
               <div className={cx("specifications__info")}>
-                {productDetails[key]}
+                {productDetails[key].value}
               </div>
             </div>
           );

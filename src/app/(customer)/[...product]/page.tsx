@@ -11,17 +11,18 @@ import {
   ProductReview,
 } from "./partials";
 
-// import css
-import "./page.css";
+// import utils
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import interfaces
 import { IBuyForm } from "./interfaces";
 
+// import css
+import "./page.css";
+
 // fetch data
 async function getProduct(slug) {
-  const res = await fetch(
-    `http://127.0.0.1:3001/api/product/${slug[0]}/${slug[1]}`
-  );
+  const res = await fetch(`${BACKEND_URL}/product/${slug[0]}`);
 
   if (!res.ok || slug[2]) return notFound();
 
@@ -36,16 +37,17 @@ export default async function ProductPage({
   const slug = params.product;
   const res = await getProduct(slug);
   const productInfo: IBuyForm = {
-    product_name: res.data?.product.product_name,
-    product_slug: res.data?.product.product_slug,
-    product_avg_rating: res.data?.product.product_avg_rating,
-    product_variants: res.data?.product.product_variants,
+    product_name: res.product.product_name,
+    product_slug: res.product.product_slug,
+    product_avg_rating: res.product.product_avg_rating,
+    product_variants: res.product.product_variants,
   };
-  const productImgs = res.data.product?.product_imgs;
-  const productDetails = res.data.product?.product_detail;
-  const productDescription = res.data.product?.product_description;
-  const productReviews = res.data.product?.recent_reviews;
-  const productId = res.data.product?.product_id;
+
+  const productImgs = res.product.product_imgs;
+  const productDetails = res.product.product_detail;
+  const productDescription = res.product.product_description;
+  const productReviews = res.product.recent_reviews;
+  const productId = res.product.product_id;
 
   return (
     <main className="product">
@@ -57,7 +59,7 @@ export default async function ProductPage({
             desktopOnly="desktop-hidden"></ProductSlider>
           <ProductBuyForm
             productInfo={productInfo}
-            currentVariantSlug={slug[1]}
+            currentVariantSlug={slug[1] ?? ""}
             mobileOnly="desktop-hidden"></ProductBuyForm>
           <ProductSpecification
             productDetails={productDetails}></ProductSpecification>
@@ -76,12 +78,14 @@ export default async function ProductPage({
           </div>
           <ProductBuyForm
             productInfo={productInfo}
-            currentVariantSlug={slug[1]}></ProductBuyForm>
+            currentVariantSlug={slug[1] ?? ""}></ProductBuyForm>
           <ProductDescription
             productDescription={productDescription}></ProductDescription>
         </div>
       </div>
-      <ProductReview productReviews={productReviews} productId={productId}></ProductReview>
+      <ProductReview
+        productReviews={productReviews}
+        productId={productId}></ProductReview>
     </main>
   );
 }

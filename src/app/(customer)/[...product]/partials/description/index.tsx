@@ -5,9 +5,6 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import { useState } from "react";
 
-// import interfaces
-import { IDescriptionRow } from "../../interfaces";
-
 // import css
 import styles from "./description.module.css";
 
@@ -18,7 +15,7 @@ export default function ProductDescription({
   productDescription,
   mobileOnly,
 }: {
-  productDescription: IDescriptionRow[];
+  productDescription: string;
   mobileOnly?: string;
 }) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
@@ -49,18 +46,8 @@ export default function ProductDescription({
           "product-description__content",
           "product-description-content",
           isSeeMoreActive ? "full-height" : ""
-        )}>
-        {productDescription.map((row, index) => {
-          if (row.type == "title") {
-            return (
-              <h5
-                className={cx("product-description-content__title")}
-                key={index}>
-                {row.content}
-              </h5>
-            );
-          }
-        })}
+        )}
+        dangerouslySetInnerHTML={{ __html: productDescription }}>
         {/* <h5 className={cx("product-description-content__title")}>
           Vẻ ngoài thời trang cùng màu sắc mới mẻ
         </h5>

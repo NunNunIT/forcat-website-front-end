@@ -13,7 +13,7 @@ import styles from "./product-variant.module.css";
 // use css
 const cx = classNames.bind(styles);
 
-export default function CustomerProductVariant({
+export default function ProductVariant({
   variant,
   key,
   ...props
