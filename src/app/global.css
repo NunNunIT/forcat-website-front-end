@@ -260,6 +260,11 @@ select {
   appearance: none;
 }
 
+button,
+input {
+  font-family: inherit;
+}
+
 .btn {
   text-decoration: none;
   cursor: pointer;
