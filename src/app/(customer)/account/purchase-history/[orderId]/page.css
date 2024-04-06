@@ -62,31 +62,24 @@
   display: flex;
   align-items: center;
   gap: .25rem;
-  padding-block: .25rem;
-  padding-inline: .5rem .75rem;
-  border-radius: .25rem;
 
   font-weight: bold;
 }
 
 .order-detail__status.unpaid {
-  background: rgba(44, 44, 44, 0.2);
-  color: black;
+  color: rgba(44, 44, 44, 0.8);
 }
 
 .order-detail__status.delivering {
-  background: rgba(2, 53, 246, 0.7);
-  color: white;
+  color: rgba(2, 53, 246, 0.7);
 }
 
 .order-detail__status.finished {
-  background: rgba(17, 151, 38, 0.8);
-  color: white;
+  color: rgba(17, 151, 38, 0.8);
 }
 
 .order-detail__status.cancel {
-  background: rgba(234, 76, 45, 0.8);
-  color: white;
+  color: rgba(234, 76, 45, 0.8);
 }
 
 .order-detail__info-receive {
