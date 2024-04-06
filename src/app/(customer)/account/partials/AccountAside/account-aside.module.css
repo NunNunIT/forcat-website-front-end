@@ -72,12 +72,10 @@
 
 .account__aside-nav-item.is-active>*:last-child {
   font-weight: bold;
-  text-decoration: underline;
 }
 
 .account__aside-nav-item.dangerous-action {
   color: var(--red3);
-  font-weight: bold;
 }
 
 @media screen and (max-width: 1024px) {

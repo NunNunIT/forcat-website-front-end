@@ -19,19 +19,16 @@ const fetchData = {
 
 const asideNavData = [
   {
-    id: 1,
     url: '/account/information',
     iconData: 'perm_contact_calendar',
     text: 'Thông tin cá nhân',
   },
   {
-    id: 2,
     url: '/account/purchase-history',
     iconData: 'shopping_bag',
     text: 'Lịch sử đơn mua',
   },
   {
-    id: 3,
     url: '/account/change-password',
     iconData: 'settings',
     text: 'Đổi mật khẩu',
@@ -59,7 +56,7 @@ export default function CustomerAccountAside() {
       <hr />
       <nav>
         <ul className={cx("account__aside-nav")}>
-          {asideNavData.map(navData => <li key={navData.id}>
+          {asideNavData.map((navData, index) => <li key={index}>
             <a href={navData.url}
               className={cx("account__aside-nav-item", isActiveClass(navData.url, pathName))}
             >
