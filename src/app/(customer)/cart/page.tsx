@@ -12,13 +12,17 @@ import "./page.css";
 
 // fetch data
 async function getCart() {
-  const res = await fetch(`${BACKEND_URL}/cart/66101303292b6f70645d8c29`, {
-    next: { revalidate: 0 },
-  });
+  try {
+    const res = await fetch(`${BACKEND_URL}/cart/66101303292b6f70645d8c29`, {
+      next: { revalidate: 0 },
+    });
 
-  if (!res.ok) return notFound();
+    if (!res.ok) return notFound();
 
-  return res.json();
+    return res.json();
+  } catch (err) {
+    return notFound();
+  }
 }
 export default async function ProductPage() {
   const res = await getCart();
