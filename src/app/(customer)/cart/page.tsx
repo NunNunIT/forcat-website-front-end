@@ -30,7 +30,7 @@ export default async function ProductPage() {
 
   return (
     <main className="cart">
-      <CartWrapper cart={res?.cartInfo} userId={userId}></CartWrapper>
+      <CartWrapper cart={res?.data.cartInfo} userId={userId}></CartWrapper>
     </main>
   );
 }
