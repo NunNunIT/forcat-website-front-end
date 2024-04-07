@@ -1,6 +1,7 @@
 'use client'
 
 // import libs
+import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import classNames from "classnames/bind";
@@ -57,12 +58,12 @@ export default function CustomerAccountAside() {
       <nav>
         <ul className={cx("account__aside-nav")}>
           {asideNavData.map((navData, index) => <li key={index}>
-            <a href={navData.url}
+            <Link href={navData.url}
               className={cx("account__aside-nav-item", isActiveClass(navData.url, pathName))}
             >
               <span className="material-icons">{navData.iconData}</span>
               <span>{navData.text}</span>
-            </a>
+            </Link>
           </li>)}
           <li key={asideNavData.length}>
             <button onClick={handleLogoutBtnClick} className={cx("account__aside-nav-item", "dangerous-action")}>
