@@ -24,6 +24,7 @@ async function getCart() {
     return notFound();
   }
 }
+
 export default async function ProductPage() {
   const res = await getCart();
   const userId = "66101303292b6f70645d8c29";

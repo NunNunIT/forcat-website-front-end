@@ -22,7 +22,9 @@ import "./page.css";
 
 // fetch data
 async function getProduct(slug) {
-  const res = await fetch(`${BACKEND_URL}/products/${slug[0]}`);
+  const res = await fetch(`${BACKEND_URL}/product/${slug[0]}`, {
+    next: { revalidate: 100 },
+  });
   if (!res.ok || slug[2]) return notFound();
 
   return res.json();
@@ -35,7 +37,9 @@ export default async function ProductPage({
 }) {
   const slug = params.product;
   const res = await getProduct(slug);
+
   const productInfo: IBuyForm = {
+    product_id: res.data.product._id,
     product_name: res.data.product.product_name,
     product_slug: res.data.product.product_slug,
     product_avg_rating: res.data.product.product_avg_rating,

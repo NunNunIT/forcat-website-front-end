@@ -2,47 +2,54 @@
 
 // import libs
 import classNames from "classnames/bind";
-import Link from "next/link";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 
 // import css
 import styles from "./order-product.module.css";
 
+// import utils
+import { IBuyInfo } from "../../uitls";
+import { convertNumberToMoney } from "@/utils";
+
 // use css
 const cx = classNames.bind(styles);
 
-export default function OrderProduct() {
+export default function OrderProduct({ buyInfo }: { buyInfo: IBuyInfo }) {
   return (
     <div className={cx("order-product__element__cover")}>
       <div className={cx("order-product__element")}>
-        <a href="#">
+        <div>
           <div className={cx("order-product__element--left")}>
             <div className={cx("order-product__img__cover")}>
-              <Image
+              <CldImage
                 className={cx("order-product__img")}
                 fill={true}
-                src="/imgs/test.png"
-                alt="ten san pham"
+                src={buyInfo.variant_image_link}
+                alt={buyInfo.variant_image_alt}
               />
             </div>
 
             <div className={cx("order-product__product-detail")}>
               <h4 className={cx("order-product__product-name")}>
-                Tên sản phẩm
+                {buyInfo.product_name}
               </h4>
               <p className={cx("order-product__variant")}>
-                Phân loại hàng: Phân loại 1
+                Phân loại hàng: {buyInfo.variant_name}
               </p>
-              <p className={cx("order-product__amount")}>x1</p>
+              <p className={cx("order-product__amount")}>x{buyInfo.quantity}</p>
             </div>
           </div>
-        </a>
+        </div>
 
         <h5 className={cx("order-product__price")}>
-          <small className={cx("order-product__price--small")}>
-            1.000.000đ
-          </small>
-          777.000đ
+          {buyInfo.discount_amount > 0 && (
+            <small className={cx("order-product__price--small")}>
+              {convertNumberToMoney(buyInfo.unit_price)}
+            </small>
+          )}
+          {convertNumberToMoney(
+            (buyInfo.unit_price * (100 - buyInfo.discount_amount)) / 100
+          )}
         </h5>
       </div>
       <hr />

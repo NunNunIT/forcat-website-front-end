@@ -4,14 +4,30 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
 // import components
 import { OrderProduct } from "./components";
 
+// import utils
+import { convertNumberToMoney } from "@/utils";
+
 // import css
 import "./page.css";
 
-export default function SearchResultPage() {
+const buyInfo = store.getState().cart.buyItems;
+const totalWithDiscount = buyInfo.reduce((result, item) => {
+  return (
+    result +
+    item.unit_price * ((100 - item.discount_amount) / 100) * item.quantity
+  );
+}, 0);
+const totalWithoutDiscount = buyInfo.reduce((result, item) => {
+  return result + item.unit_price * item.quantity;
+}, 0);
+
+export default function OrderInformationPage() {
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(true);
   const [cities, setCities] = useState<any[]>([]);
@@ -105,7 +121,7 @@ export default function SearchResultPage() {
 
   return (
     // <main className="order-container">
-    <>
+    <Provider store={store}>
       <form id="order-form">
         {/* onSubmit={submitOrderForm} */}
         <section className="order-detail">
@@ -240,8 +256,9 @@ export default function SearchResultPage() {
 
       <section className="order-sidebar">
         <div className="order-sidebar__product">
-          <OrderProduct />
-          <OrderProduct />
+          {buyInfo.map((item, index) => {
+            return <OrderProduct buyInfo={item} key={index} />;
+          })}
         </div>
         <div className="order-pay__coupon">
           <input
@@ -257,11 +274,17 @@ export default function SearchResultPage() {
           <div className="order-pay__price">
             <div className="order-pay__price-container">
               <div>
-                <del className="order-pay__total-del">1.000.000đ</del>
+                {totalWithDiscount != totalWithoutDiscount && (
+                  <del className="order-pay__total-del">
+                    {convertNumberToMoney(totalWithoutDiscount)}
+                  </del>
+                )}
               </div>
               <div className="order-pay__price__main">
                 <p>Tổng tiền hàng</p>
-                <p className="order-pay__total">777.000đ</p>
+                <p className="order-pay__total">
+                  {convertNumberToMoney(totalWithDiscount)}
+                </p>
               </div>
             </div>
           </div>
@@ -280,7 +303,7 @@ export default function SearchResultPage() {
           </div>
         </div>
       </section>
-    </>
+    </Provider>
     // </main>
   );
 }

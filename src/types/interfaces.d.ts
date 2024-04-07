@@ -1,4 +1,5 @@
 interface IVariant {
+  id: string;
   name: string;
   url: string;
   image: {
@@ -149,9 +150,9 @@ interface INotificationItemProps {
   notification_title: string;
   notification_short_desc: string;
   notification_desc: {
-    type: string,
-    url?: string,
-    content?: string,
+    type: string;
+    url?: string;
+    content?: string;
   }[];
   notification_url_img: string;
   notification_type: string;
