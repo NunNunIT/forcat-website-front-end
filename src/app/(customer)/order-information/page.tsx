@@ -1,9 +1,10 @@
 "use client";
 
 // import libs
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Link from "next/link";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
@@ -28,6 +29,8 @@ const totalWithoutDiscount = buyInfo.reduce((result, item) => {
 }, 0);
 
 export default function OrderInformationPage() {
+  if (buyInfo.length == 0) return notFound();
+
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(true);
   const [cities, setCities] = useState<any[]>([]);
