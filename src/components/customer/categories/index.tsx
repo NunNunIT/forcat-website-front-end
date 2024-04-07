@@ -47,7 +47,7 @@ export default function Categories() {
           },
           1024: {
             slidesPerView: 5,
-            spaceBetween: 2,
+            spaceBetween: 10,
           },
         }}
         centeredSlides={false}
