@@ -24,7 +24,7 @@ export default function ArticleSummary(props: IArticleProps) {
   const articleDateConverted = convertDateStrToDDMMYYYY(article_info.published_date);
 
   return (
-  <Link className={cx("article__link")} href={`news/${article_name}`}>
+    <Link className={cx("article__link")} href={`news/${article_name}`}>
       <article className={cx("article__container")}>
         <div className={cx("article__content-container")}>
           <span className={cx("article__type")}>{article_type}</span>
