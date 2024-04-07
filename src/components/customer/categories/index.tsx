@@ -43,19 +43,18 @@ export default function Categories() {
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 10,
+            spaceBetween: 5,
           },
           1024: {
             slidesPerView: 5,
-            spaceBetween: 10,
+            spaceBetween: 2,
           },
         }}
         centeredSlides={false}
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {PRODUCT}
       </Swiper>
     </div>
