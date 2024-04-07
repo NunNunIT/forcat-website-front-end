@@ -1,6 +1,7 @@
 "use client";
 
 // import libs
+import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 import { useState, useRef, useEffect } from "react";
 import { Provider } from "react-redux";
@@ -255,7 +256,9 @@ export default function CartWrapper({
     handleUpdateChangedItem(cartItemEle);
   };
 
-  const handleBuyItem = () => {
+  const handleBuyItem = (event) => {
+    // event.preventDefault();
+
     const selectedItems = cartItem.filter(
       (item) => item.querySelector(".cart-checkbox").checked
     );
@@ -272,20 +275,31 @@ export default function CartWrapper({
           (item: any) => item.value == selectEle.value
         ) as HTMLElement
       ).innerHTML;
-      const quantity =
+      const variantImageLink =
+        item.querySelector(".cart-item__image").currentSrc;
+      const variantImageAlt = item.querySelector(".cart-item__image").alt;
+      const quantity = Number(
         item.querySelector(".quantity-input-group__input").value !== ""
           ? item.querySelector(".quantity-input-group__input").value
-          : item.querySelector(".quantity-input-group__input").placeholder;
+          : item.querySelector(".quantity-input-group__input").placeholder
+      );
       const unitPrice = convertMoneyToNumber(
         item.querySelector(".cart-item__unit-price-after-discount").innerHTML
       );
+      const discountAmount = Number(
+        item.querySelector("input[name='discount_amount']").value
+      );
+
       buyList.push({
         product_id: productId,
         product_name: productName,
         variant_id: variantId,
         variant_name: variantName,
+        variant_image_link: variantImageLink,
+        variant_image_alt: variantImageAlt,
         quantity: quantity,
         unit_price: unitPrice,
+        discount_amount: discountAmount,
       });
     });
 
@@ -293,7 +307,8 @@ export default function CartWrapper({
       type: "addBuyItems",
       payload: buyList,
     });
-    console.log(store.getState().cart.buyItems);
+
+    // console.log(store.getState().cart.buyItems);
   };
 
   return (
@@ -325,7 +340,7 @@ export default function CartWrapper({
         {cart.map((cartItem, itemIndex) => {
           const currentVariantIndex =
             cartItem.product.product_variants.findIndex(
-              (item) => item.variant_id == cartItem.variant_id
+              (item) => item._id == cartItem.variant_id
             );
           return (
             <div className="cart-item" key={itemIndex}>
@@ -367,7 +382,7 @@ export default function CartWrapper({
                           value={
                             cartItem.product.product_variants[
                               currentVariantIndex
-                            ].variant_id
+                            ]._id
                           }
                         />
                         <select
@@ -378,7 +393,7 @@ export default function CartWrapper({
                             value={
                               cartItem.product.product_variants[
                                 currentVariantIndex
-                              ].variant_id
+                              ]._id
                             }
                             key={0}>
                             {
@@ -389,11 +404,11 @@ export default function CartWrapper({
                           </option>
                           {cartItem.product.product_variants.map(
                             (variant, variantIndex) => {
-                              if (variant.variant_id !== cartItem.variant_id)
+                              if (variant._id !== cartItem.variant_id)
                                 return (
                                   <option
                                     className="cart-item__variant-name"
-                                    value={variant.variant_id}
+                                    value={variant._id}
                                     key={variantIndex}>
                                     {variant.variant_name}
                                   </option>
@@ -410,6 +425,14 @@ export default function CartWrapper({
                 </div>
               </div>
               <div className="cart-item__unit-price cart-item-col">
+                <input
+                  type="hidden"
+                  name="discount_amount"
+                  value={
+                    cartItem.product.product_variants[currentVariantIndex]
+                      .discount_amount
+                  }
+                />
                 <div className="cart-item__unit-price-after-discount">
                   {convertNumberToMoney(
                     (cartItem.product.product_variants[currentVariantIndex]
@@ -493,9 +516,12 @@ export default function CartWrapper({
           <div className="cart-bill-row__title">Tổng tiền</div>
           <div className="cart-bill-row__content">{totalPrice}</div>
         </div>
-        <div className="cart-bill-row cart-bill__btn" onClick={handleBuyItem}>
+        <Link
+          href="/order-information"
+          className="cart-bill-row cart-bill__btn"
+          onClick={handleBuyItem}>
           Mua hàng (<span className="checked-num">{selectedItem}</span>)
-        </div>
+        </Link>
         <div className="cart-bill-row cart-bill-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với Điều khoản dịch vụ,
           Chính sách thu thập và xử lý dữ liệu cá nhân của ForCat.
@@ -529,11 +555,12 @@ export default function CartWrapper({
                 {totalPrice}
               </div>
             </div>
-            <div
+            <Link
+              href="/order-information"
               className="cart-footer-buy-group__buy-btn"
               onClick={handleBuyItem}>
               Mua hàng (<span className="checked-num">{selectedItem}</span>)
-            </div>
+            </Link>
           </div>
         </div>
         <div className="cart-footer-policy">
