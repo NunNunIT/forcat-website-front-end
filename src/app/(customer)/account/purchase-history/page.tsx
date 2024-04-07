@@ -1,82 +1,57 @@
 "use client";
 
 // import libs
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import useSWR, { Fetcher } from "swr";
 import { CustomerOrderItem } from "./partials";
-import { isActiveClass } from "@/utils";
+import {
+  isActiveClass,
+  convertOrderStatusToStr
+} from "@/utils";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
 
-const fetchData: OrderItemProps[] = [
-  {
-    order_id: 'DH001', order_status: 'unpaid', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-      { product_id: 'P002', quantity: 2, unit_price: 12000000, price_discount: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH002', order_status: 'delivering', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH003', order_status: 'finished', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH004', order_status: 'cancel', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH005', order_status: 'unpaid', order_total_price: 2360000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-]
+const fetcher: Fetcher<IOrderItemProps[], string> = async (url: string) => {
+  const res: IResponseJSON = await fetch(url).then(res => res.json());
 
+  if (!res.success)
+    throw res;
+
+  return res.data as IOrderItemProps[];
+}
 
 export default function PurchaseHistoryPage() {
-  const [statusPurchaseHistory, setStatusPurchaseHistory] = useState('all');
+  const [statusPurchaseHistory, setStatusPurchaseHistory] = useState("all");
+  const [fullURL, setFullURL] = useState(BACKEND_URL + "/purchases");
 
-  const orders = (() => fetchData)();
+  useEffect(() => {
+    setFullURL(BACKEND_URL + "/purchases" + ((statusPurchaseHistory === 'all') ? '' : `?type=${statusPurchaseHistory}`));
+  }, [statusPurchaseHistory]);
+
+  const { data, error, isLoading } = useSWR(fullURL, fetcher);
 
   return (
     <main className="account-purchase-history__main">
       <nav className="purchase-history__status-container">
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'all')}`}
-          onClick={() => setStatusPurchaseHistory('all')}
-        >
-          Tất cả
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'unpaid')}`}
-          onClick={() => setStatusPurchaseHistory('unpaid')}
-        >
-          Chờ thanh toán
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'delivering')}`}
-          onClick={() => setStatusPurchaseHistory('delivering')}
-        >
-          Đang giao hàng
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'finished')}`}
-          onClick={() => setStatusPurchaseHistory('finished')}
-        >
-          Hoàn thành
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'cancel')}`}
-          onClick={() => setStatusPurchaseHistory('cancel')}
-        >
-          Đã hủy
-        </button>
+        {["all", "unpaid", "delivering", "finished", "cancel"].map((status) =>
+          <button key={status}
+            className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, status)}`}
+            onClick={() => { setStatusPurchaseHistory(status) }}
+          >
+            {convertOrderStatusToStr(status)}
+          </button>
+        )}
       </nav>
 
       <section className="purchase-history__purchase-item-list">
-        {orders.map((order: OrderItemProps, index: number) =>
-          <CustomerOrderItem key={index} {...order} />)
-        }
+        {isLoading && <p>Đang tải dữ liệu...</p>}
+        {!isLoading && error && <p>Đã có lỗi xảy ra: `{error.message}`</p>}
+        {!isLoading && data?.length === 0 && <p>Bạn chưa có đơn hàng nào</p>}
+        {!isLoading && data?.map((order: IOrderItemProps) =>
+          <CustomerOrderItem key={order._id} {...order} />
+        )}
       </section>
     </main>
   )

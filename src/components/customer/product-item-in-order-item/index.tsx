@@ -8,7 +8,7 @@ import styles from "./product-item-in-order-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function ProductItemInOrderItem(props: ProductItemInOrderItemProps) {
+export default function ProductItemInOrderItem(props: IProductItemInOrderItemProps) {
   const { url, product_name, product_sub_category, quantity, unit_price, price_discount } = props;
   const price_final = price_discount ?? unit_price;
 

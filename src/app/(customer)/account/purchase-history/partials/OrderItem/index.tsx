@@ -14,14 +14,15 @@ import styles from "./order-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function OrderItem(props: OrderItemProps) {
-  const { order_id, order_status, order_total_price, order_detail } = props;
+export default function OrderItem(props: IOrderItemProps) {
+  const { _id, order_process_info, order_total_cost, order_details } = props;
+  const { status: order_status } = order_process_info.slice(-1)[0];
 
   return (
     <div className={cx("order-item")}>
       <span className={cx("order-item--top")}>
         Đơn hàng:
-        <span className={cx("order-item__id")}>{order_id}</span>
+        <span className={cx("order-item__id")}>#{_id}</span>
         <span className={cx("order-item__status", order_status)}>
           <span className="material-icons">{convertOrderStatusToIconData(order_status)}</span>
           {convertOrderStatusToStr(order_status)}
@@ -29,19 +30,19 @@ export default function OrderItem(props: OrderItemProps) {
       </span>
       <hr />
       <div className={cx("order-item__product-list")}>
-        {order_detail.map(
-          (product: ProductItemInOrderItemProps, index: number) =>
+        {order_details.map(
+          (product: IProductItemInOrderItemProps, index: number) =>
             <CustomerProductItemInOrderItem key={index} {...product} />
         )}
       </div>
       <hr />
       <div className={cx("order-item--bottom")}>
         <div className={cx("order-item__total-price")}>
-          Thành tiền: {parseNumToCurrencyStr(order_total_price)} đ
+          Thành tiền: {parseNumToCurrencyStr(order_total_cost)} đ
         </div>
         <div className={cx("order-item__button-wrapper")}>
           <Link className={`btn btn--outlined pri ${cx("order-item__button")}`}
-            href={`/account/purchase-history/${order_id}`}
+            href={`/account/purchase-history/${_id}`}
           >
             <span>Xem chi tiết</span>
           </Link>

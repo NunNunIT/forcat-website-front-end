@@ -1,9 +1,13 @@
+'use client'
+
 // import libs
-import { Suspense } from "react";
+import useSWR, { Fetcher } from "swr";
+import { BACKEND_URL } from "@/utils/commonConst";
 import {
   convertDateToFormatHHMMDDMMYYYY, convertOrderStatusToStr,
-  convertPaymentToStr, parseNumToCurrencyStr,
-  convertOrderStatusToIconData
+  convertPaymentToStr,
+  parseNumToCurrencyStr,
+  convertOrderStatusToIconData,
 } from "@/utils";
 
 // import components
@@ -12,64 +16,46 @@ import { CustomerProductItemInOrderItem } from '@/components';
 // import css
 import './page.css';
 
-function fetchDataDemo(url: string, { id }: { id: string }) {
-  const mapData = {
-    'order_url': {
-      order_id: id,
-      order_buyer: {
-        order_name: "Lê Trung Hiếu",
-        order_phone: "0123456789",
-        order_address: {
-          street: "Khu phố 6",
-          ward: "Phường Linh Trung",
-          district: "Thành phố Thủ Đức",
-          province: "Thành phố Hồ Chí Minh"
-        }
-      },
-      order_details: [
-        { product_id: 1, quantity: 1, unit_price: 11800000, price_discount: 1200000 },
-        { product_id: 2, quantity: 1, unit_price: 11800000 },
-      ],
-      payment_id: "1",
-      order_process_info: [
-        { status: 'created', date: new Date("2024-02-20 17:30") },
-        { status: 'finished', date: new Date("2024-02-23 12:34") },
-      ],
-      order_total_cost: 13000000,
-    },
-    'payment_url': {
-      payment_id: id,
-      payment_type: 'credit_card',
-    },
-    'product_url': [
-      {
-        product_id: 1, product_name: 'Sản phẩm cho mèo', product_imgs: [
-          { link_avt: '/imgs/test.png', alt: 'Hình ảnh cho mèo', },
-        ],
-      },
-    ]
-  }
-
-  return Promise.resolve({
-    json: async () => Promise.resolve({ data: mapData[url] }),
-  })
+interface IOrderDetailProps {
+  _id: string;
+  order_buyer: { order_name: string, order_phone: string };
+  order_address: { street: string, ward: string, district: string, province: string };
+  order_process_info: { status: string, date: Date }[];
+  order_details: { product_id: string, quantity: number, unit_price: number, price_discount?: number }[];
+  order_total_cost: number;
+  payment_id: string;
 }
 
-export default async function PurchaseDetailPage({ params }: { params: { orderId: string } }) {
-  const order_url = "order_url";
-  const order = await fetchDataDemo(order_url, { id: params.orderId }).then(res => res.json()).then(json => json.data);
-  const { order_id, order_buyer, order_process_info, payment_id, order_details, order_total_cost } = order;
+const fetcher: Fetcher<IOrderDetailProps, string> = async (url: string) => {
+  const res: IResponseJSON = await fetch(url).then(res => res.json());
+
+  if (!res.success)
+    throw res;
+
+  return res.data as IOrderDetailProps;
+}
+
+export default function PurchaseDetailPage({ params }: { params: { orderId: string } }) {
+  const { data, error, isLoading } = useSWR(
+    BACKEND_URL + '/purchases/' + params.orderId,
+    fetcher
+  );
+
+  if (isLoading) return <p>Đang tải dữ liệu...</p>;
+  if (error) return <p>Có lỗi xảy ra: {error.message}</p>;
+
+  const { _id, order_buyer, order_process_info, payment_id, order_details, order_total_cost, order_address } = data;
   const { date: order_date } = order_process_info[0];
   const { status: order_status } = order_process_info.slice(-1)[0];
-  const { order_name, order_phone, order_address } = order_buyer;
+  const { order_name, order_phone } = order_buyer;
   const { street, ward, district, province } = order_address;
 
   return (
     <main className="order-detail">
       <div className="order-detail--top">
         <span className="order-detail__overview">
-          <h2>Chi tiết hóa đơn: #{order_id}</h2>
-          <span>Đặt lúc: {convertDateToFormatHHMMDDMMYYYY(order_date)}</span>
+          <h2>Chi tiết hóa đơn: #{_id}</h2>
+          <span>Đặt lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(order_date))}</span>
         </span>
         <span className={`order-detail__status ${order_status}`}>
           <span className="material-icons">{convertOrderStatusToIconData(order_status)}</span>
@@ -103,7 +89,8 @@ export default async function PurchaseDetailPage({ params }: { params: { orderId
           <span className="material-icons">credit_card</span>
           <span>Thông tin thanh toán</span>
         </h2>
-        <PaymentType id={payment_id} />
+        {/* <PaymentType id={payment_id} /> */}
+        <span>Thanh toán bằng thẻ tín dụng</span>
       </div>
       <div className="order-detail__products">
         <h2>
@@ -135,17 +122,7 @@ export default async function PurchaseDetailPage({ params }: { params: { orderId
   );
 }
 
-async function PaymentType({ id }: { id: string }) {
-  const url = 'payment_url';
-  const { payment_type } = await fetchDataDemo(url, { id }).then(res => res.json()).then(json => json.data);
-  return (
-    <Suspense fallback={<>Đang tải dữ liệu</>}>
-      <p>Thanh toán bằng {convertPaymentToStr(payment_type)}</p>
-    </Suspense>
-  )
-}
-
-async function ProductItems({ order_details }: {
+function ProductItems({ order_details }: {
   order_details: {
     product_id: string,
     quantity: number,
@@ -153,19 +130,14 @@ async function ProductItems({ order_details }: {
     price_discount?: number
   }[]
 }) {
-  const product_ids = order_details.map(order_detail => order_detail.product_id);
-  const url = 'product_url';
-  const products = product_ids.map(async product_id => (
-    await fetchDataDemo(url, { id: product_id }).then(res => res.json()).then(json => json.data)
-  ))
-
-  const combineArr = products.map((product, index: number) => ({ ...product, ...order_details[index] }))
-
   return (
-    <Suspense fallback={<>Đang tải dữ liệu...</>}>
-      {combineArr.map((order_detail, index: number) =>
-        <CustomerProductItemInOrderItem key={index} {...order_detail} />
+    <>
+      {order_details.map(product =>
+        <CustomerProductItemInOrderItem
+          key={product.product_id}
+          {...product}
+        />
       )}
-    </Suspense>
+    </>
   )
 }

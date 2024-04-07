@@ -127,7 +127,7 @@ interface IArticleProps {
   article_slug?: string[];
 }
 
-interface ProductItemInOrderItemProps {
+interface IProductItemInOrderItemProps {
   url?: string;
   product_name?: string;
   product_sub_category?: string;
@@ -137,11 +137,11 @@ interface ProductItemInOrderItemProps {
   price_discount?: number;
 }
 
-interface OrderItemProps {
-  order_id: string;
-  order_status: string;
-  order_total_price: number;
-  order_detail: ProductItemInOrderItemProps[];
+interface IOrderItemProps {
+  _id: string;
+  order_process_info: { status: string, date: Date }[];
+  order_details: IProductItemInOrderItemProps[];
+  order_total_cost: number;
 }
 
 interface INotificationItemProps {
@@ -158,4 +158,12 @@ interface INotificationItemProps {
   notification_date: Date;
   is_read: boolean;
   // onClick?: (isRead: boolean) => void;
+}
+
+
+interface IResponseJSON {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: Object;
 }
