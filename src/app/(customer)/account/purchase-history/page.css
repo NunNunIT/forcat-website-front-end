@@ -31,8 +31,7 @@
 
 .purchase-history__status {
   height: 100%;
-
-  padding-inline: 1rem;
+  min-width: 4rem;
 
   font-size: 1rem;
   font-weight: bold;
