@@ -29,7 +29,9 @@ const totalWithoutDiscount = buyInfo.reduce((result, item) => {
 }, 0);
 
 export default function OrderInformationPage() {
-  if (buyInfo.length == 0) return notFound();
+  useEffect(()=>{
+    if (buyInfo.length == 0) return notFound();
+  },[])
 
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(true);
