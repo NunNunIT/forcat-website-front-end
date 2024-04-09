@@ -2,6 +2,7 @@ const initialState = {
   changedItems: [],
   deletedItems: [],
   buyItems: [],
+  addCartItem: {},
 };
 
 export default function cartReducers(state = initialState, action) {

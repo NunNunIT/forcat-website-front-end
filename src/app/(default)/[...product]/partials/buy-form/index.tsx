@@ -2,6 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
@@ -17,6 +18,7 @@ import {
   convertMoneyToNumber,
   createSlug,
 } from "@/utils";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -66,10 +68,9 @@ export default function ProductBuyForm({
     handleQuantityChange();
   }, [quantityValue]);
 
+  // handle buy
   const buyFormRef = useRef(null);
   const handleBuyItem = (event) => {
-    // event.preventDefault();
-
     const productId = productInfo.product_id;
     const productName = productInfo.product_name;
     const variantId = currentVariant._id;
@@ -100,6 +101,51 @@ export default function ProductBuyForm({
 
     // console.log(store.getState().cart.buyItems);
   };
+
+  const cartModalRef = useRef(null);
+  const handleCloseModal = () => {
+    const cartModal = cartModalRef.current;
+    cartModal.classList.add("hidden");
+  };
+
+  // handle add cart
+  const handleAddCart = () => {
+    const productId = productInfo.product_id;
+    const variantId = currentVariant._id;
+    const quantity = Number(
+      buyFormRef.current.querySelector(".quantity-input-group__input").value
+    );
+
+    store.dispatch({
+      type: "addCartItem",
+      payload: {
+        product_id: productId,
+        variant_id: variantId,
+        quantity: quantity,
+      },
+    });
+
+    const cartModal = cartModalRef.current;
+    cartModal.classList.remove("hidden");
+  };
+
+  // handle change page
+  const handleChangePage = () => {
+    const cartItem = store.getState().product.cartItem;
+    const userId = "66101303292b6f70645d8c29";
+
+    fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
+      body: JSON.stringify(cartItem),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleChangePage);
+  }, []);
 
   return (
     <Provider store={store}>
@@ -167,11 +213,38 @@ export default function ProductBuyForm({
           <p className={cx("product__total-price")}>{totalPrice}</p>
         </div>
         <div className={cx("product__buy-btns", "buy-btns")}>
-          <div className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}>
+          <div
+            className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}
+            onClick={handleAddCart}>
             <span className={cx("material-icons-round", " buy-btn-icon")}>
               add_shopping_cart
             </span>
             <span className={cx("buy-btn-text")}>Giỏ hàng</span>
+          </div>
+          <div className={cx("cart-modal", "hidden")} ref={cartModalRef}>
+            <div
+              className={cx("cart-modal__bg")}
+              title="Nhấn để thoát"
+              onClick={handleCloseModal}></div>
+            <div className={cx("cart-modal__content")}>
+              <div
+                className={cx("cart-modal-close", "modal-icon-div")}
+                onClick={handleCloseModal}
+                title="Nhấn để thoát">
+                <span className={cx("material-icons-round", "modal-icon")}>
+                  close
+                </span>
+              </div>
+              <div className={cx("cart-modal__image-div")}>
+                <Image
+                  className={cx("cart-modal__image")}
+                  src="/imgs/cart/add-cart-success.webp"
+                  alt="Thêm vào giỏ hàng thành công"
+                  fill={true}
+                />
+              </div>
+              <h3>Sản phẩm đã được thêm vào giỏ hàng</h3>
+            </div>
           </div>
           <Link
             href="/order-information"
