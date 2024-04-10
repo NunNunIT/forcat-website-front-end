@@ -1,5 +1,4 @@
 interface ProductVariant {
-  _id: string;
   variant_name: string;
   price: number;
   variant_imgs: string[];
@@ -10,7 +9,6 @@ interface ProductVariant {
 }
 
 export interface IBuyForm {
-  product_id: string;
   product_name: string;
   product_slug: string;
   product_avg_rating: number;
