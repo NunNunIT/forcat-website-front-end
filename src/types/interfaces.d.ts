@@ -128,10 +128,15 @@ interface IArticleProps {
 }
 
 interface IProductItemInOrderItemProps {
-  url?: string;
-  product_name?: string;
-  product_sub_category?: string;
   product_id: string;
+  product_name?: string;
+  product_slug?: string;
+  variant_id: string;
+  variant_name?: string;
+  product_img?: {
+    link: string,
+    alt: string,
+  };
   quantity: number;
   unit_price: number;
   price_discount?: number;
@@ -139,7 +144,7 @@ interface IProductItemInOrderItemProps {
 
 interface IOrderItemProps {
   _id: string;
-  order_process_info: { status: string, date: Date }[];
+  order_status: string;
   order_details: IProductItemInOrderItemProps[];
   order_total_cost: number;
 }

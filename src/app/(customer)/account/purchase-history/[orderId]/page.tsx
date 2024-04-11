@@ -5,7 +5,6 @@ import useSWR, { Fetcher } from "swr";
 import { BACKEND_URL } from "@/utils/commonConst";
 import {
   convertDateToFormatHHMMDDMMYYYY, convertOrderStatusToStr,
-  convertPaymentToStr,
   parseNumToCurrencyStr,
   convertOrderStatusToIconData,
 } from "@/utils";
@@ -20,8 +19,9 @@ interface IOrderDetailProps {
   _id: string;
   order_buyer: { order_name: string, order_phone: string };
   order_address: { street: string, ward: string, district: string, province: string };
+  order_status: string;
   order_process_info: { status: string, date: Date }[];
-  order_details: { product_id: string, quantity: number, unit_price: number, price_discount?: number }[];
+  order_details: IProductItemInOrderItemProps[];
   order_total_cost: number;
   payment_id: string;
 }
@@ -37,7 +37,7 @@ const fetcher: Fetcher<IOrderDetailProps, string> = async (url: string) => {
 
 export default function PurchaseDetailPage({ params }: { params: { orderId: string } }) {
   const { data, error, isLoading } = useSWR(
-    BACKEND_URL + '/purchases/' + params.orderId,
+    BACKEND_URL + '/orders/' + params.orderId,
     fetcher
   );
 
@@ -98,7 +98,9 @@ export default function PurchaseDetailPage({ params }: { params: { orderId: stri
           <span>Thông tin sản phẩm</span>
         </h2>
         <div className="order-detail__products-wrapper">
-          <ProductItems order_details={order_details} />
+          {order_details.map(product =>
+            <CustomerProductItemInOrderItem key={product.product_id} {...product} />
+          )}
         </div>
         <hr />
         <table className="order-detail__cost">
@@ -120,24 +122,4 @@ export default function PurchaseDetailPage({ params }: { params: { orderId: stri
       </div>
     </main>
   );
-}
-
-function ProductItems({ order_details }: {
-  order_details: {
-    product_id: string,
-    quantity: number,
-    unit_price: number,
-    price_discount?: number
-  }[]
-}) {
-  return (
-    <>
-      {order_details.map(product =>
-        <CustomerProductItemInOrderItem
-          key={product.product_id}
-          {...product}
-        />
-      )}
-    </>
-  )
 }

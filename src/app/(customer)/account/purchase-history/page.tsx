@@ -14,20 +14,25 @@ import { BACKEND_URL } from "@/utils/commonConst";
 import "./page.css";
 
 const fetcher: Fetcher<IOrderItemProps[], string> = async (url: string) => {
-  const res: IResponseJSON = await fetch(url).then(res => res.json());
+  const res: Response = await fetch(url);
 
-  if (!res.success)
+  if (!res.ok)
     throw res;
 
-  return res.data as IOrderItemProps[];
+  const json: IResponseJSON = await res.json();
+
+  if (!json.success)
+    throw json;
+
+  return json.data as IOrderItemProps[];
 }
 
 export default function PurchaseHistoryPage() {
   const [statusPurchaseHistory, setStatusPurchaseHistory] = useState("all");
-  const [fullURL, setFullURL] = useState(BACKEND_URL + "/purchases");
+  const [fullURL, setFullURL] = useState(BACKEND_URL + "/orders");
 
   useEffect(() => {
-    setFullURL(BACKEND_URL + "/purchases" + ((statusPurchaseHistory === 'all') ? '' : `?type=${statusPurchaseHistory}`));
+    setFullURL(BACKEND_URL + "/orders" + ((statusPurchaseHistory === 'all') ? '' : `?type=${statusPurchaseHistory}`));
   }, [statusPurchaseHistory]);
 
   const { data, error, isLoading } = useSWR(fullURL, fetcher);

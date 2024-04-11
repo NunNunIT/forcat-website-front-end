@@ -40,11 +40,14 @@ function convertOrderStatusToStr(order_status: string): string {
     case "cancel":
       return "Đã hủy";
   }
+
+  console.log("Unexpected Order Status: ", order_status);
   return "Unexpected Order Status";
 }
 
 function isActiveClass(src_str: string, des_str: string): string {
-  return src_str === des_str ? "is-active" : "";
+  const min_length = Math.min(src_str.length, des_str.length);
+  return src_str.substring(0, min_length) === des_str.substring(0, min_length) ? "is-active" : "";
 }
 
 function isActiveClassWithBool(bool: boolean): string {
