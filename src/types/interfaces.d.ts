@@ -145,18 +145,13 @@ interface OrderItemProps {
   order_detail: ProductItemInOrderItemProps[];
 }
 
-interface INotificationItemProps {
-  notification_id: string;
-  notification_title: string;
-  notification_short_desc: string;
-  notification_desc: {
-    type: string;
-    url?: string;
-    content?: string;
-  }[];
-  notification_url_img: string;
+interface INotiProps {
+  _id: string;
+  notification_name: string;
+  notification_slug: string;
   notification_type: string;
-  notification_date: Date;
+  notification_description: string;
+  notification_url_img: string;
+  updatedAt: string;
   is_read: boolean;
-  // onClick?: (isRead: boolean) => void;
 }
