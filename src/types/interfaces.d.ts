@@ -160,7 +160,6 @@ interface INotificationItemProps {
   // onClick?: (isRead: boolean) => void;
 }
 
-
 interface IResponseJSON {
   status: number;
   success: boolean;
