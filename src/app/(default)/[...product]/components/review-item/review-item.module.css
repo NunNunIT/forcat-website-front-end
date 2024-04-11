@@ -50,7 +50,7 @@
 }
 
 .review-item__variant {
-    width: fit-content;
+    width: 90%;
     padding: 4px 12px;
     border-radius: 8px;
     color: var(--white);

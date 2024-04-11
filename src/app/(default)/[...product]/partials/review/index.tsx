@@ -2,7 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState } from "react";
+import React, { useState } from "react";
 
 // import components
 import { ProductReviewItem } from "../../components";
@@ -59,10 +59,11 @@ export default function ProductReview({
         <div className={cx("reviews__group")}>
           {productReviews.map((review, index) => {
             return (
-              <ProductReviewItem
-                review={review}
-                key={index}
-                handleOpenModal={handleOpenModal}></ProductReviewItem>
+              <React.Fragment key={index}>
+                <ProductReviewItem
+                  review={review}
+                  handleOpenModal={handleOpenModal}></ProductReviewItem>
+              </React.Fragment>
             );
           })}
         </div>
