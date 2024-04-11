@@ -147,6 +147,7 @@ interface OrderItemProps {
 
 interface INotiProps {
   _id: string;
+  user_id: string;
   notification_name: string;
   notification_slug: string;
   notification_type: string;

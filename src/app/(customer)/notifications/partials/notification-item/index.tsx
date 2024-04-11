@@ -9,6 +9,9 @@ import {
   isActiveClassWithBool,
 } from "@/utils";
 
+// import utils
+import { BACKEND_URL } from "@/utils/commonConst";
+
 // import partials, components
 import { CustomerModal } from "..";
 
@@ -17,13 +20,23 @@ import styles from "./notification-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function NotificationItem(props: INotiProps) {
+export default function NotificationItem({ user_id, ...props }: INotiProps) {
   console.log("data props:", props);
-
+  console.log("data user:", user_id);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
-
+  const postData = {
+    user_id: user_id,
+    noti_id: props._id,
+  };
   const handleOnClickRead = () => {
     setIsShowModal(true);
+    fetch(`${BACKEND_URL}/noti/readNoti`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData), // Chuyển đổi đối tượng JavaScript thành chuỗi JSON
+    });
   };
 
   return (
@@ -41,7 +54,8 @@ export default function NotificationItem(props: INotiProps) {
             <span className={cx("notification-item__date")}>
               {convertDateToFormatHHMMDDMMYYYY(new Date(props.updatedAt))}
             </span>
-            <button onClick={handleOnClickRead}
+            <button
+              onClick={handleOnClickRead}
               className="btn_ btn--outlined_ pri_">
               <span>Xem chi tiết</span>
             </button>

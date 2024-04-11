@@ -15,29 +15,29 @@ import { BACKEND_URL } from "@/utils/commonConst";
 import "./page.css";
 
 const notificationTypes = ["", "order", "promotion"];
-
+const user_id = "6616be67a63ceb458b15828f";
 const fetcher: Fetcher<INotiProps[], string> = async (url: string) => {
   const res: Response = await fetch(url);
-
   if (!res.ok)
     throw new Error("Failed to fetch notifications: " + res.statusText);
 
   const json = await res.json();
 
-  if (json.error)
-    throw res;
+  if (json.error) throw res;
 
   return json.data.notifications as INotiProps[];
-}
+};
 
 export default function NotificationPage() {
   const searchParams = useSearchParams();
   const type: string = searchParams.get("type") ?? "";
   const page: string = searchParams.get("page") ?? "1";
   const limit: string = searchParams.get("limit") ?? "10";
-  const fullURL: string = BACKEND_URL + "/noti/getNoti" + "/661754a9ae209b64b08e6874?" +
-    ((type === "") ? "" : "type=" + type) +
-    "&page=" + page + "&limit=" + limit;
+  const fullURL: string =
+    `${BACKEND_URL}/noti/getNoti/${user_id}?` +
+    (type === "" ? "" : `type=${type}`) +
+    `&page=${page}` +
+    `&limit=${limit}`;
   const { data, error, isLoading } = useSWR<INotiProps[]>(fullURL, fetcher);
 
   if (!notificationTypes.includes(type)) {
@@ -48,16 +48,22 @@ export default function NotificationPage() {
     <section className="notification__content">
       <div className="notification__content--top">
         <h2 className="notification__title">Thông báo</h2>
-        <button className="btn_ pri_"
-        // onClick={handleOnClickReadAll}
+        <button
+          className="btn_ pri_"
+          // onClick={handleOnClickReadAll}
         >
           <span>Đánh dấu tất cả đã đọc</span>
         </button>
       </div>
       {isLoading && <p>Loading...</p>}
-      {data && data.map((notification: INotiProps) =>
-        <CustomerNotificationItem key={notification._id} {...notification} />
-      )}
+      {data &&
+        data.map((notification: INotiProps) => (
+          <CustomerNotificationItem
+            key={notification._id}
+            {...notification}
+            user_id={user_id}
+          />
+        ))}
     </section>
   );
 }
