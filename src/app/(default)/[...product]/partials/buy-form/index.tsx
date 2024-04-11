@@ -38,11 +38,13 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
 }
 
 export default function ProductBuyForm({
+  pid,
   productInfo,
   currentVariantSlug,
   mobileOnly,
   ...props
 }: {
+  pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
   mobileOnly?: string;
@@ -179,6 +181,7 @@ export default function ProductBuyForm({
             {productInfo.product_variants.map((item, index) => {
               return (
                 <ProductVariant
+                  pid={pid}
                   variant={{
                     id: item._id,
                     name: item.variant_name,

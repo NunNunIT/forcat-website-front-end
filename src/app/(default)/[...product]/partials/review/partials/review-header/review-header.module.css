@@ -59,7 +59,7 @@
 .image-overview {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0.8rem;
 }
 
 .image-overview__container {
@@ -78,6 +78,34 @@
     cursor: pointer;
     width: 100%;
     position: relative;
+}
+
+.image-overview__empty-noti-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.image-overview__empty-noti-div--full {
+    height: 100%;
+    justify-content: center;
+}
+
+.image-overview__empty-noti-img-div {
+    width: 120px;
+    height: 120px;
+    position: relative;
+}
+
+.image-overview__empty-noti-img-div--full {
+    width: 300px;
+    height: 300px;
+}
+
+.image-overview__empty-noti-text {
+    font-weight: 600;
 }
 
 .image-overview__image-div {
