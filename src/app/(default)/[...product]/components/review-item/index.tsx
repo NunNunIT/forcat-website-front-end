@@ -22,15 +22,13 @@ const cx = classNames.bind(styles);
 
 export default function ProductReviewItem({
   review,
-  key,
   handleOpenModal,
 }: {
   review: IReview;
-  key?: number;
   handleOpenModal: any;
 }) {
   return (
-    <div className={cx("review-item")} key={key}>
+    <div className={cx("review-item")}>
       <div className={cx("review-item__info")}>
         <div className={cx("review-item__avatar-div")}>
           <CldImage
@@ -68,6 +66,7 @@ export default function ProductReviewItem({
           {review.review_video.map((item, index) => {
             return (
               <CldImage
+                key={index}
                 className={cx("review-item__video")}
                 src={item.link}
                 alt={item.alt}

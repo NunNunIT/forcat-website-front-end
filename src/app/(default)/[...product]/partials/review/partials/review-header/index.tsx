@@ -284,7 +284,7 @@ export default function ProductReviewHeader({
               <div className={cx("video-overview__container")}>
                 {recentVideos.map((item, index) => {
                   return (
-                    <div className={cx("video-overview__item")}>
+                    <div className={cx("video-overview__item")} key={index}>
                       {/* <CldVideoPlayer
                   className={cx("video-overview__video")}
                   src={item.link}
