@@ -3,9 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// import components
-import { CustomerProductCard } from "@/components";
-
 // import css
 import "./page.css";
 
