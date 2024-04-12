@@ -4,7 +4,7 @@
 import { useSearchParams } from "next/navigation";
 import useSWR, { Fetcher } from "swr";
 import {
-  BACKEND_URL,
+  BACKEND_URL_ORDERS,
   ORDER_STATUS_LIST,
 } from "@/utils/commonConst";
 
@@ -29,18 +29,10 @@ const fetcher: Fetcher<ResponseOrderHistory, string> = async (url: string) => {
   return json.data as ResponseOrderHistory;
 }
 
-const orderAPIEndpoint = "/orders";
 const getFullBackendURLOrders = (status: string, page: string): string => {
-  return BACKEND_URL + `${orderAPIEndpoint}?` +
+  return BACKEND_URL_ORDERS +
     ((status === "all") ? "" : `type=${status}&`) +
     `page=${page}&limit=3`;
-}
-
-const currentPageURL = "/account/purchase-history";
-const getFullURL = (status: string, page: string): string => {
-  return `${currentPageURL}?` +
-    ((status === "all") ? "" : `status=${status}&`) +
-    `page=${page}`;
 }
 
 export default function PurchaseHistoryPage() {
@@ -67,13 +59,13 @@ export default function PurchaseHistoryPage() {
           <CustomerOrderItem key={order._id} {...order} />
         )}
 
-        {!isLoading && !error && data?.maxPage > 1 && <CustomerPagination
-          currentPage={parseInt(currentPage)}
-          maxPage={data?.maxPage ?? 1}
-          hrefFunc={(page: number) =>
-            getFullURL(currentStatus, page.toString())
-          }
-        />}
+        {/* Pagination */}
+        {!isLoading && !error && data?.maxPage > 1 && (
+          <CustomerPagination
+            currentPage={parseInt(currentPage)}
+            maxPage={data?.maxPage ?? 1}
+          />
+        )}
       </section>
     </div>
   )

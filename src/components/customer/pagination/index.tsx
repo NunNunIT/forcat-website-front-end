@@ -19,7 +19,6 @@ import styles from "./pagination.module.css";
 interface IPaginationProps {
   maxPage: number;
   currentPage: number;
-  hrefFunc: (page: number) => string;
 }
 
 const cx = classNames.bind(styles);
