@@ -3,7 +3,7 @@
 // import libs
 import Image from "next/image";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   convertDateToFormatHHMMDDMMYYYY,
   isActiveClassWithBool,
@@ -20,16 +20,28 @@ import styles from "./notification-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function NotificationItem({ user_id, ...props }: INotiProps) {
+export default function NotificationItem({
+  user_id,
+  allRead,
+  ...props
+}: INotiProps) {
   console.log("data props:", props);
   console.log("Isread:", props.is_read);
+  const [isRead, setIsRead] = useState<boolean>(props.is_read);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  useEffect(() => {
+    // Apply effect when all notifications are marked as read
+    if (allRead) {
+      setIsRead(true);
+    }
+  }, [allRead]);
   const postData = {
     user_id: user_id,
     noti_id: props._id,
   };
   const handleOnClickRead = () => {
     setIsShowModal(true);
+    setIsRead(true);
     fetch(`${BACKEND_URL}/noti/readNoti`, {
       method: "POST",
       headers: {
@@ -41,7 +53,7 @@ export default function NotificationItem({ user_id, ...props }: INotiProps) {
 
   return (
     <>
-      <div className={cx("notification-item")}>
+      <div className={cx("notification-item", isActiveClassWithBool(isRead))}>
         <div className={cx("notification-item__cover-container")}></div>
         <div className={cx("notification-item__content-wrapper")}>
           <h5 className={cx("notification-item__title")}>

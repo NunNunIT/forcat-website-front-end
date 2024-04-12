@@ -155,4 +155,5 @@ interface INotiProps {
   notification_url_img: string;
   updatedAt: string;
   is_read: boolean;
+  allRead: boolean;
 }
