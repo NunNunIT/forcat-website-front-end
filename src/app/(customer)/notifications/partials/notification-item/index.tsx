@@ -22,7 +22,7 @@ const cx = classNames.bind(styles);
 
 export default function NotificationItem({ user_id, ...props }: INotiProps) {
   console.log("data props:", props);
-  console.log("data user:", user_id);
+  console.log("Isread:", props.is_read);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const postData = {
     user_id: user_id,
