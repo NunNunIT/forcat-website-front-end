@@ -18,6 +18,10 @@
   padding-block: .5rem;
 }
 
+.product-item__name:is(:active, :visited) {
+  color: black;
+}
+
 .product-item__name:hover {
   color: var(--primary-mau0-2);
 }

@@ -4,11 +4,11 @@
 
   width: 100%;
 
+  margin: 0;
   display: flex;
   flex-direction: column;
   border-radius: .5rem;
   gap: 1rem;
-  margin: 0;
 }
 
 .account-purchase-history__main a {
@@ -56,6 +56,7 @@
 
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
   padding: 0;
 }

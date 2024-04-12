@@ -171,3 +171,9 @@ interface IResponseJSON {
   message?: string;
   data?: Object;
 }
+
+
+interface ResponseOrderHistory {
+  orders: IOrderItemProps[];
+  maxPage: number;
+}
