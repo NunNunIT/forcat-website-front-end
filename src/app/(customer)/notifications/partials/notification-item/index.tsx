@@ -26,11 +26,9 @@ export default function NotificationItem({
   ...props
 }: INotiProps) {
   console.log("data props:", props);
-  console.log("Isread:", props.is_read);
   const [isRead, setIsRead] = useState<boolean>(props.is_read);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   useEffect(() => {
-    // Apply effect when all notifications are marked as read
     if (allRead) {
       setIsRead(true);
     }
@@ -47,7 +45,7 @@ export default function NotificationItem({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData), // Chuyển đổi đối tượng JavaScript thành chuỗi JSON
+      body: JSON.stringify(postData), 
     });
   };
 
