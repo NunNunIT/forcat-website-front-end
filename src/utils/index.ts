@@ -165,6 +165,24 @@ function createSlug(string: string) {
     .replace(/-+$/, "");
 }
 
+function objectToSearchParams(obj: Object) {
+  const searchParams = new URLSearchParams();
+
+  // Loop through each key-value pair in the object
+  for (const [key, value] of Object.entries(obj)) {
+    // If value is an array, append each element as a separate parameter
+    if (Array.isArray(value)) {
+      value.forEach(item => searchParams.append(key, item));
+    } else {
+      // Otherwise, append the key-value pair directly
+      searchParams.append(key, value);
+    }
+  }
+
+  return searchParams;
+}
+
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -182,4 +200,5 @@ export {
   convertOrderStatusToIconData,
   isActiveClassWithBool,
   createSlug,
+  objectToSearchParams,
 };

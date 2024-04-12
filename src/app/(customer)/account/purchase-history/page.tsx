@@ -1,18 +1,20 @@
 "use client";
 
 // import libs
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useSWR, { Fetcher } from "swr";
 import {
-  isActiveClass,
-  convertOrderStatusToStr
-} from "@/utils";
-import { BACKEND_URL } from "@/utils/commonConst";
+  BACKEND_URL,
+  ORDER_STATUS_LIST,
+} from "@/utils/commonConst";
 
 // import partials, components
-import { CustomerOrderItem } from "./partials";
+import {
+  CustomerOrderItem,
+  CustomerHistoryStatusNav
+} from "./partials";
 import { CustomerPagination } from "@/components";
+import NotFound from "@/app/not-found";
 
 // import css
 import "./page.css";
@@ -41,8 +43,6 @@ const getFullURL = (status: string, page: string): string => {
     `page=${page}`;
 }
 
-export const dynamic = "force-dynamic"
-
 export default function PurchaseHistoryPage() {
   const searchParams = useSearchParams();
   const currentPage = searchParams.get("page") ?? "1";
@@ -52,18 +52,12 @@ export default function PurchaseHistoryPage() {
 
   const { data, error, isLoading } = useSWR(fullURL, fetcher);
 
+  if (!ORDER_STATUS_LIST.includes(currentStatus))
+    return NotFound();
+
   return (
-    <main className="account-purchase-history__main">
-      <nav className="purchase-history__status-container">
-        {["all", "unpaid", "delivering", "finished", "cancel"].map((status) =>
-          <Link key={status}
-            className={`purchase-history__status ${isActiveClass(currentStatus, status)}`}
-            href={getFullURL(status, "1")}
-          >
-            {convertOrderStatusToStr(status)}
-          </Link>
-        )}
-      </nav>
+    <div className="account-purchase-history__main">
+      <CustomerHistoryStatusNav />
 
       <section className="purchase-history__purchase-item-list">
         {isLoading && <p>Đang tải dữ liệu...</p>}
@@ -76,9 +70,11 @@ export default function PurchaseHistoryPage() {
         {!isLoading && !error && data?.maxPage > 1 && <CustomerPagination
           currentPage={parseInt(currentPage)}
           maxPage={data?.maxPage ?? 1}
-          hrefFunc={(page: number) => getFullURL(currentStatus, page.toString())}
+          hrefFunc={(page: number) =>
+            getFullURL(currentStatus, page.toString())
+          }
         />}
       </section>
-    </main>
+    </div>
   )
 }

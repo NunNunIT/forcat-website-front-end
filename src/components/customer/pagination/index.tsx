@@ -2,8 +2,15 @@
 
 // import libs
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { isActiveClassWithBool } from "@/utils";
+import {
+  useRouter,
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
+import {
+  isActiveClassWithBool,
+  objectToSearchParams
+} from "@/utils";
 import classNames from "classnames/bind";
 
 // import css
@@ -19,6 +26,9 @@ const cx = classNames.bind(styles);
 
 export default function Pagination(props: IPaginationProps) {
   const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const allParams = Object.fromEntries(searchParams.entries());
   const siblings: number = 1;
   const pages: number[] = Array.from(
     { length: siblings * 2 + 1 },
@@ -35,45 +45,83 @@ export default function Pagination(props: IPaginationProps) {
 
   return (
     <div className={cx("pagination-container")}>
-      <button disabled={props.currentPage === 1}
-        onClick={() => {
-          const navigationPage: number = props.currentPage - 1;
-          const navigationURL: string = props.hrefFunc(navigationPage);
-          router.push(navigationURL);
-        }}
+      {/* The first pagination button */}
+      <PaginationButton
+        disabled={props.currentPage === 1}
+        pathName={pathName}
+        allParams={allParams}
+        page={props.currentPage - 1}
       >
         <span className="material-icons-outlined">arrow_back_ios</span>
-      </button>
-      <Link
-        className={cx(isActiveClassWithBool(props.currentPage === 1))}
-        href={props.hrefFunc(1)}
-      >
-        {1}
-      </Link>
+      </PaginationButton>
+      {/* The first page */}
+      <PaginationItem
+        pathName={pathName}
+        currentPage={props.currentPage}
+        page={1}
+        allParams={allParams}
+      />
       {!objContinue.isLeftContinue && <span>...</span>}
       {pages.map(page =>
-        <Link key={page}
-          className={cx(isActiveClassWithBool(props.currentPage === page))}
-          href={props.hrefFunc(page)}
-        >
-          {page}
-        </Link>)}
+        <PaginationItem key={page}
+          pathName={pathName}
+          currentPage={props.currentPage}
+          page={page}
+          allParams={allParams}
+        />
+      )}
       {!objContinue.isRightContinue && <span>...</span>}
-      <Link
-        className={cx(isActiveClassWithBool(props.currentPage === props.maxPage))}
-        href={props.hrefFunc(props.maxPage)}
-      >
-        {props.maxPage}
-      </Link>
-      <button disabled={props.currentPage === props.maxPage}
-        onClick={() => {
-          const navigationPage: number = props.currentPage + 1;
-          const navigationURL: string = props.hrefFunc(navigationPage);
-          router.push(navigationURL);
-        }}
+      {/* The last page */}
+      <PaginationItem
+        pathName={pathName}
+        currentPage={props.currentPage}
+        page={props.maxPage}
+        allParams={allParams}
+      />
+      {/* The last pagination button */}
+      <PaginationButton
+        disabled={props.currentPage === props.maxPage}
+        pathName={pathName}
+        allParams={allParams}
+        page={props.currentPage + 1}
       >
         <span className="material-icons-outlined">arrow_forward_ios</span>
-      </button>
+      </PaginationButton>
     </div>
+  )
+}
+
+function PaginationButton({ className, pathName, page, allParams, children, disabled }: {
+  className?: string
+  pathName: string,
+  page: number
+  allParams: Object,
+  disabled: boolean,
+  children?: React.ReactNode
+}) {
+  const router = useRouter();
+  return (
+    <button className={className}
+      disabled={disabled}
+      onClick={() => router.push(pathName + objectToSearchParams({ ...allParams, page }).toString())}
+    >
+      {children}
+    </button>
+  )
+}
+
+function PaginationItem({ className, pathName, currentPage, page, allParams }: {
+  className?: string
+  pathName: string,
+  currentPage: number,
+  page: number,
+  allParams: Object,
+}) {
+  return (
+    <Link className={`${cx(isActiveClassWithBool(currentPage === page))} ${className}`}
+      href={pathName + objectToSearchParams({ ...allParams, page }).toString()}
+    >
+      {page}
+    </Link>
   )
 }
