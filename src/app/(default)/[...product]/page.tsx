@@ -21,23 +21,29 @@ import { IBuyForm } from "./interfaces";
 import "./page.css";
 
 // fetch data
-async function getProduct(slug) {
-  const res = await fetch(`${BACKEND_URL}/product/${slug[0]}`, {
-    next: { revalidate: 100 },
-  });
-  if (!res.ok || slug[2]) return notFound();
+async function getProduct(slug, pid) {
+  try {
+    const res = await fetch(`${BACKEND_URL}/product/${pid}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok || slug[2]) return notFound();
 
-  return res.json();
+    return res.json();
+  } catch {
+    return notFound();
+  }
 }
 
 export default async function ProductPage({
   params,
+  searchParams,
 }: {
   params: { product: string };
+  searchParams?: { [key: string]: string };
 }) {
   const slug = params.product;
-  const res = await getProduct(slug);
-
+  const { pid } = searchParams;
+  const res = await getProduct(slug, pid);
   const productInfo: IBuyForm = {
     product_id: res.data.product._id,
     product_name: res.data.product.product_name,
@@ -50,6 +56,16 @@ export default async function ProductPage({
   const productDetails = res.data.product.product_detail;
   const productDescription = res.data.product.product_description;
   const productReviews = res.data.product.recent_reviews;
+  const reviewOverview = {
+    total_review: res.data.product.review_count.reduce(
+      (total, current) => total + current,
+      0
+    ),
+    avg_rating: res.data.product.product_avg_rating,
+    review_count: res.data.product.review_count,
+    recent_images: res.data.product.recent_images,
+    recent_videos: res.data.product.recent_videos,
+  };
   const productId = res.data.product._id;
 
   return (
@@ -61,6 +77,7 @@ export default async function ProductPage({
             mobileOnly="mobile-hidden"
             desktopOnly="desktop-hidden"></ProductSlider>
           <ProductBuyForm
+            pid={pid}
             productInfo={productInfo}
             currentVariantSlug={slug[1] ?? ""}
             mobileOnly="desktop-hidden"></ProductBuyForm>
@@ -74,12 +91,13 @@ export default async function ProductPage({
         <div className="product-content--right product-content-right mobile-hidden">
           <div className="decoration__bow">
             <Image
-              src="/imgs/product-page/bow.png"
+              src="/imgs/product-page/bow.webp"
               alt="This is a bow"
               fill={true}
             />
           </div>
           <ProductBuyForm
+            pid={pid}
             productInfo={productInfo}
             currentVariantSlug={slug[1] ?? ""}></ProductBuyForm>
           <ProductDescription
@@ -87,6 +105,7 @@ export default async function ProductPage({
         </div>
       </div>
       <ProductReview
+        reviewOverview={reviewOverview}
         productReviews={productReviews}
         productId={productId}></ProductReview>
     </main>

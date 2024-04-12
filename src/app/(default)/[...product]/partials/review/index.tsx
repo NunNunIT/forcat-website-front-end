@@ -2,7 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // import components
 import { ProductReviewItem } from "../../components";
@@ -17,9 +17,10 @@ import styles from "./review.module.css";
 const cx = classNames.bind(styles);
 
 export default function ProductReview({
+  reviewOverview,
   productReviews,
-  productId,
 }: {
+  reviewOverview: any;
   productReviews: any;
   productId: any;
 }) {
@@ -36,7 +37,7 @@ export default function ProductReview({
     <section className={cx("product-review")}>
       <h3>Đánh giá từ khách hàng</h3>
       <ProductReviewHeader
-        productId={productId}
+        reviewOverview={reviewOverview}
         handleOpenModal={handleOpenModal}></ProductReviewHeader>
 
       <div className={cx("product-review__filter", "review-filter")}>
@@ -58,10 +59,11 @@ export default function ProductReview({
         <div className={cx("reviews__group")}>
           {productReviews.map((review, index) => {
             return (
-              <ProductReviewItem
-                review={review}
-                key={index}
-                handleOpenModal={handleOpenModal}></ProductReviewItem>
+              <React.Fragment key={index}>
+                <ProductReviewItem
+                  review={review}
+                  handleOpenModal={handleOpenModal}></ProductReviewItem>
+              </React.Fragment>
             );
           })}
         </div>

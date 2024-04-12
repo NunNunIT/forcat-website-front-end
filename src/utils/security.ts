@@ -18,7 +18,10 @@ const encryptData = (data: string) => {
   // Convert the encrypted data to base64 for string representation
   const base64Encoded = Buffer.from(encryptedData).toString("base64");
 
-  return base64Encoded;
+  // Change + to %2B
+  const encryptedString = base64Encoded.replaceAll("+", "%2B");
+
+  return encryptedString;
 };
 
 const decryptData = (encryptedData: string) => {

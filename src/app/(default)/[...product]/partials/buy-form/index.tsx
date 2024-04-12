@@ -38,19 +38,25 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
 }
 
 export default function ProductBuyForm({
+  pid,
   productInfo,
   currentVariantSlug,
   mobileOnly,
   ...props
 }: {
+  pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
   mobileOnly?: string;
 }) {
+  const filteredVariant = filterCurrentVariant(
+    productInfo.product_variants,
+    currentVariantSlug
+  );
   const currentVariant =
-    currentVariantSlug == ""
+    currentVariantSlug == "" || !filteredVariant
       ? productInfo.product_variants[0]
-      : filterCurrentVariant(productInfo.product_variants, currentVariantSlug);
+      : filteredVariant;
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
@@ -179,6 +185,7 @@ export default function ProductBuyForm({
             {productInfo.product_variants.map((item, index) => {
               return (
                 <ProductVariant
+                  pid={pid}
                   variant={{
                     id: item._id,
                     name: item.variant_name,
