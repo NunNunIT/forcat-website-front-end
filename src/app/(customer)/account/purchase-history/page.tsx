@@ -30,7 +30,7 @@ const fetcher: Fetcher<ResponseOrderHistory, string> = async (url: string) => {
 }
 
 const getFullBackendURLOrders = (status: string, page: string): string => {
-  return BACKEND_URL_ORDERS +
+  return BACKEND_URL_ORDERS + "?" +
     ((status === "all") ? "" : `type=${status}&`) +
     `page=${page}&limit=3`;
 }

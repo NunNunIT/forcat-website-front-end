@@ -102,7 +102,7 @@ function PaginationButton({ className, pathName, page, allParams, children, disa
   return (
     <button className={className}
       disabled={disabled}
-      onClick={() => router.push(pathName + objectToSearchParams({ ...allParams, page }).toString())}
+      onClick={() => router.push(pathName + "?" + objectToSearchParams({ ...allParams, page }).toString())}
     >
       {children}
     </button>
@@ -118,7 +118,7 @@ function PaginationItem({ className, pathName, currentPage, page, allParams }: {
 }) {
   return (
     <Link className={`${cx(isActiveClassWithBool(currentPage === page))} ${className}`}
-      href={pathName + objectToSearchParams({ ...allParams, page }).toString()}
+      href={pathName + "?" + objectToSearchParams({ ...allParams, page }).toString()}
     >
       {page}
     </Link>
