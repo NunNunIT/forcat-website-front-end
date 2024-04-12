@@ -18,15 +18,13 @@ export default function AboutUsPage() {
         </div>
       </section>
       <div className="term-of-use-content-page ">
-        <p>
-          <strong>1. Giới thiệu</strong>
-        </p>
+        <h2>1. Giới thiệu</h2>
         <p>Chào mừng quý khách hàng đến với FORCAT</p>
         <p>
-          Chúng tôi là Cửa hàng chuyên kinh doanh các sản phẩm cho mèo
-          FORCAT&nbsp;có địa chỉ giao dịch tại khu phố 6, phường Linh Trung,
-          thành phố Thủ Đức, thành phố Hồ Chí Minh&nbsp;và thành lập website
-          chính thức tại www.forcat.com.
+          Chúng tôi là Cửa hàng chuyên kinh doanh các sản phẩm cho mèo FORCAT
+          Shop&nbsp;có địa chỉ giao dịch tại khu phố 6, phường Linh Trung, thành
+          phố Thủ Đức, thành phố Hồ Chí Minh&nbsp;và thành lập website chính
+          thức tại www.forcat.com.
         </p>
         <p>
           Khi quý khách hàng truy cập vào trang website của chúng tôi có nghĩa
@@ -42,9 +40,7 @@ export default function AboutUsPage() {
           Quý khách hàng vui lòng kiểm tra thường xuyên để cập nhật những thay
           đổi của chúng tôi.
         </p>
-        <p>
-          <strong>2. Hướng dẫn sử dụng website</strong>
-        </p>
+        <h2>2. Hướng dẫn sử dụng website</h2>
         <p>
           Khi vào web của chúng tôi, khách hàng phải đảm bảo đủ 18 tuổi, hoặc
           truy cập dưới sự giám sát của cha mẹ hay người giám hộ hợp pháp. Khách
@@ -76,18 +72,14 @@ export default function AboutUsPage() {
           website. Nếu không muốn tiếp tục nhận mail, quý khách có thể từ chối
           bằng cách nhấp vào đường link ở dưới cùng trong mọi email quảng cáo.
         </p>
-        <p>
-          <strong>3. Ý kiến của khách hàng</strong>
-        </p>
+        <h2>3. Ý kiến của khách hàng</h2>
         <p>
           Tất cả nội dung trang web và ý kiến phê bình của quý khách đều là tài
           sản của chúng tôi. Nếu chúng tôi phát hiện bất kỳ thông tin giả mạo
           nào, chúng tôi sẽ khóa tài khoản của quý khách ngay lập tức hoặc áp
           dụng các biện pháp khác theo quy định của pháp luật Việt Nam.
         </p>
-        <p>
-          <strong>4. Chấp nhận đơn hàng và giá cả</strong>
-        </p>
+        <h2>4. Chấp nhận đơn hàng và giá cả</h2>
         <p>
           Chúng tôi có quyền từ chối hoặc hủy đơn hàng của quý khách vì bất kỳ
           lý do gì liên quan đến lỗi kỹ thuật, hệ thống một cách khách quan vào
@@ -108,9 +100,7 @@ export default function AboutUsPage() {
           chối hoặc hủy bỏ bất kỳ đơn hàng nào dù đơn hàng đó đã hay chưa được
           xác nhận hoặc đã thanh toán.
         </p>
-        <p>
-          <strong>5. Thay đổi hoặc hủy bỏ giao dịch tại forcat.com</strong>
-        </p>
+        <h2>5. Thay đổi hoặc hủy bỏ giao dịch tại forcat.com</h2>
         <p>
           Trong mọi trường hợp, khách hàng đều có quyền chấm dứt giao dịch nếu
           đã thực hiện các biện pháp sau đây:
@@ -126,11 +116,7 @@ export default function AboutUsPage() {
             ích nào từ hàng hóa đó.
           </li>
         </ul>
-        <p>
-          <strong>
-            6. Giải quyết hậu quả do lỗi nhập sai thông tin tại FORCAT
-          </strong>
-        </p>
+        <h2>6. Giải quyết hậu quả do lỗi nhập sai thông tin tại FORCAT</h2>
         <p>
           Khách hàng có trách nhiệm cung cấp thông tin đầy đủ và chính xác khi
           tham gia giao dịch tại FORCAT. Trong trường hợp khách hàng nhập sai
@@ -156,9 +142,7 @@ export default function AboutUsPage() {
           giảm giá cho các lần mua sắm tiếp theo với mệnh giá tùy từng trường
           hợp cụ thể và có quyền không thực hiện giao dịch bị lỗi.
         </p>
-        <p>
-          <strong>7. Thương hiệu và bản quyền</strong>
-        </p>
+        <h2>7. Thương hiệu và bản quyền</h2>
         <p>
           Mọi quyền sở hữu trí tuệ (đã đăng ký hoặc chưa đăng ký), nội dung
           thông tin và tất cả các thiết kế, văn bản, đồ họa, phần mềm, hình ảnh,
@@ -167,18 +151,14 @@ export default function AboutUsPage() {
           bảo vệ bởi luật bản quyền của Việt Nam và các công ước quốc tế. Bản
           quyền đã được bảo lưu.
         </p>
-        <p>
-          <strong>8. Quyền pháp lý</strong>
-        </p>
+        <h2>8. Quyền pháp lý</h2>
         <p>
           Các điều kiện, điều khoản và nội dung của trang web này được điều
           chỉnh bởi luật pháp Việt Nam và Tòa án có thẩm quyền tại Việt Nam sẽ
           giải quyết bất kỳ tranh chấp nào phát sinh từ việc sử dụng trái phép
           trang web này.
         </p>
-        <p>
-          <strong>9. Quy định về bảo mật</strong>
-        </p>
+        <h2>9. Quy định về bảo mật</h2>
         <p>
           Trang web của chúng tôi coi trọng việc bảo mật thông tin và sử dụng
           các biện pháp tốt nhất bảo vệ thông tin và việc thanh toán của quý
@@ -198,9 +178,7 @@ export default function AboutUsPage() {
           Mọi thông tin giao dịch sẽ được bảo mật ngoại trừ trong trường hợp cơ
           quan pháp luật yêu cầu.
         </p>
-        <p>
-          <strong>10. Thanh toán an toàn và tiện lợi tại FORCAT</strong>
-        </p>
+        <h2>10. Thanh toán an toàn và tiện lợi tại FORCAT</h2>
         <p>
           Người mua có thể tham khảo các phương thức thanh toán sau đây và lựa
           chọn áp dụng phương thức phù hợp:
@@ -229,7 +207,7 @@ export default function AboutUsPage() {
           Bước 1: Người mua tìm hiểu thông tin về sản phẩm, dịch vụ được đăng
           tin;
         </p>
-        <p>Bước 2: FORCAT xác thực đơn hàng (điện thoại, tin nhắn, email);</p>
+        <p>Bước 2: FORCAT xác thực đơn hàng (điện thoại, tin nhắn, email);</p>
         <p>Bước 3: FORCAT&nbsp;xác nhận thông tin Người mua;</p>
         <p>Bước 4: Ngưởi mua thanh toán;</p>
         <p>Bước 5:&nbsp; FORCAT chuyển hàng;</p>
@@ -238,18 +216,13 @@ export default function AboutUsPage() {
           Đối với người mua hàng từ FORCAT thì phải tuẩn thu theo chính sách
           thanh toán của công ty.
         </p>
-        <p>
-          <strong>11. Đảm bảo an toàn giao dịch tại FORCAT</strong>
-        </p>
+        <h2>11. Đảm bảo an toàn giao dịch tại FORCAT</h2>
         <p>
           Chúng tôi sử dụng các dịch vụ để bảo vệ thông tin về nội dung mà người
           bán đăng sản phẩm trên FORCAT. Để đảm bảo các giao dịch được tiến hành
           thành công, hạn chế tối đa rủi ro có thể phát sinh.
         </p>
-        <p>
-          <strong>12</strong>
-          <strong>. Luật pháp và thẩm quyền tại Lãnh thổ Việt Nam</strong>
-        </p>
+        <h2>12. Luật pháp và thẩm quyền tại Lãnh thổ Việt Nam</h2>
         <p>
           Tất cả các Điều Khoản và Điều Kiện này và Hợp Đồng (và tất cả nghĩa vụ
           phát sinh ngoài hợp đồng hoặc có liên quan) sẽ bị chi phối và được
