@@ -49,10 +49,14 @@ export default function ProductBuyForm({
   currentVariantSlug: string;
   mobileOnly?: string;
 }) {
+  const filteredVariant = filterCurrentVariant(
+    productInfo.product_variants,
+    currentVariantSlug
+  );
   const currentVariant =
-    currentVariantSlug == ""
+    currentVariantSlug == "" || !filteredVariant
       ? productInfo.product_variants[0]
-      : filterCurrentVariant(productInfo.product_variants, currentVariantSlug);
+      : filteredVariant;
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
