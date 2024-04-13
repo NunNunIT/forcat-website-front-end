@@ -40,11 +40,14 @@ function convertOrderStatusToStr(order_status: string): string {
     case "cancel":
       return "Đã hủy";
   }
+
+  console.log("Unexpected Order Status: ", order_status);
   return "Unexpected Order Status";
 }
 
 function isActiveClass(src_str: string, des_str: string): string {
-  return src_str === des_str ? "is-active" : "";
+  const min_length = Math.min(src_str.length, des_str.length);
+  return src_str.substring(0, min_length) === des_str.substring(0, min_length) ? "is-active" : "";
 }
 
 function isActiveClassWithBool(bool: boolean): string {
@@ -135,6 +138,49 @@ function isValidEmail(email: string): boolean {
   return emailPattern.test(email);
 }
 
+function createSlug(string: string) {
+  const a =
+    "àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;";
+  const b =
+    "aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------";
+  const p = new RegExp(a.split("").join("|"), "g");
+  return string
+    .toString()
+    .toLowerCase()
+    .replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a")
+    .replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e")
+    .replace(/i|í|ì|ỉ|ĩ|ị/gi, "i")
+    .replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o")
+    .replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u")
+    .replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y")
+    .replace(/đ/gi, "d")
+    .replace(/\s+/g, "-")
+    .replace(p, (c) => b.charAt(a.indexOf(c)))
+    .replace(/&/g, "-and-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
+function objectToSearchParams(obj: Object) {
+  const searchParams = new URLSearchParams();
+
+  // Loop through each key-value pair in the object
+  for (const [key, value] of Object.entries(obj)) {
+    // If value is an array, append each element as a separate parameter
+    if (Array.isArray(value)) {
+      value.forEach(item => searchParams.append(key, item));
+    } else {
+      // Otherwise, append the key-value pair directly
+      searchParams.append(key, value);
+    }
+  }
+
+  return searchParams;
+}
+
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -151,4 +197,6 @@ export {
   convertPaymentToStr,
   convertOrderStatusToIconData,
   isActiveClassWithBool,
+  createSlug,
+  objectToSearchParams,
 };

@@ -19,3 +19,5 @@ export { default as CustomerProductItemInOrderItem } from "./customer/product-it
 export { default as CustomerHeaderItemUlt } from "./customer/item-ult";
 export { default as Scrollup } from "./customer/scroll-up";
 export { default as ContactAside } from "./customer/contact-aside";
+
+export { default as CustomerPagination } from "./customer/pagination";
