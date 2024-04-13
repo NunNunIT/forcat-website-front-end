@@ -3,10 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 // import global components
-import { CustomerCarousel } from "@/components";
-import { CustomerProductCard } from "@/components";
-import { CustomerSlider } from "@/components";
-import { CustomerCategories } from "@/components";
+import {
+  CustomerCarousel,
+  CustomerProductCard,
+  CustomerSlider,
+  CustomerCategories,
+  Scrollup,
+  ContactAside,
+} from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
 
 // use css
@@ -101,6 +105,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <ContactAside></ContactAside>
+      <Scrollup></Scrollup>
       <CustomerFooter></CustomerFooter>
     </>
   );

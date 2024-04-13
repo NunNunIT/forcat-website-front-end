@@ -17,3 +17,5 @@ export { default as CustomerStarRating } from "./customer/star-rating";
 export { default as CustomerLogo } from "./customer/logo";
 export { default as CustomerProductItemInOrderItem } from "./customer/product-item-in-order-item";
 export { default as CustomerHeaderItemUlt } from "./customer/item-ult";
+export { default as Scrollup } from "./customer/scroll-up";
+export { default as ContactAside } from "./customer/contact-aside";
