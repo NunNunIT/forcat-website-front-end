@@ -14,10 +14,12 @@ import styles from "./product-variant.module.css";
 const cx = classNames.bind(styles);
 
 export default function ProductVariant({
+  pid,
   variant,
   key,
   ...props
 }: {
+  pid: any;
   variant: IVariant;
   key?: number;
 }) {
@@ -27,14 +29,14 @@ export default function ProductVariant({
   return (
     <Link
       className={cx("variant", isActive)}
-      href={variant.url}
+      href={`${variant.url}?pid=${pid.replaceAll("+", "%2B")}`}
       title={variant.name}
       key={key}>
       <div
         className={cx("variant__tick-div", isActive ? "variant__display" : "")}>
         <Image
           className={cx("variant__tick")}
-          src="/imgs/product-page/tick.png"
+          src="/imgs/product-page/tick.webp"
           alt="Decoration tick"
           fill={true}
         />
