@@ -13,12 +13,7 @@ import { CustomerQuantityInputGroup, CustomerRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import {
-  convertNumberToMoney,
-  convertMoneyToNumber,
-  createSlug,
-} from "@/utils";
-import { BACKEND_URL } from "@/utils/commonConst";
+import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -29,11 +24,11 @@ import { IBuyForm } from "../../interfaces";
 // use css
 const cx = classNames.bind(styles);
 
-function filterCurrentVariant(productVariants, currentVariantSlug) {
-  return productVariants.filter(
+function filterCurrentVariant(productInfo, currentVariantSlug) {
+  return productInfo.product_variants.filter(
     (variant) =>
-      createSlug(variant.variant_name) ==
-      decodeURIComponent(createSlug(currentVariantSlug))
+      variant.variant_name ==
+      decodeURIComponent(currentVariantSlug.replaceAll("-", " "))
   )[0];
 }
 

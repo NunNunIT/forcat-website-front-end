@@ -1,83 +1,70 @@
 "use client";
 
 // import libs
-import React, { useState } from "react";
-import { CustomerOrderItem } from "./partials";
-import { isActiveClass } from "@/utils";
+import { useSearchParams } from "next/navigation";
+import useSWR, { Fetcher } from "swr";
+import {
+  BACKEND_URL_ORDERS,
+  ORDER_STATUS_LIST,
+} from "@/utils/commonConst";
+
+// import partials, components
+import {
+  CustomerOrderItem,
+  CustomerHistoryStatusNav
+} from "./partials";
+import { CustomerPagination } from "@/components";
+import NotFound from "@/app/not-found";
 
 // import css
 import "./page.css";
 
-const fetchData: OrderItemProps[] = [
-  {
-    order_id: 'DH001', order_status: 'unpaid', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-      { product_id: 'P002', quantity: 2, unit_price: 12000000, price_discount: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH002', order_status: 'delivering', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH003', order_status: 'finished', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH004', order_status: 'cancel', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH005', order_status: 'unpaid', order_total_price: 2360000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-]
+const fetcher: Fetcher<ResponseOrderHistory, string> = async (url: string) => {
+  const res: Response = await fetch(url);
+  const json: IResponseJSON = await res.json();
+  if (!json.success) throw json;
 
+  return json.data as ResponseOrderHistory;
+}
+
+const getFullBackendURLOrders = (status: string, page: string): string => {
+  return BACKEND_URL_ORDERS + "?" +
+    ((status === "all") ? "" : `type=${status}&`) +
+    `page=${page}&limit=3`;
+}
 
 export default function PurchaseHistoryPage() {
-  const [statusPurchaseHistory, setStatusPurchaseHistory] = useState('all');
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get("page") ?? "1";
+  const currentStatus = searchParams.get("status") ?? "all";
 
-  const orders = (() => fetchData)();
+  const fullURL: string = getFullBackendURLOrders(currentStatus, currentPage);
+
+  const { data, error, isLoading } = useSWR(fullURL, fetcher);
+
+  if (!ORDER_STATUS_LIST.includes(currentStatus))
+    return NotFound();
 
   return (
-    <main className="account-purchase-history__main">
-      <nav className="purchase-history__status-container">
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'all')}`}
-          onClick={() => setStatusPurchaseHistory('all')}
-        >
-          Tất cả
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'unpaid')}`}
-          onClick={() => setStatusPurchaseHistory('unpaid')}
-        >
-          Chờ thanh toán
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'delivering')}`}
-          onClick={() => setStatusPurchaseHistory('delivering')}
-        >
-          Đang giao hàng
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'finished')}`}
-          onClick={() => setStatusPurchaseHistory('finished')}
-        >
-          Hoàn thành
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'cancel')}`}
-          onClick={() => setStatusPurchaseHistory('cancel')}
-        >
-          Đã hủy
-        </button>
-      </nav>
+    <div className="account-purchase-history__main">
+      <CustomerHistoryStatusNav />
 
       <section className="purchase-history__purchase-item-list">
-        {orders.map((order: OrderItemProps, index: number) =>
-          <CustomerOrderItem key={index} {...order} />)
-        }
+        {isLoading && <p>Đang tải dữ liệu...</p>}
+        {!isLoading && error && <p>Đã có lỗi xảy ra: &#39;{error.message}&#39;</p>}
+        {!isLoading && !error && data.orders.length === 0 && <p>Bạn chưa có đơn hàng nào</p>}
+        {!isLoading && !error && data.orders.map((order: IOrderItemProps) =>
+          <CustomerOrderItem key={order._id} {...order} />
+        )}
+
+        {/* Pagination */}
+        {!isLoading && !error && data?.maxPage > 1 && (
+          <CustomerPagination
+            currentPage={parseInt(currentPage)}
+            maxPage={data?.maxPage ?? 1}
+          />
+        )}
       </section>
-    </main>
+    </div>
   )
 }

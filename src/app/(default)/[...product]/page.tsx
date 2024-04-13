@@ -45,11 +45,10 @@ export default async function ProductPage({
   const { pid } = searchParams;
   const res = await getProduct(slug, pid);
   const productInfo: IBuyForm = {
-    product_id: res.data.product._id,
-    product_name: res.data.product.product_name,
-    product_slug: res.data.product.product_slug,
-    product_avg_rating: res.data.product.product_avg_rating,
-    product_variants: res.data.product.product_variants,
+    product_name: res.product.product_name,
+    product_slug: res.product.product_slug,
+    product_avg_rating: res.product.product_avg_rating,
+    product_variants: res.product.product_variants,
   };
 
   const productImgs = res.data.product.product_imgs;
