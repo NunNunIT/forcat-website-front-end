@@ -1,3 +1,5 @@
+"use client";
+
 // import libs
 import classNames from "classnames/bind";
 
@@ -13,8 +15,26 @@ export default function CustomerRating({
 }: {
   initValue: IRating;
 }) {
+  let responsiveFontSize;
+
+  if (typeof window !== "undefined") {
+    if (window.innerWidth == 1024 && window.innerWidth > 768) {
+      if (initValue.fontSize == "24px") {
+        responsiveFontSize = "20px";
+      }
+    } else if (window.innerWidth <= 768 && window.innerWidth > 416) {
+      if (initValue.fontSize == "24px") {
+        responsiveFontSize = "16px";
+      }
+    } else if (window.innerWidth <= 416) {
+      if (initValue.fontSize == "24px") {
+        responsiveFontSize = "20px";
+      }
+    }
+  }
+
   const starStyle = {
-    fontSize: initValue.fontSize,
+    fontSize: responsiveFontSize,
   };
 
   return (
@@ -34,18 +54,6 @@ export default function CustomerRating({
                 star
               </span>
             );
-          // else if (
-          //   initValue.rating - index >= 0.5 &&
-          //   initValue.rating - index < 1
-          // )
-          //   return (
-          //     <span
-          //       key={index}
-          //       style={starStyle}
-          //       className={cx("material-icons-round", "star-half")}>
-          //       star_half
-          //     </span>
-          //   );
           else
             return (
               <span
@@ -56,21 +64,6 @@ export default function CustomerRating({
               </span>
             );
         })}
-      {/* <span style={starStyle} className="material-icons-round fill">
-        star
-      </span>
-      <span style={starStyle} className="material-icons-round fill">
-        star
-      </span>
-      <span style={starStyle} className="material-icons-round fill">
-        star
-      </span>
-      <span style={starStyle} className="material-icons-round fill">
-        star
-      </span>
-      <span style={starStyle} className="material-icons-round fill">
-        star
-      </span> */}
     </div>
   );
 }

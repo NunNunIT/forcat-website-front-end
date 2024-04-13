@@ -2,15 +2,15 @@
 import {
   CustomerHeaderNav,
   CustomerHeaderMain,
-  CustomerHeaderMenu
-} from "./partials/";
+  CustomerHeaderMenu,
+} from "./partials";
 
 // use bind from classnames
 import classNameNames from "classnames/bind";
 import styles from "./header.module.css";
 const cx = classNameNames.bind(styles);
 
-const headerCategories: (ICategoryProps)[] = [
+const headerCategories: ICategoryProps[] = [
   {
     id: "1",
     name: "Thực phẩm",
@@ -74,7 +74,7 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4.6,
           },
-        ]
+        ],
       },
       {
         id: "12",
@@ -116,7 +116,7 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4,
           },
-        ]
+        ],
       },
       {
         id: "13",
@@ -134,9 +134,9 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4.5,
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     id: "2",
@@ -160,7 +160,7 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4,
           },
-        ]
+        ],
       },
       {
         id: "22",
@@ -202,9 +202,9 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4,
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     id: "3",
@@ -233,7 +233,7 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4,
           },
-        ]
+        ],
       },
       {
         id: "32",
@@ -257,7 +257,7 @@ const headerCategories: (ICategoryProps)[] = [
             price: 10000,
             rating: 4,
           },
-        ]
+        ],
       },
       {
         id: "33",
@@ -279,11 +279,11 @@ const headerCategories: (ICategoryProps)[] = [
             id: "9",
             name: "Nhà cào 3",
             price: 10000,
-            rating: 4,
+            rating: 0,
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     id: "4",
@@ -317,20 +317,20 @@ const headerCategories: (ICategoryProps)[] = [
       },
     ],
   },
-]
+];
 
 const headerLinks: IHeaderLinkProps[] = [
   {
     title: "Sản phẩm HOT",
     iconData: "local_fire_department",
     url: "a",
-    className: "menu__hot-product"
+    className: "menu__hot-product",
   },
   {
     title: "Khuyến mãi",
     iconData: "savings",
     url: "a",
-    className: "menu__promo"
+    className: "menu__promo",
   },
   {
     title: "Bài viết",
@@ -341,9 +341,9 @@ const headerLinks: IHeaderLinkProps[] = [
   {
     title: "Về chúng tôi",
     url: "a",
-    className: "menu__about-us"
+    className: "menu__about-us",
   },
-]
+];
 
 export default function Header() {
   return (
@@ -353,6 +353,6 @@ export default function Header() {
         <CustomerHeaderMain />
         <CustomerHeaderMenu categories={headerCategories} links={headerLinks} />
       </div>
-    </header >
+    </header>
   );
 }

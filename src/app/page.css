@@ -28,11 +28,12 @@ section {
 
 .tip-products-wrapper.new-products {
   /* background-color: var(--white); */
-  margin-top: 154px;
-  background: #ab6e48;
+  /* margin-top: 154px; */
+  /* background: #ab6e48;
   background: -moz-linear-gradient(top, #ab6e48 0%, #7f3e00 100%);
   background: -webkit-linear-gradient(top, #ab6e48 0%, #7f3e00 100%);
-  background: linear-gradient(to right, #ab6e48 0%, #7f3e00 100%);
+  background: linear-gradient(to right, #ab6e48 0%, #7f3e00 100%); */
+  background-color: white;
 }
 
 .tip-products-wrapper.new-products .tip-products__img {
@@ -53,16 +54,26 @@ section {
 .tip-products__label {
   display: flex;
   padding: 12px 0px;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   color: var(--white);
 }
 
-.tip-products__more {
-  display: flex;
-  align-items: center;
-  color: var(--white);
+.tip-products__title {
+  text-decoration: none;
+  color: black;
+}
+
+.tip-products__title-after::after {
+  content: "::after";
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #000000;
+  margin: 10px auto 15px;
 }
 
 .tip-products__see-all-btn {
@@ -84,10 +95,55 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  /* margin-top: 24px; */
+  justify-content: flex-start;
+  gap: 1.2%;
 }
 
 .tip-products__item {
   flex: 0 0 19%;
+}
+
+.banner-wrapper {
+  margin: 12px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  flex-wrap: wrap;
+}
+
+.banner-img--full {
+  display: block;
+  width: 100%;
+  aspect-ratio: 37 / 6;
+  /* height: 183px; */
+  /* object-fit: cover; */
+  position: relative;
+}
+
+.banner-img--half {
+  display: block;
+  width: 49%;
+  max-width: 49%;
+  aspect-ratio: 8 / 5;
+  /* height: 358px; */
+  /* object-fit: cover; */
+  position: relative;
+}
+
+.banner-img {
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 64rem) {
+  .tip-products__content {
+    gap: 2%;
+  }
+}
+
+
+@media screen and (max-width: 26rem) {
+  .content-container {
+    width: 100%;
+  }
 }

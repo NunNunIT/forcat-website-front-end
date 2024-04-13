@@ -2,7 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // import css
 import styles from "./quantity-input-group.module.css";
@@ -12,20 +12,25 @@ const cx = classNames.bind(styles);
 
 export default function CustomerQuantityInputGroup({
   initValue,
+  takeQuantity,
   ...props
 }: {
   initValue: IQuantityInputGroup;
+  takeQuantity?: any;
 }) {
   const [inputValue, setInputValue] = useState(initValue.defaultValue);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = +event.target.value;
 
-    if (newValue >= initValue.minValue && newValue <= initValue.maxValue)
+    if (newValue >= initValue.minValue && newValue <= initValue.maxValue) {
       setInputValue(newValue);
-
-    initValue.onValueChange(newValue);
+    }
   };
+
+  useEffect(() => {
+    takeQuantity(inputValue);
+  }, [inputValue]);
 
   const decreaseValue = () => {
     if (inputValue > initValue.minValue) setInputValue(+inputValue - 1);
@@ -45,7 +50,10 @@ export default function CustomerQuantityInputGroup({
       <div
         className={cx("quantity-input-group__btn-remove", "btn-quantity")}
         onClick={decreaseValue}>
-        <span className="material-icons-round">remove</span>
+        <span
+          className={cx("material-icons-round", "quantity-input-group__icon")}>
+          remove
+        </span>
       </div>
       <input
         ref={inputRef}
@@ -60,7 +68,10 @@ export default function CustomerQuantityInputGroup({
       <div
         className={cx("quantity-input-group__btn-add", "btn-quantity")}
         onClick={increaseValue}>
-        <span className="material-icons-round">add</span>
+        <span
+          className={cx("material-icons-round", "quantity-input-group__icon")}>
+          add
+        </span>
       </div>
     </div>
   );

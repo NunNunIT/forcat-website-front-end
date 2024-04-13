@@ -10,12 +10,6 @@
   color: var(--primary-mau0-2);
 }
 
-.header__logo-container {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
 .header__logo {
   width: clamp(10rem, 20vw, 13rem);
 }
@@ -25,8 +19,14 @@
   align-items: center;
   width: 100%;
   padding-inline: 2rem;
-
   justify-content: center;
+  position: relative;
+}
+
+.header__search-bar__main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .header__search-bar {
@@ -38,6 +38,40 @@
   border: none;
   border-right: none;
   align-items: center;
+}
+.header__smart-search-wrapper {
+  position: absolute;
+  top: calc(100% + 5px);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  width: 75%;
+  float: left;
+  clear: both;
+  z-index: 100;
+  background: #fff;
+  display: none;
+}
+
+.header__suggest-results-more {
+  width: 100%;
+  float: left;
+}
+
+.header__suggest-results-more-link {
+  text-align: center;
+  display: block;
+  font-size: 0.825rem;
+  padding: 10px 0;
+  font-weight: 600;
+  color: black;
+}
+
+.header__suggest-results-more-link:hover {
+  color: var(--primary-mau0-2);
+}
+
+.highlight {
+  color: var(--primary-mau0-2);
+  font-size: 1rem;
 }
 
 .header__search-btn {
@@ -281,7 +315,7 @@ img.dropdown-cart__img--empty {
 
 @media screen and (max-width: 1024px) {
   .header__main {
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
   }
 
   .header__search-bar-wrapper {
@@ -290,6 +324,10 @@ img.dropdown-cart__img--empty {
 
   .header__search-bar {
     border-radius: .75rem 0 0 .75rem;
+  }
+
+  .header__smart-search-wrapper {
+    width: 80%;;
   }
 }
 
@@ -303,14 +341,25 @@ img.dropdown-cart__img--empty {
 
     margin-right: auto;
   }
-
-  .header__logo {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 480px) {
   .header__search-bar-wrapper {
     width: 100%;
+    justify-content: flex-start;
+  }
+
+  .header__search-bar {
+    width: 100%;
+
+    padding-inline-end: 2rem;
+  }
+
+  .header__logo {
+    display: none;
+  }
+
+  .header__smart-search-wrapper {
+    width: 90%;;
   }
 }

@@ -35,9 +35,7 @@ export default function CustomerHeaderNav() {
             Hotline: 1900 123 789
           </Link>
         </div>
-        <div className={cx("header--mobile__logo")}>
-          <CustomerLogo white />
-        </div>
+        <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
             <Link href="/notification/order" className={cx("header__notifications")}>
@@ -56,17 +54,17 @@ export default function CustomerHeaderNav() {
                   <span className={cx("unauth-content__noti")}>Đăng nhập để xem Thông báo</span>
                 </div>
                 <div className={cx("unauth-content__btn")}>
-                  <Link href="/auth/login">Đăng nhập</Link>
-                  <Link href="/auth/register">Đăng ký</Link>
+                  <Link href="/login">Đăng nhập</Link>
+                  <Link href="/register">Đăng ký</Link>
                 </div>
               </div>
             </div>
           </div >
           <div className={cx("header__auth")}>
             <span className="material-icons-outlined">account_circle</span>
-            <Link href="/auth/login" className={cx("header__auth-login")}>Đăng nhập</Link>
+            <Link href="/login" className={cx("header__auth-login")}>Đăng nhập</Link>
             <span>|</span>
-            <Link href="/auth/register" className={cx("header__auth-register")}>Đăng ký</Link>
+            <Link href="/register" className={cx("header__auth-register")}>Đăng ký</Link>
           </div>
         </div>
         <div className={cx("header--mobile__noti-support")}>
