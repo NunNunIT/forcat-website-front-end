@@ -1,40 +1,39 @@
-.category-card {
+.categoryCard-container {
   box-shadow: 3px 3px 4px 0 var(--black-o20);
   border: 1px solid var(--outline1);
-  margin: auto 0.2rem;
+  margin: auto 1rem;
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
   height: 98%;
   overflow: hidden;
   padding-bottom: 1.5rem;
-  background: #fafafa;
 }
-.category__link-image {
+.categoryCard__link-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   position: relative;
 }
-.category__link-name {
-  font-size: 1rem;
+.categoryCard__link-name {
+  font-size: 15px;
   text-align: center;
   /* margin-top: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem; */
   padding-top: 1rem;
 }
-.category-image-div {
+.categoryCard-image-div {
   width: 100%;
   height: 85%;
   position: relative;
 }
-.category__link {
+.categoryCard__link {
   color: inherit;
   text-decoration: none;
 }
-.category__link:hover {
+.categoryCard__link:hover {
   opacity: 0.7;
 }
