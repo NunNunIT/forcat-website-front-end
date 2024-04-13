@@ -10,9 +10,9 @@ export default function AccountLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="account-container">
+    <main className="account-container">
       <CustomerAccountAside />
       {children}
-    </div>
+    </main>
   )
 }

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
-    "axios": "^0.25.0",
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "firebase": "^10.9.0",

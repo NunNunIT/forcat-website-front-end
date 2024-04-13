@@ -127,21 +127,26 @@ interface IArticleProps {
   article_slug?: string[];
 }
 
-interface ProductItemInOrderItemProps {
-  url?: string;
-  product_name?: string;
-  product_sub_category?: string;
+interface IProductItemInOrderItemProps {
   product_id: string;
+  product_name?: string;
+  product_slug?: string;
+  variant_id: string;
+  variant_name?: string;
+  product_img?: {
+    link: string,
+    alt: string,
+  };
   quantity: number;
   unit_price: number;
   price_discount?: number;
 }
 
-interface OrderItemProps {
-  order_id: string;
+interface IOrderItemProps {
+  _id: string;
   order_status: string;
-  order_total_price: number;
-  order_detail: ProductItemInOrderItemProps[];
+  order_details: IProductItemInOrderItemProps[];
+  order_total_cost: number;
 }
 
 interface INotiProps {
@@ -155,4 +160,16 @@ interface INotiProps {
   updatedAt: string;
   is_read: boolean;
   allRead: boolean;
+}
+
+interface IResponseJSON {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: Object;
+}
+
+interface ResponseOrderHistory {
+  orders: IOrderItemProps[];
+  maxPage: number;
 }
