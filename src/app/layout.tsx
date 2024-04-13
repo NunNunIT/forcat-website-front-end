@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   keywords: ["Cửa hàng phụ kiện thú cưng"],
   title: {
-    template: "ForCat. %s",
-    default: "ForCat.",
+    template: "ForCat | %s",
+    default: "ForCat",
   },
   description:
     "Chào mừng bạn đến với TECHTWO - địa chỉ mua sắm trực tuyến hàng đầu về điện máy! Khám phá thế giới công nghệ với sự đa dạng và chất lượng tốt nhất từ máy tính, điện thoại di động đến các sản phẩm gia dụng thông minh. Mua sắm an toàn, thuận tiện và tiết kiệm ngay hôm nay với các ưu đãi độc quyền. TECHTWO - Nơi nâng cao cuộc sống thông qua công nghệ!.",

@@ -1,6 +1,7 @@
 // import libs
 import classNames from "classnames/bind";
 import Image from "next/image";
+import { BrowserRouter } from "react-router-dom";
 
 // import components
 import { AuthLoginForm } from "@/components";
@@ -22,7 +23,7 @@ const LoginPage = () => {
         />
       </div>
       <div className={cx("auth__forms-wrap", "login")}>
-        <AuthLoginForm />
+          <AuthLoginForm />
       </div>
     </main>
   );

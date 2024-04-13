@@ -1,10 +1,11 @@
-"use client";
-
+"use client"
 // import libs
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter, redirect } from "next/navigation";
+import Cookies from "js-cookie";
+import {encryptData} from "@/utils/security"
 
 // import utils
 import { isValidEmail } from "@/utils/index";
@@ -28,11 +29,16 @@ const LoginForm = () => {
   const [errors, setErrors] = useState(initialForms);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,15 +71,25 @@ const LoginForm = () => {
       try {
         setLoading(true);
         setErrors(initialForms);
-        const res = await fetch(BACKEND_URL + "/auth/login", {
+        "use server"
+        const res = await fetch(`${BACKEND_URL}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData), // Assuming formData is an object
         });
-        const data = await res.json();
+        let data = await res.json();
         setLoading(false);
+        let accessTokens = await Cookies.get("accessToken");
+        console.log("Trước khi Set: ", accessTokens);
+
+        // console.log("login success: ", data.message);
+        Cookies.set("accessToken", data.token);
+        localStorage.setItem("userStore", JSON.stringify(data.data));
+
+        accessTokens = await Cookies.get("accessToken");
+        console.log("Sau khi set: ", accessTokens);
 
         if (data.status == 404) {
           newErrors.user_email = "Tài khoản không tồn tại!";
@@ -85,13 +101,14 @@ const LoginForm = () => {
           setErrors(newErrors);
           return;
         }
-        redirect("/");
       } catch (error) {
+        console.log(error);
         setLoading(false);
         setError(true);
       }
     }
   };
+  
   return (
     <form className={cx("form-auth")} onSubmit={handleSubmit}>
       <div className={cx("form-auth__title")}>
@@ -120,12 +137,15 @@ const LoginForm = () => {
       <div className={cx("form-auth__input-content")}>
         <label htmlFor="password">Mật khẩu</label>
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Nhập mật khẩu"
           name="user_password"
           id="user_password"
           onChange={handleChange}
         />
+        <i
+          className={cx("fas fa-eye", showPassword && "show")}
+          onClick={handleTogglePasswordVisibility}></i>
         {errors.user_password && (
           <p className={cx("text-error", "form-error")}>
             {errors.user_password}

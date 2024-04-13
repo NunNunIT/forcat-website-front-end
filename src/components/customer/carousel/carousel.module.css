@@ -11,7 +11,7 @@
     height: 50px;
     width: 50px;
     cursor: pointer;
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
     position: absolute;
     z-index: 98;
     text-align: center;
@@ -141,11 +141,13 @@
     align-items: center;
     justify-content: center;
     width: 90%;
-    height: 200px;
-    padding: 24px;
+    height: 250px;
+    /* max-height: 250px; */
+    /* padding: 24px; */
     background: white;
     border-radius: 8px 8px 0 0;
     margin: auto;
+    object-fit: cover;
 }
 
 .carousel .carousel__card--top {
@@ -155,8 +157,10 @@
 }
 
 .carousel__card .carousel__card--img img {
-    max-width: 100%;
-    max-height: 100%;
+    /* width: 100%;
+    height: auto; */
+    max-height: 100%; /* Đảm bảo chiều cao hình ảnh không vượt quá chiều cao của container */
+    border-radius: 8px; /* Đảm bảo góc bo tròn cho hình ảnh */
     object-fit: cover;
     border: 4px solid #fff;
 }
@@ -172,7 +176,7 @@
     text-align: start;
 }
 
-.carousel__card-catagory {
+.carousel__card-category {
     display: block;
     font-size: 12px;
     font-weight: 700;
@@ -196,7 +200,7 @@
 }
 
 .carousel__card-details p {
-    font-size: 15px;
+    /* font-size: 15px; */
     line-height: 22px;
     color: #999;
 }
@@ -236,7 +240,7 @@
 }
 
 .carousel__card-rate .material-symbols-outlined {
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
     color: orange;
 }
 
@@ -260,7 +264,7 @@
 
 @media screen and (max-width: 48rem) {
     .carousel .carousel__card {
-        height: 390px;
+        height: 350px;
     }
 
     .carousel .carousel__card .carousel__card--img {
@@ -268,7 +272,7 @@
     }
 
     .carousel__card-price {
-        font-size: 1rem;
+        /* font-size: 1rem; */
     }
 
     .carousel__card-bottom-details {
@@ -276,7 +280,7 @@
     }
 
     .carousel__card-details p {
-        font-size: 0.875rem;
+        /* font-size: 0.875rem; */
         line-height: 18px;
     }
 }
@@ -288,7 +292,7 @@
     }
 
     .carousel .carousel__card {
-        height: 332px;
+        height: 380px;
     }
 
     .wrapper-carousel .arrow {
@@ -296,11 +300,11 @@
     }
 
     .carousel__label-seemore a {
-        font-size: 18px;
+        /* font-size: 18px; */
     }
 
     .carousel__card-price {
-        font-size: 1rem;
+        /* font-size: 1rem; */
     }
 
     .carousel__card-bottom-details {
@@ -312,10 +316,10 @@
     }
 
     .carousel .carousel__card .carousel__card--img {
-        height: 140px;
+        height: 180px;
     }
 
     .carousel__card--badge {
-        font-size: 0.75rem;
+        /* font-size: 0.75rem; */
     }
 }

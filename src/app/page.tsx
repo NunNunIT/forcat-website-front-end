@@ -1,6 +1,7 @@
 //import libs
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 // import global components
 import { CustomerCarousel } from "@/components";
@@ -8,33 +9,51 @@ import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
+import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
 
 // use css
 import "./page.css";
 
-export default function Home() {
+const fetchNewestProducts = async () => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/productList/getNewestProducts`, {
+      next: { revalidate: 60 },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch newest products");
+    }
+    const data = await response.json();
+    return data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching newest products:", error);
+    throw error;
+  }
+};
+
+export default async function Home() {
+  let newestProducts = await fetchNewestProducts();
   return (
     <>
       <CustomerHeader></CustomerHeader>
+      <CustomerSlider></CustomerSlider>
       <main className="content-container">
-        <CustomerSlider></CustomerSlider>
         <CustomerCategories></CustomerCategories>
         <CustomerCarousel></CustomerCarousel>
         <section className="tip-products-wrapper new-products">
           <div className="tip-products">
             <h1 className="tip-products__label">
-              <Link href="#" className="tip-products__title">
+              <Link href="/search-result" className="tip-products__title">
                 Hàng mới về
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
             <div className="tip-products__content">
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
+            {newestProducts && newestProducts.length &&
+                newestProducts.map((product) => (
+                  <>
+                    <CustomerProductCard key={product.product_id} product={product} />
+                  </>
+                ))}
             </div>
           </div>
           <div className="banner-wrapper">
@@ -91,13 +110,7 @@ export default function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <div className="tip-products__content">
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-            </div>
+            <div className="tip-products__content"></div>
           </div>
         </section>
       </main>
