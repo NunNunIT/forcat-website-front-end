@@ -21,8 +21,6 @@ import "./page.css";
 
 const fetcher: Fetcher<ResponseOrderHistory, string> = async (url: string) => {
   const res: Response = await fetch(url);
-  if (!res.ok) throw res;
-
   const json: IResponseJSON = await res.json();
   if (!json.success) throw json;
 
@@ -53,7 +51,7 @@ export default function PurchaseHistoryPage() {
 
       <section className="purchase-history__purchase-item-list">
         {isLoading && <p>Đang tải dữ liệu...</p>}
-        {!isLoading && error && <p>Đã có lỗi xảy ra: `{JSON.stringify(error)}`</p>}
+        {!isLoading && error && <p>Đã có lỗi xảy ra: &#39;{error.message}&#39;</p>}
         {!isLoading && !error && data.orders.length === 0 && <p>Bạn chưa có đơn hàng nào</p>}
         {!isLoading && !error && data.orders.map((order: IOrderItemProps) =>
           <CustomerOrderItem key={order._id} {...order} />
