@@ -1,61 +1,59 @@
 // import libs
-import Link from "next/link"
-import Image from "next/image"
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 // import components
-import { ArticleSummary } from "./partials"
+import { ArticleSummary } from "./partials";
+
+// import utils
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
-import "./page.css"
+import "./page.css";
 
-const articleData: IArticleProps = {
-  article_id: '0',
-  article_name: "Gel Dinh Dưỡng Cho Chó Mèo: Tìm Hiểu, Lựa Chọn & Sử Dụng",
-  article_type: 'Cách nuôi',
-  article_short_description: "Gel dinh dưỡng cho chó mèo là một sản phẩm quan trọng trong việc bổ sung năng lượng, vitamin và khoáng chất cho thú cưng của bạn. Việc sử dụng …",
-  article_info: {
-    author: "Thú cưng",
-    published_date: "01/04/2023",
-  },
-  article_date: '01/04/2024'
-};
+// fetch data
+async function getAllNews() {
+  try {
+    const res = await fetch(`${BACKEND_URL}/articles`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return notFound();
 
-const articlesData: IArticleProps[] = [
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-  articleData,
-]
+    return res.json();
+  } catch {
+    return notFound();
+  }
+}
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const res = await getAllNews();
+  const articlesData: IArticleProps[] = res.data;
+
   return (
     <main>
       <h1>Tin tức</h1>
       <section className="news__group-article">
-        {articlesData.map((articleData: IArticleProps) =>
+        {articlesData.map((articleData: IArticleProps) => (
           <ArticleSummary key={articleData.article_id} {...articleData} />
-        )}
+        ))}
       </section>
       <aside className="news__group-banner">
         <div className="news__banner-container">
-          <Image src="/imgs/banner/banner_1.png"
+          <Image
+            src="/imgs/banner/banner_1.png"
             alt="The first banner in news-page"
             fill
           />
         </div>
         <div className="news__banner-container">
-          <Image src="/imgs/banner/banner_2.png"
+          <Image
+            src="/imgs/banner/banner_2.png"
             alt="The second banner in news-page"
             fill
           />
         </div>
       </aside>
     </main>
-  )
+  );
 }
