@@ -12,6 +12,7 @@ import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import styles from "../authForm.module.css";
+import { set } from "mongoose";
 
 const cx = classNames.bind(styles);
 
@@ -25,17 +26,92 @@ const ForgotForm = () => {
   const [formData, setFormData] = useState(initialForms);
   const [errors, setErrors] = useState(initialForms);
   const [error, setError] = useState(false);
+  const [errorOTP, setErrorOTP] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentForm, setCurrentForm] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleInputChange = (event) => {
-    // Only allow number input
-    if (!event.target.value.match(/^[0-9]$/)) {
-      event.target.value = "";
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  //xử lý form 1
+  const handleStep1 = async (e) => {
+    e.preventDefault();
+
+    let isValid = true;
+    let newErrors = { ...initialForms };
+
+    // Validate email
+    if (!formData.user_email) {
+      newErrors.user_email = "Email không được bỏ trống!";
+      isValid = false;
+    } else if (!isValidEmail(formData.user_email)) {
+      newErrors.user_email = "Email không đúng định dạng!";
+      isValid = false;
+    }
+
+    // Update state with errors
+    setErrors(newErrors);
+
+    if (isValid) {
+      try {
+        setLoading(true);
+        setErrors(initialForms);
+        const res = await fetch(BACKEND_URL + "/auth/forgot", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData), // Assuming formData is an object
+          credentials: "include",
+        });
+        const data = await res.json();
+        setLoading(false);
+
+        if (data.status == 404) {
+          newErrors.user_email = "Email này chưa đăng ký tài khoản!";
+          setErrors(newErrors);
+          return;
+        } 
+        setCurrentForm(currentForm + 1);
+        setStartCountdown(true);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+      }
     }
   };
+
+  //xử lý form 2
+
+  const [count, setCount] = useState(60);
+  const [startCountdown, setStartCountdown] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [showResendMessage, setShowResendMessage] = useState(false);
+  const [otp, setOtp] = useState("");
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    const keyCode = event.nativeEvent.keyCode;
+
+    // Check if the user pressed the backspace key
+    if (keyCode === 8) {
+        // Remove the last character from the OTP
+        setOtp(otp.slice(0, -1));
+    } else {
+        // Only allow number input
+        if (!value.match(/^[0-9]$/)) {
+            event.target.value = "";
+        } else {
+            // Check if otp length is less than 6 before adding new value
+            if (otp.length < 6) {
+                setOtp(otp + value);
+            }
+        }
+    }
+};
   const moveToNext = (currentInput, nextInputId, prevInputId) => {
     if (currentInput.value.length >= 1) {
       const nextInput = document.getElementById(nextInputId);
@@ -49,11 +125,6 @@ const ForgotForm = () => {
       }
     }
   };
-
-  const [count, setCount] = useState(60);
-  const [startCountdown, setStartCountdown] = useState(false);
-  const [isResending, setIsResending] = useState(false);
-  const [showResendMessage, setShowResendMessage] = useState(false);
 
   useEffect(() => {
     if (!startCountdown) return;
@@ -69,53 +140,98 @@ const ForgotForm = () => {
     };
   }, [count, startCountdown]);
 
-  const handleResendOTP = (event) => {
+  const handleResendOTP = async (event) => {
     event.preventDefault();
+
     setIsResending(true);
     setShowResendMessage(true);
 
-    // After 3 seconds, show the resend link again
     setTimeout(() => {
       setIsResending(false);
       setShowResendMessage(false);
-    }, 3000);
+    }, 3000); // After 3 seconds, show the resend link again
     setCount(60);
 
-    // Add any additional logic for resending OTP here
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleStep1 = async (e) => {
-    e.preventDefault();
-
-    let newErrors = { ...initialForms };
-    let isValid = true;
-
-    // Validate email
-    if (!formData.user_email) {
-      newErrors.user_email = "Email không được bỏ trống!";
-      isValid = false;
-    } else if (!isValidEmail(formData.user_email)) {
-      newErrors.user_email = "Email không đúng định dạng!";
-      isValid = false;
-    }
-
-    // Update state with errors
-    setErrors(newErrors);
-    if (isValid) {
-      setCurrentForm(currentForm + 1);
-      setStartCountdown(true);
+    if (!isResending) {
+      try {
+        setLoading(true);
+        const res = await fetch(BACKEND_URL + "/auth/forgot", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+          credentials: "include",
+        });
+        setLoading(false);
+      } catch (error) {
+        setIsResending(false);
+        setShowResendMessage(false);
+      }
     }
   };
+
   const handleStep2 = async (e) => {
     e.preventDefault();
-    // if (validateInputOTP()) {
-    //   setStep(3);
-    // }
-    setCurrentForm(currentForm + 1);
+    let isValid = true;
+    let newErrorOtp = "";
+
+    if (otp === "") {
+      newErrorOtp = "Vui lòng nhập mã OTP!";
+      isValid = false;
+    }
+    setErrorOTP(newErrorOtp);
+
+        
+    if (isValid) {
+      try {
+        setLoading(true);
+        setErrorOTP(newErrorOtp);
+        const requestBody = {
+          user_email: formData.user_email,
+          otp: otp,
+        };
+        console.log("Request body: ", requestBody);
+        const res = await fetch(BACKEND_URL + "/auth/verify-otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_email: formData.user_email,
+            otp: otp,
+          }),
+          credentials: "include",
+        });
+
+        const data = await res.json();
+        setLoading(false);
+
+        if (data.status == 400) {
+          setOtp("");
+          newErrorOtp = "Mã OTP không trùng khớp!";
+          setErrorOTP(newErrorOtp);
+          console.log(errorOTP);
+          return;
+        }
+        setCurrentForm(currentForm + 1);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+        console.log("OTP verification failed");
+      }
+    }
+
+    
+  };
+
+  //xử lý form 3
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -158,41 +274,27 @@ const ForgotForm = () => {
       try {
         setLoading(true);
         setErrors(initialForms);
-        const res = await fetch(BACKEND_URL + "/auth/login", {
-          method: "POST",
+        const res = await fetch(BACKEND_URL + "/auth/reset-password", {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData), // Assuming formData is an object
+          body: JSON.stringify({
+            newPassword: formData.user_password,
+            user_email: formData.user_email,
+          }), // Assuming formData is an object
         });
         const data = await res.json();
         setLoading(false);
-
-        if (data.status == 404) {
-          newErrors.user_email = "Tài khoản không tồn tại!";
-          setErrors(newErrors);
-          return;
-        } else if (data.status == 401) {
-          newErrors.user_email = "Email không chính xác!";
-          newErrors.user_password = "Mật khẩu không chính xác!";
-          setErrors(newErrors);
-          return;
-        }
-
-        redirect("/");
-        // If no errors, move to the next form
+       
+        alert("Đặt lại mật khẩu thành công!");
+        window.location.href = "/login";
+        // If no errors, move to homepage
       } catch (error) {
         setLoading(false);
         setError(true);
       }
     }
-  };
-
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleToggleConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -318,6 +420,9 @@ const ForgotForm = () => {
           )}
           {showResendMessage && (
             <div className={cx("resend")}>Đã gửi lại mã OTP</div>
+          )}
+          {errorOTP && (
+            <p className={cx("text-error", "otp-error")}>{errorOTP}</p>
           )}
 
           <div className={cx("form-confirm")}>

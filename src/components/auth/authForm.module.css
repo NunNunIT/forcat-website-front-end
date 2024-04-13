@@ -155,7 +155,7 @@
   margin-left: 10px;
   font-size: 0.95rem;
 }
-.send-again .resend{
+.send-again .resend .limit{
   display: flex;
   flex-direction: row;
   font-size: 1 rem;
@@ -185,4 +185,10 @@ span.red-start {
   top: 50%;
   right: 4%;
   transform: translateY(-50%);
+}
+.otp-error {
+  /* position: absolute; */
+  margin: auto;
+  bottom: -10px;
+  left: 0;
 }
