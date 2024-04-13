@@ -69,10 +69,7 @@ function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
     month: "2-digit",
     day: "2-digit",
   };
-  return `${date.toLocaleTimeString(
-    locales,
-    timeOptions
-  )} ${date.toLocaleDateString(locales, dateOptions)}`;
+  return `${date.toLocaleTimeString(locales, timeOptions)} ${date.toLocaleDateString(locales, dateOptions)}`;
 }
 
 function convertPaymentToStr(payment_type: string): string {

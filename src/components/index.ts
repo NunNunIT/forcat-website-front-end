@@ -1,7 +1,6 @@
 // Auth components
 export { default as AuthLoginForm } from "./auth/loginForm";
 export { default as AuthRegisterForm } from "./auth/registerForm";
-export { default as AuthForgotForm } from "./auth/forgotForm";
 
 // Customer components
 export { default as CustomerCarousel } from "./customer/carousel";
