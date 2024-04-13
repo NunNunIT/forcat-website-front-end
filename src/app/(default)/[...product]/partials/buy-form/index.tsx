@@ -4,7 +4,7 @@
 import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
@@ -184,20 +184,21 @@ export default function ProductBuyForm({
           <div className={cx("variants__group")}>
             {productInfo.product_variants.map((item, index) => {
               return (
-                <ProductVariant
-                  pid={pid}
-                  variant={{
-                    id: item._id,
-                    name: item.variant_name,
-                    url: `/${productInfo.product_slug}/${createSlug(
-                      item.variant_name
-                    )}`,
-                    image: {
-                      url: (item.variant_imgs[0] as any).link,
-                      alt: (item.variant_imgs[0] as any).alt,
-                    },
-                  }}
-                  key={index}></ProductVariant>
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={{
+                      id: item._id,
+                      name: item.variant_name,
+                      url: `/${productInfo.product_slug}/${createSlug(
+                        item.variant_name
+                      )}`,
+                      image: {
+                        url: (item.variant_imgs[0] as any).link,
+                        alt: (item.variant_imgs[0] as any).alt,
+                      },
+                    }}></ProductVariant>
+                </React.Fragment>
               );
             })}
           </div>
