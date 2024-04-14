@@ -1,24 +1,58 @@
 "use client";
 // import libs
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import classNameNames from "classnames/bind";
-
-// import components
+import { BACKEND_URL } from "@/utils/commonConst";
 import { CustomerLogo, CustomerHeaderItemUlt } from "@/components";
-
-// import css
 import styles from "./header-main.module.css";
 
 const cx = classNameNames.bind(styles);
 
 export default function CustomerHeaderMain() {
   const [showSmartSearch, setShowSmartSearch] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [totalSearchResults, setTotalSearchResults] = useState(0);
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (inputValue) {
+        fetchSearchResults(inputValue);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
+
+  const fetchSearchResults = async (inputValue) => {
+    try {
+      const response = await fetch(
+        `${BACKEND_URL}/productList/searchRecommended?searchKey=${inputValue}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch search results");
+      }
+      const data = await response.json();
+      if (data.data.searchKey === inputValue) {
+        console.log("Trả về cho data", data.data.searchKey)
+        setSearchResults(data.data.recommendedProducts);
+        setTotalSearchResults(data.data.totalProducts);
+        setShowSmartSearch(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    setShowSmartSearch(inputValue !== ""); // Kiểm tra xem input có giá trị không
+    console.log("Gía trị nhạp vào", inputValue)
+    setInputValue(inputValue);
+    if (!inputValue) {
+      setShowSmartSearch(false);
+    }
   };
 
   return (
@@ -27,8 +61,9 @@ export default function CustomerHeaderMain() {
       <div className={cx("header__search-bar-wrapper")}>
         <form
           className={cx("header__search-bar__main")}
-          action="/search/results"
-          method="GET">
+          action="/search-result"
+          method="GET"
+        >
           <div className={cx("header__search-bar")}>
             <input
               className={cx("header__search-input")}
@@ -45,19 +80,25 @@ export default function CustomerHeaderMain() {
         </form>
         <div
           className={cx("header__smart-search-wrapper", {
-            "display-block": showSmartSearch, // Sử dụng điều kiện để thêm class 'display-block' khi showSmartSearch là true
+            "display-block": showSmartSearch,
           })}
           id="header__smart-search-wrapper"
-          style={{ display: showSmartSearch ? "block" : "none" }}>
-          {" "}
-          {/* Thay đổi thuộc tính display dựa vào giá trị của showSmartSearch */}
+          style={{ display: showSmartSearch ? "block" : "none" }}
+        >
           <div className={cx("header__suggest-results-content")}>
-            <CustomerHeaderItemUlt />
-            <CustomerHeaderItemUlt />
+            {showSmartSearch &&
+              searchResults.map((product) => (
+                <CustomerHeaderItemUlt
+                  key={product.product_id}
+                  product={product}
+                />
+              ))}
           </div>
           <div className={cx("header__suggest-results-more")}>
             <Link className={cx("header__suggest-results-more-link")} href="#">
-              Xem thêm <span className={cx("highlight")}>31</span> sản phẩm
+              Xem thêm{" "}
+              <span className={cx("highlight")}>{totalSearchResults}</span> sản
+              phẩm
             </Link>
           </div>
         </div>
@@ -67,7 +108,8 @@ export default function CustomerHeaderMain() {
         <a
           href="/cart"
           className={cx("header__cart-container")}
-          title="Giỏ hàng">
+          title="Giỏ hàng"
+        >
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
           </div>

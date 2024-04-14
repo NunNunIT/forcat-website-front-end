@@ -95,7 +95,9 @@ const LoginForm = () => {
           newErrors.user_email = "Tài khoản không tồn tại!";
           setErrors(newErrors);
           return;
-        } else if (data.status == 401) {
+        }
+
+        if (data.status == 401) {
           newErrors.user_email = "Email không chính xác!";
           newErrors.user_password = "Mật khẩu không chính xác!";
           setErrors(newErrors);

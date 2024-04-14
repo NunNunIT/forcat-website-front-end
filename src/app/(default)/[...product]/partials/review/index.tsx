@@ -2,7 +2,7 @@
 
 // import libs
 import classNames from "classnames/bind";
-import { useState } from "react";
+import React, { useState } from "react";
 
 // import components
 import { ProductReviewItem } from "../../components";
@@ -28,7 +28,7 @@ export default function ProductReview({
   const handleOpenModal = () => {
     if (typeof window !== "undefined") {
       const body = window.document.body;
-      body.style.overflow = "hidden";
+      body.style.overflow = 'hidden'
     }
     setIsModalHidden("block");
   };
@@ -59,10 +59,11 @@ export default function ProductReview({
         <div className={cx("reviews__group")}>
           {productReviews.map((review, index) => {
             return (
-              <ProductReviewItem
-                review={review}
-                key={index}
-                handleOpenModal={handleOpenModal}></ProductReviewItem>
+              <React.Fragment key={index}>
+                <ProductReviewItem
+                  review={review}
+                  handleOpenModal={handleOpenModal}></ProductReviewItem>
+              </React.Fragment>
             );
           })}
         </div>

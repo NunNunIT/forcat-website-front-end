@@ -23,11 +23,11 @@ const asideNavData = [
     text: "Tất cả",
   },
   {
-    url: "/notifications?type=orders",
+    url: "/notifications?type=order",
     text: "Đơn hàng",
   },
   {
-    url: "/notifications?type=promotions",
+    url: "/notifications?type=promotion",
     text: "Khuyến mãi",
   }
 ]

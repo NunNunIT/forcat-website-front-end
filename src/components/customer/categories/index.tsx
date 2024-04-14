@@ -54,7 +54,8 @@ export default function Categories() {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper">
+        className="mySwiper"
+      >
         {PRODUCT}
       </Swiper>
     </div>

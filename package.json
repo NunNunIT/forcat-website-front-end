@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
-    "axios": "^0.25.0",
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "firebase": "^10.9.0",
@@ -32,14 +32,15 @@
     "redux-thunk": "^3.1.0",
     "swiper": "^11.0.7",
     "swr": "^2.2.5",
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "^1.0.3",
+    "unidecode": "^1.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/node": "20.12.7",
+    "@types/react": "18.2.75",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "typescript": "^5"
+    "typescript": "5.4.5"
   }
 }

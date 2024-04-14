@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import components
 import { CustomerProductCard } from "@/components";
@@ -36,12 +37,16 @@ export default function SearchResultPage() {
         </div>
 
         <div className="search-result__main-card">
-          <CustomerProductCard></CustomerProductCard>
-          <CustomerProductCard></CustomerProductCard>
-          <CustomerProductCard></CustomerProductCard>
-          <CustomerProductCard></CustomerProductCard>
-          <CustomerProductCard></CustomerProductCard>
-          <CustomerProductCard></CustomerProductCard>
+          {/* {searchResultsProducts &&
+            searchResultsProducts.length &&
+            searchResultsProducts.map((product) => (
+              <>
+                <CustomerProductCard
+                  key={product.product_id}
+                  product={product}
+                />
+              </>
+            ))} */}
         </div>
       </section>
     </main>

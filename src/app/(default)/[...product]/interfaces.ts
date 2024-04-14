@@ -1,5 +1,4 @@
 interface ProductVariant {
-  _id: string;
   variant_name: string;
   price: number;
   variant_imgs: string[];
@@ -10,7 +9,6 @@ interface ProductVariant {
 }
 
 export interface IBuyForm {
-  product_id: string;
   product_name: string;
   product_slug: string;
   product_avg_rating: number;
@@ -24,11 +22,24 @@ export interface ISliderImage {
 
 export interface IReview {
   review_id: string;
+  product_variant_name: string;
   review_rating: number;
-  user_name: string;
-  user_avt: string;
-  review_date: string;
-  review_imgs: string;
-  review_video: string;
+  user_info: {
+    user_name: string;
+    user_avt: string;
+  };
+  createdAt: string;
+  review_imgs: [
+    {
+      link: string;
+      alt: string;
+    }
+  ];
+  review_video: [
+    {
+      link: string;
+      alt: string;
+    }
+  ];
   review_context: string;
 }

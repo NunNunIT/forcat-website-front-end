@@ -74,6 +74,10 @@
   --primary-mau4-4: #619d5c;
   --primary-mau4-5: #c4d6b0;
   --primary-mau4-6: #daece8;
+  --primary-mau4-7: #3f271b;
+
+
+  --white: #fff;
 
   /* outline */
   --outline1: rgb(235, 235, 240);
@@ -143,6 +147,7 @@
   --yellow1: rgb(255, 193, 7, 0.1);
   --yellow5: #ffc107;
   --yellow6: #e5ad06;
+  --yellow10: #ffecbd;
 
   --swiper-navigation-color: var(--dark3);
   --swiper-navigation-size: 1em !important;
@@ -160,6 +165,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
+  background-color: #fcfafb;
 }
 
 ::-webkit-scrollbar {
@@ -185,7 +191,7 @@ body {
 
 main {
   margin: 1rem auto;
-  min-height: calc(100vh - (280px + 152px + 1rem));
+  min-height: calc(100vh - (280px + 152px + 2rem));
 }
 
 h1 {
@@ -258,6 +264,11 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+button,
+input {
+  font-family: inherit;
 }
 
 .btn {

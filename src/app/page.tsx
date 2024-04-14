@@ -9,16 +9,19 @@ import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
-import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
+import { BACKEND_URL} from "@/utils/commonConst";
 
 // use css
 import "./page.css";
 
 const fetchNewestProducts = async () => {
   try {
-    const response = await fetch(`${BACKEND_URL}/productList/getNewestProducts`, {
-      next: { revalidate: 60 },
-    });
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getNewestProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch newest products");
     }
@@ -36,10 +39,17 @@ export default async function Home() {
     <>
       <CustomerHeader></CustomerHeader>
       <CustomerSlider></CustomerSlider>
-      <main className="content-container">
-        <CustomerCategories></CustomerCategories>
-        <CustomerCarousel></CustomerCarousel>
-        <section className="tip-products-wrapper new-products">
+      <main className="main-container">
+        <div className="content-container">
+          <CustomerCategories></CustomerCategories>
+        </div>
+        <div className="wrapper color">
+          <div className="content-container">
+            <CustomerCarousel></CustomerCarousel>
+          </div>
+        </div>
+
+        <section className="content-container tip-products-wrapper">
           <div className="tip-products">
             <h1 className="tip-products__label">
               <Link href="/search-result" className="tip-products__title">
@@ -48,10 +58,14 @@ export default async function Home() {
               <span className="tip-products__title-after"></span>
             </h1>
             <div className="tip-products__content">
-            {newestProducts && newestProducts.length &&
+              {newestProducts &&
+                newestProducts.length &&
                 newestProducts.map((product) => (
                   <>
-                    <CustomerProductCard key={product.product_id} product={product} />
+                    <CustomerProductCard
+                      key={product.product_id}
+                      product={product}
+                    />
                   </>
                 ))}
             </div>
