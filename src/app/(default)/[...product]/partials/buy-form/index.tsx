@@ -4,7 +4,7 @@
 import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
@@ -13,12 +13,7 @@ import { CustomerQuantityInputGroup, CustomerRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import {
-  convertNumberToMoney,
-  convertMoneyToNumber,
-  createSlug,
-} from "@/utils";
-import { BACKEND_URL } from "@/utils/commonConst";
+import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -29,11 +24,11 @@ import { IBuyForm } from "../../interfaces";
 // use css
 const cx = classNames.bind(styles);
 
-function filterCurrentVariant(productVariants, currentVariantSlug) {
-  return productVariants.filter(
+function filterCurrentVariant(productInfo, currentVariantSlug) {
+  return productInfo.product_variants.filter(
     (variant) =>
-      createSlug(variant.variant_name) ==
-      decodeURIComponent(createSlug(currentVariantSlug))
+      variant.variant_name ==
+      decodeURIComponent(currentVariantSlug.replaceAll("-", " "))
   )[0];
 }
 
@@ -49,10 +44,14 @@ export default function ProductBuyForm({
   currentVariantSlug: string;
   mobileOnly?: string;
 }) {
+  const filteredVariant = filterCurrentVariant(
+    productInfo.product_variants,
+    currentVariantSlug
+  );
   const currentVariant =
-    currentVariantSlug == ""
+    currentVariantSlug == "" || !filteredVariant
       ? productInfo.product_variants[0]
-      : filterCurrentVariant(productInfo.product_variants, currentVariantSlug);
+      : filteredVariant;
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
@@ -180,20 +179,21 @@ export default function ProductBuyForm({
           <div className={cx("variants__group")}>
             {productInfo.product_variants.map((item, index) => {
               return (
-                <ProductVariant
-                  pid={pid}
-                  variant={{
-                    id: item._id,
-                    name: item.variant_name,
-                    url: `/${productInfo.product_slug}/${createSlug(
-                      item.variant_name
-                    )}`,
-                    image: {
-                      url: (item.variant_imgs[0] as any).link,
-                      alt: (item.variant_imgs[0] as any).alt,
-                    },
-                  }}
-                  key={index}></ProductVariant>
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={{
+                      id: item._id,
+                      name: item.variant_name,
+                      url: `/${productInfo.product_slug}/${createSlug(
+                        item.variant_name
+                      )}`,
+                      image: {
+                        url: (item.variant_imgs[0] as any).link,
+                        alt: (item.variant_imgs[0] as any).alt,
+                      },
+                    }}></ProductVariant>
+                </React.Fragment>
               );
             })}
           </div>

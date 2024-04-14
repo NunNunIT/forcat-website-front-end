@@ -40,11 +40,14 @@ function convertOrderStatusToStr(order_status: string): string {
     case "cancel":
       return "Đã hủy";
   }
+
+  console.log("Unexpected Order Status: ", order_status);
   return "Unexpected Order Status";
 }
 
 function isActiveClass(src_str: string, des_str: string): string {
-  return src_str === des_str ? "is-active" : "";
+  const min_length = Math.min(src_str.length, des_str.length);
+  return src_str.substring(0, min_length) === des_str.substring(0, min_length) ? "is-active" : "";
 }
 
 function isActiveClassWithBool(bool: boolean): string {
@@ -66,10 +69,7 @@ function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
     month: "2-digit",
     day: "2-digit",
   };
-  return `${date.toLocaleTimeString(
-    locales,
-    timeOptions
-  )} ${date.toLocaleDateString(locales, dateOptions)}`;
+  return `${date.toLocaleTimeString(locales, timeOptions)} ${date.toLocaleDateString(locales, dateOptions)}`;
 }
 
 function convertPaymentToStr(payment_type: string): string {
@@ -162,6 +162,24 @@ function createSlug(string: string) {
     .replace(/-+$/, "");
 }
 
+function objectToSearchParams(obj: Object) {
+  const searchParams = new URLSearchParams();
+
+  // Loop through each key-value pair in the object
+  for (const [key, value] of Object.entries(obj)) {
+    // If value is an array, append each element as a separate parameter
+    if (Array.isArray(value)) {
+      value.forEach(item => searchParams.append(key, item));
+    } else {
+      // Otherwise, append the key-value pair directly
+      searchParams.append(key, value);
+    }
+  }
+
+  return searchParams;
+}
+
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -179,4 +197,5 @@ export {
   convertOrderStatusToIconData,
   isActiveClassWithBool,
   createSlug,
+  objectToSearchParams,
 };

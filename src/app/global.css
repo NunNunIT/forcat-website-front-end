@@ -185,7 +185,7 @@ body {
 
 main {
   margin: 1rem auto;
-  min-height: calc(100vh - (280px + 152px + 1rem));
+  min-height: calc(100vh - (280px + 152px + 2rem));
 }
 
 h1 {
@@ -258,6 +258,11 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+button,
+input {
+  font-family: inherit;
 }
 
 .btn {

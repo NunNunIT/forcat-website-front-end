@@ -24,7 +24,7 @@
   font-size: 16px;
 }
 
-.form-auth__title, .form-confirm{
+.form-auth__title{
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -37,11 +37,11 @@
   font-weight: 600;
 }
 
-.form-auth__title a, .form-confirm a{
+.form-auth__title a{
   color: var(--dark7)
 }
 
-.form-auth__title a:hover, .form-confirm a:hover{
+.form-auth__title a:hover{
   color: var(--dark6)
 }
 

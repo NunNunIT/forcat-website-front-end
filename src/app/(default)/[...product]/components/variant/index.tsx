@@ -16,12 +16,10 @@ const cx = classNames.bind(styles);
 export default function ProductVariant({
   pid,
   variant,
-  key,
   ...props
 }: {
   pid: any;
   variant: IVariant;
-  key?: number;
 }) {
   const pathname = decodeURIComponent(usePathname());
   const isActive = pathname == variant.url ? "variant__active" : "";
@@ -30,8 +28,7 @@ export default function ProductVariant({
     <Link
       className={cx("variant", isActive)}
       href={`${variant.url}?pid=${pid.replaceAll("+", "%2B")}`}
-      title={variant.name}
-      key={key}>
+      title={variant.name}>
       <div
         className={cx("variant__tick-div", isActive ? "variant__display" : "")}>
         <Image
