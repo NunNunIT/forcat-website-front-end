@@ -1,7 +1,7 @@
 "use client";
 
 // import libs
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import useSWR, { Fetcher } from "swr";
 import {
   BACKEND_URL_ORDERS,
@@ -34,16 +34,33 @@ const getFullBackendURLOrders = (status: string, page: string): string => {
 }
 
 export default function PurchaseHistoryPage() {
+  // use pathName, router
+  const pathName = usePathname();
+  const router = useRouter();
+
+  // get searchParam status, page
   const searchParams = useSearchParams();
-  const currentPage = searchParams.get("page") ?? "1";
   const currentStatus = searchParams.get("status") ?? "all";
+  const currentPage = searchParams.get("page") ?? "1";
 
   const fullURL: string = getFullBackendURLOrders(currentStatus, currentPage);
 
-  const { data, error, isLoading } = useSWR(fullURL, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(fullURL, fetcher);
 
+  // check valid status
   if (!ORDER_STATUS_LIST.includes(currentStatus))
     return NotFound();
+
+  if (parseInt(currentPage) < 1) {
+    router.push(pathName + `?status=${currentStatus}&page=1`);
+    return;
+  }
+
+  // check valid page
+  if (error?.message?.message == "Page out of range!") {
+    router.push(pathName + `?status=${currentStatus}&page=${error.message.maxPage}`)
+    return;
+  }
 
   return (
     <div className="account-purchase-history__main">
@@ -51,10 +68,10 @@ export default function PurchaseHistoryPage() {
 
       <section className="purchase-history__purchase-item-list">
         {isLoading && <p>Đang tải dữ liệu...</p>}
-        {!isLoading && error && <p>Đã có lỗi xảy ra: &#39;{error.message}&#39;</p>}
+        {!isLoading && error && <p>Đã có lỗi xảy ra: &#39;{error.message?.message || error.message}&#39;</p>}
         {!isLoading && !error && data.orders.length === 0 && <p>Bạn chưa có đơn hàng nào</p>}
         {!isLoading && !error && data.orders.map((order: IOrderItemProps) =>
-          <CustomerOrderItem key={order._id} {...order} />
+          <CustomerOrderItem key={order._id} {...order} mutate={mutate} />
         )}
 
         {/* Pagination */}

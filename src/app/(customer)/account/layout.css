@@ -22,6 +22,23 @@ button {
   font-weight: bold;
 
   transition: .1s ease-in-out;
+
+  font-size: unset;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background: unset;
+}
+
+.btn:disabled:hover {
+  box-shadow: none !important;
+}
+
+.btn:disabled>span {
+  border: none !important;
+  background: var(--bg-white-o50) !important;
+  color: white !important;
 }
 
 .btn>span {
@@ -34,12 +51,19 @@ button {
   justify-content: center;
   align-items: center;
   padding-inline: 1rem;
+
+  color: inherit;
 }
 
 .btn.btn--outlined.pri {
   border: 2px solid var(--primary-mau0-2);
 
   color: var(--primary-mau0-2);
+}
+
+.btn.btn--outlined.danger {
+  border: 2px solid var(--dollar-red2);
+  color: var(--dollar-red2);
 }
 
 .btn.btn--filled.pri {

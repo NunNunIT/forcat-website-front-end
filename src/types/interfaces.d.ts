@@ -128,7 +128,7 @@ interface IArticleProps {
 }
 
 interface IProductItemInOrderItemProps {
-  product_id: string;
+  product_id_hashed: string;
   product_name?: string;
   product_slug?: string;
   variant_id: string;
@@ -147,6 +147,7 @@ interface IOrderItemProps {
   order_status: string;
   order_details: IProductItemInOrderItemProps[];
   order_total_cost: number;
+  mutate?: () => void;
 }
 
 interface INotiProps {
