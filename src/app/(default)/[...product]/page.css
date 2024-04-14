@@ -6,6 +6,14 @@
     gap: 12px;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.display-flex {
+    display: flex;
+}
+
 section {
     background-color: var(--white);
     padding: 16px;

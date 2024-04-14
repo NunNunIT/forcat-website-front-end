@@ -1,4 +1,5 @@
 interface IVariant {
+  id: string;
   name: string;
   url: string;
   image: {
@@ -134,8 +135,8 @@ interface IProductItemInOrderItemProps {
   variant_id: string;
   variant_name?: string;
   product_img?: {
-    link: string,
-    alt: string,
+    link: string;
+    alt: string;
   };
   quantity: number;
   unit_price: number;
