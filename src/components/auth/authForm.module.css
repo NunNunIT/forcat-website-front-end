@@ -119,3 +119,76 @@
   bottom: -10px;
   left: 0;
 }
+
+/* forgot form */
+.hidden {
+  display: none;
+}
+
+.timer {
+  margin-top: 1em;
+}
+
+.input-wrap input[type="text"] {
+  width: 10%;
+  height: 4.5rem;
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.input-wrap {
+  position: relative;
+  height: 80px;
+  margin-top: 1rem;
+  margin-bottom: 0.875rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.input-wrap label {
+  margin-left: 10px;
+  font-size: 0.95rem;
+}
+.send-again .resend .limit{
+  display: flex;
+  flex-direction: row;
+  font-size: 1 rem;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.send-again a {
+  color: var(--dark7)
+}
+.send-again a:hover {
+  color: var(--dark6)
+}
+span.red-start {
+  color: red;
+}
+.input-container {
+  position: relative;
+}
+.input-field {
+  width: 100%;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  transform: translateY(-50%);
+}
+.otp-error {
+  /* position: absolute; */
+  margin: auto;
+  bottom: -10px;
+  left: 0;
+}
