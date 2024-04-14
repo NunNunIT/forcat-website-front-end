@@ -2,6 +2,9 @@
 
 // import libs
 import useSWR, { Fetcher } from "swr";
+import { notFound } from "next/navigation";
+import Skeleton from 'react-loading-skeleton'
+
 import { BACKEND_URL_ORDERS } from "@/utils/commonConst";
 import {
   convertDateToFormatHHMMDDMMYYYY, convertOrderStatusToStr,
@@ -14,6 +17,7 @@ import { CustomerProductItemInOrderItem } from '@/components';
 
 // import css
 import './page.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface IOrderDetailProps {
   _id: string;
@@ -41,8 +45,43 @@ export default function PurchaseDetailPage({ params }: { params: { orderId: stri
     fetcher
   );
 
-  if (isLoading) return <p>Đang tải dữ liệu...</p>;
-  if (error) return <p>Có lỗi xảy ra: {error.message}</p>;
+  // if isLoading
+  if (isLoading)
+    return (
+      <main className="order-detail">
+        <div className="order-detail--top">
+          <span className="order-detail__overview">
+            <h2>Chi tiết hóa đơn: #{params.orderId}</h2>
+            <Skeleton />
+          </span>
+          <Skeleton />
+        </div>
+        <div className="order-detail__info-receive">
+          <h2>
+            <span className="material-icons">location_on</span>
+            <span>Thông tin nhận hàng</span>
+          </h2>
+          <Skeleton className="order-detail__info-receive-data" count={3} />
+        </div>
+        <div className="order-detail__paying-method">
+          <h2>
+            <span className="material-icons">credit_card</span>
+            <span>Thông tin thanh toán</span>
+          </h2>
+          <Skeleton className="order-detail__info-receive-data" />
+        </div>
+        <div className="order-detail__products">
+          <h2>
+            <span className="material-icons">shopping_bag</span>
+            <span>Thông tin sản phẩm</span>
+          </h2>
+          <Skeleton className="order-detail__products-wrapper" count={3} />
+        </div>
+      </main>
+    );
+
+  if (error)
+    return notFound();
 
   const {
     _id, order_buyer, payment_id,

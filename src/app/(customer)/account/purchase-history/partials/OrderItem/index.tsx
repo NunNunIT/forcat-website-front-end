@@ -4,6 +4,8 @@
 import Link from "next/link";
 import axios from "axios";
 import classNames from "classnames/bind";
+
+// import utils
 import {
   convertOrderStatusToStr, parseNumToCurrencyStr,
   convertOrderStatusToIconData,
@@ -14,11 +16,31 @@ import {
 
 // import components
 import { CustomerProductItemInOrderItem } from "@/components";
+import Skeleton from "react-loading-skeleton";
 
 // import css
 import styles from "./order-item.module.css";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const cx = classNames.bind(styles);
+
+export function SkeletonOrderItem() {
+  return (
+    <div className={cx("order-item")}>
+      <span>
+        <Skeleton/>
+      </span>
+      <hr />
+      <div className={cx("order-item__product-list")}>
+        <Skeleton count={3} />
+      </div>
+      <hr />
+      <div className={cx("order-item--bottom")}>
+        <Skeleton />
+      </div>
+    </div>
+  )
+}
 
 export default function OrderItem(props: IOrderItemProps) {
   const setCancel = async () => {
@@ -46,7 +68,7 @@ export default function OrderItem(props: IOrderItemProps) {
       <div className={cx("order-item__product-list")}>
         {props.order_details.map(
           (product: IProductItemInOrderItemProps) =>
-            <CustomerProductItemInOrderItem key={product.product_id} {...product} />
+            <CustomerProductItemInOrderItem key={product.product_id_hashed} {...product} />
         )}
       </div>
       <hr />
