@@ -22,8 +22,9 @@ export default function ProductItemInOrderItem(props: IProductItemInOrderItemPro
       </div>
       <div className={cx("product-item__detail")}>
         <h5>
+          {/* TODO: implement the link */}
           <Link className={cx("product-item__name")}
-            href={`/${props.product_slug}`}
+            href={`/${props.product_slug}?pid=${props.product_id_hashed}`}
           >
             {props.product_name}
           </Link>

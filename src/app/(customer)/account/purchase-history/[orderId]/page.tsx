@@ -2,7 +2,7 @@
 
 // import libs
 import useSWR, { Fetcher } from "swr";
-import { BACKEND_URL } from "@/utils/commonConst";
+import { BACKEND_URL_ORDERS } from "@/utils/commonConst";
 import {
   convertDateToFormatHHMMDDMMYYYY, convertOrderStatusToStr,
   parseNumToCurrencyStr,
@@ -19,11 +19,11 @@ interface IOrderDetailProps {
   _id: string;
   order_buyer: { order_name: string, order_phone: string };
   order_address: { street: string, ward: string, district: string, province: string };
-  order_status: string;
-  order_process_info: { status: string, date: Date }[];
   order_details: IProductItemInOrderItemProps[];
   order_total_cost: number;
+  order_status: string;
   payment_id: string;
+  createdAt: string;
 }
 
 const fetcher: Fetcher<IOrderDetailProps, string> = async (url: string) => {
@@ -37,16 +37,19 @@ const fetcher: Fetcher<IOrderDetailProps, string> = async (url: string) => {
 
 export default function PurchaseDetailPage({ params }: { params: { orderId: string } }) {
   const { data, error, isLoading } = useSWR(
-    BACKEND_URL + '/orders/' + params.orderId,
+    BACKEND_URL_ORDERS + "/" + params.orderId,
     fetcher
   );
 
   if (isLoading) return <p>Đang tải dữ liệu...</p>;
   if (error) return <p>Có lỗi xảy ra: {error.message}</p>;
 
-  const { _id, order_buyer, order_process_info, payment_id, order_details, order_total_cost, order_address } = data;
-  const { date: order_date } = order_process_info[0];
-  const { status: order_status } = order_process_info.slice(-1)[0];
+  const {
+    _id, order_buyer, payment_id,
+    order_details, order_total_cost,
+    order_address, order_status,
+    createdAt: order_date,
+  } = data;
   const { order_name, order_phone } = order_buyer;
   const { street, ward, district, province } = order_address;
 
@@ -99,7 +102,7 @@ export default function PurchaseDetailPage({ params }: { params: { orderId: stri
         </h2>
         <div className="order-detail__products-wrapper">
           {order_details.map(product =>
-            <CustomerProductItemInOrderItem key={product.product_id} {...product} />
+            <CustomerProductItemInOrderItem key={product.product_id_hashed} {...product} />
           )}
         </div>
         <hr />
