@@ -88,6 +88,8 @@ const LoginForm = () => {
 
         accessTokens = await Cookies.get("accessToken");
         console.log("Sau khi set: ", accessTokens);
+        
+        window.location.href = "/";
 
         if (data.status == 404) {
           newErrors.user_email = "Tài khoản không tồn tại!";

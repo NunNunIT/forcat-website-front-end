@@ -165,7 +165,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
-  background-color: #fcfafb;
+  background-color: #fffdf9;
 }
 
 ::-webkit-scrollbar {

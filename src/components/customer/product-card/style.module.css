@@ -6,7 +6,8 @@
   position: relative;
   box-shadow: 0 2px 7px #dfdfdf;
   margin: 0;
-  background: #fafafa;
+  /* background: #fafafa; */
+  background: #fff;
   margin-bottom: 12px;
   border-radius: 8px;
 }

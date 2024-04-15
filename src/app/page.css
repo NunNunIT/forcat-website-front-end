@@ -156,5 +156,6 @@ section {
 @media screen and (max-width: 26rem) {
   .content-container {
     width: 100%;
+    padding: 0 12px;
   }
 }

@@ -14,9 +14,12 @@ const cx = classNames.bind(styles);
 
 const fetchTopRatedProducts = async () => {
   try {
-    const response = await fetch(`${BACKEND_URL}/productList/getTopRatedProducts`, {
-      next: { revalidate: 60 },
-    });
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getTopRatedProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch top rated products");
     }
@@ -304,16 +307,19 @@ const CustomerCarousel = () => {
                   </div>
                   <div className={cx("carousel__card-bottom-details")}>
                     <div className={cx("carousel__card-price")}>
-                      {product.highest_discount ? (
-                        <>
-                          {convertNumberToMoney(product.lowest_price)}đ
-                          <small>
-                            {convertNumberToMoney(product.product_price)}đ
-                          </small>
-                        </>
-                      ) : (
-                        <>{convertNumberToMoney(product.product_price)}đ</>
-                      )}
+                      <h2>
+                        {" "}
+                        {product.highest_discount ? (
+                          <>
+                            {convertNumberToMoney(product.lowest_price)}đ
+                            <small>
+                              {convertNumberToMoney(product.product_price)}đ
+                            </small>
+                          </>
+                        ) : (
+                          <>{convertNumberToMoney(product.product_price)}đ</>
+                        )}
+                      </h2>
                     </div>
                   </div>
                 </Link>
