@@ -12,9 +12,9 @@ import { SearchResultContainer } from "./partials";
 import "./page.css";
 
 // fetch data
-async function getSearchProduct(searchKey) {
+async function getSearchProduct(searchKey, page) {
   try {
-    const res = await fetch(`${BACKEND_URL}/productList/search?searchKey=${searchKey}`, {
+    const res = await fetch(`${BACKEND_URL}/productList/search?searchKey=${searchKey}&page=${page}`, {
       next: { revalidate: 60 },
     });
 
@@ -33,8 +33,8 @@ export default async function SearchResultPage({
   params: { "search-result": string };
   searchParams?: { [key: string]: string };
 }) {
-  const { searchKey } = searchParams; // Truy cập tham số truy vấn searchKey từ params
+  const { searchKey, page } = searchParams; // Truy cập tham số truy vấn searchKey từ params
   console.log("Lấy từ url", searchKey)
-  const searchResults = await getSearchProduct(searchKey)
+  const searchResults = await getSearchProduct(searchKey, page)
   return <SearchResultContainer searchKey={searchKey} searchResults={searchResults} />;
 }

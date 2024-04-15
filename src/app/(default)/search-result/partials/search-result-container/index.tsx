@@ -7,6 +7,7 @@ import Image from "next/image";
 import { BACKEND_URL } from "@/utils/commonConst";
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
+import Pagination from '@/components/customer/pagination';
 
 // import css
 import styles from "./search-result-container.module.css";
@@ -20,6 +21,8 @@ import "./search-result.css";
 
 export default function SearchResultPage({ searchKey, searchResults }) {
   const totalResults = searchResults.totalResults
+  const totalPage = searchResults.totalPages
+  const currentPage = searchResults.currentPage
 
   let searchResultsProducts;
   console.log("Từ khóa tìm kiếm", searchKey);
@@ -519,6 +522,7 @@ export default function SearchResultPage({ searchKey, searchResults }) {
               </>
             ))}
         </div>
+        <Pagination maxPage={totalPage} currentPage={currentPage} />
       </section>
     </main>
   );
