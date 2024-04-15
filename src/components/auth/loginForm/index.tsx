@@ -3,9 +3,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter, redirect } from "next/navigation";
 import Cookies from "js-cookie";
-import {encryptData} from "@/utils/security"
 
 // import utils
 import { isValidEmail } from "@/utils/index";

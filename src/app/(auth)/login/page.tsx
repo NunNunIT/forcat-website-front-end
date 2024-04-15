@@ -1,7 +1,6 @@
 // import libs
 import classNames from "classnames/bind";
 import Image from "next/image";
-import { BrowserRouter } from "react-router-dom";
 
 // import components
 import { AuthLoginForm } from "@/components";
