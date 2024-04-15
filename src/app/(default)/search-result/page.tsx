@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import components
 import { CustomerProductCard } from "@/components";
@@ -15,6 +16,12 @@ import {
 
 // import css
 import "./page.css";
+
+export const metadata: Metadata = {
+  title: "Kết quả tìm kiếm",
+  description:
+    "Kết quả tìm kiếm trên ForCat Shop sẽ giúp bạn dễ dàng tìm thấy những sản phẩm và thông tin mà bạn đang quan tâm. Hãy khám phá các kết quả tìm kiếm và tìm thấy những điều tuyệt vời mà ForCat mang lại cho bạn!",
+};
 
 export default function SearchResultPage() {
   return (
