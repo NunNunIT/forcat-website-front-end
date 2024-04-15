@@ -287,7 +287,7 @@ const CustomerCarousel = () => {
                     </div>
                     <div className={cx("carousel__card-details")}>
                       <span className={cx("carousel__card-category")}>
-                        {product.category_name > 0
+                        {product.category_name
                           ? product.category_name
                           : "FORCAT"}
                       </span>

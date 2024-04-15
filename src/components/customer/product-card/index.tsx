@@ -33,7 +33,7 @@ export default function CustomerProductCard({ product }) {
             </div>
             <div className={cx("product-details")}>
               <span className={cx("product-category")}>
-                {product.category_name > 0 ? product.category_name : "FORCAT"}
+                {product.category_name ? product.category_name : "FORCAT"}
               </span>
               <div className={cx("product-rate")}>
                 <CustomerStarRating rating={product.product_avg_rating} />
@@ -43,7 +43,7 @@ export default function CustomerProductCard({ product }) {
           </div>
           <div className={cx("product-bottom-details")}>
             <div className={cx("product-price")}>
-              {product.highest_discount ? (
+              {product.highest_discount && product.lowest_price ? (
                 <>
                   {convertNumberToMoney(product.lowest_price)}đ
                   <small>{convertNumberToMoney(product.product_price)}đ</small>

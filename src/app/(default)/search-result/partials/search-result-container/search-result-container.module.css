@@ -96,9 +96,7 @@
 
 .filter-dropdown__button {
   display: flex;
-  margin: 0 auto;
-  gap: 12px;
-  padding: 24px 0;
+  /* padding: 24px 0; */
 }
 
 .filter-dropdown__button button.btn--filled.pri,

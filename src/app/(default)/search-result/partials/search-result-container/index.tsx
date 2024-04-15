@@ -18,7 +18,19 @@ import { CustomerProductCard } from "@/components";
 // import css
 import "./search-result.css";
 
-export default function SearchResultPage() {
+export default function SearchResultPage({ searchKey, searchResults }) {
+  const totalResults = searchResults.totalResults
+
+  let searchResultsProducts;
+  console.log("Từ khóa tìm kiếm", searchKey);
+
+  if (searchResults) {
+    searchResultsProducts = searchResults.searchProducts;
+  } else {
+    searchResultsProducts = [];
+  }
+  console.log("Từ khóa tìm kiếm", searchResultsProducts);
+
   const [selectedFilterItem, setSelectedFilterItem] =
     useState<HTMLDivElement | null>(null);
 
@@ -110,41 +122,43 @@ export default function SearchResultPage() {
 
   const handleFilterItemClickSort = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    const isFilterItem = target.closest(".search-result__sort__cover");
-    const isDropdownContent = target.closest(".dropdown-content--sort__cover");
+    const isFilterItemSort = target.closest(".search-result__sort__cover");
+    const isDropdownContentSort = target.closest(
+      ".dropdown-content--sort__cover"
+    );
 
     // Nếu phần tử được bấm là một mục filter
-    if (isFilterItem) {
-      const filterItem = isFilterItem as HTMLDivElement;
+    if (isFilterItemSort) {
+      const filterItemSort = isFilterItemSort as HTMLDivElement;
 
       // Đặt lại tất cả các mục filter khác
-      const filterItems = document.querySelectorAll(
+      const filterItemsSort = document.querySelectorAll(
         ".search-result__sort__cover"
       );
-      filterItems.forEach((item: Element) => {
-        if (item !== filterItem) {
+      filterItemsSort.forEach((item: Element) => {
+        if (item !== filterItemSort) {
           (item as HTMLElement).style.borderColor = ""; // Đặt lại màu viền
-          const dropdownContent = item.querySelector(
+          const dropdownContentSort = item.querySelector(
             ".dropdown-content--sort__cover"
           ) as HTMLDivElement | null;
-          if (dropdownContent) {
-            dropdownContent.style.display = "none"; // Ẩn dropdown content
+          if (dropdownContentSort) {
+            dropdownContentSort.style.display = "none"; // Ẩn dropdown content
           }
         }
       });
 
       // Hiển thị hoặc ẩn dropdown content cho mục filter được bấm
-      if (filterItem.style.borderColor === "brown") {
-        filterItem.style.borderColor = ""; // Đặt lại màu viền
-        const dropdownContent = filterItem.querySelector(
+      if (filterItemSort.style.borderColor === "brown") {
+        filterItemSort.style.borderColor = ""; // Đặt lại màu viền
+        const dropdownContent = filterItemSort.querySelector(
           ".dropdown-content--sort__cover"
         ) as HTMLDivElement | null;
         if (dropdownContent) {
           dropdownContent.style.display = "none"; // Ẩn dropdown content
         }
       } else {
-        filterItem.style.borderColor = "brown"; // Đặt màu viền là nâu
-        const dropdownContent = filterItem.querySelector(
+        filterItemSort.style.borderColor = "brown"; // Đặt màu viền là nâu
+        const dropdownContent = filterItemSort.querySelector(
           ".dropdown-content--sort__cover"
         ) as HTMLDivElement | null;
         if (dropdownContent) {
@@ -152,37 +166,37 @@ export default function SearchResultPage() {
         }
       }
 
-      setSelectedFilterItem(filterItem);
+      setSelectedFilterItemSort(filterItemSort);
     }
   };
 
   useEffect(() => {
-    document.body.addEventListener("click", handleBodyClick);
+    document.body.addEventListener("click", handleBodyClickSort);
 
     // Clean up: Gỡ bỏ sự kiện khi component unmount
     return () => {
-      document.body.removeEventListener("click", handleBodyClick);
+      document.body.removeEventListener("click", handleBodyClickSort);
     };
   }, []);
 
   const handleBodyClickSort = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    const isFilterItem = target.closest(".search-result__sort__cover");
+    const targetSort = event.target as HTMLElement;
+    const isFilterItemSort = targetSort.closest(".search-result__sort__cover");
 
-    if (!isFilterItem) {
+    if (!isFilterItemSort) {
       document
         .querySelectorAll(".search-result__sort__cover")
         .forEach((item: Element) => {
           (item as HTMLElement).style.borderColor = ""; // Reset border color
-          const dropdownContent = item.querySelector(
+          const dropdownContentSort = item.querySelector(
             ".dropdown-content--sort__cover"
           ) as HTMLDivElement | null;
-          if (dropdownContent) {
-            dropdownContent.style.display = "none"; // Hide dropdown content
+          if (dropdownContentSort) {
+            dropdownContentSort.style.display = "none"; // Hide dropdown content
           }
         });
 
-      setSelectedFilterItem(null);
+      setSelectedFilterItemSort(null);
     }
   };
 
@@ -253,14 +267,7 @@ export default function SearchResultPage() {
                     </label>
                   </div>
                 </div>
-                <div className={cx("filter-dropdown__button")}>
-                  <button className={cx("btn btn--outlined")} type="submit">
-                    Hủy bộ lọc này
-                  </button>
-                  <button className={cx("btn btn--filled")} type="submit">
-                    Xem <strong>13</strong> sản phẩm
-                  </button>
-                </div>
+                {/* Comment */}
               </div>
             </div>
 
@@ -311,14 +318,7 @@ export default function SearchResultPage() {
                     </label>
                   </div>
                 </div>
-                <div className={cx("filter-dropdown__button")}>
-                  <button className={cx("btn btn--filled")} type="submit">
-                    Hủy bộ lọc này
-                  </button>
-                  <button className={cx("btn btn--filled")} type="submit">
-                    Xem <strong>13</strong> sản phẩm
-                  </button>
-                </div>
+                {/* Comment */}
               </div>
             </div>
 
@@ -411,15 +411,16 @@ export default function SearchResultPage() {
                     </label>
                   </div>
                 </div>
-                <div className={cx("filter-dropdown__button")}>
-                  <button className={cx("btn btn--outlined")} type="submit">
-                    Hủy bộ lọc này
-                  </button>
-                  <button className={cx("btn btn--filled")} type="submit">
-                    Xem <strong>13</strong> sản phẩm
-                  </button>
-                </div>
+                {/* Comment */}
               </div>
+            </div>
+            <div className={cx("filter-dropdown__button")}>
+              <button className={cx("btn btn--outlined")} type="submit">
+                Hủy bộ lọc này
+              </button>
+              <button className={cx("btn btn--filled")} type="submit">
+                Xem <strong>13</strong> sản phẩm
+              </button>
             </div>
           </div>
         </section>
@@ -434,84 +435,81 @@ export default function SearchResultPage() {
         <div className="search-result__main__heading">
           <p className="search-result__main__count">
             Tìm thấy
-            <span className="search-result__highlight"> 31</span> kết quả cho từ
-            khóa &quot;<span className="search-result__key">mèo</span>&quot;
+            <span className="search-result__highlight"> {totalResults} </span> kết quả cho từ
+            khóa &quot;<span className="search-result__key">{searchKey} </span>&quot;
           </p>
           {/* <SearchResultSort /> */}
           <div
-      className={cx("search-result__sort", "search-result__sort__cover")}
-      onClick={(e: any) => handleFilterItemClickSort(e)}
-    >
-      <p className={cx("search-result__sort-title")}>Sắp xếp theo:</p>
-      <div className={cx("search-result__sort-content")}>
-        <p>Nổi bật</p>
-        <span className={cx("material-icons-round")}>expand_more</span>
-      </div>
-      <div
-        className={cx(
-          "dropdown-content--sort",
-          "dropdown-content--sort__cover"
-        )}
-      >
-        <div className={cx("dropdown-options")}>
-          <input
-            className={cx("sort-option")}
-            type="radio"
-            id="hot"
-            name="sort"
-            value="hot"
-          />
-          <label htmlFor="hot" className={cx("sort-label")}>
-            Nổi bật
-          </label>
-        </div>
-        <hr />
-        <div className={cx("dropdown-options")}>
-          <input
-            className={cx("sort-option")}
-            type="radio"
-            id="sale"
-            name="sort"
-            value="sale"
-          />
-          <label htmlFor="hot" className={cx("sort-label")}>
-            Bán chạy
-          </label>
-        </div>
-        <hr />
-        <div className={cx("dropdown-options")}>
-          <input
-            className={cx("sort-option")}
-            type="radio"
-            id="price-z-to-a"
-            name="sort"
-            value="price-z-to-a"
-          />
-          <label htmlFor="hot" className={cx("sort-label")}>
-            Giá cao đến thấp
-          </label>
-        </div>
-        <hr />
-        <div className={cx("dropdown-options")}>
-          <input
-            className={cx("sort-option")}
-            type="radio"
-            id="price-a-to-z"
-            name="sort"
-            value="price-a-to-z"
-          />
-          <label htmlFor="hot" className={cx("sort-label")}>
-            Giá thấp đến cao
-          </label>
-        </div>
-      </div>
-    </div>
-
+            className={cx("search-result__sort", "search-result__sort__cover")}
+            onClick={(e: any) => handleFilterItemClickSort(e)}>
+            <p className={cx("search-result__sort-title")}>Sắp xếp theo:</p>
+            <div className={cx("search-result__sort-content")}>
+              <p>Nổi bật</p>
+              <span className={cx("material-icons-round")}>expand_more</span>
+            </div>
+            <div
+              className={cx(
+                "dropdown-content--sort",
+                "dropdown-content--sort__cover"
+              )}>
+              <div className={cx("dropdown-options")}>
+                <input
+                  className={cx("sort-option")}
+                  type="radio"
+                  id="hot"
+                  name="sort"
+                  value="hot"
+                />
+                <label htmlFor="hot" className={cx("sort-label")}>
+                  Nổi bật
+                </label>
+              </div>
+              <hr />
+              <div className={cx("dropdown-options")}>
+                <input
+                  className={cx("sort-option")}
+                  type="radio"
+                  id="sale"
+                  name="sort"
+                  value="sale"
+                />
+                <label htmlFor="hot" className={cx("sort-label")}>
+                  Bán chạy
+                </label>
+              </div>
+              <hr />
+              <div className={cx("dropdown-options")}>
+                <input
+                  className={cx("sort-option")}
+                  type="radio"
+                  id="price-z-to-a"
+                  name="sort"
+                  value="price-z-to-a"
+                />
+                <label htmlFor="hot" className={cx("sort-label")}>
+                  Giá cao đến thấp
+                </label>
+              </div>
+              <hr />
+              <div className={cx("dropdown-options")}>
+                <input
+                  className={cx("sort-option")}
+                  type="radio"
+                  id="price-a-to-z"
+                  name="sort"
+                  value="price-a-to-z"
+                />
+                <label htmlFor="hot" className={cx("sort-label")}>
+                  Giá thấp đến cao
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="search-result__main-card">
-          {/* {searchResultsProducts &&
-            searchResultsProducts.length &&
+          {searchResultsProducts &&
+            searchResultsProducts.length >= 0 &&
             searchResultsProducts.map((product) => (
               <>
                 <CustomerProductCard
@@ -519,7 +517,7 @@ export default function SearchResultPage() {
                   product={product}
                 />
               </>
-            ))} */}
+            ))}
         </div>
       </section>
     </main>

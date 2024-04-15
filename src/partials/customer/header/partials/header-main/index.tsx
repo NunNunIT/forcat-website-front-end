@@ -10,7 +10,16 @@ import styles from "./header-main.module.css";
 
 const cx = classNameNames.bind(styles);
 
-export default function CustomerHeaderMain() {
+export default function CustomerHeaderMain({
+  params,
+  searchParams,
+}: {
+  params: { "*": string };
+  searchParams?: { [key: string]: string };
+}) {
+  const searchKey = searchParams ?? 0;
+  console.log("searchKey từ Header", searchKey);
+  console.log("searchKey từ Header",  searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
@@ -36,7 +45,7 @@ export default function CustomerHeaderMain() {
       }
       const data = await response.json();
       if (data.data.searchKey === inputValue) {
-        console.log("Trả về cho data", data.data.searchKey)
+        console.log("Trả về cho data", data.data.searchKey);
         setSearchResults(data.data.recommendedProducts);
         setTotalSearchResults(data.data.totalProducts);
         setShowSmartSearch(true);
@@ -48,7 +57,7 @@ export default function CustomerHeaderMain() {
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Gía trị nhạp vào", inputValue)
+    console.log("Gía trị nhạp vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);
@@ -62,15 +71,14 @@ export default function CustomerHeaderMain() {
         <form
           className={cx("header__search-bar__main")}
           action="/search-result"
-          method="GET"
-        >
+          method="GET">
           <div className={cx("header__search-bar")}>
             <input
               className={cx("header__search-input")}
               id="header__search-input"
               type="search"
               name="searchKey"
-              placeholder="Bạn tìm gì..."
+              placeholder = { searchKey ? searchKey : "Bạn tìm gì..." }
               onChange={handleInputChange}
             />
             <button className={cx("header__search-btn")} type="submit">
@@ -83,8 +91,7 @@ export default function CustomerHeaderMain() {
             "display-block": showSmartSearch,
           })}
           id="header__smart-search-wrapper"
-          style={{ display: showSmartSearch ? "block" : "none" }}
-        >
+          style={{ display: showSmartSearch ? "block" : "none" }}>
           <div className={cx("header__suggest-results-content")}>
             {showSmartSearch &&
               searchResults.map((product) => (
@@ -108,8 +115,7 @@ export default function CustomerHeaderMain() {
         <a
           href="/cart"
           className={cx("header__cart-container")}
-          title="Giỏ hàng"
-        >
+          title="Giỏ hàng">
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
           </div>
