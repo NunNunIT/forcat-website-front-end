@@ -29,7 +29,7 @@ const LoginPage = () => {
         />
       </div>
       <div className={cx("auth__forms-wrap", "login")}>
-        <AuthLoginForm />
+          <AuthLoginForm />
       </div>
     </main>
   );

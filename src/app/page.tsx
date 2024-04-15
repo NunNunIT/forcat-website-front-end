@@ -1,7 +1,6 @@
 //import libs
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 
 // import global components
 import { CustomerCarousel } from "@/components";
@@ -9,6 +8,7 @@ import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
+import { BACKEND_URL} from "@/utils/commonConst";
 
 // use css
 import "./page.css";
@@ -19,29 +19,60 @@ export const metadata: Metadata = {
     "Chào mừng bạn đến với ForCat Shop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Tại đây, chúng tôi cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất để giúp bạn chăm sóc và yêu thương thú cưng của mình. Khám phá ngay bộ sưu tập sản phẩm đa dạng và đăng ký tài khoản để nhận ưu đãi đặc biệt. Hãy bắt đầu hành trình mua sắm và chăm sóc thú cưng của bạn tại ForCat Shop ngay hôm nay!",
 };
 
-export default function Home() {
+const fetchNewestProducts = async () => {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getNewestProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch newest products");
+    }
+    const data = await response.json();
+    return data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching newest products:", error);
+    throw error;
+  }
+};
+
+export default async function Home() {
+  let newestProducts = await fetchNewestProducts();
   return (
     <>
       <CustomerHeader></CustomerHeader>
-      <main className="content-container">
-        <CustomerSlider></CustomerSlider>
-        <CustomerCategories></CustomerCategories>
-        <CustomerCarousel></CustomerCarousel>
-        <section className="tip-products-wrapper new-products">
+      <CustomerSlider></CustomerSlider>
+      <main className="main-container">
+        <div className="content-container">
+          <CustomerCategories></CustomerCategories>
+        </div>
+        <div className="wrapper color">
+          <div className="content-container">
+            <CustomerCarousel></CustomerCarousel>
+          </div>
+        </div>
+
+        <section className="content-container tip-products-wrapper">
           <div className="tip-products">
             <h1 className="tip-products__label">
-              <Link href="#" className="tip-products__title">
+              <Link href="/search-result" className="tip-products__title">
                 Hàng mới về
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
             <div className="tip-products__content">
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
+              {newestProducts &&
+                newestProducts.length &&
+                newestProducts.map((product) => (
+                  <>
+                    <CustomerProductCard
+                      key={product.product_id}
+                      product={product}
+                    />
+                  </>
+                ))}
             </div>
           </div>
           <div className="banner-wrapper">
@@ -98,13 +129,7 @@ export default function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <div className="tip-products__content">
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-              <CustomerProductCard></CustomerProductCard>
-            </div>
+            <div className="tip-products__content"></div>
           </div>
         </section>
       </main>

@@ -15,6 +15,7 @@
     "classnames": "^2.5.1",
     "firebase": "^10.9.0",
     "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
     "material-icons": "^1.13.12",
     "mongoose": "^8.2.2",
     "next": "14.0.4",
@@ -31,7 +32,8 @@
     "redux-thunk": "^3.1.0",
     "swiper": "^11.0.7",
     "swr": "^2.2.5",
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "^1.0.3",
+    "unidecode": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "20.12.7",
