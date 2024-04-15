@@ -2,9 +2,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import css
 import "./page.css";
+
+export const metadata: Metadata = {
+  title: "Điều khoản sử dụng",
+  description:
+    "Trang Điều khoản sử dụng của ForCat Shop mô tả các điều kiện và quy định mà người dùng phải tuân thủ khi sử dụng dịch vụ của chúng tôi. Hãy đảm bảo bạn đã đọc và hiểu rõ các điều khoản này trước khi sử dụng trang web của chúng tôi. Bằng cách tiếp tục sử dụng trang web của chúng tôi, bạn đồng ý tuân thủ các điều khoản và điều kiện được nêu trong trang Điều khoản sử dụng này.",
+};
 
 export default function AboutUsPage() {
   return (

@@ -1,4 +1,4 @@
-
+import type { Metadata } from "next";
 import React from "react";
 import classNames from "classnames/bind";
 import Image from "next/image";
@@ -10,6 +10,12 @@ import { AuthForgotForm } from "@/components";
 import styles from "../auth.module.css";
 
 const cx = classNames.bind(styles);
+
+export const metadata: Metadata = {
+  title: "Quên mật khẩu | Không thể đăng nhập",
+  description:
+    "Quên mật khẩu? Đừng lo lắng! Trang này cho phép bạn khôi phục mật khẩu của mình một cách đơn giản và nhanh chóng.",
+};
 
 export default function ForgotPage() {
   return (
@@ -23,7 +29,7 @@ export default function ForgotPage() {
         />
       </div>
       <div className={cx("auth__forms-wrap", "login")}>
-        <AuthForgotForm/>
+        <AuthForgotForm />
       </div>
     </main>
   );
