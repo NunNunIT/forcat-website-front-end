@@ -2,9 +2,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import css
 import "./page.css";
+
+export const metadata: Metadata = {
+  title: "Chính sách bảo mật thông tin",
+  description:
+    "Chính sách bảo mật thông tin của ForCat Shop cam kết việc bảo vệ thông tin cá nhân của bạn và thú cưng của bạn. Chúng tôi tôn trọng và bảo vệ quyền riêng tư của mỗi khách hàng, và cam kết tuân thủ các quy định bảo vệ dữ liệu.",
+};
 
 export default function AboutUsPage() {
   return (
