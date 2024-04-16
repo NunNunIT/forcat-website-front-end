@@ -40,23 +40,22 @@ const fetchNewestProducts = async () => {
 };
 
 const fetchDiscountProducts = async () => {
-  // try {
-  //   const response = await fetch(
-  //     `${BACKEND_URL}/productList/getDiscountProducts`,
-  //     {
-  //       next: { revalidate: 60 },
-  //     }
-  //   );
-  //   if (!response.ok) {
-  //     throw new Error("Failed to fetch discount products");
-  //   }
-  //   const data = await response.json();
-  //   return data.data; // Return the entire data object
-  // } catch (error) {
-  //   console.error("Error fetching discount products:", error);
-  //   throw error;
-  // }
-  return [];
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getDiscountProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch discount products");
+    }
+    const data = await response.json();
+    return data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching discount products:", error);
+    throw error;
+  }
 };
 
 export default async function Home() {
