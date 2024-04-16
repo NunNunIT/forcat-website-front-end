@@ -24,9 +24,12 @@ import "./page.css";
 // fetch data
 async function getProduct(slug, pid) {
   try {
-    const res = await fetch(`${BACKEND_URL}/product/${pid}`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${BACKEND_URL}/product/${encodeURIComponent(pid)}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!res.ok || slug[2]) return notFound();
 
     return res.json();
