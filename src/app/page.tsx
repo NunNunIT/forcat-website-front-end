@@ -163,7 +163,7 @@ export default async function Home() {
               <span className="tip-products__title-after"></span>
             </h1>
             <div className="tip-products__content">
-            {discountProducts &&
+              {discountProducts &&
                 discountProducts.length &&
                 discountProducts.map((product) => (
                   <>

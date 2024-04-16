@@ -25,22 +25,32 @@ interface ILogoProps {
 }
 
 interface IProductProps {
-  id: string;
-  name: string;
-  rating: number;
-  price: number;
+  product_id_hashed: string;
+  product_name: string;
+  product_slug: string;
+  product_avg_rating: number;
+  product_img: {
+    link: string;
+    alt: string;
+  };
+  lowest_price?: number;
+  product_price: number;
+  highest_discount?: number;
   price__discount?: number;
+  product_sold_quantity?: number;
+  category_name: string;
 }
 
 interface ISubCategoryProps {
-  id: string;
-  name: string;
+  // _id: string;
+  category_name: string;
+  category_img: string;
   products: IProductProps[];
 }
 
 interface ICategoryProps {
-  id: string;
-  name: string;
+  // id: string;
+  category_type: string;
   iconData?: string;
   url?: string;
   subCategories?: ISubCategoryProps[];
@@ -60,24 +70,28 @@ interface IHeaderMenuProps {
 }
 
 interface IHeaderMenuProductItemProps {
-  id: string;
-  name: string;
-  rating: number;
-  price: number;
+  product_id_hashed: string;
+  product_name: string;
+  product_slug: string;
+  product_avg_rating: number;
+  product_img: {
+    link: string;
+    alt: string;
+  };
+  lowest_price?: number;
+  product_price: number;
   price__discount?: number;
-  subCategory_id: string;
+  category_name: string;
 }
 
 interface IHeaderMenuSubCategoryItemProps {
-  id: string;
-  title: string;
+  category_name: string;
+  category_img: string;
   products: IProductProps[];
-  children?: React.ReactNode;
 }
 
 interface IHeaderMenuCategoryItemProps {
-  id: string;
-  title: string;
+  categoryType: string;
   url?: string;
   iconData?: string;
   children?: React.ReactNode;

@@ -16,23 +16,32 @@ import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
 
 const cx = classNameNames.bind(styles);
 
+interface IUserLocal {
+  user_id: string;
+  user_name: string;
+  user_avt: string;
+}
+
 export default function CustomerHeaderNav() {
-  const [currentUser, setCurrentUser] = useState(null); // Định nghĩa biến currentUser ở đây
+  const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
-  useEffect(() => {
-    const user = getCurrentUser();
-    setCurrentUser(user);
-  }, []);
-
-  const getCurrentUser = () => {
+  const getCurrentUser = (): (IUserLocal | null) => {
     const storedUser = localStorage.getItem("userStore");
     let currentUser = null;
-
     if (storedUser) {
       currentUser = JSON.parse(storedUser);
     }
     return currentUser;
+    // const currentUser = storedUser
+    //   ? JSON.parse(storedUser)
+    //   : null;
+    // return currentUser;
   };
+
+  useEffect(() => {
+    const user: (IUserLocal | null) = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
 
   // console.log("LocalStore2", currentUser);
 
@@ -86,8 +95,7 @@ export default function CustomerHeaderNav() {
         <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
-            <Link
-              href="/notification/order"
+            <Link href="/notifications"
               className={cx("header__notifications")}>
               <span className="material-icons-outlined">notifications</span>
               Thông báo
@@ -135,7 +143,7 @@ export default function CustomerHeaderNav() {
           )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
-          <Link href="/notification/order" className={cx("noti--mobile")}>
+          <Link href="/notifications" className={cx("noti--mobile")}>
             <span className="material-icons-outlined" title="Thông báo">
               notifications
             </span>
