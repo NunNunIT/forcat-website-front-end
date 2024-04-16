@@ -1,7 +1,7 @@
 // import libs
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 // import partials
 import {
@@ -38,10 +38,25 @@ async function getProduct(slug, pid) {
   }
 }
 
-export const metadata: Metadata = {
-  title: "",
-  description: "",
-};
+export async function generateMetadata(
+  {
+    params,
+    searchParams,
+  }: {
+    params: { product: string };
+    searchParams?: { [key: string]: string };
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = params.product;
+  const { pid } = searchParams;
+  const res = await getProduct(slug, pid);
+
+  return {
+    title: res.data.product.product_name,
+    description: res.data.product.product_short_description,
+  };
+}
 
 export default async function ProductPage({
   params,
@@ -76,9 +91,6 @@ export default async function ProductPage({
     recent_images: res.data.product.recent_images,
     recent_videos: res.data.product.recent_videos,
   };
-  // Gán tên sản phẩm và description cho metadata
-  metadata.title = productInfo.product_name;
-  metadata.description = productDescription;
 
   return (
     <main className="product">
