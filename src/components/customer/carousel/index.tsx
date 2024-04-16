@@ -14,9 +14,12 @@ const cx = classNames.bind(styles);
 
 const fetchTopRatedProducts = async () => {
   try {
-    const response = await fetch(`${BACKEND_URL}/productList/getTopRatedProducts`, {
-      next: { revalidate: 60 },
-    });
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getTopRatedProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch top rated products");
     }
@@ -240,7 +243,7 @@ const CustomerCarousel = () => {
 
   return (
     <div ref={wrapperRef} className={cx("wrapper-carousel")}>
-      <div className={cx("carousel__label")}>
+      {/* <div className={cx("carousel__label")}>
         <h2 className={cx("carousel__title")}>Gợi ý hôm nay</h2>
         <div className={cx("carousel__label-seemore")}>
           <Link href="/search-result">Xem tất cả</Link>
@@ -248,7 +251,7 @@ const CustomerCarousel = () => {
             keyboard_arrow_right
           </span>
         </div>
-      </div>
+      </div> */}
       <span
         id="left"
         onClick={handleClick}
@@ -304,16 +307,19 @@ const CustomerCarousel = () => {
                   </div>
                   <div className={cx("carousel__card-bottom-details")}>
                     <div className={cx("carousel__card-price")}>
-                      {product.highest_discount ? (
-                        <>
-                          {convertNumberToMoney(product.lowest_price)}đ
-                          <small>
-                            {convertNumberToMoney(product.product_price)}đ
-                          </small>
-                        </>
-                      ) : (
-                        <>{convertNumberToMoney(product.product_price)}đ</>
-                      )}
+                      <h2>
+                        {" "}
+                        {product.highest_discount ? (
+                          <>
+                            {convertNumberToMoney(product.lowest_price)}đ
+                            <small>
+                              {convertNumberToMoney(product.product_price)}đ
+                            </small>
+                          </>
+                        ) : (
+                          <>{convertNumberToMoney(product.product_price)}đ</>
+                        )}
+                      </h2>
                     </div>
                   </div>
                 </Link>

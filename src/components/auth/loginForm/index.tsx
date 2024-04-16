@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // import libs
 import classNames from "classnames/bind";
 import Link from "next/link";
@@ -18,6 +18,13 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
   const initialForms = {
     user_email: "",
     user_password: "",
@@ -31,12 +38,6 @@ const LoginForm = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleTogglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,7 +70,7 @@ const LoginForm = () => {
       try {
         setLoading(true);
         setErrors(initialForms);
-        "use server"
+        ("use server");
         const res = await fetch(`${BACKEND_URL}/auth/login`, {
           method: "POST",
           headers: {
@@ -88,6 +89,8 @@ const LoginForm = () => {
 
         accessTokens = await Cookies.get("accessToken");
         console.log("Sau khi set: ", accessTokens);
+
+        window.location.href = "/";
 
         if (data.status == 404) {
           newErrors.user_email = "Tài khoản không tồn tại!";
@@ -108,7 +111,7 @@ const LoginForm = () => {
       }
     }
   };
-  
+
   return (
     <form className={cx("form-auth")} onSubmit={handleSubmit}>
       <div className={cx("form-auth__title")}>
@@ -121,31 +124,43 @@ const LoginForm = () => {
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          placeholder="Nhập email "
-          name="user_email"
-          id="user_email"
-          onChange={handleChange}
-        />
+        <label htmlFor="email">
+          Email<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type="text"
+            placeholder="Nhập email "
+            name="user_email"
+            id="user_email"
+            onChange={handleChange}
+          />
+        </div>
         {errors.user_email && (
           <p className={cx("text-error", "form-error")}>{errors.user_email}</p>
         )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="password">Mật khẩu</label>
-        <input
-          type={showPassword ? "text" : "password"}
-          placeholder="Nhập mật khẩu"
-          name="user_password"
-          id="user_password"
-          onChange={handleChange}
-        />
-        <i
-          className={cx("fas fa-eye", showPassword && "show")}
-          onClick={handleTogglePasswordVisibility}></i>
+        <label htmlFor="password">
+          Mật khẩu<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type={showPassword ? "text" : "password"}
+            placeholder="Nhập mật khẩu"
+            name="user_password"
+            id="user_password"
+            onChange={handleChange}
+          />
+          <span
+            className={cx("material-icons-outlined eye-open", "icon")}
+            onClick={handleTogglePasswordVisibility}>
+            {showPassword ? "visibility_off" : "visibility"}
+          </span>
+        </div>
         {errors.user_password && (
           <p className={cx("text-error", "form-error")}>
             {errors.user_password}

@@ -26,7 +26,7 @@ export default function CustomerCategoryCard({
             fill={true}
           />
         </div>
-        <p className={cx("category__link-name")}>{initValue.name}</p>
+        <h3 className={cx("category__link-name")}>{initValue.name}</h3>
       </Link>
     </div>
   );
