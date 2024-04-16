@@ -63,7 +63,8 @@ export default function CustomerCarouselSlider() {
               300: { slidesPerView: 2, spaceBetween: 5 },
               400: { slidesPerView: 2, spaceBetween: 5 },
               640: { slidesPerView: 3, spaceBetween: 5 },
-              768: { slidesPerView: 4, spaceBetween: 10 },
+              768: { slidesPerView: 3, spaceBetween: 10 },
+              821: { slidesPerView: 3, spaceBetween: 10 },
               868: { slidesPerView: 4, spaceBetween: 10 },
               1024: { slidesPerView: 4, spaceBetween: 10 },
             }}

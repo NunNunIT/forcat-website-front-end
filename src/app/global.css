@@ -467,13 +467,33 @@ input[type="number"] {
 
 .swiper-pagination-bullet {
   background: #000 !important;
-  width: 16px !important;
+  width: 20px !important;
   /* Chiều rộng của bullet */
-  height: 16px !important;
+  height: 20px !important;
   /* Chiều cao của bullet */
   margin: 0 8px;
   /* Khoảng cách giữa các bullet */
 }
+
+@media only screen and (max-width: 800px) {
+  .swiper-pagination-bullet {
+    width: 15px !important;
+    /* Chiều rộng của bullet */
+    height: 15px !important;
+    /* Chiều cao của bullet */
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .swiper-pagination-bullet {
+    width: 10px !important;
+    /* Chiều rộng của bullet */
+    height: 10px !important;
+    /* Chiều cao của bullet */
+  }
+}
+
+
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: var(--fire-orange) !important;

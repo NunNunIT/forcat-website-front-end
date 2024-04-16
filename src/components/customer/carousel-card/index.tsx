@@ -31,14 +31,17 @@ export default function CustomerCarouselCard({ product }) {
         <div className={cx("carousel__card-bottom-details")}>
           <div className={cx("carousel__card-price")}>
             
-              {" "}
               {product.highest_discount ? (
                 <>
                   <h2>{convertNumberToMoney(product.lowest_price)}đ</h2>
                   <small>{convertNumberToMoney(product.product_price)}đ</small>
                 </>
               ) : (
-                <><h2>{convertNumberToMoney(product.product_price)}đ</h2></>
+                <>
+                  <h2>{convertNumberToMoney(product.product_price)}đ</h2>
+                  <small className={cx("display-none")}>{" "}alo</small>
+                </>
+
               )}
             
           </div>
