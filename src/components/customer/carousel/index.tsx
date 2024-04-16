@@ -129,12 +129,12 @@ const CustomerCarousel = () => {
     }
   };
 
- const autoPlay = () => {
+const autoPlay = () => {
   if (typeof window !== "undefined") {
     if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
     // Autoplay the carousel after every 2500 ms
     const carousel = carouselRef.current;
-    if (carousel) {
+    if (carousel && carousel.firstChild) {
       const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
       const id = window.setTimeout(() => {
         carousel.scrollLeft += firstCardWidth;
@@ -143,6 +143,7 @@ const CustomerCarousel = () => {
     }
   }
 };
+
   useEffect(() => {
     if (carouselRef.current && carouselRef.current.children[0]) {
       setFirstCardWidth(
