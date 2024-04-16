@@ -32,7 +32,7 @@ export default async function NewsPage() {
 
   return (
     <main>
-      <h1>Tin tức</h1>
+      <h2>Tin tức</h2>
       <section className="news__group-article">
         {articlesData.map((articleData: IArticleProps) => (
           <ArticleSummary key={articleData.article_id} {...articleData} />
