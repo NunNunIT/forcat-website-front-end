@@ -25,11 +25,6 @@ interface IUserLocal {
 export default function CustomerHeaderNav() {
   const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
-  useEffect(() => {
-    const user: (IUserLocal | null) = getCurrentUser();
-    setCurrentUser(user);
-  }, []);
-
   const getCurrentUser = (): (IUserLocal | null) => {
     const storedUser = localStorage.getItem("userStore");
     let currentUser = null;
@@ -43,7 +38,12 @@ export default function CustomerHeaderNav() {
     // return currentUser;
   };
 
-  console.log("LocalStore2", currentUser);
+  useEffect(() => {
+    const user: (IUserLocal | null) = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
+
+  // console.log("LocalStore2", currentUser);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -95,8 +95,7 @@ export default function CustomerHeaderNav() {
         <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
-            <Link
-              href="/notification/order"
+            <Link href="/notifications"
               className={cx("header__notifications")}>
               <span className="material-icons-outlined">notifications</span>
               Thông báo
@@ -144,7 +143,7 @@ export default function CustomerHeaderNav() {
           )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
-          <Link href="/notification/order" className={cx("noti--mobile")}>
+          <Link href="/notifications" className={cx("noti--mobile")}>
             <span className="material-icons-outlined" title="Thông báo">
               notifications
             </span>

@@ -71,6 +71,7 @@
 }
 
 .cate-dropdown__info .cate-dropdown__sub-cate {
+  margin-left: .25rem;
   text-overflow: ellipsis;
   overflow: hidden;
 }

@@ -27,7 +27,6 @@ function CustomerHeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.
     >
       <span className={cx("cate-dropdown__product-img-container")}>
         <CldImage src={props.product_img.link} alt={props.product_img.alt} fill />
-        {/* <Image src="/imgs/test.png" alt="Test" fill /> */}
       </span>
       <div className={cx("cate-dropdown__product-rating")}>
         <CustomerStarRating className={cx("cate-dropdown__product-star")}
@@ -38,7 +37,7 @@ function CustomerHeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.
       <span className={cx("cate-dropdown__product-name")}>{props.product_name}</span>
       <div>
         <span className={cx("cate-dropdown__product-price")}>
-          {parseNumToCurrencyStr(discountPrice)}
+          {parseNumToCurrencyStr(discountPrice)} đ
         </span>{" "}
         {/* {price__discount && (
           <del className={cx("cate-dropdown__product-price--discount")}>
@@ -51,17 +50,16 @@ function CustomerHeaderMenuProductItem(props: IHeaderMenuProductItemProps): JSX.
 }
 
 function CustomerHeaderMenuSubCategoryItem(props: IHeaderMenuSubCategoryItemProps): JSX.Element {
-  const { category_name, products } = props;
+  const { category_name, category_img, products } = props;
   const hasProducts: boolean = products?.length > 0;
 
   return (
     <li className={cx("cate-dropdown__wrapper")}>
       <Link className={cx("cate-dropdown__info")}
-        // href={`/search/results?category_id=${id}`}
-        href="#"
+        href={`/search-result?searchKey=${props.category_name}`}
       >
         <span className={cx("cate-dropdown__img-container")}>
-          <Image src="/imgs/test.png" alt="Test" fill />
+          <CldImage src={category_img} alt={`Hình đại cho phân loại${category_name} của ForCat Shop`} fill/>
         </span>
         <span className={cx("cate-dropdown__sub-cate")}>{category_name}</span>{" "}
         <span>({products?.length ?? 0})</span>
@@ -70,34 +68,34 @@ function CustomerHeaderMenuSubCategoryItem(props: IHeaderMenuSubCategoryItemProp
         <div className={cx("cate-dropdown__title")}>
           <span>Sản phẩm bán chạy nhất</span>
           <Link className={cx("cate-dropdown__title-link")}
-            href={`/search/results?category_id=${props}`}
+            href={`/search-result?searchKey=${props.category_name}`}
           >
             <span>Xem tất cả</span>
             <span className="material-icons-outlined">chevron_right</span>
           </Link>
         </div>
-        {hasProducts && (
-          <div className={cx("cate-dropdown__products")}>
-            {products.map((product: IProductProps, index: number) => (
-              <CustomerHeaderMenuProductItem
-                key={index}
-                {...product}
-              />
-            ))}
-          </div>
-        )}
-
-        {!hasProducts && (
-          <div className={cx("cate-dropdown__products--not-found")}>
-            <span className={cx("cate-dropdown__products--not-found__img-container")}>
-              <Image src="/imgs/nothing-result.png"
-                alt="Not found result"
-                fill
-              />
-            </span>
-            <span className={cx("cate-dropdown__products--not-found__text")}>Không tìm thấy sản phẩm!</span>
-          </div>
-        )}
+        {hasProducts
+          ? (
+            <div className={cx("cate-dropdown__products")}>
+              {products.map((product: IProductProps, index: number) => (
+                <CustomerHeaderMenuProductItem
+                  key={index} {...product}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={cx("cate-dropdown__products--not-found")}>
+              <span className={cx("cate-dropdown__products--not-found__img-container")}>
+                <Image src="/imgs/nothing-result.png"
+                  alt="Not found result"
+                  fill
+                />
+              </span>
+              <span className={cx("cate-dropdown__products--not-found__text")}>
+                Không tìm thấy sản phẩm!
+              </span>
+            </div>
+          )}
       </div>
     </li>
   );

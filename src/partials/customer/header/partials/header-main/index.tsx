@@ -1,4 +1,5 @@
 "use client";
+
 // import libs
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -57,7 +58,7 @@ export default function CustomerHeaderMain({
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Gía trị nhạp vào", inputValue);
+    // console.log("Giá trị nhạp vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);

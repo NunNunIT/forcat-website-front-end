@@ -42,8 +42,9 @@ interface IProductProps {
 }
 
 interface ISubCategoryProps {
-  _id: string;
+  // _id: string;
   category_name: string;
+  category_img: string;
   products: IProductProps[];
 }
 
@@ -85,6 +86,7 @@ interface IHeaderMenuProductItemProps {
 
 interface IHeaderMenuSubCategoryItemProps {
   category_name: string;
+  category_img: string;
   products: IProductProps[];
 }
 

@@ -39,13 +39,13 @@ const headerLinks: IHeaderLinkProps[] = [
   {
     title: "Sản phẩm HOT",
     iconData: "local_fire_department",
-    url: "a",
+    url: "/search-result",
     className: "menu__hot-product",
   },
   {
     title: "Khuyến mãi",
     iconData: "savings",
-    url: "a",
+    url: "/search-result",
     className: "menu__promo",
   },
   {
@@ -56,22 +56,21 @@ const headerLinks: IHeaderLinkProps[] = [
   },
   {
     title: "Về chúng tôi",
-    url: "a",
+    url: "/about-us",
     className: "menu__about-us",
   },
 ];
 
 export default async function Header() {
-  const headerCategories = await categoryProducts()
-  console.log(headerCategories)
+  const headerCategories = await categoryProducts();
 
   return (
     <header className={cx("header")}>
       <CustomerHeaderNav />
       <div className={cx("header__container")}>
         <CustomerHeaderMain />
-        {/* Hiếu sửa */}
         <CustomerHeaderMenu categories={headerCategories} links={headerLinks} />
+        
       </div>
     </header>
   );
