@@ -1,3 +1,6 @@
+// import libs
+import classNameNames from "classnames/bind";
+
 // import components
 import {
   CustomerHeaderNav,
@@ -5,11 +8,13 @@ import {
   CustomerHeaderMenu,
 } from "./partials";
 
-// use bind from classnames
-import classNameNames from "classnames/bind";
+// import css
 import styles from "./header.module.css";
-const cx = classNameNames.bind(styles);
+
+// import constant
 import { BACKEND_URL} from "@/utils/commonConst";
+
+const cx = classNameNames.bind(styles);
 
 const categoryProducts = async () => {
   try {
@@ -66,7 +71,7 @@ export default async function Header() {
       <div className={cx("header__container")}>
         <CustomerHeaderMain />
         {/* Hiếu sửa */}
-        {/* <CustomerHeaderMenu categories={headerCategories} links={headerLinks} /> */}
+        <CustomerHeaderMenu categories={headerCategories} links={headerLinks} />
       </div>
     </header>
   );

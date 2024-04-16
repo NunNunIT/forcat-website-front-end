@@ -16,22 +16,31 @@ import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
 
 const cx = classNameNames.bind(styles);
 
+interface IUserLocal {
+  user_id: string;
+  user_name: string;
+  user_avt: string;
+}
+
 export default function CustomerHeaderNav() {
-  const [currentUser, setCurrentUser] = useState(null); // Định nghĩa biến currentUser ở đây
+  const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
   useEffect(() => {
-    const user = getCurrentUser();
+    const user: (IUserLocal | null) = getCurrentUser();
     setCurrentUser(user);
   }, []);
 
-  const getCurrentUser = () => {
+  const getCurrentUser = (): (IUserLocal | null) => {
     const storedUser = localStorage.getItem("userStore");
     let currentUser = null;
-
     if (storedUser) {
       currentUser = JSON.parse(storedUser);
     }
     return currentUser;
+    // const currentUser = storedUser
+    //   ? JSON.parse(storedUser)
+    //   : null;
+    // return currentUser;
   };
 
   console.log("LocalStore2", currentUser);

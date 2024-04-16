@@ -14,7 +14,7 @@ export default function CustomerHeaderMain({
   params,
   searchParams,
 }: {
-  params: { "*": string };
+  params?: { "*": string };
   searchParams?: { [key: string]: string };
 }) {
   const searchKey = searchParams ?? 0;

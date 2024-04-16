@@ -1,6 +1,7 @@
 //import libs
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 
 // import global components
 import { CustomerCarousel } from "@/components";
@@ -38,13 +39,33 @@ const fetchNewestProducts = async () => {
   }
 };
 
+const fetchDiscountProducts = async () => {
+  // try {
+  //   const response = await fetch(
+  //     `${BACKEND_URL}/productList/getDiscountProducts`,
+  //     {
+  //       next: { revalidate: 60 },
+  //     }
+  //   );
+  //   if (!response.ok) {
+  //     throw new Error("Failed to fetch discount products");
+  //   }
+  //   const data = await response.json();
+  //   return data.data; // Return the entire data object
+  // } catch (error) {
+  //   console.error("Error fetching discount products:", error);
+  //   throw error;
+  // }
+  return [];
+};
+
 export default async function Home() {
   let newestProducts = await fetchNewestProducts();
   return (
     <>
       <CustomerHeader></CustomerHeader>
       <CustomerSlider></CustomerSlider>
-      <main className="main-container">
+      {/* <main className="main-container">
         <div className="content-container">
           <CustomerCategories></CustomerCategories>
         </div>
@@ -132,7 +153,7 @@ export default async function Home() {
             <div className="tip-products__content"></div>
           </div>
         </section>
-      </main>
+      </main> */}
       <CustomerFooter></CustomerFooter>
     </>
   );
