@@ -4,7 +4,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 // import global components
-import { CustomerCarousel } from "@/components";
 import { CustomerCarouselSlider } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
