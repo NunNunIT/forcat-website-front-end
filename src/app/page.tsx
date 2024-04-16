@@ -63,8 +63,8 @@ export default async function Home() {
   return (
     <>
       <CustomerHeader></CustomerHeader>
-      <CustomerSlider></CustomerSlider>
       <main className="main-container">
+      <CustomerSlider></CustomerSlider>
         <div className="content-container">
           <h1 className="tip-products__label">
             <Link href="/search-result" className="tip-products__title">
@@ -86,7 +86,7 @@ export default async function Home() {
           </div>
         </div>
 
-        <section className="content-container tip-products-wrapper">
+        <section className="content-container tip-products-wrapper wrapper--white">
           <div className="tip-products">
             <h1 className="tip-products__label">
               <Link href="/search-result" className="tip-products__title">

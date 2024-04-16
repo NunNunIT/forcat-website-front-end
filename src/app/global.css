@@ -165,7 +165,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
-  background-color: #fffdf9;
+  background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar {
@@ -460,8 +460,9 @@ input[type="number"] {
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   opacity: 0.8;
-  background-color: var(--fire-orange);
-  /* color: var(--green1); */
+  /* background-color: var(--fire-orange); */
+  background-color: var(--dark2);
+  color: #fff !important;
 }
 
 .swiper-pagination-bullet {

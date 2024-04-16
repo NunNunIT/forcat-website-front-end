@@ -29,7 +29,7 @@ export default function CustomerSlider() {
     <>
       <div className={cx("customerSlider-container")}>
         <Swiper
-          spaceBetween={30}
+          spaceBetween={50}
           centeredSlides={true}
           autoplay={{
             delay: 2500,
@@ -41,6 +41,9 @@ export default function CustomerSlider() {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           loop={true}
+          speed={1000} // Tăng tốc độ chuyển động
+          effect={"slide"} // Sử dụng hiệu ứng slide
+          grabCursor={true} // Biến con trỏ thành bàn tay khi di chuột qua
         >
           {SLIDER_CARD}
         </Swiper>
