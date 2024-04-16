@@ -232,8 +232,13 @@ section {
 
 .cart-bill-policy {
     padding: 0px 4px;
+    display: inline;
     text-align: center;
     font-size: 0.875rem;
+}
+
+.cart-bill-policy__link {
+    color: var(--blue5);
 }
 
 .desktop-hidden {

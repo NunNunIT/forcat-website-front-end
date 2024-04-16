@@ -1,6 +1,7 @@
 //import libs
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import global components
 import { CustomerCarousel } from "@/components";
@@ -8,7 +9,7 @@ import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
 import { CustomerHeader, CustomerFooter } from "@/partials";
-import { BACKEND_URL} from "@/utils/commonConst";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // use css
 import "./page.css";

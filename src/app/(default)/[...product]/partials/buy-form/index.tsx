@@ -37,6 +37,20 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
   )[0];
 }
 
+// handle change page
+const handleChangePage = () => {
+  const cartItem = store.getState().product.cartItem;
+  const userId = "661705d07c6da785f2af9811";
+
+  fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
+    body: JSON.stringify(cartItem),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export default function ProductBuyForm({
   pid,
   productInfo,
@@ -133,20 +147,6 @@ export default function ProductBuyForm({
 
     const cartModal = cartModalRef.current;
     cartModal.classList.remove("hidden");
-  };
-
-  // handle change page
-  const handleChangePage = () => {
-    const cartItem = store.getState().product.cartItem;
-    const userId = "661705d07c6da785f2af9811";
-
-    fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
-      body: JSON.stringify(cartItem),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   };
 
   useEffect(() => {

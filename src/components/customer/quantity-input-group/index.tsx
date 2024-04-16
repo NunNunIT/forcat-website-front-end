@@ -47,14 +47,14 @@ export default function CustomerQuantityInputGroup({
 
   return (
     <div className={cx("quantity-input-group")}>
-      <div
+      <button
         className={cx("quantity-input-group__btn-remove", "btn-quantity")}
         onClick={decreaseValue}>
         <span
           className={cx("material-icons-round", "quantity-input-group__icon")}>
           remove
         </span>
-      </div>
+      </button>
       <input
         ref={inputRef}
         className={cx("quantity-input-group__input", "input-quantity")}
@@ -65,14 +65,14 @@ export default function CustomerQuantityInputGroup({
         max={initValue.maxValue}
         value={inputValue}
       />
-      <div
+      <button
         className={cx("quantity-input-group__btn-add", "btn-quantity")}
         onClick={increaseValue}>
         <span
           className={cx("material-icons-round", "quantity-input-group__icon")}>
           add
         </span>
-      </div>
+      </button>
     </div>
   );
 }
