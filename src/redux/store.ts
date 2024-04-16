@@ -6,6 +6,7 @@ import productReducer from "./slices/productSlice";
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
+  product: productReducer,
 });
 
 export const store = configureStore({

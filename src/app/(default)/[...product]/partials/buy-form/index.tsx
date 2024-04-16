@@ -13,7 +13,12 @@ import { CustomerQuantityInputGroup, CustomerRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
+import {
+  convertNumberToMoney,
+  convertMoneyToNumber,
+  createSlug,
+} from "@/utils";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -24,11 +29,11 @@ import { IBuyForm } from "../../interfaces";
 // use css
 const cx = classNames.bind(styles);
 
-function filterCurrentVariant(productInfo, currentVariantSlug) {
-  return productInfo.product_variants.filter(
+function filterCurrentVariant(productVariants, currentVariantSlug) {
+  return productVariants.filter(
     (variant) =>
-      variant.variant_name ==
-      decodeURIComponent(currentVariantSlug.replaceAll("-", " "))
+      createSlug(variant.variant_name) ==
+      decodeURIComponent(createSlug(currentVariantSlug))
   )[0];
 }
 
@@ -249,6 +254,7 @@ export default function ProductBuyForm({
               <h3>Sản phẩm đã được thêm vào giỏ hàng</h3>
             </div>
           </div>
+
           <Link
             href="/order-information"
             className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}

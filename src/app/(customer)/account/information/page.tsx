@@ -1,10 +1,15 @@
 // import libs
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 // import css
 import "./page.css";
 
+export const metadata: Metadata = {
+  description:
+    "Quản lý và cập nhật thông tin cá nhân của bạn trên ForCat Shop.",
+};
 export default function InformationPage() {
   return (
     <main className="account-information__main">

@@ -1,6 +1,7 @@
 // import libs
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 // import partials
 import {
@@ -34,6 +35,11 @@ async function getProduct(slug, pid) {
   }
 }
 
+export const metadata: Metadata = {
+  title: "",
+  description: "",
+};
+
 export default async function ProductPage({
   params,
   searchParams,
@@ -45,16 +51,18 @@ export default async function ProductPage({
   const { pid } = searchParams;
   const res = await getProduct(slug, pid);
   const productInfo: IBuyForm = {
-    product_name: res.product.product_name,
-    product_slug: res.product.product_slug,
-    product_avg_rating: res.product.product_avg_rating,
-    product_variants: res.product.product_variants,
+    product_id: res.data.product._id,
+    product_name: res.data.product.product_name,
+    product_slug: res.data.product.product_slug,
+    product_avg_rating: res.data.product.product_avg_rating,
+    product_variants: res.data.product.product_variants,
   };
 
   const productImgs = res.data.product.product_imgs;
   const productDetails = res.data.product.product_detail;
   const productDescription = res.data.product.product_description;
   const productReviews = res.data.product.recent_reviews;
+  const productId = res.data.product._id;
   const reviewOverview = {
     total_review: res.data.product.review_count.reduce(
       (total, current) => total + current,
@@ -65,7 +73,9 @@ export default async function ProductPage({
     recent_images: res.data.product.recent_images,
     recent_videos: res.data.product.recent_videos,
   };
-  const productId = res.data.product._id;
+  // Gán tên sản phẩm và description cho metadata
+  metadata.title = productInfo.product_name;
+  metadata.description = productDescription;
 
   return (
     <main className="product">

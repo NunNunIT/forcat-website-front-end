@@ -131,10 +131,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className={cx("footer__copyright")}>
+      </div>
+      <div className={cx("footer__copyright")}>
           <span>2024 - Bản quyền thuộc cửa hàng FORCAT</span>
         </div>
-      </div>
     </footer>
   );
 }
