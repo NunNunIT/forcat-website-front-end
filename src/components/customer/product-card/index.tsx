@@ -43,7 +43,7 @@ export default function CustomerProductCard({ product }) {
           </div>
           <div className={cx("product-bottom-details")}>
             <div className={cx("product-price")}>
-              {product.highest_discount && product.lowest_price ? (
+              <h2>{product.highest_discount && product.lowest_price ? (
                 <>
                   {convertNumberToMoney(product.lowest_price)}đ
                   <small>{convertNumberToMoney(product.product_price)}đ</small>
@@ -51,6 +51,7 @@ export default function CustomerProductCard({ product }) {
               ) : (
                 <>{convertNumberToMoney(product.product_price)}đ</>
               )}
+              </h2>
             </div>
           </div>
       </Link>

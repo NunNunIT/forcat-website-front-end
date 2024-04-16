@@ -4,19 +4,10 @@
 
 .content-container {
   width: 80%;
-  max-width: 1152px;
-  display: flex;
-  flex-direction: column;
-  gap: 5vh;
-}
-
-.content-container {
-  width: 80%;
   margin: 24px auto;
   max-width: 1152px;
   display: flex;
   flex-direction: column;
-  gap: 5vh;
 }
 
 .wrapper.color {
@@ -48,7 +39,6 @@ section {
 }
 
 .tip-products-wrapper.new-products .tip-products__img {
-  background-image: url("/imgs/banner/bannerNew.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -64,7 +54,7 @@ section {
 
 .tip-products__label {
   display: flex;
-  padding: 12px 0px;
+  /* padding: 12px 0px; */
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
@@ -156,5 +146,6 @@ section {
 @media screen and (max-width: 26rem) {
   .content-container {
     width: 100%;
+    padding: 0 12px;
   }
 }

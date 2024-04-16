@@ -35,18 +35,30 @@ export default function Categories() {
         breakpoints={{
           200: {
             slidesPerView: 2,
-            spaceBetween: 10,
+            spaceBetween: 5,
           },
-          640: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-          768: {
+          300: {
             slidesPerView: 3,
             spaceBetween: 5,
           },
-          1024: {
+          400: {
+            slidesPerView: 4,
+            spaceBetween: 5,
+          },
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 5,
+          },
+          768: {
             slidesPerView: 5,
+            spaceBetween: 10,
+          },
+          868: {
+            slidesPerView: 5,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 6,
             spaceBetween: 10,
           },
         }}
