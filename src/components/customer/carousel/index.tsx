@@ -58,16 +58,19 @@ const CustomerCarousel = () => {
     loadTopRatedProducts(); // Load top rated products when component mounts
   }, []);
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
-  ) => {
-    const carousel = carouselRef.current;
-    const btn = event.currentTarget;
-    if (carousel && btn) {
-      carousel.scrollLeft +=
-        btn.id === "left" ? -firstCardWidth : firstCardWidth;
-    }
-  };
+ const handleClick = (
+  event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+) => {
+  const carousel = carouselRef.current;
+  const btn = event.currentTarget;
+  if (carousel && btn) {
+    const direction = btn.id === "left" ? -1 : 1;
+    // Get the width of the first child of the carousel
+    const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
+    carousel.scrollLeft += direction * firstCardWidth;
+    console.log(carousel.scrollLeft); // Log the new scroll position
+  }
+};
 
   const dragStart = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     setIsDragging(true);
@@ -104,7 +107,8 @@ const CustomerCarousel = () => {
       // If the carousel is at the beginning, scroll to the end
       if (carousel.scrollLeft === 0) {
         carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.offsetWidth;
+        // Scroll to the second copy of the first item
+        carousel.scrollLeft = carousel.scrollWidth / 3;
         carousel.classList.remove("no-transition");
       }
       // If the carousel is at the end, scroll to the beginning
@@ -115,7 +119,8 @@ const CustomerCarousel = () => {
           carousel.scrollWidth - carousel.offsetWidth
       ) {
         carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.offsetWidth;
+        // Scroll to the original first item
+        carousel.scrollLeft = carousel.scrollWidth / 3;
         carousel.classList.remove("no-transition");
       }
       // Clear existing timeout & start autoplay if mouse is not hovering over carousel
@@ -124,19 +129,20 @@ const CustomerCarousel = () => {
     }
   };
 
-  const autoPlay = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
-      // Autoplay the carousel after every 2500 ms
-      const carousel = carouselRef.current;
-      if (carousel) {
-        const id = window.setTimeout(() => {
-          carousel.scrollLeft += firstCardWidth;
-        }, 1500);
-        setTimeoutId(id);
-      }
+const autoPlay = () => {
+  if (typeof window !== "undefined") {
+    if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+    // Autoplay the carousel after every 2500 ms
+    const carousel = carouselRef.current;
+    if (carousel && carousel.firstChild) {
+      const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
+      const id = window.setTimeout(() => {
+        carousel.scrollLeft += firstCardWidth;
+      }, 1500);
+      setTimeoutId(id);
     }
-  };
+  }
+};
 
   useEffect(() => {
     if (carouselRef.current && carouselRef.current.children[0]) {
