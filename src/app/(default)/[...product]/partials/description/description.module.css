@@ -37,9 +37,14 @@
     overflow: hidden;
 }
 
-.product-description-content h5 {
+.product-description-content h5,
+.product-description-content h4,
+.product-description-content h3,
+.product-description-content h2,
+.product-description-content h1 {
     width: 100%;
     font-weight: 600;
+    font-size: 1rem;
 }
 
 .product-description-content p {
@@ -48,6 +53,7 @@
 }
 
 .product-description-content ul {
+    width: 100%;
     padding-left: 12px;
     list-style-type: none;
     margin: 0;

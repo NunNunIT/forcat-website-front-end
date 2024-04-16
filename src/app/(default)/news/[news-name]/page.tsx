@@ -1,6 +1,7 @@
 // import libs
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import utils
 import { convertDateStrToDDMMYYYY } from "@/utils";
@@ -112,6 +113,11 @@ const convertJSONToDOM = (props: {
   );
 };
 
+export const metadata: Metadata = {
+  title: "",
+  description: "",
+};
+
 export default function NewsDetailPage() {
   const {
     article_name,
@@ -119,8 +125,10 @@ export default function NewsDetailPage() {
     article_info,
     article_date,
     article_description,
+    article_short_description,
   } = articleData;
-
+  metadata.title = article_name;
+  metadata.description = article_short_description;
   const articleDateConverted = convertDateStrToDDMMYYYY(article_date);
 
   return (

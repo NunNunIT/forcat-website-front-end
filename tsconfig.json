@@ -32,8 +32,9 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/app/(auth)/login/page.tsx"  ],
+    "**/*.tsx",
+    "src/app/(auth)/login/page.tsx"
+  ],
   "exclude": [
     "node_modules"
   ],

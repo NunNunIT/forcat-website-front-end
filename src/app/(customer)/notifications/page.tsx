@@ -1,131 +1,97 @@
-"use client"
+"use client";
 
 // import libs
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from 'react';
+import useSWR, { Fetcher } from "swr";
+import { useState } from "react";
 import NotFound from "@/app/not-found";
 
 // import partials, components
 import { CustomerNotificationItem } from "./partials";
 
+// import utils
+import { BACKEND_URL } from "@/utils/commonConst";
+
 // import css
 import "./page.css";
 
-const notificationTypes = ['', 'orders', 'promotions'];
+const notificationTypes = ["", "order", "promotion"];
+const user_id = "6616be67a63ceb458b15828f";
+const fetcher: Fetcher<INotiProps[], string> = async (url: string) => {
+  const res: Response = await fetch(url);
+  if (!res.ok)
+    throw new Error("Failed to fetch notifications: " + res.statusText);
 
-const fetchData: INotificationItemProps[] = [
-  {
-    notification_id: "1",
-    notification_title: "Thông báo 1",
-    notification_short_desc: "Thông báo 1",
-    notification_desc: [
-      { type: "h2", content: "Thông báo 1", },
-      { type: "h3", content: "1. heading 2 của thông báo 1", },
-      { type: "p", content: "Nội dung thông báo heading 2 của thông báo 1", },
-      { type: "h3", content: "2. heading 2 của thông báo 1", },
-      { type: "p", content: "Nội dung thông báo heading 2 của thông báo 1", },
-    ],
-    notification_url_img: "/imgs/test.png",
-    notification_type: "orders",
-    notification_date: new Date("2022-01-01"),
-    is_read: false,
-  },
-  {
-    "notification_id": "2",
-    "notification_title": "Thông báo 2",
-    "notification_short_desc": "Thông báo 2",
-    "notification_desc": [
-      { "type": "h2", "content": "Thông báo 2" },
-      { "type": "h3", "content": "1. heading 2 của thông báo 2" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 2" },
-      { "type": "h3", "content": "2. heading 2 của thông báo 2" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 2" }
-    ],
-    "notification_url_img": "/imgs/test.png",
-    "notification_type": "orders",
-    "notification_date": new Date("2022-01-05T00:00:00.000Z"),
-    "is_read": false
-  },
-  {
-    "notification_id": "3",
-    "notification_title": "Thông báo 3",
-    "notification_short_desc": "Thông báo 3",
-    "notification_desc": [
-      { "type": "h2", "content": "Thông báo 3" },
-      { "type": "h3", "content": "1. heading 2 của thông báo 3" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 3" },
-      { "type": "h3", "content": "2. heading 2 của thông báo 3" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 3" }
-    ],
-    "notification_url_img": "/imgs/test.png",
-    "notification_type": "promotions",
-    "notification_date": new Date("2022-01-10T00:00:00.000Z"),
-    "is_read": true
-  },
-  {
-    "notification_id": "4",
-    "notification_title": "Thông báo 4",
-    "notification_short_desc": `Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4.
-      Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báoDòngmôtả ngắn về thông báo 4.
-      Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4. Dòng mô tả ngắn về thông báo 4.`,
-    "notification_desc": [
-      { "type": "h2", "content": "Thông báo 4" },
-      { "type": "h3", "content": "1. heading 2 của thông báo 4" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 4" },
-      { "type": "h3", "content": "2. heading 2 của thông báo 4" },
-      { "type": "p", "content": "Nội dung thông báo heading 2 của thông báo 4" }
-    ],
-    "notification_url_img": "/imgs/test.png",
-    "notification_type": "promotions",
-    "notification_date": new Date("2022-01-15T00:00:00.000Z"),
-    "is_read": false
-  },
-]
+  const json = await res.json();
+
+  if (json.error) throw res;
+
+  const notifications: INotiProps[] = json.data.notifications.map(
+    (notification: any) => {
+      const user = notification.users.usersList.find(
+        (user: any) => user._id === user_id
+      );
+      return {
+        ...notification,
+        is_read: user ? user.isRead : false,
+      };
+    }
+  );
+
+  return notifications;
+};
 
 export default function NotificationPage() {
   const searchParams = useSearchParams();
-  const [notifications, setNotifications] = useState(fetchData);
-  const type = searchParams.get('type') ?? '';
-
-  const handleOnClickReadAll = () => {
-    const updateNotifications = notifications.map(notification => ({
-      ...notification,
-      is_read: true,
-    }));
-
-    setNotifications(updateNotifications);
-  }
-
-  useEffect(() => {
-
-  }, [notifications])
+  const type: string = searchParams.get("type") ?? "";
+  const page: string = searchParams.get("page") ?? "1";
+  const limit: string = searchParams.get("limit") ?? "10";
+  const [allRead, setAllRead] = useState<boolean>(false);
+  const fullURL: string =
+    `${BACKEND_URL}/noti/getNoti/${user_id}?` +
+    (type === "" ? "" : `type=${type}`) +
+    `&page=${page}` +
+    `&limit=${limit}`;
+  const { data, error, isLoading } = useSWR<INotiProps[]>(fullURL, fetcher);
 
   if (!notificationTypes.includes(type)) {
     return NotFound();
   }
+  const handleOnClickReadAll = async () => {
+    const postData = {
+      user_id: user_id,
+    };
 
+    // Gửi yêu cầu đánh dấu tất cả thông báo đã đọc
+    await fetch(`${BACKEND_URL}/noti/readAllNoti`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
 
+    // Update state to indicate all notifications have been read
+    setAllRead(true);
+  };
   return (
-    <>
-      <section className="notification__content">
-        <div className="notification__content--top">
-          <h2 className="notification__title">Thông báo</h2>
-          <button className="btn_ pri_" onClick={handleOnClickReadAll}>
-            <span>Đánh dấu tất cả đã đọc</span>
-          </button>
-        </div>
-        <Suspense fallback={"Đang tải dữ liệu..."}>
-          {notifications.filter(
-            (notification) => (type === '' || notification.notification_type === type)
-          ).map(
-            (notification) => <CustomerNotificationItem key={notification.notification_id} {...notification} />
-          )}
-        </Suspense>
-      </section>
-    </>
-  )
-}
-
-async function getNotificationData() {
-  return fetchData;
+    <section className="notification__content">
+      <div className="notification__content--top">
+        <h2 className="notification__title">Thông báo</h2>
+        <button className="btn_ pri_" onClick={handleOnClickReadAll}>
+          <span>Đánh dấu tất cả đã đọc</span>
+        </button>
+      </div>
+      {isLoading && <p>Loading...</p>}
+      {data &&
+        data.map((notification: INotiProps) => (
+          <CustomerNotificationItem
+            key={notification._id}
+            {...notification}
+            user_id={user_id}
+            allRead={allRead}
+          />
+        ))}
+    </section>
+  );
 }

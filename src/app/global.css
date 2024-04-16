@@ -74,6 +74,10 @@
   --primary-mau4-4: #619d5c;
   --primary-mau4-5: #c4d6b0;
   --primary-mau4-6: #daece8;
+  --primary-mau4-7: #3f271b;
+
+
+  --white: #fff;
 
   /* outline */
   --outline1: rgb(235, 235, 240);
@@ -143,6 +147,7 @@
   --yellow1: rgb(255, 193, 7, 0.1);
   --yellow5: #ffc107;
   --yellow6: #e5ad06;
+  --yellow10: #ffecbd;
 
   --swiper-navigation-color: var(--dark3);
   --swiper-navigation-size: 1em !important;
@@ -160,6 +165,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
+  background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar {
@@ -185,7 +191,7 @@ body {
 
 main {
   margin: 1rem auto;
-  min-height: calc(100vh - (280px + 152px + 1rem));
+  min-height: calc(100vh - (280px + 152px + 2rem));
 }
 
 h1 {
@@ -258,6 +264,11 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+button,
+input {
+  font-family: inherit;
 }
 
 .btn {
@@ -428,7 +439,8 @@ input[type="number"] {
   justify-content: center;
   border: 1px solid var(--bg-white-o80);
   border-radius: 50%;
-  background-color: var(--bg-white-o80);
+  /* background-color: var(--bg-white-o80); */
+  background-color: white;
   color: var(--swiper-navigation-color, var(--swiper-theme-color));
   margin-right: 1rem;
   margin-left: 1rem;
@@ -441,12 +453,28 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.7;
+  /* opacity: 0.7; */
+  color: var(--dark4) !important;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  opacity: 0.5;
-  background-color: var(--dark3);
-  color: var(--green1);
+  opacity: 0.8;
+  /* background-color: var(--fire-orange); */
+  background-color: var(--dark2);
+  color: #fff !important;
+}
+
+.swiper-pagination-bullet {
+  background: #000 !important;
+  width: 16px !important;
+  /* Chiều rộng của bullet */
+  height: 16px !important;
+  /* Chiều cao của bullet */
+  margin: 0 8px;
+  /* Khoảng cách giữa các bullet */
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: var(--fire-orange) !important;
 }

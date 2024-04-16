@@ -325,7 +325,7 @@ export default function CartWrapper({
         {cart.map((cartItem, itemIndex) => {
           const currentVariantIndex =
             cartItem.product.product_variants.findIndex(
-              (item) => item._id == cartItem.variant_id
+              (item) => item.variant_id == cartItem.variant_id
             );
           return (
             <div className="cart-item" key={itemIndex}>
@@ -367,7 +367,7 @@ export default function CartWrapper({
                           value={
                             cartItem.product.product_variants[
                               currentVariantIndex
-                            ]._id
+                            ].variant_id
                           }
                         />
                         <select
@@ -378,7 +378,7 @@ export default function CartWrapper({
                             value={
                               cartItem.product.product_variants[
                                 currentVariantIndex
-                              ]._id
+                              ].variant_id
                             }
                             key={0}>
                             {
@@ -389,11 +389,11 @@ export default function CartWrapper({
                           </option>
                           {cartItem.product.product_variants.map(
                             (variant, variantIndex) => {
-                              if (variant._id !== cartItem.variant_id)
+                              if (variant.variant_id !== cartItem.variant_id)
                                 return (
                                   <option
                                     className="cart-item__variant-name"
-                                    value={variant._id}
+                                    value={variant.variant_id}
                                     key={variantIndex}>
                                     {variant.variant_name}
                                   </option>

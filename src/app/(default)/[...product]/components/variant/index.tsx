@@ -14,12 +14,12 @@ import styles from "./product-variant.module.css";
 const cx = classNames.bind(styles);
 
 export default function ProductVariant({
+  pid,
   variant,
-  key,
   ...props
 }: {
+  pid: any;
   variant: IVariant;
-  key?: number;
 }) {
   const pathname = decodeURIComponent(usePathname());
   const isActive = pathname == variant.url ? "variant__active" : "";
@@ -27,14 +27,13 @@ export default function ProductVariant({
   return (
     <Link
       className={cx("variant", isActive)}
-      href={variant.url}
-      title={variant.name}
-      key={key}>
+      href={`${variant.url}?pid=${pid.replaceAll("+", "%2B")}`}
+      title={variant.name}>
       <div
         className={cx("variant__tick-div", isActive ? "variant__display" : "")}>
         <Image
           className={cx("variant__tick")}
-          src="/imgs/product-page/tick.png"
+          src="/imgs/product-page/tick.webp"
           alt="Decoration tick"
           fill={true}
         />

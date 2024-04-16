@@ -1,37 +1,69 @@
+"use client";
+
 // use bind from classnames
 import classNames from "classnames/bind";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+// import { isActiveClass } from "@/utils";
+import { useState } from "react";
 
 // use scss
 import styles from "./styles.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function AppBar() {
-    return (
-        <div className={cx("app-bar")}>
-            <div className={cx("app-bar__container")}>
-                <div className={cx("app-bar__element")}>
-                    <span className={cx("material-icons-outlined nav__icon")}>home</span>
-                    <a href="/">Trang chủ</a>
-                </div>
-                <div className={cx("app-bar__element")}>
-                    <span className={cx("material-icons-outlined nav__icon")}>category</span>
-                    <a href="/category">Danh mục</a>
-                </div>
-                <div className={cx("app-bar__element")}>
-                    <span className={cx("material-icons-outlined nav__icon")}>local_fire_department</span>
-                    <a href="/search/results?hotProduct=true">HOT</a>
-                </div>
-                <div className={cx("app-bar__element")}>
-                    <span className={cx("material-icons-outlined nav__icon")}>account_circle</span>
-                    <a href="/account/mobile-account">Tài khoản</a>
-                </div>
-                <div className={cx("app-bar__element")}>
-                    <span className={cx("material-icons-outlined nav__icon")}>account_circle</span>
-                    <a href="/account/information">Unknown</a>
-                </div>
+const appBarData = [
+  {
+    url: "/",
+    iconData: "home",
+    text: "Trang chủ",
+  },
+  {
+    url: "/category",
+    iconData: "category",
+    text: "Danh mục",
+  },
+  {
+    url: "/news",
+    iconData: "article",
+    text: "Tin tức",
+  },
+  {
+    url: "/search/results?hotProduct=true",
+    iconData: "local_fire_department",
+    text: "HOT",
+  },
+  {
+    url: "/account/mobile-account",
+    iconData: "account_circle",
+    text: "Tài khoản",
+  },
+];
 
+export default function AppBar() {
+  const pathName = usePathname();
+  return (
+    <div className={cx("app-bar")}>
+      <div className={cx("app-bar__container")}>
+        {appBarData.map((navData, index) => {
+          const isActive = pathName === navData.url;
+          return (
+            <div key={index} className={cx("app-bar__element")}>
+              <Link href={navData.url} className={cx({ active: isActive })}>
+                <span
+                  className={cx("material-icons-outlined nav__icon", {
+                    active: isActive,
+                  })}>
+                  {navData.iconData}
+                </span>
+              </Link>
+              <Link href={navData.url} className={cx({ active: isActive })}>
+                {navData.text}
+              </Link>
             </div>
-        </div>
-    );
+          );
+        })}
+      </div>
+    </div>
+  );
 }
