@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...newEntries,
     ];
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return [
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,

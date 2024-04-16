@@ -41,7 +41,7 @@ function convertOrderStatusToStr(order_status: string): string {
       return "Đã hủy";
   }
 
-  console.log("Unexpected Order Status: ", order_status);
+  // console.log("Unexpected Order Status: ", order_status);
   return "Unexpected Order Status";
 }
 

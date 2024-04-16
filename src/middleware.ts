@@ -7,7 +7,7 @@ let currentUser = null;
 
 export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken");
-  console.log("Token", accessToken);
+  // console.log("Token", accessToken);
 
   if (!accessToken && (request.url.includes("/login") || request.url.includes("/register"))) {
     return NextResponse.next();

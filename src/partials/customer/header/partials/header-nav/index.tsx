@@ -34,7 +34,7 @@ export default function CustomerHeaderNav() {
     return currentUser;
   };
 
-  console.log("LocalStore2", currentUser);
+  // console.log("LocalStore2", currentUser);
 
   const handleLogout = async (e) => {
     e.preventDefault();

@@ -25,7 +25,7 @@ export default function NotificationItem({
   allRead,
   ...props
 }: INotiProps) {
-  console.log("data props:", props);
+  // console.log("data props:", props);
   const [isRead, setIsRead] = useState<boolean>(props.is_read);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   useEffect(() => {

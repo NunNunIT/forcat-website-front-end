@@ -191,7 +191,7 @@ const ForgotForm = () => {
           user_email: formData.user_email,
           otp: otp,
         };
-        console.log("Request body: ", requestBody);
+        // console.log("Request body: ", requestBody);
         const res = await fetch(BACKEND_URL + "/auth/verify-otp", {
           method: "POST",
           headers: {
@@ -211,14 +211,14 @@ const ForgotForm = () => {
           setOtp("");
           newErrorOtp = "Mã OTP không trùng khớp!";
           setErrorOTP(newErrorOtp);
-          console.log(errorOTP);
+          // console.log(errorOTP);
           return;
         }
         setCurrentForm(currentForm + 1);
       } catch (error) {
         setLoading(false);
         setError(true);
-        console.log("OTP verification failed");
+        // console.log("OTP verification failed");
       }
     }
 

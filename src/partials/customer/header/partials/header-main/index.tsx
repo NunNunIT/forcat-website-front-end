@@ -14,12 +14,12 @@ export default function CustomerHeaderMain({
   params,
   searchParams,
 }: {
-  params: { "*": string };
+  params?: { "*": string };
   searchParams?: { [key: string]: string };
 }) {
   const searchKey = searchParams ?? 0;
-  console.log("searchKey từ Header", searchKey);
-  console.log("searchKey từ Header",  searchParams);
+  // console.log("searchKey từ Header", searchKey);
+  // console.log("searchKey từ Header",  searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
@@ -45,7 +45,7 @@ export default function CustomerHeaderMain({
       }
       const data = await response.json();
       if (data.data.searchKey === inputValue) {
-        console.log("Trả về cho data", data.data.searchKey);
+        // console.log("Trả về cho data", data.data.searchKey);
         setSearchResults(data.data.recommendedProducts);
         setTotalSearchResults(data.data.totalProducts);
         setShowSmartSearch(true);
@@ -57,7 +57,7 @@ export default function CustomerHeaderMain({
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Gía trị nhạp vào", inputValue);
+    // console.log("Gía trị nhạp vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);

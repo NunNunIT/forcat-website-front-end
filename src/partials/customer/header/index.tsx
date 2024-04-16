@@ -58,7 +58,7 @@ const headerLinks: IHeaderLinkProps[] = [
 
 export default async function Header() {
   const headerCategories = await categoryProducts()
-  console.log(headerCategories)
+  // console.log(headerCategories)
 
   return (
     <header className={cx("header")}>

@@ -25,14 +25,14 @@ export default function SearchResultPage({ searchKey, searchResults }) {
   const currentPage = searchResults.currentPage
 
   let searchResultsProducts;
-  console.log("Từ khóa tìm kiếm", searchKey);
+  // console.log("Từ khóa tìm kiếm", searchKey);
 
   if (searchResults) {
     searchResultsProducts = searchResults.searchProducts;
   } else {
     searchResultsProducts = [];
   }
-  console.log("Từ khóa tìm kiếm", searchResultsProducts);
+  // console.log("Từ khóa tìm kiếm", searchResultsProducts);
 
   const [selectedFilterItem, setSelectedFilterItem] =
     useState<HTMLDivElement | null>(null);

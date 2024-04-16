@@ -29,7 +29,7 @@ async function getSearchProduct(searchKey, page) {
     });
 
     const data = await res.json();
-    console.log("Dữ liệu tôi cần", data.data)
+    // console.log("Dữ liệu tôi cần", data.data)
     return data.data;
   } catch {
     return notFound();
@@ -44,7 +44,7 @@ export default async function SearchResultPage({
   searchParams?: { [key: string]: string };
 }) {
   const { searchKey, page } = searchParams; // Truy cập tham số truy vấn searchKey từ params
-  console.log("Lấy từ url", searchKey)
+  // console.log("Lấy từ url", searchKey)
   const searchResults = await getSearchProduct(searchKey, page)
   return <SearchResultContainer searchKey={searchKey} searchResults={searchResults} />;
 }
