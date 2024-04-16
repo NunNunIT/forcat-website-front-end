@@ -1,5 +1,7 @@
 .customerSlider-container {
   width: 100%;
   position: relative;
-  height: 20rem;
+  margin: 0;
+  padding: 0;
+  display: block;
 }

@@ -48,7 +48,6 @@ section {
 }
 
 .tip-products-wrapper.new-products .tip-products__img {
-  background-image: url("/imgs/banner/bannerNew.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;

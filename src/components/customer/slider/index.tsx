@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 export default function CustomerSlider() {
   const SLIDER_CARD = Slider_Image_Data.map((item) => (
-    <SwiperSlide key={item.id}>
+    <SwiperSlide className="custom-slide" key={item.id}>
       <CustomerSliderCard
         initValue={{
           url: item.imageurl,
@@ -29,10 +29,10 @@ export default function CustomerSlider() {
     <>
       <div className={cx("customerSlider-container")}>
         <Swiper
-          spaceBetween={30}
+          spaceBetween={30000}
           centeredSlides={true}
           autoplay={{
-            delay: 2500,
+            delay: 25000,
             disableOnInteraction: false,
           }}
           pagination={{
