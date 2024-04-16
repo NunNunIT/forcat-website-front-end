@@ -8,7 +8,7 @@ import { CustomerCarouselSlider } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
-import { CustomerHeader, CustomerFooter } from "@/partials";
+import { CustomerHeader, CustomerFooter, CustomerAppBar } from "@/partials";
 import { BACKEND_URL } from "@/utils/commonConst";
 
 // use css
@@ -178,6 +178,7 @@ export default async function Home() {
         </section>
       </main>
       <CustomerFooter></CustomerFooter>
+      <CustomerAppBar></CustomerAppBar>
     </>
   );
 }

@@ -14,7 +14,7 @@ export default function DefaultLayout({
       <CustomerHeader />
       {children}
       <CustomerFooter />
-      <CustomerAppBar />
+      <CustomerAppBar></CustomerAppBar>
     </>
   );
 }
