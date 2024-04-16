@@ -24,7 +24,7 @@ export interface ISliderImage {
 }
 
 export interface IReview {
-  review_id: string;
+  review_id_hashed: string;
   product_variant_name: string;
   review_rating: number;
   user_info: {
