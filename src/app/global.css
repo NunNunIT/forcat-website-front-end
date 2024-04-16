@@ -466,10 +466,14 @@ input[type="number"] {
 
 .swiper-pagination-bullet {
   background: #000 !important;
-  width: 16px !important; /* Chiều rộng của bullet */
-  height: 16px !important; /* Chiều cao của bullet */
-  margin: 0 8px; /* Khoảng cách giữa các bullet */
+  width: 16px !important;
+  /* Chiều rộng của bullet */
+  height: 16px !important;
+  /* Chiều cao của bullet */
+  margin: 0 8px;
+  /* Khoảng cách giữa các bullet */
 }
+
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: var(--fire-orange) !important;
 }

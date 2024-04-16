@@ -17,11 +17,11 @@ import "./page.css";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 let checkboxes, cartItem;
-const userId = "661705d07c6da785f2af9811";
+const userId = "661705fe7c6da785f2af9814";
 
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(
-    `${BACKEND_URL}/cart/661705d07c6da785f2af9811`,
+    `${BACKEND_URL}/cart/661705fe7c6da785f2af9814`,
     fetcher
   );
   const cart = data?.data.cartInfo;
