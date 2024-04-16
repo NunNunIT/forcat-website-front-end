@@ -174,3 +174,19 @@ interface ResponseOrderHistory {
   orders: IOrderItemProps[];
   maxPage: number;
 }
+
+interface IReviewItem {
+  product_id_hashed: string;
+  product_name: string;
+  product_slug: string;
+  variant_name: string;
+  variant_img: {
+    link: string;
+    alt: string;
+  };
+  quantity: number;
+  unit_price: number;
+  review_rating: number;
+  review_context: string;
+  order_id?: string;
+}

@@ -28,7 +28,7 @@ button {
 
 .btn:disabled {
   cursor: not-allowed;
-  background: unset;
+  background: var(--dark-gray-o50) !important;
 }
 
 .btn:disabled:hover {
