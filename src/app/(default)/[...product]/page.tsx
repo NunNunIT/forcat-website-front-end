@@ -1,6 +1,7 @@
 // import libs
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 // import partials
 import {
@@ -33,6 +34,11 @@ async function getProduct(slug, pid) {
     return notFound();
   }
 }
+
+export const metadata: Metadata = {
+  title: "",
+  description: "",
+};
 
 export default async function ProductPage({
   params,
@@ -67,6 +73,9 @@ export default async function ProductPage({
     recent_images: res.data.product.recent_images,
     recent_videos: res.data.product.recent_videos,
   };
+  // Gán tên sản phẩm và description cho metadata
+  metadata.title = productInfo.product_name;
+  metadata.description = productDescription;
 
   return (
     <main className="product">

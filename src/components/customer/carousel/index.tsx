@@ -6,8 +6,30 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 import styles from "./carousel.module.css";
 import { CustomerStarRating } from "@/components";
+import { BACKEND_URL, CLOUDINARY_URL } from "@/utils/commonConst";
+import { CldImage } from "next-cloudinary";
+import { convertNumberToMoney } from "@/utils";
 
 const cx = classNames.bind(styles);
+
+const fetchTopRatedProducts = async () => {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getTopRatedProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch top rated products");
+    }
+    const data = await response.json();
+    return data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching top rated products:", error);
+    throw error;
+  }
+};
 
 const CustomerCarousel = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -21,15 +43,26 @@ const CustomerCarousel = () => {
   const [startScrollLeft, setStartScrollLeft] = useState<number | null>(null);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
   const [cardPerView, setCardPerView] = useState(0);
+  const [topRatedProducts, setTopRatedProducts] = useState([]);
+
+  const loadTopRatedProducts = async () => {
+    try {
+      const data = await fetchTopRatedProducts();
+      setTopRatedProducts(data);
+    } catch (error) {
+      console.error("Error fetching top rated products:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadTopRatedProducts(); // Load top rated products when component mounts
+  }, []);
 
   const handleClick = (
     event: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
     const carousel = carouselRef.current;
     const btn = event.currentTarget;
-    console.log("carousel:", carousel);
-    console.log("btn:", btn);
-    console.log("firstCardWidth:", firstCardWidth);
     if (carousel && btn) {
       carousel.scrollLeft +=
         btn.id === "left" ? -firstCardWidth : firstCardWidth;
@@ -206,21 +239,19 @@ const CustomerCarousel = () => {
   //   };
   // }, [dragStart, dragging, dragStop, infiniteScroll, autoPlay, timeoutId]);
 
-  useEffect(() => {
-    console.log(carouselRef.current);
-  }, [carouselRef.current]);
+  useEffect(() => {}, [carouselRef.current]);
 
   return (
     <div ref={wrapperRef} className={cx("wrapper-carousel")}>
-      <div className={cx("carousel__label")}>
+      {/* <div className={cx("carousel__label")}>
         <h2 className={cx("carousel__title")}>Gợi ý hôm nay</h2>
         <div className={cx("carousel__label-seemore")}>
-          <Link href="/search/results<%= seemore %>">Xem tất cả</Link>
+          <Link href="/search-result">Xem tất cả</Link>
           <span className={cx("arrow material-icons")}>
             keyboard_arrow_right
           </span>
         </div>
-      </div>
+      </div> */}
       <span
         id="left"
         onClick={handleClick}
@@ -237,79 +268,63 @@ const CustomerCarousel = () => {
           onMouseUp={dragStop}
           onMouseLeave={dragStop}
           onScroll={infiniteScroll}>
-          {/* <% products.forEach(function(product) { %> */}
-          <li className={cx("carousel__card")}>
-            <Link
-              className={cx("carousel__card-main")}
-              href="/search/<%= product.product_variant_id %>?category_id=<%= product.category_id %>">
-              <div className={cx("carousel__card--badge")}>- 12.5 %</div>
-              <div className={cx("carousel__card--top")}>
-                <div className={cx("carousel__card--img")}>
-                  <Image
-                    src="/imgs/test.png"
-                    alt="<%= product.product_name %>"
-                    fill={true}
-                    draggable="false"
-                  />
-                </div>
-                <div className={cx("carousel__card-details")}>
-                  <span className={cx("carousel__card-catagory")}>
-                    {/* = product.category_name ?? 'null'{" "} */}
-                    CATEGORY NAME
-                  </span>
-                  {/* <% if (product.product_rate) { %> */}
-                  <div className={cx("carousel__card-rate")}>
-                    <CustomerStarRating rating={5} />
-                    {/* <span className={cx("material-icons-outline fill")}>star</span>
-                    <span className={cx("material-icons fill")}>star</span>
-                    <span className={cx("material-icons fill")}>star</span>
-                    <span className={cx("material-icons fill")}>star</span> */}
-                    {/* <% for (let i = 0; i < Math.floor(product.product_rate); i++) { %>
-								<span className={cx("material-symbols-outlined")}>star</span>
-								<% } %>
-
-								<% if (product.product_rate % 1 !== 0.5) { %>
-								<% if (product.product_rate - Math.floor(product.product_rate) > 0) { %> */}
-
-                    {/* <span className={cx("material-icons ")}>star_half</span> */}
-                    {/* // <% } %>
-								// <% for (let i = 0; i < Math.floor(5 - Math.ceil(product.product_rate)); i++) { %> */}
-                    {/* // <span className={cx("material-symbols-outlined" style="font-variation-settings: 'FILL' 0")}>star</span>
-								// <% } %>
-								// <% } else { %> */}
-                    {/* // <span className={cx("material-symbols-outlined" style="font-variation-settings: 'FILL' 0")}>star</span>
-								// <% } %>
-								// <p>(<%= product.product_rate %>)</p> */}
+          {topRatedProducts &&
+            topRatedProducts.map((product) => (
+              <li key={product.product_id} className={cx("carousel__card")}>
+                <Link
+                  className={cx("carousel__card-main")}
+                  href={`/${product.product_slug}?pid=${product.product_id}`}>
+                  {product.highest_discount ? (
+                    <div className={cx("carousel__card--badge")}>
+                      - {product.highest_discount} %
+                    </div>
+                  ) : null}
+                  <div className={cx("carousel__card--top")}>
+                    <div className={cx("carousel__card--img")}>
+                      <CldImage
+                        src={product.product_img.link}
+                        alt={product.product_img.alt}
+                        fill={true}
+                        draggable="false"
+                      />
+                    </div>
+                    <div className={cx("carousel__card-details")}>
+                      <span className={cx("carousel__card-category")}>
+                        {product.category_name
+                          ? product.category_name
+                          : "FORCAT"}
+                      </span>
+                      <div className={cx("carousel__card-rate")}>
+                        <CustomerStarRating
+                          rating={product.product_avg_rating}
+                        />
+                      </div>
+                      <h4 title={product.product_name}>
+                        {product.product_name}
+                      </h4>
+                      <p> Hàng cực hot </p>
+                    </div>
                   </div>
-                  {/* <% } %> */}
-
-                  <h4 title="<%= product.product_name ?? 'Null' %>">
-                    PRODUCT NAME
-                    {/* // <% if (product.product_name.length > 30) { %>
-								// <%= product.product_name.substring(0, 30) + '...' %>
-								// <% } else { %>
-								// <%= product.product_name ?? 'null' %>
-								// <% } %> */}
-                  </h4>
-                  <p> product.discount_description %</p>
-                </div>
-              </div>
-
-              <div className={cx("carousel__card-bottom-details")}>
-                <div className={cx("carousel__card-price")}>
-                  500.000
-                  {/* <% if (product.discount_amount) { %>
-							<% const discountedPrice = Math.round(product.product_variant_price - product.product_variant_price * (product.discount_amount / 100)) %>
-							<%= toCurrency(discountedPrice) %><small><%= toCurrency(product.product_variant_price) %></small>
-							<% } else { %>
-							<%= toCurrency(product.product_variant_price) %>
-							<% } %> */}
-                </div>
-              </div>
-            </Link>
-          </li>
-
-          {/* <% }) %> */}
+                  <div className={cx("carousel__card-bottom-details")}>
+                    <div className={cx("carousel__card-price")}>
+                      <h2>
+                        {" "}
+                        {product.highest_discount ? (
+                          <>
+                            {convertNumberToMoney(product.lowest_price)}đ
+                            <small>
+                              {convertNumberToMoney(product.product_price)}đ
+                            </small>
+                          </>
+                        ) : (
+                          <>{convertNumberToMoney(product.product_price)}đ</>
+                        )}
+                      </h2>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
         </ul>
       </div>
       <span

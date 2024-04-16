@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--primary-mau4-2);
+  background-color: var( --primary-mau4-7);
 }
 
 .footer__container {
@@ -129,9 +129,10 @@
 
 /* Copyright */
 .footer__copyright {
+  color: var(--white);
   grid-area: Copyright;
-
-  margin: .25rem 0;
+  background-color: var(--primary-mau4-1);
+  /* margin: .25rem 0; */
   padding: .25rem 0;
   display: flex;
   align-items: center;
