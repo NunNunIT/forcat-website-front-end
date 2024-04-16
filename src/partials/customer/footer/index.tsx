@@ -73,15 +73,15 @@ export default function Footer() {
             <h3>VỀ Forcat Shop</h3>
           </div>
           <div className={cx("footer__list")}>
-            <a href="/about-us" className={cx("footer__list-item")}>
+            <Link href="/about-us" className={cx("footer__list-item")}>
               Giới thiệu về Forcat Shop
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="/term-of-use" className={cx("footer__list-item")}>
               Điều khoản chung
-            </a>
-            <a href="/privacy-policy" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="/privacy-policy" className={cx("footer__list-item")}>
               Chính sách bảo mật
-            </a>
+            </Link>
           </div>
         </div>
         <div className={cx("footer__help")}>
@@ -89,15 +89,15 @@ export default function Footer() {
             <h3>HỖ TRỢ</h3>
           </div>
           <div className={cx("footer__list")}>
-            <a href="#" className={cx("footer__list-item")}>
+            <Link href="#" className={cx("footer__list-item")}>
               Trung tâm trợ giúp
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="#" className={cx("footer__list-item")}>
               Chính sách bảo hành
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="#" className={cx("footer__list-item")}>
               Chính sách trả hàng
-            </a>
+            </Link>
           </div>
         </div>
         <div className={cx("footer__contact")}>

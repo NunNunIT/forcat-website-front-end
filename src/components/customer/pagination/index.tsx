@@ -28,7 +28,7 @@ export default function Pagination(props: IPaginationProps) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const allParams = Object.fromEntries(searchParams.entries());
-  const siblings: number = 1;
+  const siblings: number = 2;
   const pages: number[] = Array.from(
     { length: siblings * 2 + 1 },
     (_, i) => props.currentPage - siblings + i)

@@ -4,6 +4,7 @@
 
 }
 
+
 .wrapper-carousel .arrow {
     display: flex;
     align-items: center;
@@ -271,9 +272,6 @@
         height: 140px;
     }
 
-    .carousel__card-price {
-        /* font-size: 1rem; */
-    }
 
     .carousel__card-bottom-details {
         padding: 12px;
@@ -299,14 +297,6 @@
         display: none;
     }
 
-    .carousel__label-seemore a {
-        /* font-size: 18px; */
-    }
-
-    .carousel__card-price {
-        /* font-size: 1rem; */
-    }
-
     .carousel__card-bottom-details {
         padding: 12px;
     }
@@ -317,9 +307,5 @@
 
     .carousel .carousel__card .carousel__card--img {
         height: 180px;
-    }
-
-    .carousel__card--badge {
-        /* font-size: 0.75rem; */
     }
 }

@@ -143,7 +143,7 @@ interface IArticleProps {
 }
 
 interface IProductItemInOrderItemProps {
-  product_id: string;
+  product_id_hashed: string;
   product_name?: string;
   product_slug?: string;
   variant_id: string;
@@ -162,6 +162,7 @@ interface IOrderItemProps {
   order_status: string;
   order_details: IProductItemInOrderItemProps[];
   order_total_cost: number;
+  mutate?: () => void;
 }
 
 interface INotiProps {
@@ -187,4 +188,20 @@ interface IResponseJSON {
 interface ResponseOrderHistory {
   orders: IOrderItemProps[];
   maxPage: number;
+}
+
+interface IReviewItem {
+  product_id_hashed: string;
+  product_name: string;
+  product_slug: string;
+  variant_name: string;
+  variant_img: {
+    link: string;
+    alt: string;
+  };
+  quantity: number;
+  unit_price: number;
+  review_rating: number;
+  review_context: string;
+  order_id?: string;
 }
