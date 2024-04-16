@@ -1,6 +1,7 @@
 .wrapper-carousel {
     width: 100%;
     position: relative;
+
 }
 
 .wrapper-carousel .arrow {
@@ -74,7 +75,6 @@
     border-radius: 8px;
     position: relative;
     margin: 0;
-    background: #fafafa;
     margin: 8px 0px;
 }
 

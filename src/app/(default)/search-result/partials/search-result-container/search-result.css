@@ -110,6 +110,11 @@
     object-fit: contain;
     width: 50%;
   }
+
+  .pagination {
+    width: 100%;
+    margin-top: 12px auto;
+  }
   
   @media only screen and (max-width: 64rem) {
     .dropdown-content--sort {

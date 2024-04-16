@@ -39,18 +39,50 @@ const fetchNewestProducts = async () => {
   }
 };
 
+const fetchDiscountProducts = async () => {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getDiscountProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch discount products");
+    }
+    const data = await response.json();
+    return data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching discount products:", error);
+    throw error;
+  }
+};
+
 export default async function Home() {
   let newestProducts = await fetchNewestProducts();
+  let discountProducts = await fetchDiscountProducts();
   return (
     <>
       <CustomerHeader></CustomerHeader>
       <CustomerSlider></CustomerSlider>
       <main className="main-container">
         <div className="content-container">
+          <h1 className="tip-products__label">
+            <Link href="/search-result" className="tip-products__title">
+              Danh mục
+            </Link>
+            <span className="tip-products__title-after"></span>
+          </h1>
           <CustomerCategories></CustomerCategories>
         </div>
         <div className="wrapper color">
           <div className="content-container">
+            <h1 className="tip-products__label">
+              <Link href="/search-result" className="tip-products__title">
+                Gợi ý hôm nay
+              </Link>
+              <span className="tip-products__title-after"></span>
+            </h1>
             <CustomerCarousel></CustomerCarousel>
           </div>
         </div>
@@ -130,7 +162,18 @@ export default async function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <div className="tip-products__content"></div>
+            <div className="tip-products__content">
+            {discountProducts &&
+                discountProducts.length &&
+                discountProducts.map((product) => (
+                  <>
+                    <CustomerProductCard
+                      key={product.product_id}
+                      product={product}
+                    />
+                  </>
+                ))}
+            </div>
           </div>
         </section>
       </main>
