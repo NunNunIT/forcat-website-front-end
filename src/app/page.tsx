@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 
 // import global components
 import { CustomerCarousel } from "@/components";
+import { CustomerCarouselSlider } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
@@ -83,7 +84,7 @@ export default async function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <CustomerCarousel></CustomerCarousel>
+            <CustomerCarouselSlider></CustomerCarouselSlider>
           </div>
         </div>
 

@@ -29,9 +29,9 @@
 
 .app-bar__element {
     width: 10rem;
+    display: flex;
     flex-direction: column; 
     justify-content: center;
-    display: flex;
     align-items: center;
     text-decoration: none;
     color: black;
@@ -50,6 +50,10 @@
 }
 
 @media screen and (max-width: 26rem) {
+    .app-bar {
+        display: flex;
+    }
+    
     .app-bar__container {
         width: 95vw;
     }
