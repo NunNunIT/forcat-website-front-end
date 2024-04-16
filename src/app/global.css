@@ -439,7 +439,8 @@ input[type="number"] {
   justify-content: center;
   border: 1px solid var(--bg-white-o80);
   border-radius: 50%;
-  background-color: var(--bg-white-o80);
+  /* background-color: var(--bg-white-o80); */
+  background-color: white;
   color: var(--swiper-navigation-color, var(--swiper-theme-color));
   margin-right: 1rem;
   margin-left: 1rem;
@@ -452,12 +453,23 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.7;
+  /* opacity: 0.7; */
+  color: var(--dark4) !important;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  opacity: 0.5;
-  background-color: var(--dark3);
-  color: var(--green1);
+  opacity: 0.8;
+  background-color: var(--fire-orange);
+  /* color: var(--green1); */
+}
+
+.swiper-pagination-bullet {
+  background: #000 !important;
+  width: 20px !important; /* Chiều rộng của bullet */
+  height: 20px !important; /* Chiều cao của bullet */
+  margin: 0 8px; /* Khoảng cách giữa các bullet */
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: var(--fire-orange) !important;
 }

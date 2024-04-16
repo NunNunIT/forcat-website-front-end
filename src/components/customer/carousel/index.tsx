@@ -243,7 +243,7 @@ const CustomerCarousel = () => {
 
   return (
     <div ref={wrapperRef} className={cx("wrapper-carousel")}>
-      <div className={cx("carousel__label")}>
+      {/* <div className={cx("carousel__label")}>
         <h2 className={cx("carousel__title")}>Gợi ý hôm nay</h2>
         <div className={cx("carousel__label-seemore")}>
           <Link href="/search-result">Xem tất cả</Link>
@@ -251,7 +251,7 @@ const CustomerCarousel = () => {
             keyboard_arrow_right
           </span>
         </div>
-      </div>
+      </div> */}
       <span
         id="left"
         onClick={handleClick}
