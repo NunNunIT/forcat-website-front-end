@@ -39,6 +39,8 @@ const getFullBackendURLOrders = (status: string, page: string): string => {
 }
 
 export default function PurchaseHistoryPage() {
+  console.log("Bé cưwng", localStorage.getItem("currentUser"));
+
   // use pathName, router
   const pathName = usePathname();
   const router = useRouter();

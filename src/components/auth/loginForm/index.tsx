@@ -85,7 +85,9 @@ const LoginForm = () => {
 
         // console.log("login success: ", data.message);
         Cookies.set("accessToken", data.token);
-        localStorage.setItem("userStore", JSON.stringify(data.data));
+        console.log("User", data.data)
+        Cookies.set("currentUser", data.data._id);
+        localStorage.setItem("currentUser", JSON.stringify(data.data));
 
         accessTokens = await Cookies.get("accessToken");
         console.log("Sau khi set: ", accessTokens);

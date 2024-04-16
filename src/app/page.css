@@ -1,7 +1,7 @@
 
 .main-container {
   width: 100%;
-  margin: -1rem auto;
+  margin: -0.5rem auto;
   background-color: #fffbf3;
 }
 
@@ -62,7 +62,7 @@ section {
 
 .tip-products__label {
   display: flex;
-  /* padding: 12px 0px; */
+  padding: 12px 0px;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
@@ -152,6 +152,9 @@ section {
 
 
 @media screen and (max-width: 26rem) {
+  .main-container {
+    margin: 0 auto;
+  }
   .content-container {
     width: 100%;
     padding: 0 12px;
