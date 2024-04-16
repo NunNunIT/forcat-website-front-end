@@ -176,6 +176,7 @@ span.red-start {
 }
 .input-container {
   position: relative;
+  width: 100%;
 }
 .input-field {
   width: 100%;
