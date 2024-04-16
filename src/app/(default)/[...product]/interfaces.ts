@@ -1,6 +1,7 @@
 interface ProductVariant {
   _id: string;
   variant_name: string;
+  variant_slug: string;
   price: number;
   variant_imgs: string[];
   discount_id: string;

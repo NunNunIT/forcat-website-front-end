@@ -17,11 +17,11 @@ import "./page.css";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 let checkboxes, cartItem;
-const userId = "661705d07c6da785f2af9811";
+const userId = "661705fe7c6da785f2af9814";
 
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(
-    `${BACKEND_URL}/cart/661705d07c6da785f2af9811`,
+    `${BACKEND_URL}/cart/661705fe7c6da785f2af9814`,
     fetcher
   );
   const cart = data?.data.cartInfo;
@@ -535,8 +535,15 @@ export default function CartPage() {
             Mua hàng (<span className="checked-num">{selectedItem}</span>)
           </Link>
           <div className="cart-bill-row cart-bill-policy">
-            Bằng việc tiến hành đặt mua hàng, bạn đồng ý với Điều khoản dịch vụ,
-            Chính sách thu thập và xử lý dữ liệu cá nhân của ForCat.
+            Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
+            <a className="cart-bill-policy__link" href="#">
+              Điều khoản dịch vụ
+            </a>{" "}
+            và{" "}
+            <a className="cart-bill-policy__link" href="/privacy-policy">
+              Chính sách bảo mật
+            </a>{" "}
+            của ForCat.
           </div>
         </section>
 

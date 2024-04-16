@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     );
 
-    const newsRes = await fetch(`${BACKEND_URL}/articles`);
+    const newsRes = await fetch(`${BACKEND_URL}/articles/unlimited`);
     const newResJson = await newsRes.json();
     const news = newResJson.data;
     const newEntries: MetadataRoute.Sitemap = news.map((item, index) => ({
