@@ -124,10 +124,44 @@ export default function SearchResultPage() {
     }
   }
 
+  function handleOnSubmit(event: React.ChangeEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const buyerName = formData.get("buyerName") as string;
+    const buyerPhone = formData.get("buyerPhone") as string;
+    const address = formData.get("address") as string;
+    const note = formData.get("note") as string;
+    const payMethod = formData.get("pay-method") as string;
+
+    const city = formData.get("city") as string;
+    const district = formData.get("district") as string;
+    const ward = formData.get("ward") as string;
+
+    const orderData = {
+      order_buyer: {
+        order_name: buyerName,
+        order_phone: buyerPhone,
+      },
+      order_address: {
+        city: city,
+        district: district,
+        ward: ward,
+        street: address,
+      },
+      order_details: buyInfo,
+      order_note: note,
+      payment_id: payMethod,
+    };
+
+    console.log(orderData);
+  }
+
   return (
     // <main className="order-container">
     <Provider store={store}>
-      <form id="order-form">
+      <form id="order-form" onSubmit={handleOnSubmit}>
         {/* onSubmit={submitOrderForm} */}
         <section className="order-detail">
           <div className="order-detail__customer">
@@ -163,6 +197,7 @@ export default function SearchResultPage() {
             <div className="location__input-group">
               <select
                 className="location__select"
+                name="city"
                 id="city"
                 required
                 onChange={handleCityChange}>
@@ -178,6 +213,7 @@ export default function SearchResultPage() {
 
               <select
                 className="location__select"
+                name="district"
                 id="district"
                 required
                 onChange={handleDistrictChange}>
@@ -191,7 +227,9 @@ export default function SearchResultPage() {
                 ))}
               </select>
 
-              <select className="location__select" id="ward" required>
+              <select className="location__select" 
+                name="ward"
+                id="ward" required>
                 <option value="" selected>
                   Chọn Phường/Xã
                 </option>
@@ -262,6 +300,7 @@ export default function SearchResultPage() {
       <section className="order-sidebar">
         <div className="order-sidebar__product">
           {buyInfo.map((item, index) => {
+            console.log(buyInfo);
             return <OrderProduct buyInfo={item} key={index} />;
           })}
         </div>

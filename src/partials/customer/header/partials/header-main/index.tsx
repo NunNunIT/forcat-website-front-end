@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import classNameNames from "classnames/bind";
 import { BACKEND_URL } from "@/utils/commonConst";
 import { CustomerLogo, CustomerHeaderItemUlt } from "@/components";
@@ -13,12 +14,14 @@ const cx = classNameNames.bind(styles);
 
 export default function CustomerHeaderMain({
   params,
-  searchParams,
+  // searchParams,
 }: {
   params?: { "*": string };
-  searchParams?: { [key: string]: string };
+  // searchParams?: { [key: string]: string };
 }) {
-  const searchKey = searchParams ?? 0;
+  const searchParams = useSearchParams();
+  const searchKey = searchParams.get("searchKey");
+
   // console.log("searchKey từ Header", searchKey);
   // console.log("searchKey từ Header",  searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
@@ -58,7 +61,7 @@ export default function CustomerHeaderMain({
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Gía trị nhạp vào", inputValue);
+    console.log("Giá trị nhập vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);
@@ -79,7 +82,7 @@ export default function CustomerHeaderMain({
               id="header__search-input"
               type="search"
               name="searchKey"
-              placeholder = { searchKey ? searchKey : "Bạn tìm gì..." }
+              placeholder={searchKey ?? "Bạn tìm gì..."}
               onChange={handleInputChange}
             />
             <button className={cx("header__search-btn")} type="submit">
@@ -137,8 +140,8 @@ export default function CustomerHeaderMain({
               </span>
             </div>
             <div className={cx("unauth-content__btn")}>
-              <a href="/login">Đăng nhập</a>
-              <a href="/register">Đăng ký</a>
+              <Link href="/login">Đăng nhập</Link>
+              <Link href="/register">Đăng ký</Link>
             </div>
           </div>
         </div>

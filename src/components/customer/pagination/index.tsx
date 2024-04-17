@@ -27,6 +27,10 @@ export default function Pagination(props: IPaginationProps) {
   const router = useRouter();
   const pathName = usePathname();
   const searchParams = useSearchParams();
+  if (props.maxPage <= 1) {
+    return <></>
+  }
+
   const allParams = Object.fromEntries(searchParams.entries());
   const siblings: number = 2;
   const pages: number[] = Array.from(

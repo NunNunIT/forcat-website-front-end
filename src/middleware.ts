@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     } catch (error) {
       console.error("Token verification failed:", error);
     }
-  } 
+  }
 
   // Nếu không có token hoặc giải mã thất bại, chuyển hướng đến trang đăng nhập
   return NextResponse.redirect(new URL("/login", request.url));
@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher:
-    "/(account/.*|cart|notifications/.*|order-information|login|register|logout)",
+    "/(account/.*|cart|notifications/.*|order-information|login|register|logout/)",
 };
 
 export function getCurrentUser() {

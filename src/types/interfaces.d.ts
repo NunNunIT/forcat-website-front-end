@@ -165,7 +165,7 @@ interface IOrderItemProps {
   mutate?: () => void;
 }
 
-interface INotiProps {
+interface INotiItemProps {
   _id: string;
   user_id: string;
   notification_name: string;
@@ -185,7 +185,7 @@ interface IResponseJSON {
   data?: Object;
 }
 
-interface ResponseOrderHistory {
+interface IDataResponseOrder {
   orders: IOrderItemProps[];
   maxPage: number;
 }

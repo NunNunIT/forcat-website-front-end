@@ -81,14 +81,14 @@ const LoginForm = () => {
         let data = await res.json();
         setLoading(false);
         let accessTokens = await Cookies.get("accessToken");
-        // console.log("Trước khi Set: ", accessTokens);
+        console.log("Trước khi Set: ", accessTokens);
 
-        // console.log("login success: ", data.message);
+        console.log("login success: ", data.message);
         Cookies.set("accessToken", data.token);
         localStorage.setItem("userStore", JSON.stringify(data.data));
 
         accessTokens = await Cookies.get("accessToken");
-        // console.log("Sau khi set: ", accessTokens);
+        console.log("Sau khi set: ", accessTokens);
 
         window.location.href = "/";
 

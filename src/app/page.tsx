@@ -101,7 +101,7 @@ export default async function Home() {
                 newestProducts.map((product) => (
                   <>
                     <CustomerProductCard
-                      key={product.product_id}
+                      key={product.product_id_hashed}
                       product={product}
                     />
                   </>
@@ -168,7 +168,7 @@ export default async function Home() {
                 discountProducts.map((product) => (
                   <>
                     <CustomerProductCard
-                      key={product.product_id}
+                      key={product.product_id_hashed}
                       product={product}
                     />
                   </>

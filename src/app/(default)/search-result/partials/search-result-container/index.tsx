@@ -516,16 +516,15 @@ export default function SearchResultPage({ searchKey, searchResults }) {
             searchResultsProducts.map((product) => (
               <>
                 <CustomerProductCard
-                  key={product.product_id}
+                  key={product.product_id_hashed}
                   product={product}
                 />
               </>
             ))}
         </div>
-        <div className = "pagination">
-            <Pagination maxPage={totalPage} currentPage={currentPage} />
+        <div className="pagination">
+          <Pagination maxPage={totalPage} currentPage={currentPage} />
         </div>
-        
       </section>
     </main>
   );

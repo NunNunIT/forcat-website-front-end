@@ -4,6 +4,7 @@
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import Skeleton from 'react-loading-skeleton'
 import useSWR, { Fetcher } from "swr";
+import Cookies from "js-cookie";
 
 // import utils
 import {
@@ -24,12 +25,16 @@ import NotFound from "@/app/not-found";
 import "./page.css";
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const fetcher: Fetcher<ResponseOrderHistory, string> = async (url: string) => {
-  const res: Response = await fetch(url);
+const fetcher: Fetcher<IDataResponseOrder, string> = async (url: string) => {
+  // const accessToken: string = await Cookies.get("accessToken");
+  // console.log(accessToken);
+  const res: Response = await fetch(url, {
+    credentials: "same-origin",
+  });
   const json: IResponseJSON = await res.json();
   if (!json.success) throw json;
 
-  return json.data as ResponseOrderHistory;
+  return json.data as IDataResponseOrder;
 }
 
 const getFullBackendURLOrders = (status: string, page: string): string => {

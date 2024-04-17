@@ -58,19 +58,19 @@ const CustomerCarousel = () => {
     loadTopRatedProducts(); // Load top rated products when component mounts
   }, []);
 
- const handleClick = (
-  event: React.MouseEvent<HTMLSpanElement, MouseEvent>
-) => {
-  const carousel = carouselRef.current;
-  const btn = event.currentTarget;
-  if (carousel && btn) {
-    const direction = btn.id === "left" ? -1 : 1;
-    // Get the width of the first child of the carousel
-    const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
-    carousel.scrollLeft += direction * firstCardWidth;
-    console.log(carousel.scrollLeft); // Log the new scroll position
-  }
-};
+  const handleClick = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
+    const carousel = carouselRef.current;
+    const btn = event.currentTarget;
+    if (carousel && btn) {
+      const direction = btn.id === "left" ? -1 : 1;
+      // Get the width of the first child of the carousel
+      const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
+      carousel.scrollLeft += direction * firstCardWidth;
+      // console.log(carousel.scrollLeft); // Log the new scroll position
+    }
+  };
 
   const dragStart = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     setIsDragging(true);
@@ -114,9 +114,9 @@ const CustomerCarousel = () => {
       // If the carousel is at the end, scroll to the beginning
       else if (
         Math.ceil(carousel.scrollLeft) ===
-          carousel.scrollWidth - carousel.offsetWidth ||
+        carousel.scrollWidth - carousel.offsetWidth ||
         Math.ceil(carousel.scrollLeft) - 1 ===
-          carousel.scrollWidth - carousel.offsetWidth
+        carousel.scrollWidth - carousel.offsetWidth
       ) {
         carousel.classList.add("no-transition");
         // Scroll to the original first item
@@ -129,20 +129,20 @@ const CustomerCarousel = () => {
     }
   };
 
-const autoPlay = () => {
-  if (typeof window !== "undefined") {
-    if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
-    // Autoplay the carousel after every 2500 ms
-    const carousel = carouselRef.current;
-    if (carousel && carousel.firstChild) {
-      const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
-      const id = window.setTimeout(() => {
-        carousel.scrollLeft += firstCardWidth;
-      }, 1500);
-      setTimeoutId(id);
+  const autoPlay = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+      // Autoplay the carousel after every 2500 ms
+      const carousel = carouselRef.current;
+      if (carousel && carousel.firstChild) {
+        const firstCardWidth = (carousel.firstChild as HTMLElement).offsetWidth;
+        const id = window.setTimeout(() => {
+          carousel.scrollLeft += firstCardWidth;
+        }, 1500);
+        setTimeoutId(id);
+      }
     }
-  }
-};
+  };
 
   useEffect(() => {
     if (carouselRef.current && carouselRef.current.children[0]) {
@@ -245,7 +245,7 @@ const autoPlay = () => {
   //   };
   // }, [dragStart, dragging, dragStop, infiniteScroll, autoPlay, timeoutId]);
 
-  useEffect(() => {}, [carouselRef.current]);
+  useEffect(() => { }, [carouselRef.current]);
 
   return (
     <div ref={wrapperRef} className={cx("wrapper-carousel")}>
@@ -279,7 +279,7 @@ const autoPlay = () => {
               <li key={product.product_id} className={cx("carousel__card")}>
                 <Link
                   className={cx("carousel__card-main")}
-                  href={`/${product.product_slug}?pid=${product.product_id}`}>
+                  href={`/${product.product_slug}?pid=${product.product_id_hashed}`}>
                   {product.highest_discount ? (
                     <div className={cx("carousel__card--badge")}>
                       - {product.highest_discount} %

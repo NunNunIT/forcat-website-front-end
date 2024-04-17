@@ -12,7 +12,9 @@ import { CustomerLogo } from "@/components";
 // import css
 import styles from "./header-nav.module.css";
 
+// import constant
 import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
+import { convertDateToFormatHHMMDDMMYYYY } from "@/utils";
 
 const cx = classNameNames.bind(styles);
 
@@ -20,6 +22,13 @@ interface IUserLocal {
   user_id: string;
   user_name: string;
   user_avt: string;
+  recent_notification: {
+    _id: string;
+  notification_type: string;
+    notification_name: string;
+    notification_description: string;
+    createdAt: string;
+  }[],
 }
 
 export default function CustomerHeaderNav() {
@@ -27,15 +36,10 @@ export default function CustomerHeaderNav() {
 
   const getCurrentUser = (): (IUserLocal | null) => {
     const storedUser = localStorage.getItem("userStore");
-    let currentUser = null;
-    if (storedUser) {
-      currentUser = JSON.parse(storedUser);
-    }
+    const currentUser = storedUser
+      ? JSON.parse(storedUser)
+      : null;
     return currentUser;
-    // const currentUser = storedUser
-    //   ? JSON.parse(storedUser)
-    //   : null;
-    // return currentUser;
   };
 
   useEffect(() => {
@@ -47,7 +51,8 @@ export default function CustomerHeaderNav() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    const accessTokens = Cookies.get("accessToken");
+    const accessToken = Cookies.get("accessToken");
+    console.log(accessToken);
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
@@ -102,27 +107,52 @@ export default function CustomerHeaderNav() {
             </Link>
             <div className={cx("dropdown-noti__content-container")}>
               <div className={cx("dropdown-noti__content")}>
-                <div className={cx("dropdown-noti__unauth-user")}>
-                  <div className={cx("unauth-user__img-container")}>
-                    <Image src="/imgs/unauth-user.png" alt="unauth-user" fill />
-                  </div>
-                  <span className={cx("unauth-content__noti")}>
-                    Đăng nhập để xem Thông báo
-                  </span>
-                </div>
-                <div className={cx("unauth-content__btn")}>
-                  <Link href="/login">Đăng nhập</Link>
-                  <Link href="/register">Đăng ký</Link>
-                </div>
+                {currentUser ? (<>{
+                  currentUser.recent_notification.length > 0
+                    ? (currentUser.recent_notification.map((noti, index: number) =>
+                      <Link key={index} href={`notifications?type=${noti.notification_type}`}>
+                        <h5>{noti.notification_name}</h5>
+                        <p>Lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(noti.createdAt))}</p>
+                      </Link>
+                    ))
+                    : (<>
+                      <div className={cx("dropdown-noti--empty")}>
+                        <Image
+                          src="/imgs/nothing-result.png"
+                          alt="Hình ảnh của bạn không có thông báo mới"
+                          fill
+                        />
+                      </div>
+                      <span className={cx("empty-content__noti")}>
+                        Bạn chưa có thông báo mới nào
+                      </span>
+                    </>)
+                }</>) : (
+                  <>
+                    <div className={cx("dropdown-noti__unauth-user")}>
+                      <div className={cx("unauth-user__img-container")}>
+                        <Image src="/imgs/unauth-user.png" alt="unauth-user" fill />
+                      </div>
+                      <span className={cx("unauth-content__noti")}>
+                        Đăng nhập để xem Thông báo
+                      </span>
+                    </div>
+                    <div className={cx("unauth-content__btn")}>
+                      <Link href="/login">Đăng nhập</Link>
+                      <Link href="/register">Đăng ký</Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
           {currentUser ? (
             <div className={cx("header__auth")}>
               <span className="material-icons-outlined">account_circle</span>
-              <Link href="/profile" className={cx("header__auth-login")}>
+              <Link href="/account/information" className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
+              {"|"}
               <form onSubmit={handleLogout}>
                 <button type="submit" className={cx("header__auth-logout-btn")}>
                   Đăng xuất
