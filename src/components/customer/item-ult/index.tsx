@@ -10,9 +10,12 @@ import styles from "./style.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function CustomerHeaderItemUlt({product}) {
+export default function CustomerHeaderItemUlt({ product }) {
   // Kiểm tra nếu giá lowest_price và product_price bằng nhau
-  const showPrice = product.lowest_price === product.product_price ? product.lowest_price : `${convertNumberToMoney(product.lowest_price)}đ`;
+  const showPrice =
+    product.lowest_price === product.product_price
+      ? product.lowest_price
+      : `${convertNumberToMoney(product.lowest_price)}đ`;
 
   return (
     <div className={cx("header__item-ult")}>
@@ -37,8 +40,7 @@ export default function CustomerHeaderItemUlt({product}) {
             className={cx("header__item-ult__thumbs__img")}
             src={product.product_img.link} // Sử dụng link hình ảnh từ dữ liệu sản phẩm
             alt={product.product_img.alt} // Sử dụng alt từ dữ liệu sản phẩm
-            width={100} // Đặt chiều rộng và chiều cao của ảnh theo ý muốn
-            height={100}
+            fill={true}
           />
         </Link>
       </div>

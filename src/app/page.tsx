@@ -1,6 +1,7 @@
 //import libs
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import global components
 import { CustomerCarousel } from "@/components";
@@ -59,7 +60,7 @@ const fetchDiscountProducts = async () => {
 
 export default async function Home() {
   let newestProducts = await fetchNewestProducts();
-  let discountProducts = await fetchDiscountProducts();
+  let discountProducts = await fetchNewestProducts();
   return (
     <>
       <CustomerHeader></CustomerHeader>
@@ -162,7 +163,7 @@ export default async function Home() {
               <span className="tip-products__title-after"></span>
             </h1>
             <div className="tip-products__content">
-            {discountProducts &&
+              {discountProducts &&
                 discountProducts.length &&
                 discountProducts.map((product) => (
                   <>

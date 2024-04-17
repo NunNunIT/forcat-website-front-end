@@ -1,6 +1,5 @@
 "use client";
-// import libs
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import classNameNames from "classnames/bind";
@@ -19,11 +18,12 @@ export default function CustomerHeaderMain({
 }) {
   const searchKey = searchParams ?? 0;
   console.log("searchKey từ Header", searchKey);
-  console.log("searchKey từ Header",  searchParams);
+  console.log("searchKey từ Header", searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
   const [inputValue, setInputValue] = useState("");
+  const smartSearchRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,6 +34,25 @@ export default function CustomerHeaderMain({
 
     return () => clearTimeout(timer);
   }, [inputValue]);
+
+  useEffect(() => {
+    // Add event listener when component mounts
+    window.addEventListener("mousedown", handleClickOutside);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (
+      smartSearchRef.current &&
+      !smartSearchRef.current.contains(event.target)
+    ) {
+      setShowSmartSearch(false);
+    }
+  };
 
   const fetchSearchResults = async (inputValue) => {
     try {
@@ -57,7 +76,6 @@ export default function CustomerHeaderMain({
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Gía trị nhạp vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);
@@ -78,7 +96,7 @@ export default function CustomerHeaderMain({
               id="header__search-input"
               type="search"
               name="searchKey"
-              placeholder = { searchKey ? searchKey : "Bạn tìm gì..." }
+              placeholder={searchKey ? searchKey : "Bạn tìm gì..."}
               onChange={handleInputChange}
             />
             <button className={cx("header__search-btn")} type="submit">
@@ -87,6 +105,7 @@ export default function CustomerHeaderMain({
           </div>
         </form>
         <div
+          ref={smartSearchRef}
           className={cx("header__smart-search-wrapper", {
             "display-block": showSmartSearch,
           })}
