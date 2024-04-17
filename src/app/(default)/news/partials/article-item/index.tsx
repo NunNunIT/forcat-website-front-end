@@ -7,11 +7,11 @@ import classNames from "classnames/bind";
 import { convertDateToHourDayMonthYear } from "@/utils";
 
 // import css
-import styles from "./article-summary.module.css";
+import styles from "./article-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function ArticleSummary(props: IArticleProps) {
+export default function ArticleItem(props: IArticleItemProps) {
   const {
     article_slug,
     article_name,
