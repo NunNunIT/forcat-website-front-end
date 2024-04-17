@@ -59,8 +59,10 @@ export default function CustomerHeaderNav() {
 
       if (res.ok) {
         Cookies.remove("accessToken");
-        localStorage.removeItem("userStore");
-        setCurrentUser(null); // Đặt currentUser thành null sau khi đăng xuất
+        Cookies.remove("currentUser");
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }

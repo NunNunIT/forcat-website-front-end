@@ -169,7 +169,11 @@ const LoginForm = () => {
           </p>
         )}
       </div>
-
+      <Link href="/forgot" className={cx("align-right")}>
+          <p>
+            Quên mật khẩu?
+          </p>
+      </Link>
       <button disabled={loading} className={cx("form-button")}>
         <h3>{loading ? "Đang xử lý..." : "Đăng nhập"}</h3>
       </button>

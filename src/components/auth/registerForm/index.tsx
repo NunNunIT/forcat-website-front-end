@@ -219,7 +219,15 @@ const RegisterForm = () => {
       )}
 
       <OAuth />
+      <div className={cx("register-note")}>
+        <p>
+          Bằng việc nhấn nút đăng ký, bạn đồng ý với các{" "}
+          <Link href="/forgot">điều khoản</Link> và{" "}
+          <Link href="/forgot">chính sách bảo mật</Link>{" "} của chúng tôi
+        </p>
+      </div>
     </form>
+    
   );
 };
 
