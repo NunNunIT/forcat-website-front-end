@@ -165,7 +165,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
-  background-color: #fffdf9;
+  background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar {
@@ -460,19 +460,40 @@ input[type="number"] {
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   opacity: 0.8;
-  background-color: var(--fire-orange);
-  /* color: var(--green1); */
+  /* background-color: var(--fire-orange); */
+  background-color: var(--dark2);
+  color: #fff !important;
 }
 
 .swiper-pagination-bullet {
   background: #000 !important;
-  width: 16px !important;
+  width: 20px !important;
   /* Chiều rộng của bullet */
-  height: 16px !important;
+  height: 20px !important;
   /* Chiều cao của bullet */
   margin: 0 8px;
   /* Khoảng cách giữa các bullet */
 }
+
+@media only screen and (max-width: 800px) {
+  .swiper-pagination-bullet {
+    width: 15px !important;
+    /* Chiều rộng của bullet */
+    height: 15px !important;
+    /* Chiều cao của bullet */
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .swiper-pagination-bullet {
+    width: 10px !important;
+    /* Chiều rộng của bullet */
+    height: 10px !important;
+    /* Chiều cao của bullet */
+  }
+}
+
+
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: var(--fire-orange) !important;

@@ -17,16 +17,16 @@ import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
 const cx = classNameNames.bind(styles);
 
 interface IUserLocal {
-  user_id: string;
+  _id: string;
   user_name: string;
-  user_avt: string;
+  user_avt_img: string;
 }
 
 export default function CustomerHeaderNav() {
   const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
   const getCurrentUser = (): (IUserLocal | null) => {
-    const storedUser = localStorage.getItem("userStore");
+    const storedUser = localStorage.getItem("currentUser");
     let currentUser = null;
     if (storedUser) {
       currentUser = JSON.parse(storedUser);
@@ -43,7 +43,6 @@ export default function CustomerHeaderNav() {
     setCurrentUser(user);
   }, []);
 
-  // console.log("LocalStore2", currentUser);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -60,8 +59,10 @@ export default function CustomerHeaderNav() {
 
       if (res.ok) {
         Cookies.remove("accessToken");
-        localStorage.removeItem("userStore");
-        setCurrentUser(null); // Đặt currentUser thành null sau khi đăng xuất
+        Cookies.remove("currentUser");
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }
