@@ -167,15 +167,14 @@ interface IOrderItemProps {
 
 interface INotiItemProps {
   _id: string;
-  user_id: string;
   notification_name: string;
   notification_slug: string;
   notification_type: string;
   notification_description: string;
-  notification_url_img: string;
   updatedAt: string;
-  is_read: boolean;
-  allRead: boolean;
+  is_unread: boolean;
+  user_id: string;
+  read_all: boolean;
 }
 
 interface IResponseJSON {

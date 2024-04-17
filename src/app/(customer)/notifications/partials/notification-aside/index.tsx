@@ -4,7 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames/bind";
-import { isActiveClass } from "@/utils";
+import { isActiveClassWithBool } from "@/utils";
 import { usePathname, useSearchParams } from "next/navigation";
 
 // import css
@@ -54,7 +54,7 @@ export default function NotificationAside() {
           {asideNavData.map((navData, index) => <li key={index}>
             <Link href={navData.url}
               className={cx("notification__aside-nav-item",
-                isActiveClass(navData.url, currentURL))}
+                isActiveClassWithBool(navData.url === currentURL))}
             >
               <span>{navData.text}</span>
             </Link>

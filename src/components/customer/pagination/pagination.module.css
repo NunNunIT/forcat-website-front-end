@@ -6,7 +6,8 @@
 
 .pagination-container>* {
   width: 3rem;
-  aspect-ratio: 1/1;
+  height: 3rem;
+  /* aspect-ratio: 1/1; */
 
   display: flex;
   justify-content: center;
