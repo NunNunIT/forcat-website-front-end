@@ -4,11 +4,11 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 // import global components
-import { CustomerCarousel } from "@/components";
+import { CustomerCarouselSlider } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
-import { CustomerHeader, CustomerFooter } from "@/partials";
+import { CustomerHeader, CustomerFooter, CustomerAppBar } from "@/partials";
 import { BACKEND_URL } from "@/utils/commonConst";
 
 // use css
@@ -64,8 +64,8 @@ export default async function Home() {
   return (
     <>
       <CustomerHeader></CustomerHeader>
-      <CustomerSlider></CustomerSlider>
       <main className="main-container">
+      <CustomerSlider></CustomerSlider>
         <div className="content-container">
           <h1 className="tip-products__label">
             <Link href="/search-result" className="tip-products__title">
@@ -83,11 +83,11 @@ export default async function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <CustomerCarousel></CustomerCarousel>
+            <CustomerCarouselSlider></CustomerCarouselSlider>
           </div>
         </div>
 
-        <section className="content-container tip-products-wrapper">
+        <section className="content-container tip-products-wrapper wrapper--white">
           <div className="tip-products">
             <h1 className="tip-products__label">
               <Link href="/search-result" className="tip-products__title">
@@ -178,6 +178,7 @@ export default async function Home() {
         </section>
       </main>
       <CustomerFooter></CustomerFooter>
+      <CustomerAppBar></CustomerAppBar>
     </>
   );
 }

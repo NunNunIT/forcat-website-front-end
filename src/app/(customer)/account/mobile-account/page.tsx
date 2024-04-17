@@ -2,17 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-
 // import components
 import { MobileLogout } from "./partials";
 // import css
 import "./page.css";
-
-export const metadata: Metadata = {
-  description:
-    "Quản lý thông tin cá nhân, đơn hàng và cập nhật tài khoản của bạn trên ForCat Shop.",
-};
 
 export default function MobileAccountPage() {
   return (
@@ -56,16 +49,7 @@ export default function MobileAccountPage() {
             </Link>
           </li>
           <li>
-            <Link href="/account/warranty-claim">
-              <span className="material-icons-outlined"> build </span>
-              <span className="text">Yêu cầu bảo hành</span>
-              <span className="material-icons-outlined arrow-icon">
-                navigate_next
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/account/changePassword">
+            <Link href="/account/change-password">
               <span className="material-icons-outlined"> settings </span>
               <span className="text">Đổi mật khẩu</span>
               <span className="material-icons-outlined arrow-icon">

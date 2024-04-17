@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Quản lý và cập nhật thông tin cá nhân của bạn trên ForCat Shop.",
 };
-export default function InformationPage() {
+export default async function InformationPage() {
   return (
     <main className="account-information__main">
       <section className="information__main">

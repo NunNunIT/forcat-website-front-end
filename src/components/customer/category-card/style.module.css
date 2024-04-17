@@ -1,10 +1,11 @@
 .category-card {
-  box-shadow: 3px 3px 4px 0 var(--black-o20);
-  border: 1px solid var(--outline1);
+  /* box-shadow: 3px 3px 0 0 var(--black-o20); */
+  box-shadow: 0 2px 7px #dfdfdf;
+  /* border: 1px solid var(--outline1); */
   margin: auto 0.2rem;
   text-align: center;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 8px;
   height: 98%;
   overflow: hidden;
   padding-bottom: 1.5rem;

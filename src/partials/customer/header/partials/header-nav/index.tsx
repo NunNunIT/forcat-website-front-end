@@ -16,25 +16,33 @@ import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
 
 const cx = classNameNames.bind(styles);
 
+interface IUserLocal {
+  _id: string;
+  user_name: string;
+  user_avt_img: string;
+}
+
 export default function CustomerHeaderNav() {
-  const [currentUser, setCurrentUser] = useState(null); // Định nghĩa biến currentUser ở đây
+  const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
-  useEffect(() => {
-    const user = getCurrentUser();
-    setCurrentUser(user);
-  }, []);
-
-  const getCurrentUser = () => {
-    const storedUser = localStorage.getItem("userStore");
+  const getCurrentUser = (): (IUserLocal | null) => {
+    const storedUser = localStorage.getItem("currentUser");
     let currentUser = null;
-
     if (storedUser) {
       currentUser = JSON.parse(storedUser);
     }
     return currentUser;
+    // const currentUser = storedUser
+    //   ? JSON.parse(storedUser)
+    //   : null;
+    // return currentUser;
   };
 
-  console.log("LocalStore2", currentUser);
+  useEffect(() => {
+    const user: (IUserLocal | null) = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
+
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -46,13 +54,15 @@ export default function CustomerHeaderNav() {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
 
       if (res.ok) {
         Cookies.remove("accessToken");
-        localStorage.removeItem("userStore");
-        setCurrentUser(null); // Đặt currentUser thành null sau khi đăng xuất
+        Cookies.remove("currentUser");
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }
@@ -86,8 +96,7 @@ export default function CustomerHeaderNav() {
         <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
-            <Link
-              href="/notification/order"
+            <Link href="/notifications"
               className={cx("header__notifications")}>
               <span className="material-icons-outlined">notifications</span>
               Thông báo
@@ -135,7 +144,7 @@ export default function CustomerHeaderNav() {
           )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
-          <Link href="/notification/order" className={cx("noti--mobile")}>
+          <Link href="/notifications" className={cx("noti--mobile")}>
             <span className="material-icons-outlined" title="Thông báo">
               notifications
             </span>

@@ -37,6 +37,20 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
   )[0];
 }
 
+// handle change page
+const handleChangePage = () => {
+  const cartItem = store.getState().product.cartItem;
+  const userId = "661705fe7c6da785f2af9814";
+
+  fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
+    body: JSON.stringify(cartItem),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export default function ProductBuyForm({
   pid,
   productInfo,
@@ -135,20 +149,6 @@ export default function ProductBuyForm({
     cartModal.classList.remove("hidden");
   };
 
-  // handle change page
-  const handleChangePage = () => {
-    const cartItem = store.getState().product.cartItem;
-    const userId = "661705d07c6da785f2af9811";
-
-    fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
-      body: JSON.stringify(cartItem),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
-
   useEffect(() => {
     window.addEventListener("beforeunload", handleChangePage);
   }, []);
@@ -190,9 +190,7 @@ export default function ProductBuyForm({
                     variant={{
                       id: item._id,
                       name: item.variant_name,
-                      url: `/${productInfo.product_slug}/${createSlug(
-                        item.variant_name
-                      )}`,
+                      url: `/${productInfo.product_slug}/${item.variant_slug}}`,
                       image: {
                         url: (item.variant_imgs[0] as any).link,
                         alt: (item.variant_imgs[0] as any).alt,

@@ -80,9 +80,9 @@
   }
 }
 
-@media (max-width: 416px) {
+@media (max-width: 417px) {
   .customerSlider_card-container {
-    height: 10rem;
+    height: 10.25rem;
   }
 }
 
