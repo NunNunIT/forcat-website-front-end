@@ -1,0 +1,34 @@
+.breadcrumb__container {
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb {
+  border-radius: .5rem;
+  background: white;
+
+  width: 100%;
+  max-width: 1152px;
+  min-height: 2rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  margin-bottom: 0;
+
+  display: flex;
+}
+
+.breadcrumb a:is(:active, :visited) {
+  color: black;
+}
+
+.breadcrumb>*:not(:last-child)::after {
+  font-weight: 500;
+  content: "/";
+  margin-inline: .5rem;
+}
+
+.breadcrumb>*:last-child {
+  font-weight: bold;
+}

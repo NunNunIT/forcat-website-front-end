@@ -20,3 +20,5 @@ export { default as CustomerProductItemInOrderItem } from "./customer/product-it
 export { default as CustomerHeaderItemUlt } from "./customer/item-ult";
 
 export { default as CustomerPagination } from "./customer/pagination";
+
+export { default as CustomerBreadcrumb } from "./customer/breadcrumb";
