@@ -15,7 +15,7 @@ import { BACKEND_URL } from "@/utils/commonConst";
 import "./page.css";
 
 export const metadata: Metadata = {
-  title: "Trang chủ",
+  title: "ForCat | Trang chủ",
   description:
     "Chào mừng bạn đến với ForCat Shop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Tại đây, chúng tôi cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất để giúp bạn chăm sóc và yêu thương thú cưng của mình. Khám phá ngay bộ sưu tập sản phẩm đa dạng và đăng ký tài khoản để nhận ưu đãi đặc biệt. Hãy bắt đầu hành trình mua sắm và chăm sóc thú cưng của bạn tại ForCat Shop ngay hôm nay!",
 };
@@ -28,14 +28,16 @@ const fetchNewestProducts = async () => {
         next: { revalidate: 60 },
       }
     );
-    if (!response.ok) {
-      throw new Error("Failed to fetch newest products");
-    }
+
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch newest products");
+    // }
+
     const data = await response.json();
     return data.data; // Return the entire data object
   } catch (error) {
-    console.error("Error fetching newest products:", error);
-    throw error;
+    // console.error("Error fetching newest products:", error);
+    // throw error;
   }
 };
 
@@ -47,14 +49,16 @@ const fetchDiscountProducts = async () => {
         next: { revalidate: 60 },
       }
     );
-    if (!response.ok) {
-      throw new Error("Failed to fetch discount products");
-    }
+
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch discount products");
+    // }
+
     const data = await response.json();
     return data.data; // Return the entire data object
   } catch (error) {
-    console.error("Error fetching discount products:", error);
-    throw error;
+    // console.error("Error fetching discount products:", error);
+    // throw error;
   }
 };
 
@@ -63,9 +67,9 @@ export default async function Home() {
   let discountProducts = await fetchDiscountProducts();
   return (
     <>
-      <CustomerHeader></CustomerHeader>
+      <CustomerHeader />
       <main className="main-container">
-      <CustomerSlider></CustomerSlider>
+        <CustomerSlider />
         <div className="content-container">
           <h1 className="tip-products__label">
             <Link href="/search-result" className="tip-products__title">
@@ -73,7 +77,7 @@ export default async function Home() {
             </Link>
             <span className="tip-products__title-after"></span>
           </h1>
-          <CustomerCategories></CustomerCategories>
+          <CustomerCategories/>
         </div>
         <div className="wrapper color">
           <div className="content-container">
@@ -83,7 +87,7 @@ export default async function Home() {
               </Link>
               <span className="tip-products__title-after"></span>
             </h1>
-            <CustomerCarouselSlider></CustomerCarouselSlider>
+            <CustomerCarouselSlider />
           </div>
         </div>
 
@@ -99,12 +103,10 @@ export default async function Home() {
               {newestProducts &&
                 newestProducts.length &&
                 newestProducts.map((product) => (
-                  <>
-                    <CustomerProductCard
-                      key={product.product_id}
-                      product={product}
-                    />
-                  </>
+                  <CustomerProductCard
+                    key={product.product_id_hashed}
+                    product={product}
+                  />
                 ))}
             </div>
           </div>
@@ -113,7 +115,7 @@ export default async function Home() {
               <Image
                 className="banner-img"
                 fill={true}
-                src="/imgs/home-page/banner-small-4.png"
+                src="/imgs/home-page/banner-small-4.webp"
                 alt="banner-info"
               />
             </Link>
@@ -121,7 +123,7 @@ export default async function Home() {
               <Image
                 className="banner-img"
                 fill={true}
-                src="/imgs/home-page/banner-small-1.png"
+                src="/imgs/home-page/banner-small-1.webp"
                 alt="banner-info"
               />
             </Link>
@@ -139,7 +141,7 @@ export default async function Home() {
               <Image
                 className="banner-img"
                 fill={true}
-                src="/imgs/home-page/banner-small-2.png"
+                src="/imgs/home-page/banner-small-2.webp"
                 alt="banner-info"
               />
             </Link>
@@ -149,7 +151,7 @@ export default async function Home() {
               <Image
                 className="banner-img"
                 fill={true}
-                src="/imgs/home-page/banner-1.png"
+                src="/imgs/home-page/banner-1.webp"
                 alt="banner-info"
               />
             </Link>
@@ -166,19 +168,17 @@ export default async function Home() {
               {discountProducts &&
                 discountProducts.length &&
                 discountProducts.map((product) => (
-                  <>
-                    <CustomerProductCard
-                      key={product.product_id}
-                      product={product}
-                    />
-                  </>
+                  <CustomerProductCard
+                    key={product.product_id_hashed}
+                    product={product}
+                  />
                 ))}
             </div>
           </div>
         </section>
       </main>
-      <CustomerFooter></CustomerFooter>
-      <CustomerAppBar></CustomerAppBar>
+      <CustomerFooter />
+      <CustomerAppBar />
     </>
   );
 }

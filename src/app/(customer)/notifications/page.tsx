@@ -4,7 +4,8 @@
 import { useSearchParams } from "next/navigation";
 import useSWR, { Fetcher } from "swr";
 import { useState } from "react";
-import NotFound from "@/app/not-found";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 // import partials, components
 import { CustomerNotificationItem } from "./partials";
@@ -19,8 +20,8 @@ const notificationTypes = ["", "order", "promotion"];
 const user_id = "6616be67a63ceb458b15828f";
 const fetcher: Fetcher<INotiProps[], string> = async (url: string) => {
   const res: Response = await fetch(url);
-  if (!res.ok)
-    throw new Error("Failed to fetch notifications: " + res.statusText);
+  // if (!res.ok)
+  //   throw new Error("Failed to fetch notifications: " + res.statusText);
 
   const json = await res.json();
 
@@ -55,7 +56,7 @@ export default function NotificationPage() {
   const { data, error, isLoading } = useSWR<INotiProps[]>(fullURL, fetcher);
 
   if (!notificationTypes.includes(type)) {
-    return NotFound();
+    return notFound();
   }
   const handleOnClickReadAll = async () => {
     const postData = {
@@ -63,35 +64,38 @@ export default function NotificationPage() {
     };
 
     // Gửi yêu cầu đánh dấu tất cả thông báo đã đọc
-    await fetch(`${BACKEND_URL}/noti/readAllNoti`, {
+    await fetch(`${BACKEND_URL}/notifications/readAll`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postData),
+      credentials: "include",
     });
 
     // Update state to indicate all notifications have been read
     setAllRead(true);
   };
   return (
-    <section className="notification__content">
-      <div className="notification__content--top">
-        <h2 className="notification__title">Thông báo</h2>
-        <button className="btn_ pri_" onClick={handleOnClickReadAll}>
-          <span>Đánh dấu tất cả đã đọc</span>
-        </button>
-      </div>
-      {isLoading && <p>Loading...</p>}
-      {data &&
-        data.map((notification: INotiProps) => (
-          <CustomerNotificationItem
-            key={notification._id}
-            {...notification}
-            user_id={user_id}
-            allRead={allRead}
-          />
-        ))}
-    </section>
+    <Suspense>
+      <section className="notification__content">
+        <div className="notification__content--top">
+          <h2 className="notification__title">Thông báo</h2>
+          <button className="btn_ pri_" onClick={handleOnClickReadAll}>
+            <span>Đánh dấu tất cả đã đọc</span>
+          </button>
+        </div>
+        {isLoading && <p>Loading...</p>}
+        {data &&
+          data.map((notification: INotiProps) => (
+            <CustomerNotificationItem
+              key={notification._id}
+              {...notification}
+              user_id={user_id}
+              allRead={allRead}
+            />
+          ))}
+      </section>
+    </Suspense>
   );
 }

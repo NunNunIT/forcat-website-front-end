@@ -1,7 +1,7 @@
 "use client";
 // import libs
-import Link from "next/link";
 import classNames from "classnames/bind";
+import Link from "next/link";
 import Image from "next/image";
 
 // import css
@@ -17,7 +17,7 @@ export default function CustomerCategoryCard({
 }) {
   return (
     <div className={cx("category-card")}>
-      <Link href="#" className={cx("category__link")}>
+      <Link href={`/search-result?searchKey=${initValue.name}`} className={cx("category__link")}>
         <div className={cx("category-image-div")}>
           <Image
             className={cx("category__link-image")}
