@@ -1,13 +1,18 @@
 "use client";
 
 // import libs
-import React, { useState, useEffect } from "react";
+import classNameNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import classNameNames from "classnames/bind";
+import React, { useState, useEffect, useRef } from "react";
+
+// import utils
 import { BACKEND_URL } from "@/utils/commonConst";
+
+// import components
 import { CustomerLogo, CustomerHeaderItemUlt } from "@/components";
+
+// import css
 import styles from "./header-main.module.css";
 
 const cx = classNameNames.bind(styles);
@@ -19,15 +24,14 @@ export default function CustomerHeaderMain({
   params?: { "*": string };
   // searchParams?: { [key: string]: string };
 }) {
-  const searchParams = useSearchParams();
-  const searchKey = searchParams.get("searchKey");
-
-  // console.log("searchKey từ Header", searchKey);
-  // console.log("searchKey từ Header",  searchParams);
+  const searchKey = searchParams?.searchKey ?? 0;
+  console.log("searchKey từ Header", searchKey);
+  console.log("searchKey từ Header", searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
   const [inputValue, setInputValue] = useState("");
+  const smartSearchRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,14 +43,33 @@ export default function CustomerHeaderMain({
     return () => clearTimeout(timer);
   }, [inputValue]);
 
+  useEffect(() => {
+    // Add event listener when component mounts
+    window.addEventListener("mousedown", handleClickOutside);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (
+      smartSearchRef.current &&
+      !smartSearchRef.current.contains(event.target)
+    ) {
+      setShowSmartSearch(false);
+    }
+  };
+
   const fetchSearchResults = async (inputValue) => {
     try {
       const response = await fetch(
         `${BACKEND_URL}/productList/searchRecommended?searchKey=${inputValue}`
       );
-      if (!response.ok) {
-        throw new Error("Failed to fetch search results");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to fetch search results");
+      // }
       const data = await response.json();
       if (data.data.searchKey === inputValue) {
         // console.log("Trả về cho data", data.data.searchKey);
@@ -61,7 +84,6 @@ export default function CustomerHeaderMain({
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
-    console.log("Giá trị nhập vào", inputValue);
     setInputValue(inputValue);
     if (!inputValue) {
       setShowSmartSearch(false);
@@ -82,7 +104,7 @@ export default function CustomerHeaderMain({
               id="header__search-input"
               type="search"
               name="searchKey"
-              placeholder={searchKey ?? "Bạn tìm gì..."}
+              placeholder={searchKey ? searchKey : "Bạn tìm gì..."}
               onChange={handleInputChange}
             />
             <button className={cx("header__search-btn")} type="submit">
@@ -91,6 +113,7 @@ export default function CustomerHeaderMain({
           </div>
         </form>
         <div
+          ref={smartSearchRef}
           className={cx("header__smart-search-wrapper", {
             "display-block": showSmartSearch,
           })}
@@ -100,7 +123,7 @@ export default function CustomerHeaderMain({
             {showSmartSearch &&
               searchResults.map((product) => (
                 <CustomerHeaderItemUlt
-                  key={product.product_id}
+                  key={product.product_id_hashed}
                   product={product}
                 />
               ))}
@@ -116,14 +139,15 @@ export default function CustomerHeaderMain({
       </div>
 
       <div className={cx("dropdown-cart")}>
-        <a
+        <Link
           href="/cart"
           className={cx("header__cart-container")}
-          title="Giỏ hàng">
+          title="Giỏ hàng"
+        >
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
           </div>
-        </a>
+        </Link>
         <div className={cx("dropdown-cart__content-container")}>
           <div className={cx("dropdown-cart__content")}>
             <div className={cx("dropdown-cart__unauth-user")}>

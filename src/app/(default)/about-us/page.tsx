@@ -1,6 +1,5 @@
 // import libs
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 
@@ -150,7 +149,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Nhật Tấn</h4>
-            <p>&quot;&quot;Slogan Slogannnn&quot;&quot;</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
         </div>
       </section>

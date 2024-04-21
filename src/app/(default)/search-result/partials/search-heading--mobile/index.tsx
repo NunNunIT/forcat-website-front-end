@@ -1,7 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+// import libs
 import classNames from "classnames/bind";
+import React, { useState, useEffect } from "react";
+
+// import css
 import styles from "./search-heading--mobile.module.css";
 
 const cx = classNames.bind(styles);

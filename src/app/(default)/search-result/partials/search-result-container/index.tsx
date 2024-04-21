@@ -1,28 +1,24 @@
 "use client";
 
 // import libs
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { BACKEND_URL } from "@/utils/commonConst";
 import classNames from "classnames/bind";
+import React from "react";
 import { useState, useEffect } from "react";
-import Pagination from '@/components/customer/pagination';
 
 // import css
 import styles from "./search-result-container.module.css";
 const cx = classNames.bind(styles);
 
 // import components
-import { CustomerProductCard } from "@/components";
+import { CustomerProductCard, CustomerPagination } from "@/components";
 
 // import css
 import "./search-result.css";
 
 export default function SearchResultPage({ searchKey, searchResults }) {
-  const totalResults = searchResults.totalResults
-  const totalPage = searchResults.totalPages
-  const currentPage = searchResults.currentPage
+  const totalResults = searchResults.totalResults;
+  const totalPage = searchResults.totalPages;
+  const currentPage = searchResults.currentPage;
 
   let searchResultsProducts;
   // console.log("Từ khóa tìm kiếm", searchKey);
@@ -438,8 +434,12 @@ export default function SearchResultPage({ searchKey, searchResults }) {
         <div className="search-result__main__heading">
           <p className="search-result__main__count">
             Tìm thấy
-            <span className="search-result__highlight"> {totalResults} </span> kết quả cho từ
-            khóa &quot;<span className="search-result__key">{searchKey} </span>&quot;
+            <span className="search-result__highlight">
+              {" "}
+              {totalResults}{" "}
+            </span>{" "}
+            kết quả cho từ khóa &quot;
+            <span className="search-result__key">{searchKey} </span>&quot;
           </p>
           {/* <SearchResultSort /> */}
           <div
@@ -523,7 +523,7 @@ export default function SearchResultPage({ searchKey, searchResults }) {
             ))}
         </div>
         <div className="pagination">
-          <Pagination maxPage={totalPage} currentPage={currentPage} />
+          <CustomerPagination maxPage={totalPage} />
         </div>
       </section>
     </main>

@@ -1,1 +1,1 @@
-export {default as CustomerArticleItem} from "./article-item"
+export { default as CustomerNewsItem } from "./news-item"

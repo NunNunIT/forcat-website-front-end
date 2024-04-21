@@ -1,9 +1,9 @@
 "use client";
+
 // import libs
+import classNameNames from "classnames/bind";
 import Link from "next/link";
 import Image from "next/image";
-import classNameNames from "classnames/bind";
-import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 // import components
@@ -13,18 +13,18 @@ import { CustomerLogo } from "@/components";
 import styles from "./header-nav.module.css";
 
 // import constant
-import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
+import { BACKEND_URL } from "@/utils/commonConst";
 import { convertDateToFormatHHMMDDMMYYYY } from "@/utils";
 
 const cx = classNameNames.bind(styles);
 
 interface IUserLocal {
-  user_id: string;
+  _id: string;
   user_name: string;
   user_avt: string;
   recent_notification: {
     _id: string;
-  notification_type: string;
+    notification_type: string;
     notification_name: string;
     notification_description: string;
     createdAt: string;
@@ -35,7 +35,7 @@ export default function CustomerHeaderNav() {
   const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
   const getCurrentUser = (): (IUserLocal | null) => {
-    const storedUser = localStorage.getItem("userStore");
+    const storedUser = localStorage.getItem("currentUser");
     const currentUser = storedUser
       ? JSON.parse(storedUser)
       : null;
@@ -47,12 +47,8 @@ export default function CustomerHeaderNav() {
     setCurrentUser(user);
   }, []);
 
-  // console.log("LocalStore2", currentUser);
-
   const handleLogout = async (e) => {
     e.preventDefault();
-    const accessToken = Cookies.get("accessToken");
-    console.log(accessToken);
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
@@ -64,16 +60,17 @@ export default function CustomerHeaderNav() {
       });
 
       if (res.ok) {
-        Cookies.remove("accessToken");
-        localStorage.removeItem("userStore");
-        setCurrentUser(null); // Đặt currentUser thành null sau khi đăng xuất
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }
     } catch (error) {
-      console.error("Logout error:", error);
+      // console.error("Logout error:", error);
     }
   };
+
   return (
     <nav className={cx("header__nav")}>
       <div className={cx("header__nav-container")}>
@@ -94,41 +91,44 @@ export default function CustomerHeaderNav() {
           </div>
           <Link href="#" className={cx("header__support-info__hotline")}>
             <span className="material-icons-outlined">call</span>
-            Hotline: 1900 123 789
+            Hotline: 0559 695 594
           </Link>
         </div>
         <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
-            <Link href="/notifications"
-              className={cx("header__notifications")}>
+            <Link
+              className={cx("header__notifications")}
+              href="/notifications"
+            >
               <span className="material-icons-outlined">notifications</span>
               Thông báo
             </Link>
             <div className={cx("dropdown-noti__content-container")}>
               <div className={cx("dropdown-noti__content")}>
-                {currentUser ? (<>{
-                  currentUser.recent_notification.length > 0
-                    ? (currentUser.recent_notification.map((noti, index: number) =>
-                      <Link key={index} href={`notifications?type=${noti.notification_type}`}>
-                        <h5>{noti.notification_name}</h5>
-                        <p>Lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(noti.createdAt))}</p>
-                      </Link>
-                    ))
-                    : (<>
-                      <div className={cx("dropdown-noti--empty")}>
-                        <Image
-                          src="/imgs/nothing-result.png"
-                          alt="Hình ảnh của bạn không có thông báo mới"
-                          fill
-                        />
-                      </div>
-                      <span className={cx("empty-content__noti")}>
-                        Bạn chưa có thông báo mới nào
-                      </span>
-                    </>)
-                }</>) : (
-                  <>
+                {currentUser
+                  ? (<>{
+                    currentUser.recent_notification.length > 0
+                      ? (currentUser.recent_notification.map((noti, index: number) =>
+                        <Link key={index} href={`notifications?type=${noti.notification_type}`}>
+                          <h5>{noti.notification_name}</h5>
+                          <p>Lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(noti.createdAt))}</p>
+                        </Link>
+                      ))
+                      : (<>
+                        <div className={cx("dropdown-noti--empty")}>
+                          <Image
+                            src="/imgs/nothing-result.png"
+                            alt="Hình ảnh của bạn không có thông báo mới"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("empty-content__noti")}>
+                          Bạn chưa có thông báo mới nào
+                        </span>
+                      </>)
+                  }</>)
+                  : (<>
                     <div className={cx("dropdown-noti__unauth-user")}>
                       <div className={cx("unauth-user__img-container")}>
                         <Image src="/imgs/unauth-user.png" alt="unauth-user" fill />
@@ -141,8 +141,7 @@ export default function CustomerHeaderNav() {
                       <Link href="/login">Đăng nhập</Link>
                       <Link href="/register">Đăng ký</Link>
                     </div>
-                  </>
-                )}
+                  </>)}
               </div>
             </div>
           </div>

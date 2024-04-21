@@ -25,6 +25,7 @@
     "next-auth": "^5.0.0-beta.3",
     "next-cloudinary": "^6.3.0",
     "next-redux-wrapper": "^8.1.0",
+    "normalize.css": "^8.0.1",
     "npm": "^10.2.5",
     "react": "^18",
     "react-datepicker": "^6.6.0",

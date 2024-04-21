@@ -139,6 +139,19 @@ interface IArticleItemProps {
   article_date: string;
 }
 
+interface INewsItemProps {
+  article_id_hashed: string;
+  article_name: string;
+  article_slug: string;
+  article_type: string;
+  article_short_description: string;
+  article_info: {
+    author: string;
+    published_date: string;
+  };
+  article_date: string;
+}
+
 interface IProductItemInOrderItemProps {
   product_id_hashed: string;
   product_name?: string;
@@ -181,11 +194,6 @@ interface IResponseJSON {
   data?: Object;
 }
 
-interface IDataResponseOrder {
-  orders: IOrderItemProps[];
-  maxPage: number;
-}
-
 interface IReviewItem {
   product_id_hashed: string;
   product_name: string;
@@ -200,10 +208,4 @@ interface IReviewItem {
   review_rating: number;
   review_context: string;
   order_id?: string;
-}
-
-
-interface IResponseArticles {
-  articles: IArticleItemProps[];
-  maxPage: number;
 }

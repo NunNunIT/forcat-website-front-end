@@ -1,16 +1,14 @@
 // import libs
 import Image from "next/image";
-import { Fetcher } from "swr";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-
 // import partials, components
-import { CustomerArticleItem } from "./partials";
+import { CustomerNewsItem } from "./partials";
 import { CustomerPagination } from "@/components";
 
 // import utils
-import { BACKEND_URL_ARTICLES } from "@/utils/commonConst";
+import { BACKEND_URL_NEWS } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
@@ -22,19 +20,23 @@ export const metadata: Metadata = {
 };
 
 const getFullBackendArticleUrl = (page: string, limit: string): string => {
-  return `${BACKEND_URL_ARTICLES}?page=${page}&limit=${limit}`;
+  return `${BACKEND_URL_NEWS}?page=${page}&limit=${limit}`;
 }
 
-export const fetcher: Fetcher<IResponseArticles, string> = async (url: string) => {
-  const RES: Response = await fetch(url, {
+interface IResponseNews {
+  articles: INewsItemProps[];
+  maxPage: number;
+}
+
+const fetcher = async (url: string) => {
+  const res: Response = await fetch(url, {
     next: { revalidate: 60 },
   });
 
-  if (!RES.ok)
-    return notFound();
+  if (!res.ok) return notFound();
 
-  const json: IResponseJSON = await RES.json();
-  return json.data as IResponseArticles;
+  const json: IResponseJSON = await res.json();
+  return json.data as IResponseNews;
 }
 
 export default async function NewsPage({
@@ -43,37 +45,32 @@ export default async function NewsPage({
   searchParams?: { [key: string]: string | undefined };
 }) {
   const page = searchParams?.page ?? "1";
-  const limit = searchParams?.limit ?? "4";
+  const limit = searchParams?.limit ?? "2";
   const fullURL: string = getFullBackendArticleUrl(page, limit);
-  const data = await fetcher(fullURL);
+  const data: IResponseNews = await fetcher(fullURL);
 
   return (
-    <main>
+    <main className="news-page__container">
       <h1>Tin tức</h1>
-      <section className="news__group-article">
-        {data.articles.map((articleData: IArticleItemProps) => (
-          <CustomerArticleItem key={articleData._id} {...articleData} />
+      <section className="news__group-news-item">
+        {data.articles.map((articleData: INewsItemProps) => (
+          <CustomerNewsItem
+            key={articleData.article_id_hashed}
+            {...articleData}
+          />
         ))}
       </section>
 
       <aside className="news__group-banner">
         <div className="news__banner-container">
           <Image
-            src="/imgs/banner/banner_1.png"
+            src="/imgs/banner/banner.webp"
             alt="The first banner in news-page"
             fill
           />
         </div>
-        <div className="news__banner-container">
-          <Image
-            src="/imgs/banner/banner_2.png"
-            alt="The second banner in news-page"
-            fill
-          />
-        </div>
       </aside>
-      <CustomerPagination className={"news__pagination"} maxPage={data.maxPage} />
-
+      <CustomerPagination className="news__pagination" maxPage={data.maxPage} />
     </main>
   );
 }
