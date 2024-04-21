@@ -57,7 +57,6 @@ function isActiveClassWithBool(bool: boolean): string {
 }
 
 function convertDateStrToDDMMYYYY(dateStr: string): string {
-  console.log("yyyyyyyyyyyyyyyyyyyyyy", dateStr);
   return dateStr.split("-").reverse().join("/");
 }
 

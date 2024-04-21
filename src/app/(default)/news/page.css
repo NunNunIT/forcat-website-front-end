@@ -15,7 +15,7 @@ section {
     "pagination pagination";
   grid-template-columns: 9fr 3fr;
   column-gap: min(4rem, 8vw);
-  row-gap: 2rem;
+  row-gap: 1rem;
   margin: 1rem auto;
 }
 

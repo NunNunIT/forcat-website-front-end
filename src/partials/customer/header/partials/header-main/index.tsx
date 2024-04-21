@@ -19,14 +19,14 @@ const cx = classNameNames.bind(styles);
 
 export default function CustomerHeaderMain({
   params,
-  // searchParams,
+  searchParams,
 }: {
   params?: { "*": string };
-  // searchParams?: { [key: string]: string };
+  searchParams?: { [key: string]: string };
 }) {
-  const searchKey = searchParams?.searchKey ?? 0;
-  console.log("searchKey từ Header", searchKey);
-  console.log("searchKey từ Header", searchParams);
+  const searchKey = searchParams?.searchKey ?? '';
+  // console.log("searchKey từ Header", searchKey);
+  // console.log("searchKey từ Header", searchParams);
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
@@ -72,7 +72,7 @@ export default function CustomerHeaderMain({
       // }
       const data = await response.json();
       if (data.data.searchKey === inputValue) {
-        // console.log("Trả về cho data", data.data.searchKey);
+        console.log("Trả về cho data", data.data.searchKey);
         setSearchResults(data.data.recommendedProducts);
         setTotalSearchResults(data.data.totalProducts);
         setShowSmartSearch(true);

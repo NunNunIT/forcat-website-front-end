@@ -60,7 +60,6 @@ export default async function NewsPage({
           />
         ))}
       </section>
-
       <aside className="news__group-banner">
         <div className="news__banner-container">
           <Image

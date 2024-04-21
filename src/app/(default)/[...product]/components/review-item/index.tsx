@@ -30,20 +30,20 @@ export default function ProductReviewItem({
     <div className={cx("review-item")}>
       <div className={cx("review-item__info")}>
         <div className={cx("review-item__avatar-div")}>
-          {/* <CldImage
+          <CldImage
             className={cx("review-item__avatar")}
             src={review.user_info.user_avt}
             alt={review.user_info.user_name}
             fill={true}
-          /> */}
+          />
         </div>
         <div className={cx("review-item__info-div")}>
           <p className={cx("review-item__user-name")}>
-            {/* {review.user_info.user_name} */}
+            {review.user_info.user_name}
           </p>
           <div className={cx("review-item__rating")}>
             <span className={cx("review-item__rating-number")}>
-              {/* {review.review_rating}/5 */}
+              {review.review_rating}/5
             </span>
             <CustomerRating
               initValue={{
@@ -62,7 +62,7 @@ export default function ProductReviewItem({
         </p>
         <p className={cx("review-item__text")}>{review.review_context}</p>
         <div className={cx("review-item__image-group")}>
-          {/* {review.review_video.map((item, index) => {
+          {review.review_video.map((item, index) => {
             return (
               <CldImage
                 key={index}
@@ -73,8 +73,8 @@ export default function ProductReviewItem({
                 height="100"
               />
             );
-          })} */}
-          {/* {review.review_imgs.map((item, index) => {
+          })}
+          {review.review_imgs.map((item, index) => {
             return (
               <div
                 className={cx("review-item__image-div")}
@@ -88,7 +88,7 @@ export default function ProductReviewItem({
                 />
               </div>
             );
-          })} */}
+          })}
         </div>
       </div>
     </div>

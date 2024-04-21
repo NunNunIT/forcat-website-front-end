@@ -125,20 +125,6 @@ interface IArticleDescriptionMediaPRops {
   caption: string;
 }
 
-interface IArticleItemProps {
-  _id: string;
-  article_name: string;
-  article_slug?: string[];
-  article_type: string;
-  article_short_description: string;
-  article_description?: string;
-  article_info: {
-    author: string;
-    published_date: string;
-  };
-  article_date: string;
-}
-
 interface INewsItemProps {
   article_id_hashed: string;
   article_name: string;
@@ -183,8 +169,7 @@ interface INotiItemProps {
   notification_description: string;
   updatedAt: string;
   is_unread: boolean;
-  user_id: string;
-  read_all: boolean;
+  readAll?: boolean;
 }
 
 interface IResponseJSON {
