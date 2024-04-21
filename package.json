@@ -25,6 +25,7 @@
     "next-auth": "^5.0.0-beta.3",
     "next-cloudinary": "^6.3.0",
     "next-redux-wrapper": "^8.1.0",
+    "normalize": "^0.3.1",
     "normalize.css": "^8.0.1",
     "npm": "^10.2.5",
     "react": "^18",
@@ -37,8 +38,7 @@
     "redux-thunk": "^3.1.0",
     "swiper": "^11.0.7",
     "swr": "^2.2.5",
-    "tweetnacl": "^1.0.3",
-    "unidecode": "^1.0.1"
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",
