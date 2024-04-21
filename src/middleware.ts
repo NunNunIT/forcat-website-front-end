@@ -33,21 +33,20 @@ export async function middleware(request: NextRequest) {
   } else if (accessTokenString && request.url.includes("/logout")) {
     return NextResponse.next();
   } else if (accessTokenString) {
-    const res = await fetchUser(accessTokenString.value);
-    console.log(res)
-    if (res.status !== 200 && res.success == true) {
-      console.log("Fake AccessToken !!!");
-      const response = NextResponse.redirect(new URL("/login", request.url));
-      response.headers.set(
-        "Set-Cookie",
-        `currentUser=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-      );
-      response.headers.set(
-        "Set-Cookie",
-        `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-      );
-      return response;
-    }
+    // const res = await fetchUser(accessTokenString.value);
+    // if (res.status !== 200 && res.success == true) {
+    //   console.log("Fake AccessToken !!!");
+    //   const response = NextResponse.redirect(new URL("/login", request.url));
+    //   response.headers.set(
+    //     "Set-Cookie",
+    //     `currentUser=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
+    //   );
+    //   response.headers.set(
+    //     "Set-Cookie",
+    //     `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
+    //   );
+    //   return response;
+    // }
     return NextResponse.next();
   }
 
