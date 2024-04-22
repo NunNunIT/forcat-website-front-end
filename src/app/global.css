@@ -207,8 +207,8 @@ main {
 }
 
 h1 {
-  /* 40px */
-  font-size: 2.5rem;
+  /* 32px */
+  font-size: 2rem;
   font-weight: 800;
 }
 
@@ -265,6 +265,12 @@ a {
 @media only screen and (max-width: 417px) {
   html {
     font-size: 12px;
+  }
+
+  p,
+  li,
+  div {
+    font-size: 1.2rem;
   }
 }
 
