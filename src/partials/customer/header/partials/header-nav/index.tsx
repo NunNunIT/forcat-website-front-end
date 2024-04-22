@@ -53,7 +53,7 @@ export default function CustomerHeaderNav() {
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
         method: "POST",
-        credentials: "include",
+        // credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
