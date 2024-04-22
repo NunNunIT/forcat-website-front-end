@@ -118,13 +118,13 @@
     font-weight: 500;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1025px) {
     .product-description-content__image {
         height: 480px !important;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 821px) {
     .product-description {
         gap: 8px;
     }

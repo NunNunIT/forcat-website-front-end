@@ -83,7 +83,7 @@
     border-radius: 4px;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1025px) {
     .review-item {
         padding: 8px;
         grid-template-columns: 250px 1fr;
@@ -95,7 +95,7 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 821px) {
     .review-item {
         padding: 8px;
         grid-template-columns: 180px 1fr;
@@ -120,7 +120,7 @@
     }
 }
 
-@media only screen and (max-width: 416px) {
+@media only screen and (max-width: 431px) {
     .review-item {
         padding: 4px;
         grid-template-columns: none;

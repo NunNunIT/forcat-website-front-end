@@ -6,6 +6,7 @@
 
 .product__name {
     padding-right: 10.5%;
+    margin: 0;
 }
 
 .rating {
@@ -14,6 +15,7 @@
 }
 
 .rating__average {
+    font-size: 1.2rem;
     font-weight: 500;
 }
 
@@ -162,8 +164,16 @@
     background-color: var(--dollar-red2);
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1025px) {
     .variants__group {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width:431px) {
+    .buy-btn {
+        height: 40px;
+        width: 50%;
+        border-radius: 6px;
     }
 }
