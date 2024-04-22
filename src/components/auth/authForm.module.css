@@ -179,6 +179,10 @@
   gap: 8px;
 }
 
+.form-confirm a {
+  color: var(--dark7)
+}
+
 .send-again a {
   color: var(--dark7)
 }
