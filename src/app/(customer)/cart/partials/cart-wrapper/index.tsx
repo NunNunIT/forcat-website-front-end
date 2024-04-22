@@ -21,7 +21,7 @@ export default function CartWrapper({
   userId: string;
 }) {
   // handle change page
-  const handleChangePage = (event) => {
+  const handleChangePage = () => {
     const changedItems = store.getState().cart.changedItems;
     const deletedItems = store.getState().cart.deletedItems;
 
@@ -36,7 +36,7 @@ export default function CartWrapper({
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleChangePage);
-  }, []);
+  }, [handleChangePage]);
 
   // handle checkbox
   const checkAll = useRef(null);
@@ -293,7 +293,7 @@ export default function CartWrapper({
       type: "addBuyItems",
       payload: buyList,
     });
-    console.log(store.getState().cart.buyItems);
+    // console.log(store.getState().cart.buyItems);
   };
 
   return (

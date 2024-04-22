@@ -125,23 +125,6 @@ interface IArticleDescriptionMediaPRops {
   caption: string;
 }
 
-interface IArticleProps {
-  article_id: string;
-  article_name: string;
-  article_type: string;
-  article_short_description: string;
-  article_description?: (
-    | IArticleDescriptionContentPRops
-    | IArticleDescriptionMediaPRops
-  )[];
-  article_info: {
-    author: string;
-    published_date: string;
-  };
-  article_date: string;
-  article_slug?: string[];
-}
-
 interface INewsItemProps {
   article_id_hashed: string;
   article_name: string;
@@ -178,17 +161,15 @@ interface IOrderItemProps {
   mutate?: () => void;
 }
 
-interface INotiProps {
+interface INotiItemProps {
   _id: string;
-  user_id: string;
   notification_name: string;
   notification_slug: string;
   notification_type: string;
   notification_description: string;
-  notification_url_img: string;
   updatedAt: string;
-  is_read: boolean;
-  allRead: boolean;
+  is_unread: boolean;
+  readAll?: boolean;
 }
 
 interface IResponseJSON {
