@@ -1,10 +1,10 @@
 "use client";
 
 // import libs
-import classNameNames from "classnames/bind";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import classNameNames from "classnames/bind";
 
 // import components
 import { CustomerLogo } from "@/components";
@@ -20,7 +20,7 @@ const cx = classNameNames.bind(styles);
 interface IUserLocal {
   _id: string;
   user_name: string;
-  user_avt: string;
+  user_avt_img: string;
   recent_notification: {
     _id: string;
   }[],
@@ -54,17 +54,25 @@ export default function CustomerHeaderNav() {
         },
       });
 
-      if (res.ok) {
-        localStorage.removeItem("currentUser");
-        setCurrentUser(null);
-        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
-      } else {
+      if (!res.ok) {
         console.error("Logout failed:", await res.text());
+        return;
       }
+
+      localStorage.removeItem("currentUser");
+      setCurrentUser(null);
+      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      return;
     } catch (error) {
       // console.error("Logout error:", error);
     }
   };
+
+  const optionsInHeaderAuth = [
+    { text: "Thông tin cá nhân", href: "/account/information" },
+    { text: "Lịch sử đơn mua", href: "/account/purchase-history" },
+    { text: "Đổi mật khẩu", href: "/account/change-password" },
+  ]
 
   return (
     <nav className={cx("header__nav")}>
@@ -120,7 +128,7 @@ export default function CustomerHeaderNav() {
                         </div>
                         <span className={cx("content__noti")}>
                           Bạn đang có thông báo mới nè!!!<br />
-                          Hãy kiểm tra ngay nhé!
+                          Bấm <Link href="/notifications">vào đây</Link> để kiểm tra ngay nhé!
                         </span>
                       </>)
                       : (<>
@@ -155,29 +163,48 @@ export default function CustomerHeaderNav() {
           </div>
           {currentUser ? (
             <div className={cx("header__auth")}>
-              <span className="material-icons-outlined">account_circle</span>
+              <span className={cx("header__auth-avatar")}>
+                <Image
+                  src={currentUser?.user_avt_img}
+                  alt="Avatar của bạn"
+                  fill
+                />
+              </span>
               <Link href="/account/information" className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
-              {/* {"|"}
-              <form onSubmit={handleLogout}>
-                <button type="submit" className={cx("header__auth-logout-btn")}>
-                  Đăng xuất
-                </button>
-              </form> */}
-            </div>
-          ) : (
-            <div className={cx("header__auth")}>
-              <span className="material-icons-outlined">account_circle</span>
-              <Link href="/login" className={cx("header__auth-login")}>
-                Đăng nhập
-              </Link>
-              <span>|</span>
-              <Link href="/register" className={cx("header__auth-register")}>
-                Đăng ký
-              </Link>
-            </div>
-          )}
+              <div className={cx("header__auth-dropdown-container")}>
+                <div className={cx("header__auth-dropdown")}>
+                  {optionsInHeaderAuth.map(option =>
+                    <Link
+                      key={option.text}
+                      className={cx("header__auth-dropdown-item")}
+                      href={option.href}
+                      title={`Trang ${option.text}`}
+                    >
+                      {option.text}
+                    </Link>
+                  )}
+                  <form className={cx("header__auth-dropdown-item")} onSubmit={handleLogout}>
+                    <button type="submit" className={cx("header__auth-logout-btn")}>
+                      Đăng xuất
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>)
+            : (
+              <div className={cx("header__unauth")}>
+                <span className="material-icons-outlined">account_circle</span>
+                <Link href="/login" className={cx("header__auth-login")}>
+                  Đăng nhập
+                </Link>
+                <span>|</span>
+                <Link href="/register" className={cx("header__auth-register")}>
+                  Đăng ký
+                </Link>
+              </div>
+            )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
           <Link href="/notifications" className={cx("noti--mobile")}>
