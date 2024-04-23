@@ -46,6 +46,11 @@ export default function CustomerHeaderMain() {
         >
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
+            {currentUser && currentUser.cart.length > 0 && (
+              <span className={cx("header__cart-quantity")}>
+                {currentUser.cart.length < 10 ? currentUser.cart.length : "9+"}
+              </span>
+            )}
           </div>
         </Link>
         <div className={cx("dropdown-cart__content-container")}>

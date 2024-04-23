@@ -29,7 +29,7 @@
   font-size: 3rem;
 }
 
-.header__cart span.header__cart-number {
+.header__cart span.header__cart-quantity {
   font-size: 0.625rem;
   font-weight: 500;
   position: absolute;
