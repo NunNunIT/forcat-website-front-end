@@ -241,21 +241,31 @@
   display: flex;
 }
 
-.dropdown-noti--empty {
-  display: flex;
-  flex-direction: column;
-  padding: 62px;
-  align-items: center;
-  gap: 12PX;
-
+.header__about-account .header__notification-icon {
   position: relative;
 }
 
-.dropdown-noti--empty img {
+.header__about-account .header__notification-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: .5rem;
+  height: .5rem;
+  background-color: red;
+  border-radius: 100%;
+}
+
+.dropdown-noti-- {
+  position: relative;
+  padding: 2rem;
+  margin-block-start: 2rem;
+}
+
+.dropdown-noti-- img {
   object-fit: contain;
 }
 
-.empty-content__noti {
+.content__noti {
   display: block;
   font-size: .875rem;
   /* margin-inline: auto; */

@@ -14,7 +14,6 @@ import styles from "./header-nav.module.css";
 
 // import constant
 import { BACKEND_URL } from "@/utils/commonConst";
-import { convertDateToFormatHHMMDDMMYYYY } from "@/utils";
 
 const cx = classNameNames.bind(styles);
 
@@ -24,10 +23,6 @@ interface IUserLocal {
   user_avt: string;
   recent_notification: {
     _id: string;
-    notification_type: string;
-    notification_name: string;
-    notification_description: string;
-    createdAt: string;
   }[],
 }
 
@@ -100,8 +95,14 @@ export default function CustomerHeaderNav() {
             <Link
               className={cx("header__notifications")}
               href="/notifications"
+              title="Trang thông báo"
             >
-              <span className="material-icons-outlined">notifications</span>
+              <span className={`material-icons ${cx("header__notification-icon")}`}>
+                notifications
+                {currentUser && currentUser.recent_notification.length > 0 && (
+                  <span className={cx("header__notification-dot")}></span>
+                )}
+              </span>
               Thông báo
             </Link>
             <div className={cx("dropdown-noti__content-container")}>
@@ -109,21 +110,28 @@ export default function CustomerHeaderNav() {
                 {currentUser
                   ? (<>{
                     currentUser.recent_notification.length > 0
-                      ? (currentUser.recent_notification.map((noti, index: number) =>
-                        <Link key={index} href={`notifications?type=${noti.notification_type}`}>
-                          <h5>{noti.notification_name}</h5>
-                          <p>Lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(noti.createdAt))}</p>
-                        </Link>
-                      ))
+                      ? (<>
+                        <div className={cx("dropdown-noti--")}>
+                          <Image
+                            src="/imgs/icon-ATC.webp"
+                            alt="Hình ảnh của bạn có thông báo mới"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__noti")}>
+                          Bạn đang có thông báo mới nè!!!<br />
+                          Hãy kiểm tra ngay nhé!
+                        </span>
+                      </>)
                       : (<>
-                        <div className={cx("dropdown-noti--empty")}>
+                        <div className={cx("dropdown-noti--")}>
                           <Image
                             src="/imgs/nothing-result.png"
                             alt="Hình ảnh của bạn không có thông báo mới"
                             fill
                           />
                         </div>
-                        <span className={cx("empty-content__noti")}>
+                        <span className={cx("content__noti")}>
                           Bạn chưa có thông báo mới nào
                         </span>
                       </>)
@@ -151,12 +159,12 @@ export default function CustomerHeaderNav() {
               <Link href="/account/information" className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
-              {"|"}
+              {/* {"|"}
               <form onSubmit={handleLogout}>
                 <button type="submit" className={cx("header__auth-logout-btn")}>
                   Đăng xuất
                 </button>
-              </form>
+              </form> */}
             </div>
           ) : (
             <div className={cx("header__auth")}>
