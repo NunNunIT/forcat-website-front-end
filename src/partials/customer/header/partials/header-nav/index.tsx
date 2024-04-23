@@ -17,15 +17,6 @@ import { BACKEND_URL } from "@/utils/commonConst";
 
 const cx = classNameNames.bind(styles);
 
-interface IUserLocal {
-  _id: string;
-  user_name: string;
-  user_avt_img: string;
-  recent_notification: {
-    _id: string;
-  }[],
-}
-
 export default function CustomerHeaderNav() {
   const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
 
