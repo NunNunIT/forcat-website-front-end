@@ -1,6 +1,5 @@
 // import libs
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 
 // import utils
 import { BACKEND_URL_ORDERS, ORDER_STATUS_LIST } from "@/utils/commonConst";
@@ -19,22 +18,22 @@ interface IDataResponseOrder {
 }
 
 const fetcher: (url: string) => Promise<IDataResponseOrder> = async (url: string) => {
-  const accessTokenString = cookies().get("accessToken").value;
-
   const res: Response = await fetch(url, {
-    method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Cookie:
-        "accessToken="
-        + accessTokenString,
     },
     credentials: "include",
+    next: { revalidate: 60 },
   });
-  if (!res.ok) return notFound();
+
+  if (!res.ok) {
+    return notFound();
+  }
 
   const json: IResponseJSON = await res.json();
-  if (!json.success) return notFound();
+  if (!json.success) {
+    return notFound();
+  }
 
   return json.data as IDataResponseOrder;
 }

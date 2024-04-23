@@ -1,10 +1,10 @@
 "use client";
 
 // import libs
-import classNameNames from "classnames/bind";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import classNameNames from "classnames/bind";
 
 // import components
 import { CustomerLogo } from "@/components";
@@ -14,22 +14,8 @@ import styles from "./header-nav.module.css";
 
 // import constant
 import { BACKEND_URL } from "@/utils/commonConst";
-import { convertDateToFormatHHMMDDMMYYYY } from "@/utils";
 
 const cx = classNameNames.bind(styles);
-
-interface IUserLocal {
-  _id: string;
-  user_name: string;
-  user_avt: string;
-  recent_notification: {
-    _id: string;
-    notification_type: string;
-    notification_name: string;
-    notification_description: string;
-    createdAt: string;
-  }[],
-}
 
 export default function CustomerHeaderNav() {
   const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
@@ -59,17 +45,25 @@ export default function CustomerHeaderNav() {
         },
       });
 
-      if (res.ok) {
-        localStorage.removeItem("currentUser");
-        setCurrentUser(null);
-        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
-      } else {
+      if (!res.ok) {
         console.error("Logout failed:", await res.text());
+        return;
       }
+
+      localStorage.removeItem("currentUser");
+      setCurrentUser(null);
+      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      return;
     } catch (error) {
       // console.error("Logout error:", error);
     }
   };
+
+  const optionsInHeaderAuth = [
+    { text: "Thông tin cá nhân", href: "/account/information" },
+    { text: "Lịch sử đơn mua", href: "/account/purchase-history" },
+    { text: "Đổi mật khẩu", href: "/account/change-password" },
+  ]
 
   return (
     <nav className={cx("header__nav")}>
@@ -100,8 +94,14 @@ export default function CustomerHeaderNav() {
             <Link
               className={cx("header__notifications")}
               href="/notifications"
+              title="Trang thông báo"
             >
-              <span className="material-icons-outlined">notifications</span>
+              <span className={`material-icons ${cx("header__notification-icon")}`}>
+                notifications
+                {currentUser && currentUser.recent_notification.length > 0 && (
+                  <span className={cx("header__notification-dot")}></span>
+                )}
+              </span>
               Thông báo
             </Link>
             <div className={cx("dropdown-noti__content-container")}>
@@ -109,21 +109,28 @@ export default function CustomerHeaderNav() {
                 {currentUser
                   ? (<>{
                     currentUser.recent_notification.length > 0
-                      ? (currentUser.recent_notification.map((noti, index: number) =>
-                        <Link key={index} href={`notifications?type=${noti.notification_type}`}>
-                          <h5>{noti.notification_name}</h5>
-                          <p>Lúc: {convertDateToFormatHHMMDDMMYYYY(new Date(noti.createdAt))}</p>
-                        </Link>
-                      ))
+                      ? (<>
+                        <div className={cx("dropdown-noti--")}>
+                          <Image
+                            src="/imgs/icon-ATC.webp"
+                            alt="Hình ảnh của bạn có thông báo mới"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__noti")}>
+                          Bạn đang có thông báo mới nè!!!<br />
+                          Bấm <Link href="/notifications">vào đây</Link> để kiểm tra ngay nhé!
+                        </span>
+                      </>)
                       : (<>
-                        <div className={cx("dropdown-noti--empty")}>
+                        <div className={cx("dropdown-noti--")}>
                           <Image
                             src="/imgs/nothing-result.png"
                             alt="Hình ảnh của bạn không có thông báo mới"
                             fill
                           />
                         </div>
-                        <span className={cx("empty-content__noti")}>
+                        <span className={cx("content__noti")}>
                           Bạn chưa có thông báo mới nào
                         </span>
                       </>)
@@ -147,29 +154,48 @@ export default function CustomerHeaderNav() {
           </div>
           {currentUser ? (
             <div className={cx("header__auth")}>
-              <span className="material-icons-outlined">account_circle</span>
+              <span className={cx("header__auth-avatar")}>
+                <Image
+                  src={currentUser?.user_avt_img}
+                  alt="Avatar của bạn"
+                  fill
+                />
+              </span>
               <Link href="/account/information" className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
-              {"|"}
-              <form onSubmit={handleLogout}>
-                <button type="submit" className={cx("header__auth-logout-btn")}>
-                  Đăng xuất
-                </button>
-              </form>
-            </div>
-          ) : (
-            <div className={cx("header__auth")}>
-              <span className="material-icons-outlined">account_circle</span>
-              <Link href="/login" className={cx("header__auth-login")}>
-                Đăng nhập
-              </Link>
-              <span>|</span>
-              <Link href="/register" className={cx("header__auth-register")}>
-                Đăng ký
-              </Link>
-            </div>
-          )}
+              <div className={cx("header__auth-dropdown-container")}>
+                <div className={cx("header__auth-dropdown")}>
+                  {optionsInHeaderAuth.map(option =>
+                    <Link
+                      key={option.text}
+                      className={cx("header__auth-dropdown-item")}
+                      href={option.href}
+                      title={`Trang ${option.text}`}
+                    >
+                      {option.text}
+                    </Link>
+                  )}
+                  <form className={cx("header__auth-dropdown-item")} onSubmit={handleLogout}>
+                    <button type="submit" className={cx("header__auth-logout-btn")}>
+                      Đăng xuất
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>)
+            : (
+              <div className={cx("header__unauth")}>
+                <span className="material-icons-outlined">account_circle</span>
+                <Link href="/login" className={cx("header__auth-login")}>
+                  Đăng nhập
+                </Link>
+                <span>|</span>
+                <Link href="/register" className={cx("header__auth-register")}>
+                  Đăng ký
+                </Link>
+              </div>
+            )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
           <Link href="/notifications" className={cx("noti--mobile")}>

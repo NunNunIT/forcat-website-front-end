@@ -1,7 +1,5 @@
 // import libs
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
-import { Suspense } from "react";
 
 // import partials, components
 import { CustomerNotificationWrapper } from "./partials";
@@ -21,9 +19,7 @@ export default function NotificationPage(
 
   return (
     <section className="notification__content">
-      <CustomerNotificationWrapper
-        accessToken={cookies().get("accessToken").value}
-      />
+      <CustomerNotificationWrapper />
     </section>
   );
 }
