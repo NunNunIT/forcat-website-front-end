@@ -48,11 +48,6 @@ const headerLinks: IHeaderLinkProps[] = [
     url: "/news",
     className: "menu__news",
   },
-  {
-    title: "Về chúng tôi",
-    url: "/about-us",
-    className: "menu__about-us",
-  },
 ];
 
 export default async function CustomerHeader() {

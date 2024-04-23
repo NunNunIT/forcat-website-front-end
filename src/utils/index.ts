@@ -74,10 +74,7 @@ function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
   return `${date.toLocaleTimeString(
     locales,
     timeOptions
-  )} ${date.toLocaleDateString(
-    locales,
-    dateOptions
-  )}`;
+  )} ${date.toLocaleDateString(locales, dateOptions)}`;
 }
 
 function convertPaymentToStr(payment_type: string): string {
@@ -121,7 +118,7 @@ function convertNumberToMoney(number: number): string {
     .replace(/₫/g, "");
 
   // Return the formatted currency string
-  return currency;
+  return currency + " đ";
 }
 
 function convertDateToHourDayMonthYear(dateString: string): string {

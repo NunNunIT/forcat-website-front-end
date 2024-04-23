@@ -18,11 +18,11 @@ interface IPaginationProps {
 
 const cx = classNames.bind(styles);
 
-export default function Pagination(props: IPaginationProps) {
+export default function CustomerPagination(props: IPaginationProps) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   if (props.maxPage <= 1) {
-    return <></>
+    return <></>;
   }
 
   const allParams = Object.fromEntries(searchParams.entries());
@@ -41,8 +41,8 @@ export default function Pagination(props: IPaginationProps) {
   } = {
     isLeftContinue: !(pages.length > 0 && pages[0] !== 2),
     isRightContinue:
-      !(pages.length > 0 && pages[pages.length - 1] !== props.maxPage - 1)
-      && !(pages.length == 0 && props.maxPage > 2),
+      !(pages.length > 0 && pages[pages.length - 1] !== props.maxPage - 1) &&
+      !(pages.length == 0 && props.maxPage > 2),
   };
 
   return (
@@ -52,8 +52,7 @@ export default function Pagination(props: IPaginationProps) {
         disabled={currentPage === 1}
         pathName={pathName}
         allParams={allParams}
-        page={currentPage - 1}
-      >
+        page={currentPage - 1}>
         <span className="material-icons-outlined">arrow_back_ios</span>
       </PaginationButton>
       {/* The first page */}
@@ -86,8 +85,7 @@ export default function Pagination(props: IPaginationProps) {
         disabled={currentPage === props.maxPage}
         pathName={pathName}
         allParams={allParams}
-        page={currentPage + 1}
-      >
+        page={currentPage + 1}>
         <span className="material-icons-outlined">arrow_forward_ios</span>
       </PaginationButton>
     </div>
@@ -116,12 +114,11 @@ function PaginationButton({
       disabled={disabled}
       onClick={() =>
         router.push(
-          pathName
-          + "?"
-          + objectToSearchParams({ ...allParams, page }).toString()
+          pathName +
+            "?" +
+            objectToSearchParams({ ...allParams, page }).toString()
         )
-      }
-    >
+      }>
       {children}
     </button>
   );
@@ -146,11 +143,8 @@ function PaginationItem({
         isActiveClassWithBool(currentPage === page)
       )} ${className}`}
       href={
-        pathName
-        + "?"
-        + objectToSearchParams({ ...allParams, page }).toString()
-      }
-    >
+        pathName + "?" + objectToSearchParams({ ...allParams, page }).toString()
+      }>
       {page}
     </Link>
   );
