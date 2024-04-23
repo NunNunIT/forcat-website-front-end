@@ -40,14 +40,14 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
 // handle change page
 const handleChangePage = () => {
   const cartItem = store.getState().product.cartItem;
-  const userId = "661705fe7c6da785f2af9814";
 
-  fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
+  fetch(`${BACKEND_URL}/cart/addCart`, {
     body: JSON.stringify(cartItem),
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
 };
 
