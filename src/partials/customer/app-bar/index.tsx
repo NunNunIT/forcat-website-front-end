@@ -4,8 +4,6 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { isActiveClass } from "@/utils";
-import { useState } from "react";
 
 // use scss
 import styles from "./styles.module.css";
@@ -34,7 +32,7 @@ const appBarData = [
     text: "HOT",
   },
   {
-    url: "/account/mobile-account",
+    url: ["/account/mobile-account", "/login", "/register", "/forgot"],
     iconData: "account_circle",
     text: "Tài khoản",
   },
@@ -46,10 +44,12 @@ export default function AppBar() {
     <div className={cx("app-bar")}>
       <div className={cx("app-bar__container")}>
         {appBarData.map((navData, index) => {
-          const isActive = pathName === navData.url;
+          const isActive = Array.isArray(navData.url)
+            ? navData.url.includes(pathName)
+            : pathName === navData.url;
           return (
             <div key={index} className={cx("app-bar__element")}>
-              <Link href={navData.url} className={cx({ active: isActive })}>
+              <Link href={navData.url[0]} className={cx({ active: isActive })}>
                 <span
                   className={cx("material-icons-outlined nav__icon", {
                     active: isActive,
@@ -57,7 +57,7 @@ export default function AppBar() {
                   {navData.iconData}
                 </span>
               </Link>
-              <Link href={navData.url} className={cx({ active: isActive })}>
+              <Link href={navData.url[0]} className={cx({ active: isActive })}>
                 {navData.text}
               </Link>
             </div>

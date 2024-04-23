@@ -1,9 +1,8 @@
 "use client";
 // import libs
+import classNameNames from "classnames/bind";
 import Link from "next/link";
 import Image from "next/image";
-import classNameNames from "classnames/bind";
-import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 // import components
@@ -12,42 +11,34 @@ import { CustomerLogo } from "@/components";
 // import css
 import styles from "./header-nav.module.css";
 
-import { BACKEND_URL, expirationTime } from "@/utils/commonConst";
+// import constant
+import { BACKEND_URL } from "@/utils/commonConst";
+import { convertDateToFormatHHMMDDMMYYYY } from "@/utils";
 
 const cx = classNameNames.bind(styles);
 
 interface IUserLocal {
-  user_id: string;
+  _id: string;
   user_name: string;
-  user_avt: string;
+  user_avt_img: string;
 }
 
 export default function CustomerHeaderNav() {
-  const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
+  const [currentUser, setCurrentUser] = useState<IUserLocal | null>(null); // Định nghĩa biến currentUser ở đây
 
-  const getCurrentUser = (): (IUserLocal | null) => {
-    const storedUser = localStorage.getItem("userStore");
-    let currentUser = null;
-    if (storedUser) {
-      currentUser = JSON.parse(storedUser);
-    }
+  const getCurrentUser = (): IUserLocal | null => {
+    const storedUser = localStorage.getItem("currentUser");
+    const currentUser = storedUser ? JSON.parse(storedUser) : null;
     return currentUser;
-    // const currentUser = storedUser
-    //   ? JSON.parse(storedUser)
-    //   : null;
-    // return currentUser;
   };
 
   useEffect(() => {
-    const user: (IUserLocal | null) = getCurrentUser();
+    const user: IUserLocal | null = getCurrentUser();
     setCurrentUser(user);
   }, []);
 
-  // console.log("LocalStore2", currentUser);
-
   const handleLogout = async (e) => {
     e.preventDefault();
-    const accessTokens = Cookies.get("accessToken");
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
@@ -59,14 +50,14 @@ export default function CustomerHeaderNav() {
       });
 
       if (res.ok) {
-        Cookies.remove("accessToken");
-        localStorage.removeItem("userStore");
-        setCurrentUser(null); // Đặt currentUser thành null sau khi đăng xuất
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }
     } catch (error) {
-      console.error("Logout error:", error);
+      // console.error("Logout error:", error);
     }
   };
   return (
@@ -95,8 +86,7 @@ export default function CustomerHeaderNav() {
         <CustomerLogo className={cx("header--mobile__logo")} white />
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
-            <Link href="/notifications"
-              className={cx("header__notifications")}>
+            <Link className={cx("header__notifications")} href="/notifications">
               <span className="material-icons-outlined">notifications</span>
               Thông báo
             </Link>
@@ -120,7 +110,9 @@ export default function CustomerHeaderNav() {
           {currentUser ? (
             <div className={cx("header__auth")}>
               <span className="material-icons-outlined">account_circle</span>
-              <Link href="/profile" className={cx("header__auth-login")}>
+              <Link
+                href="/account/information"
+                className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
               <form onSubmit={handleLogout}>
