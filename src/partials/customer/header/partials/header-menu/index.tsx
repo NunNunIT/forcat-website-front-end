@@ -7,7 +7,7 @@ import Image from "next/image";
 import { CldImage } from "next-cloudinary";
 
 // import function from utils
-import { parseNumToCurrencyStr } from "@/utils";
+import { convertNumberToMoney } from "@/utils";
 
 // import components
 import { CustomerStarRating } from "@/components";
@@ -20,7 +20,7 @@ const cx = classNameNames.bind(styles);
 function CustomerHeaderMenuProductItem(
   props: IHeaderMenuProductItemProps
 ): JSX.Element {
-  const discountPrice = props.product_price;
+  // const discountPrice = props.product_price;
 
   return (
     <Link
@@ -46,16 +46,31 @@ function CustomerHeaderMenuProductItem(
         {props.product_name}
       </span>
       <div>
-        <span className={cx("cate-dropdown__product-price")}>
-          {parseNumToCurrencyStr(discountPrice)} đ
-        </span>{" "}
+        {/* <span className={cx("cate-dropdown__product-price")}>
+          {convertNumberToMoney(discountPrice)} đ
+        </span>{" "} */}
         {/* {price__discount && (
           <del className={cx("cate-dropdown__product-price--discount")}>
-            {parseNumToCurrencyStr(price)}
+            {convertNumberToMoney(price)}
           </del>
         )} */}
+        {props.highest_discount
+          ? (
+            <>
+              {/* <span className={cx("cate-dropdown__product-price")} >
+                {convertNumberToMoney(props.lowest_price ?? 0)}đ
+              </span> */}
+              <del>{convertNumberToMoney(props.product_price)}đ</del>
+            </>
+          )
+          : (
+            <>
+              <span>{convertNumberToMoney(props.product_price)}đ</span>
+              {/* <del className={cx("display-none")}></del> */}
+            </>
+          )}
       </div>
-    </Link>
+    </Link >
   );
 }
 

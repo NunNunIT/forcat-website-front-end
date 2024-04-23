@@ -80,7 +80,7 @@ interface IHeaderMenuProductItemProps {
   };
   lowest_price?: number;
   product_price: number;
-  price__discount?: number;
+  highest_discount?: number;
   category_name: string;
 }
 
