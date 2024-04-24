@@ -1,7 +1,7 @@
 // import libs
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { Metadata, ResolvingMetadata } from "next";
 
 // import partials
 import {
@@ -113,10 +113,13 @@ export default async function ProductPage({
         </div>
 
         <div className="product-content--right product-content-right mobile-hidden">
-          <div className="decoration__bow">
+          <div className="decoration-div">
             <Image
-              src="/imgs/product-page/bow.webp"
-              alt="This is a bow"
+              className="decoration-img"
+              src={`/imgs/product-page/decoration-${Math.floor(
+                Math.random() * 5
+              )}.webp`}
+              alt="Trang trí"
               fill={true}
             />
           </div>

@@ -3,9 +3,11 @@
 // import libs
 import classNames from "classnames/bind";
 import React, { useState } from "react";
+import Image from "next/image";
 
 // import components
 import { ProductReviewItem } from "../../components";
+import { CustomerPagination } from "@/components";
 
 // import paritals
 import { ProductReviewHeader, ProductImageModal } from "./partials";
@@ -41,7 +43,7 @@ export default function ProductReview({
         handleOpenModal={handleOpenModal}></ProductReviewHeader>
 
       <div className={cx("product-review__filter", "review-filter")}>
-        <h5>Lọc đánh giá theo</h5>
+        <h4>Lọc đánh giá theo</h4>
         <div className={cx("review-filter__group")}>
           <div className={cx("review-filter__item")}>Mới nhất</div>
           <div className={cx("review-filter__item")}>Có hình ảnh</div>
@@ -55,39 +57,37 @@ export default function ProductReview({
       </div>
 
       <div className={cx("product-review__all-reviews", "reviews")}>
-        <h5>Tất cả đánh giá</h5>
-        <div className={cx("reviews__group")}>
-          {productReviews.map((review, index) => {
-            return (
-              <React.Fragment key={index}>
-                <ProductReviewItem
-                  review={review}
-                  handleOpenModal={handleOpenModal}></ProductReviewItem>
-              </React.Fragment>
-            );
-          })}
-        </div>
-
-        <div className={cx("reviews__pagination-div")}>
-          <div className={cx("reviews__pagination", "pagination")}>
-            <div className={cx("pagination__btn")}>
-              <span className={cx("material-icons-round", "pagination__icon")}>
-                arrow_back_ios
-              </span>
+        <h4 className={cx("reviews__title")}>Tất cả đánh giá</h4>
+        {productReviews.length == 0 && (
+          <>
+            <div className={cx("reviews__empty-review-div")}>
+              <Image
+                src="/imgs/product-page/no-review.webp"
+                alt="Sản phẩm chưa có đánh giá"
+                fill={true}
+              />
             </div>
-            <div className={cx("pagination__btn")}>1</div>
-            <div className={cx("pagination__btn")}>2</div>
-            <div className={cx("pagination__btn", "pagination__btn-disabled")}>
-              ...
+            <p className={cx("reviews__empty-noti-text")}>
+              Sản phẩm này chưa có đánh giá!
+            </p>
+          </>
+        )}
+        {productReviews.length != 0 && (
+          <>
+            <div className={cx("reviews__group")}>
+              {productReviews.map((review, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <ProductReviewItem
+                      review={review}
+                      handleOpenModal={handleOpenModal}></ProductReviewItem>
+                  </React.Fragment>
+                );
+              })}
             </div>
-            <div className={cx("pagination__btn")}>3</div>
-            <div className={cx("pagination__btn")}>
-              <span className={cx("material-icons-round", "pagination__icon")}>
-                arrow_forward_ios
-              </span>
-            </div>
-          </div>
-        </div>
+            <CustomerPagination maxPage={10}></CustomerPagination>
+          </>
+        )}
       </div>
       <ProductImageModal
         isModalHidden={isModalHidden}

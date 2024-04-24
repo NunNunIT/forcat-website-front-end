@@ -1,3 +1,4 @@
+// import libs
 import type { Metadata } from "next";
 import React from "react";
 import classNames from "classnames/bind";
@@ -19,17 +20,19 @@ export const metadata: Metadata = {
 
 export default function ForgotPage() {
   return (
-    <main className={cx("auth_main")}>
-      <div className={cx("auth__image-wrap", "login")}>
-        <Image
-          className={cx("auth__image")}
-          src="/imgs/auth/meo-1.png"
-          alt="Anh meo vang"
-          fill={true}
-        />
-      </div>
-      <div className={cx("auth__forms-wrap", "login")}>
-        <AuthForgotForm />
+    <main className={cx("main-container")}>
+      <div className={cx("auth_main")}>
+        <div className={cx("auth__image-wrap", "login")}>
+          <Image
+            className={cx("auth__image")}
+            src="/imgs/auth/meo-1.png"
+            alt="Anh meo vang"
+            fill={true}
+          />
+        </div>
+        <div className={cx("auth__forms-wrap", "login")}>
+          <AuthForgotForm />
+        </div>
       </div>
     </main>
   );

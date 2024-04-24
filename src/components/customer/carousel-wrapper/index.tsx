@@ -1,15 +1,22 @@
 "use client";
+
+// import libs
+import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import classNames from "classnames/bind";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { BACKEND_URL, CLOUDINARY_URL } from "@/utils/commonConst";
-import CustomerCarouselCard from "@/components/customer/carousel-card";
-import LoadingSpinner from "@/components/default/loading";
-import styles from "./carousel.module.css";
+
+// import utils
+import { BACKEND_URL } from "@/utils/commonConst";
+
+// import components
+import { CustomerCarouselCard, LoadingSpinner } from "@/components";
+
+// import css
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import styles from "./carousel.module.css";
 
 const cx = classNames.bind(styles);
 
@@ -21,14 +28,14 @@ const fetchTopRatedProducts = async () => {
         next: { revalidate: 60 },
       }
     );
-    if (!response.ok) {
-      throw new Error("Failed to fetch top rated products");
-    }
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch top rated products");
+    // }
     const data = await response.json();
     return data.data;
   } catch (error) {
-    console.error("Error fetching top rated products:", error);
-    throw error;
+    // console.error("Error fetching top rated products:", error);
+    // throw error;
   }
 };
 
@@ -43,7 +50,7 @@ export default function CustomerCarouselSlider() {
         setTopRatedProducts(data);
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
-        console.error("Error fetching initial data:", error);
+        // console.error("Error fetching initial data:", error);
       }
     };
 
@@ -72,11 +79,12 @@ export default function CustomerCarouselSlider() {
             navigation={true}
             loop={true}
             modules={[Autoplay, Pagination, Navigation]}>
-            {topRatedProducts.map((product) => (
-              <SwiperSlide key={product.product_id}>
-                <CustomerCarouselCard product={product} />
-              </SwiperSlide>
-            ))}
+            {topRatedProducts &&
+              topRatedProducts.map((product) => (
+                <SwiperSlide key={product.product_id}>
+                  <CustomerCarouselCard product={product} />
+                </SwiperSlide>
+              ))}
           </Swiper>
         )}
       </div>

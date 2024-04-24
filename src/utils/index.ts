@@ -41,13 +41,15 @@ function convertOrderStatusToStr(order_status: string): string {
       return "Đã hủy";
   }
 
-  console.log("Unexpected Order Status: ", order_status);
+  // console.log("Unexpected Order Status: ", order_status);
   return "Unexpected Order Status";
 }
 
 function isActiveClass(src_str: string, des_str: string): string {
   const min_length = Math.min(src_str.length, des_str.length);
-  return src_str.substring(0, min_length) === des_str.substring(0, min_length) ? "is-active" : "";
+  return src_str.substring(0, min_length) === des_str.substring(0, min_length)
+    ? "is-active"
+    : "";
 }
 
 function isActiveClassWithBool(bool: boolean): string {
@@ -69,7 +71,10 @@ function convertDateToFormatHHMMDDMMYYYY(date: Date): string {
     month: "2-digit",
     day: "2-digit",
   };
-  return `${date.toLocaleTimeString(locales, timeOptions)} ${date.toLocaleDateString(locales, dateOptions)}`;
+  return `${date.toLocaleTimeString(
+    locales,
+    timeOptions
+  )} ${date.toLocaleDateString(locales, dateOptions)}`;
 }
 
 function convertPaymentToStr(payment_type: string): string {
@@ -110,10 +115,11 @@ function convertNumberToMoney(number: number): string {
   // Format the number as currency using toLocaleString
   const currency = number
     .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
-    .replace(/₫/g, "");
+    .replace(/₫/g, "")
+    .trimRight();
 
   // Return the formatted currency string
-  return currency;
+  return currency + "đ";
 }
 
 function convertDateToHourDayMonthYear(dateString: string): string {
@@ -169,7 +175,7 @@ function objectToSearchParams(obj: Object) {
   for (const [key, value] of Object.entries(obj)) {
     // If value is an array, append each element as a separate parameter
     if (Array.isArray(value)) {
-      value.forEach(item => searchParams.append(key, item));
+      value.forEach((item) => searchParams.append(key, item));
     } else {
       // Otherwise, append the key-value pair directly
       searchParams.append(key, value);
@@ -178,7 +184,6 @@ function objectToSearchParams(obj: Object) {
 
   return searchParams;
 }
-
 
 export {
   parseNumToCurrencyStr,

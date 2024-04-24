@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
 // import components
-import { CustomerQuantityInputGroup, CustomerRating } from "@/components";
+import { CustomerQuantityInputGroup, CustomerStarRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
@@ -40,14 +40,14 @@ function filterCurrentVariant(productVariants, currentVariantSlug) {
 // handle change page
 const handleChangePage = () => {
   const cartItem = store.getState().product.cartItem;
-  const userId = "661705fe7c6da785f2af9814";
 
-  fetch(`${BACKEND_URL}/cart/addCart/${userId}`, {
+  fetch(`${BACKEND_URL}/cart/addCart`, {
     body: JSON.stringify(cartItem),
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
 };
 
@@ -163,11 +163,8 @@ export default function ProductBuyForm({
           <span className={cx("rating__average")}>
             {productInfo.product_avg_rating}/5
           </span>
-          <CustomerRating
-            initValue={{
-              fontSize: "24px",
-              rating: productInfo.product_avg_rating,
-            }}></CustomerRating>
+          <CustomerStarRating
+            rating={productInfo.product_avg_rating}></CustomerStarRating>
         </div>
         <div className={cx("product__unit-price-div")}>
           <p className={cx("product__unit-price")} ref={unitPriceRef}>

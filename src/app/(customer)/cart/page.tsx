@@ -15,15 +15,14 @@ import { BACKEND_URL } from "@/utils/commonConst";
 // import css
 import "./page.css";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) =>
+  fetch(url, { method: "GET", credentials: "include" }).then((res) =>
+    res.json()
+  );
 let checkboxes, cartItem;
-const userId = "661705fe7c6da785f2af9814";
 
 export default function CartPage() {
-  const { data, error, isLoading } = useSWR(
-    `${BACKEND_URL}/cart/661705fe7c6da785f2af9814`,
-    fetcher
-  );
+  const { data, error, isLoading } = useSWR(`${BACKEND_URL}/cart`, fetcher);
   const cart = data?.data.cartInfo;
 
   // handle change page
@@ -31,12 +30,13 @@ export default function CartPage() {
     const changedItems = store.getState().cart.changedItems;
     const deletedItems = store.getState().cart.deletedItems;
 
-    fetch(`${BACKEND_URL}/cart/updateCart/${userId}`, {
+    fetch(`${BACKEND_URL}/cart/updateCart`, {
       body: JSON.stringify({ changedItems, deletedItems }),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
   };
 
@@ -536,13 +536,13 @@ export default function CartPage() {
           </Link>
           <div className="cart-bill-row cart-bill-policy">
             Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-            <a className="cart-bill-policy__link" href="#">
+            <Link className="cart-bill-policy__link" href="#">
               Điều khoản dịch vụ
-            </a>{" "}
+            </Link>{" "}
             và{" "}
-            <a className="cart-bill-policy__link" href="/privacy-policy">
+            <Link className="cart-bill-policy__link" href="/privacy-policy">
               Chính sách bảo mật
-            </a>{" "}
+            </Link>{" "}
             của ForCat.
           </div>
         </section>
