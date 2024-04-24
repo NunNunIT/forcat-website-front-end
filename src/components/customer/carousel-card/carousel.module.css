@@ -112,9 +112,7 @@
     border-top: 1px solid #eee;
     padding: 14px 12px;
     display: flex;
-    /* Add display flex */
     align-items: flex-end;
-    /* Align items to flex-end */
 }
 
 .carousel__card-bottom-details div {

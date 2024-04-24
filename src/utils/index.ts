@@ -115,10 +115,11 @@ function convertNumberToMoney(number: number): string {
   // Format the number as currency using toLocaleString
   const currency = number
     .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
-    .replace(/₫/g, "");
+    .replace(/₫/g, "")
+    .trimRight();
 
   // Return the formatted currency string
-  return currency + " đ";
+  return currency + "đ";
 }
 
 function convertDateToHourDayMonthYear(dateString: string): string {
