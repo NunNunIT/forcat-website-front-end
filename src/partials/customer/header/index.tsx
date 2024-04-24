@@ -33,13 +33,13 @@ const headerLinks: IHeaderLinkProps[] = [
   {
     title: "Sản phẩm HOT",
     iconData: "local_fire_department",
-    url: "/search-result",
+    url: "/search-result?topRate=true",
     className: "menu__hot-product",
   },
   {
     title: "Khuyến mãi",
     iconData: "savings",
-    url: "/search-result",
+    url: "/search-result?discount=true",
     className: "menu__promo",
   },
   {
