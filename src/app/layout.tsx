@@ -8,6 +8,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 // use styles
 import "./global.css";
 
+// import components
+import { Scrollup, ContactAside } from "@/components";
+
 const quicksand = Quicksand({
   weight: "500",
   subsets: ["latin"],
@@ -49,6 +52,8 @@ export default function CustomerLayout({
         {children}
         <Analytics />
         <SpeedInsights />
+        <Scrollup />
+        <ContactAside />
       </body>
       <GoogleAnalytics gaId="G-YQ5DTD2VQS" />
     </html>

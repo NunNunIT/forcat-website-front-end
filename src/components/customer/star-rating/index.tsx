@@ -1,10 +1,10 @@
 // import libs
-import classNames from "classnames/bind";
+import classNameNames from "classnames/bind";
 
 // import css
 import styles from "./star-rating.module.css";
 
-const cx = classNames.bind(styles);
+const cx = classNameNames.bind(styles);
 
 export default function CustomerStarRating(props: IStarRatingProps) {
   let rating = props.rating;

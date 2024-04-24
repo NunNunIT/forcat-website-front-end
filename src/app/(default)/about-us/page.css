@@ -25,6 +25,19 @@ body {
   align-items: center;
 }
 
+.about-us__about-information__title, .about-us__about-value__title, .about-us__about-members__subtitle {
+  text-align: center;
+}
+
+.about-us__about-value__title, .about-us__about-members__title {
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.about-us__about-members__subtitle {
+  margin-top: 16px;
+}
+
 .about-us__about-information__title::after {
   content: "::after";
   content: "";
@@ -59,7 +72,7 @@ body {
 }
 
 .about-us__service__wrapper p {
-  font-size: 0.875rem !important;
+  font-size: 0.875rem;
   text-align: center;
   font-weight: 200 !important;
 }
@@ -232,9 +245,31 @@ body {
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 430px) {
   .about-us__container {
     width: 100%;
     padding-inline: 1rem;
+  }
+
+  .about-us__members__wrapper {
+    width: 32%;
+  }
+
+  .about-us__value__wrapper {
+    width: 49%;
+  }
+
+  .about-us__service__imgs__cover {
+    width: 40px;
+    height: 40px;
+  }
+
+  .about-us__service__wrapper h3 {
+    font-size: 1rem;
+  }
+
+  .about-us__service__wrapper p {
+    font-size: 0.85rem;
+    font-weight: 200;
   }
 }

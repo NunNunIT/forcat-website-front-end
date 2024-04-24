@@ -13,26 +13,20 @@ import styles from "./pagination.module.css";
 
 interface IPaginationProps {
   maxPage: number;
-  className?: string;
+  currentPage: number;
 }
 
 const cx = classNames.bind(styles);
 
-export default function CustomerPagination(props: IPaginationProps) {
+export default function Pagination(props: IPaginationProps) {
+  const router = useRouter();
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  if (props.maxPage <= 1) {
-    return <></>;
-  }
-
   const allParams = Object.fromEntries(searchParams.entries());
   const siblings: number = 2;
-  const currentPage: number = allParams.page
-    ? parseInt(allParams.page as string)
-    : 1;
   const pages: number[] = Array.from(
     { length: siblings * 2 + 1 },
-    (_, i) => currentPage - siblings + i
+    (_, i) => props.currentPage - siblings + i
   ).filter((page) => page > 1 && page < props.maxPage);
 
   const objContinue: {
@@ -46,19 +40,19 @@ export default function CustomerPagination(props: IPaginationProps) {
   };
 
   return (
-    <div className={`${cx("pagination-container")} ${props.className}`}>
+    <div className={cx("pagination-container")}>
       {/* The first pagination button */}
       <PaginationButton
-        disabled={currentPage === 1}
+        disabled={props.currentPage === 1}
         pathName={pathName}
         allParams={allParams}
-        page={currentPage - 1}>
+        page={props.currentPage - 1}>
         <span className="material-icons-outlined">arrow_back_ios</span>
       </PaginationButton>
       {/* The first page */}
       <PaginationItem
         pathName={pathName}
-        currentPage={currentPage}
+        currentPage={props.currentPage}
         page={1}
         allParams={allParams}
       />
@@ -67,7 +61,7 @@ export default function CustomerPagination(props: IPaginationProps) {
         <PaginationItem
           key={page}
           pathName={pathName}
-          currentPage={currentPage}
+          currentPage={props.currentPage}
           page={page}
           allParams={allParams}
         />
@@ -76,16 +70,16 @@ export default function CustomerPagination(props: IPaginationProps) {
       {/* The last page */}
       <PaginationItem
         pathName={pathName}
-        currentPage={currentPage}
+        currentPage={props.currentPage}
         page={props.maxPage}
         allParams={allParams}
       />
       {/* The last pagination button */}
       <PaginationButton
-        disabled={currentPage === props.maxPage}
+        disabled={props.currentPage === props.maxPage}
         pathName={pathName}
         allParams={allParams}
-        page={currentPage + 1}>
+        page={props.currentPage + 1}>
         <span className="material-icons-outlined">arrow_forward_ios</span>
       </PaginationButton>
     </div>
