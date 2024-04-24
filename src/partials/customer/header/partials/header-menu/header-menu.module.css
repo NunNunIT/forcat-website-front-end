@@ -150,10 +150,12 @@
 }
 
 .cate-dropdown__product-price {
-  font-weight: 500;
+  font-weight: 700;
+  color: var(--dollar-red2);
 }
 
 .cate-dropdown__product-price--discount {
+  margin-left: .5rem;
   font-weight: 400;
   color: var(--del-gray);
 }

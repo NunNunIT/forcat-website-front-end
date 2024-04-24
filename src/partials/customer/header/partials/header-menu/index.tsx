@@ -57,16 +57,19 @@ function CustomerHeaderMenuProductItem(
         {props.highest_discount
           ? (
             <>
-              {/* <span className={cx("cate-dropdown__product-price")} >
-                {convertNumberToMoney(props.lowest_price ?? 0)}đ
-              </span> */}
-              <del>{convertNumberToMoney(props.product_price)}đ</del>
+              <span className={cx("cate-dropdown__product-price")} >
+                {convertNumberToMoney(props.lowest_price ?? 0)}
+              </span>
+              <del className={cx("cate-dropdown__product-price--discount")}>
+                {convertNumberToMoney(props.product_price)}
+              </del>
             </>
           )
           : (
             <>
-              <span>{convertNumberToMoney(props.product_price)}đ</span>
-              {/* <del className={cx("display-none")}></del> */}
+              <span className={cx("cate-dropdown__product-price")}>
+                {convertNumberToMoney(props.product_price)}
+              </span>
             </>
           )}
       </div>
