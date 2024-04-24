@@ -48,7 +48,7 @@ export default function CustomerHeaderMain() {
             <span className="material-icons">shopping_cart</span>
             {currentUser && currentUser.cart.length > 0 && (
               <span className={cx("header__cart-quantity")}>
-                {currentUser.cart.length < 10 ? currentUser.cart.length : "9+"}
+                {currentUser.cart.length < 100 ? currentUser.cart.length : "99+"}
               </span>
             )}
           </div>
