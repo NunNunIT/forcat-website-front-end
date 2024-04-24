@@ -46,14 +46,6 @@ function CustomerHeaderMenuProductItem(
         {props.product_name}
       </span>
       <div>
-        {/* <span className={cx("cate-dropdown__product-price")}>
-          {convertNumberToMoney(discountPrice)} đ
-        </span>{" "} */}
-        {/* {price__discount && (
-          <del className={cx("cate-dropdown__product-price--discount")}>
-            {convertNumberToMoney(price)}
-          </del>
-        )} */}
         {props.highest_discount
           ? (
             <>
@@ -164,29 +156,26 @@ function CustomerHeaderMenuCategoryItem(
 export default function CustomerHeaderMenu(
   props: IHeaderMenuProps
 ): JSX.Element {
+  const flatCategoryTypeProduct: ISubCategoryProps[] = props.categoryTypes.map(
+    categoryType => categoryType.subCategories
+  ).flat(1);
+
   return (
     <ul className={cx("header__menu")}>
-      {props.categories &&
-        props.categories.map((category: ICategoryProps, index: number) => (
-          <CustomerHeaderMenuCategoryItem
-            key={index}
-            categoryType={category.category_type}
-            {...category}
-          >
-            {category.subCategories && (
-              <ul className={cx("menu__cate-dropdown")}>
-                {category.subCategories.map(
-                  (subCategory: ISubCategoryProps, index: number) => (
-                    <CustomerHeaderMenuSubCategoryItem
-                      key={index}
-                      {...subCategory}
-                    />
-                  )
-                )}
-              </ul>
-            )}
-          </CustomerHeaderMenuCategoryItem>
-        ))}
+      <CustomerHeaderMenuCategoryItem
+        categoryType="Danh mục sản phẩm"
+      >
+        <ul className={cx("menu__cate-dropdown")}>
+          {flatCategoryTypeProduct.map(
+            (categoryName: ISubCategoryProps) => (
+              <CustomerHeaderMenuSubCategoryItem
+                key={categoryName.category_name}
+                {...categoryName}
+              />
+            )
+          )}
+        </ul>
+      </CustomerHeaderMenuCategoryItem>
 
       {props.links.map((link: IHeaderLinkProps) => (
         <li key={link.title} className={cx("menu__item")}>

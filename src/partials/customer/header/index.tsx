@@ -58,7 +58,7 @@ export default async function CustomerHeader() {
       <CustomerHeaderNav />
       <div className={cx("header__container")}>
         <CustomerHeaderMain />
-        <CustomerHeaderMenu categories={headerCategories} links={headerLinks} />
+        <CustomerHeaderMenu categoryTypes={headerCategories} links={headerLinks} />
       </div>
     </header>
   );
