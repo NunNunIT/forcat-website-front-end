@@ -111,8 +111,10 @@
 .cate-dropdown__products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 
   overflow-y: scroll;
 }
@@ -284,16 +286,8 @@
 }
 
 @media only screen and (max-width: 1025px) {
-  .header__menu {
-    display: none;
-  }
-
   .menu__item {
     padding: .5rem;
-  }
-
-  .menu__item-p {
-    width: 4rem;
   }
 
   .cate-dropdown__products {
@@ -302,6 +296,10 @@
 }
 
 @media only screen and (max-width: 769px) {
+  .header__menu {
+    display: none;
+  }
+
   .cate-dropdown__products {
     grid-template-columns: repeat(2, 1fr);
   }
