@@ -263,6 +263,6 @@ img.dropdown-cart__img--empty {
 
 @media screen and (max-width: 417px) {
   .header__logo {
-    display: none;
+    display: none !important;
   }
 }
