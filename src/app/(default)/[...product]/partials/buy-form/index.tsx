@@ -51,6 +51,9 @@ const handleChangePage = () => {
   });
 };
 
+const storedUser = localStorage.getItem("currentUser");
+const currentUser = storedUser ? JSON.parse(storedUser) : null;
+
 export default function ProductBuyForm({
   pid,
   productInfo,
@@ -217,14 +220,15 @@ export default function ProductBuyForm({
           <p className={cx("product__total-price")}>{totalPrice}</p>
         </div>
         <div className={cx("product__buy-btns", "buy-btns")}>
-          <div
+          <Link
+            href={currentUser ? "" : "/login"}
             className={cx("buy-btns__add-cart", "add-cart-btn", "buy-btn")}
             onClick={handleAddCart}>
             <span className={cx("material-icons-round", " buy-btn-icon")}>
               add_shopping_cart
             </span>
             <span className={cx("buy-btn-text")}>Giỏ hàng</span>
-          </div>
+          </Link>
           <div className={cx("cart-modal", "hidden")} ref={cartModalRef}>
             <div
               className={cx("cart-modal__bg")}
@@ -252,7 +256,7 @@ export default function ProductBuyForm({
           </div>
 
           <Link
-            href="/order-information"
+            href={currentUser ? "/order-information" : "/login"}
             className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}
             onClick={handleBuyItem}>
             <span className={cx("material-icons-round", "buy-btn-icon")}>
