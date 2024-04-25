@@ -59,6 +59,7 @@ export default function ProductReviewHeader({
               {reviewOverview.avg_rating}
             </span>
             <CustomerStarRating
+              className={cx("review-overview__star-group")}
               rating={reviewOverview.avg_rating}></CustomerStarRating>
           </div>
           <p className={cx("review-overview__total")}>

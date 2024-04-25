@@ -269,7 +269,9 @@ a {
 
   p,
   li,
-  div {
+  div,
+  strong,
+  b {
     font-size: 1.2rem;
   }
 }

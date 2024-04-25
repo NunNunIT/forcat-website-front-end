@@ -164,6 +164,7 @@ export default function ProductBuyForm({
             {productInfo.product_avg_rating}/5
           </span>
           <CustomerStarRating
+            className={cx("product__star-group")}
             rating={productInfo.product_avg_rating}></CustomerStarRating>
         </div>
         <div className={cx("product__unit-price-div")}>
