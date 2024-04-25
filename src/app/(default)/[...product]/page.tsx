@@ -25,7 +25,7 @@ import "./page.css";
 async function getProduct(slug, pid) {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/product/${encodeURIComponent(pid)}`,
+      `${BACKEND_URL}/product/${encodeURIComponent(pid.replaceAll(" ", "+"))}`,
       {
         next: { revalidate: 60 },
       }
