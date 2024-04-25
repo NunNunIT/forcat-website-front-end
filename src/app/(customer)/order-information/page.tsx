@@ -17,20 +17,46 @@ import { convertNumberToMoney } from "@/utils";
 // import css
 import "./page.css";
 
-const buyInfo = store.getState().cart.buyItems;
-const totalWithDiscount = buyInfo.reduce((result, item) => {
-  return (
-    result +
-    item.unit_price * ((100 - item.discount_amount) / 100) * item.quantity
-  );
-}, 0);
-const totalWithoutDiscount = buyInfo.reduce((result, item) => {
-  return result + item.unit_price * item.quantity;
-}, 0);
+// handle change page
+const handleOrderChangPage = () => {
+  localStorage.removeItem("buyItems");
+};
+
+let buyInfo = [],
+  totalWithDiscount,
+  totalWithoutDiscount;
 
 export default function SearchResultPage() {
   useEffect(() => {
-    if (buyInfo.length == 0) return notFound();
+    const buyItems = JSON.parse(localStorage.getItem("buyItems"));
+    if (buyItems) {
+      buyInfo = buyItems.payload;
+      totalWithDiscount = buyInfo.reduce(
+        (result, item) =>
+          result +
+          item.unit_price *
+            ((100 - item.discount_amount) / 100) *
+            item.quantity,
+        0
+      );
+      totalWithoutDiscount = buyInfo.reduce(
+        (result, item) => result + item.unit_price * item.quantity,
+        0
+      );
+    } else {
+      return notFound();
+    }
+
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", handleOrderChangPage);
+    });
+
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener("click", handleOrderChangPage);
+      });
+    };
   }, []);
 
   const [isNameValid, setIsNameValid] = useState<boolean>(true);

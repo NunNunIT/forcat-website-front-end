@@ -16,18 +16,16 @@ import styles from "./header-main.module.css";
 const cx = classNames.bind(styles);
 
 export default function CustomerHeaderMain() {
-  const [currentUser, setCurrentUser] = useState<(IUserLocal | null)>(null); // Định nghĩa biến currentUser ở đây
+  const [currentUser, setCurrentUser] = useState<IUserLocal | null>(null); // Định nghĩa biến currentUser ở đây
 
-  const getCurrentUser = (): (IUserLocal | null) => {
+  const getCurrentUser = (): IUserLocal | null => {
     const storedUser = localStorage.getItem("currentUser");
-    const currentUser = storedUser
-      ? JSON.parse(storedUser)
-      : null;
+    const currentUser = storedUser ? JSON.parse(storedUser) : null;
     return currentUser;
   };
 
   useEffect(() => {
-    const user: (IUserLocal | null) = getCurrentUser();
+    const user: IUserLocal | null = getCurrentUser();
     setCurrentUser(user);
   }, []);
 
@@ -42,8 +40,7 @@ export default function CustomerHeaderMain() {
         <Link
           href="/cart"
           className={cx("header__cart-container")}
-          title="Giỏ hàng"
-        >
+          title="Giỏ hàng">
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
             {currentUser && currentUser.cart.length > 0 && (
@@ -55,37 +52,46 @@ export default function CustomerHeaderMain() {
         </Link>
         <div className={cx("dropdown-cart__content-container")}>
           <div className={cx("dropdown-cart__content")}>
-            {currentUser
-              ? <> {
-                <div className={cx("dropdown-cart__auth-user")}>
-                  {currentUser.cart.length > 0
-                    ? (<>
-                      <div className={cx("unauth-user__img-container")}>
-                        <Image
-                          src="/imgs/icon-ATC.webp"
-                          alt="Hình ảnh của bạn có sản phẩm trong giỏ hàng"
-                          fill
-                        />
-                      </div>
-                      <span className={cx("content__cart")}>
-                        Bấm <Link href="/cart">vào đây</Link><br />để kiểm tra giỏ hàng nhé!
-                      </span>
-                    </>)
-                    : (<>
-                      <div className={cx("unauth-user__img-container")}>
-                        <Image
-                          src="/imgs/nothing-result.png"
-                          alt="Hình ảnh của bạn chưa có sản phẩm trong giỏ hàng"
-                          fill
-                        />
-                      </div>
-                      <span className={cx("content__cart")}>
-                        Bạn chưa có sản phẩm<br /> trong giỏ hàng
-                      </span>
-                    </>)}
-                </div>
-              }</>
-              : <>
+            {currentUser ? (
+              <>
+                {" "}
+                {
+                  <div className={cx("dropdown-cart__auth-user")}>
+                    {currentUser.cart.length > 0 ? (
+                      <>
+                        <div className={cx("unauth-user__img-container")}>
+                          <Image
+                            src="/imgs/icon-ATC.webp"
+                            alt="Hình ảnh của bạn có sản phẩm trong giỏ hàng"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__cart")}>
+                          Bấm <Link href="/cart">vào đây</Link>
+                          <br />
+                          để kiểm tra giỏ hàng nhé!
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div className={cx("unauth-user__img-container")}>
+                          <Image
+                            src="/imgs/nothing-result.png"
+                            alt="Hình ảnh của bạn chưa có sản phẩm trong giỏ hàng"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__cart")}>
+                          Bạn chưa có sản phẩm
+                          <br /> trong giỏ hàng
+                        </span>
+                      </>
+                    )}
+                  </div>
+                }
+              </>
+            ) : (
+              <>
                 <div className={cx("dropdown-cart__unauth-user")}>
                   <div className={cx("unauth-user__img-container")}>
                     <Image
@@ -103,10 +109,11 @@ export default function CustomerHeaderMain() {
                   <Link href="/login">Đăng nhập</Link>
                   <Link href="/register">Đăng ký</Link>
                 </div>
-              </>}
+              </>
+            )}
           </div>
-        </div >
-      </div >
-    </div >
+        </div>
+      </div>
+    </div>
   );
 }
