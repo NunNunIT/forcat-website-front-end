@@ -118,7 +118,8 @@ function convertNumberToMoney(number: number): string {
     .replace(/₫/g, "");
 
   // Return the formatted currency string
-  return currency + " đ";
+  // console.log(currency);
+  return currency + "đ";
 }
 
 function convertDateToHourDayMonthYear(dateString: string): string {

@@ -1,27 +1,25 @@
 "use client";
 
 // import libs
-import classNameNames from "classnames/bind";
+import classNames from "classnames/bind";
 import Link from "next/link";
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
 
-// import function from utils
-import { parseNumToCurrencyStr } from "@/utils";
-
 // import components
 import { CustomerStarRating } from "@/components";
+
+// import function from utils
+import { convertNumberToMoney } from "@/utils";
 
 // import css
 import styles from "./header-menu.module.css";
 
-const cx = classNameNames.bind(styles);
+const cx = classNames.bind(styles);
 
 function CustomerHeaderMenuProductItem(
   props: IHeaderMenuProductItemProps
 ): JSX.Element {
-  const discountPrice = props.product_price;
-
   return (
     <Link
       className={cx("cate-dropdown__product-link")}
@@ -46,16 +44,24 @@ function CustomerHeaderMenuProductItem(
         {props.product_name}
       </span>
       <div>
-        <span className={cx("cate-dropdown__product-price")}>
-          {parseNumToCurrencyStr(discountPrice)} đ
-        </span>{" "}
-        {/* {price__discount && (
-          <del className={cx("cate-dropdown__product-price--discount")}>
-            {parseNumToCurrencyStr(price)}
-          </del>
-        )} */}
+        {props.highest_discount
+          ? (
+            <>
+              <span className={cx("cate-dropdown__product-price")} >
+                {convertNumberToMoney(props.lowest_price ?? 0)}
+              </span>
+              <del className={cx("cate-dropdown__product-price--discount")}>
+                {convertNumberToMoney(props.product_price)}
+              </del>
+            </>
+          )
+          : (
+            <span className={cx("cate-dropdown__product-price")}>
+              {convertNumberToMoney(props.product_price)}
+            </span>
+          )}
       </div>
-    </Link>
+    </Link >
   );
 }
 
@@ -74,7 +80,7 @@ function CustomerHeaderMenuSubCategoryItem(
         <span className={cx("cate-dropdown__img-container")}>
           <CldImage
             src={category_img}
-            alt={`Hình đại cho phân loại${category_name} của ForCat Shop`}
+            alt={`Hình đại cho phân loại ${category_name} của ForCat Shop`}
             fill
           />
         </span>
@@ -146,29 +152,28 @@ function CustomerHeaderMenuCategoryItem(
 export default function CustomerHeaderMenu(
   props: IHeaderMenuProps
 ): JSX.Element {
+  const flatCategoryTypeProduct: ISubCategoryProps[] = props.categoryTypes.map(
+    categoryType => categoryType.subCategories
+  ).flat(1);
+
   return (
     <ul className={cx("header__menu")}>
-      {props.categories &&
-        props.categories.map((category: ICategoryProps, index: number) => (
-          <CustomerHeaderMenuCategoryItem
-            key={index}
-            categoryType={category.category_type}
-            {...category}
-          >
-            {category.subCategories && (
-              <ul className={cx("menu__cate-dropdown")}>
-                {category.subCategories.map(
-                  (subCategory: ISubCategoryProps, index: number) => (
-                    <CustomerHeaderMenuSubCategoryItem
-                      key={index}
-                      {...subCategory}
-                    />
-                  )
-                )}
-              </ul>
+      <CustomerHeaderMenuCategoryItem
+        categoryType="Danh mục sản phẩm"
+      >
+        <div className={cx("menu__cate-dropdown-container")}>
+          <ul className={cx("menu__cate-dropdown")}>
+            {flatCategoryTypeProduct.map(
+              (categoryName: ISubCategoryProps) => (
+                <CustomerHeaderMenuSubCategoryItem
+                  key={categoryName.category_name}
+                  {...categoryName}
+                />
+              )
             )}
-          </CustomerHeaderMenuCategoryItem>
-        ))}
+          </ul>
+        </div>
+      </CustomerHeaderMenuCategoryItem>
 
       {props.links.map((link: IHeaderLinkProps) => (
         <li key={link.title} className={cx("menu__item")}>

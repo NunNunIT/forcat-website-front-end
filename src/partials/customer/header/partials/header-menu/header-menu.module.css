@@ -26,18 +26,17 @@
   gap: .25rem;
 }
 
-.menu__item .menu__cate-dropdown {
+.menu__cate-dropdown-container {
   position: absolute;
   left: 0;
   right: 0;
   top: 100%;
-
-  width: 100%;
   max-width: 1152px;
-  min-height: 535.5px;
-  padding: .75rem;
-  border-radius: 0 0 .75rem .75rem;
+  height: 400px;
 
+  padding: .75rem;
+  padding-inline-end: 0;
+  border-radius: 0 0 .75rem .75rem;
   display: none;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,6 +45,14 @@
   box-shadow: 0px .5rem .5rem var(--black-o20);
 
   cursor: default;
+}
+
+.menu__item .menu__cate-dropdown {
+  overflow-y: scroll;
+}
+
+.menu__cate-dropdown::-webkit-scrollbar {
+  width: .75rem;
 }
 
 .cate-dropdown__info {
@@ -111,8 +118,10 @@
 .cate-dropdown__products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 
   overflow-y: scroll;
 }
@@ -123,8 +132,10 @@
 
 .cate-dropdown__product-img-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  /* width: 100px;
+  height: 100px; */
+  width: 100%;
+  aspect-ratio: 1/1;
 }
 
 .cate-dropdown__product-img-container img {
@@ -150,10 +161,12 @@
 }
 
 .cate-dropdown__product-price {
-  font-weight: 500;
+  font-weight: 700;
+  color: var(--dollar-red2);
 }
 
 .cate-dropdown__product-price--discount {
+  margin-left: .5rem;
   font-weight: 400;
   color: var(--del-gray);
 }
@@ -205,6 +218,10 @@
   color: var(--primary-mau0-2);
 }
 
+.cate-dropdown__wrapper {
+  /* flex-grow: 0; */
+}
+
 .menu__item .cate-dropdown__wrapper:last-child {
   order: -1;
 }
@@ -238,7 +255,7 @@
   color: var(--primary-mau0-2);
 }
 
-.menu__item:hover .menu__cate-dropdown {
+.menu__item:hover .menu__cate-dropdown-container {
   display: flex;
 }
 
@@ -282,16 +299,8 @@
 }
 
 @media only screen and (max-width: 1025px) {
-  .header__menu {
-    display: none;
-  }
-
   .menu__item {
     padding: .5rem;
-  }
-
-  .menu__item-p {
-    width: 4rem;
   }
 
   .cate-dropdown__products {
@@ -300,6 +309,10 @@
 }
 
 @media only screen and (max-width: 769px) {
+  .header__menu {
+    display: none;
+  }
+
   .cate-dropdown__products {
     grid-template-columns: repeat(2, 1fr);
   }
