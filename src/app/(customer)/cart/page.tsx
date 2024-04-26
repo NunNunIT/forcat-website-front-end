@@ -529,7 +529,7 @@ export default function CartPage() {
             <div className="cart-bill-row__content">{totalPrice}</div>
           </div>
           <Link
-            href="/order-information"
+            href={selectedItem > 0 ? "/order-information" : "#"}
             className="cart-bill-row cart-bill__btn"
             onClick={handleBuyItem}>
             Mua hàng (<span className="checked-num">{selectedItem}</span>)
@@ -575,7 +575,7 @@ export default function CartPage() {
                 </div>
               </div>
               <Link
-                href="/order-information"
+                href={selectedItem > 0 ? "/order-information" : "#"}
                 className="cart-footer-buy-group__buy-btn"
                 onClick={handleBuyItem}>
                 Mua hàng (<span className="checked-num">{selectedItem}</span>)

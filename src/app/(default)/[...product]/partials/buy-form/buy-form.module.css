@@ -11,12 +11,18 @@
 
 .rating {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
 .rating__average {
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+.product__star-group {
+    display: flex;
+    align-items: center;
 }
 
 .rating__stars {
@@ -171,6 +177,20 @@
 }
 
 @media only screen and (max-width:431px) {
+
+    .product__star-group span {
+        font-size: 1.75rem;
+    }
+
+    .rating__average {
+        font-size: 1.5rem;
+    }
+
+    .product__unit-price,
+    .product__total-price {
+        font-size: 1.75rem;
+    }
+
     .buy-btn {
         height: 40px;
         width: 50%;

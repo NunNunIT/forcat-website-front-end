@@ -21,7 +21,6 @@
 }
 
 .review-overview__average {
-    padding-bottom: 4px;
     font-size: 2rem;
     font-weight: 600;
 }
@@ -105,6 +104,7 @@
 }
 
 .image-overview__empty-noti-text {
+    text-align: center;
     font-weight: 600;
 }
 
@@ -206,13 +206,31 @@
         gap: 12px;
     }
 
+    .review-overview__star-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .review-overview__star-group span {
+        font-size: 28px;
+    }
+
     .review-overview-detail__progress-div {
-        width: 60%;
+        width: 40vw;
         height: 10px;
     }
 
     .image-overview__container {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .image-overview__empty-noti-img-div--full {
+        width: 140px;
+        height: 140px;
+    }
+
+    .image-overview__empty-noti-text {
+        font-size: 1.125rem;
     }
 
     .video-overview__container {
