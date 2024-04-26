@@ -36,7 +36,7 @@ export default function MobileLogout() {
 
       if (res.ok) {
         localStorage.removeItem("currentUser");
-        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+        window.location.href = "/"; // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }

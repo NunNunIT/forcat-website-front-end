@@ -65,10 +65,7 @@ export default function CustomerAccountAside() {
 
     getUser();
   }, []);
-  const {
-    user_name = "Chưa thiết lập",
-    user_avt_img = "",
-  } = user ?? {};
+  const { user_name = "Chưa thiết lập", user_avt_img = "" } = user ?? {};
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -84,7 +81,7 @@ export default function CustomerAccountAside() {
 
       if (res.ok) {
         localStorage.removeItem("currentUser");
-        window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+        window.location.href = "/"; // Đặt currentUser thành null sau khi đăng xuất
       } else {
         console.error("Logout failed:", await res.text());
       }
