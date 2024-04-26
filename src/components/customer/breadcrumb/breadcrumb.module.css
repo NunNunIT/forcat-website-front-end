@@ -3,13 +3,19 @@
 
   display: flex;
   align-items: center;
+
+  overflow-y: scroll;
+}
+
+.breadcrumb__container::-webkit-scrollbar {
+  display: none;
 }
 
 .breadcrumb {
   border-radius: .5rem;
   background: white;
 
-  width: 100%;
+  width: 80%;
   max-width: 1152px;
   min-height: 2rem;
   padding: 1rem;
@@ -31,4 +37,20 @@
 
 .breadcrumb>*:last-child {
   font-weight: bold;
+}
+
+@media screen and (max-width: 1025px) {
+  .breadcrumb {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 417px) {
+  .breadcrumb__container {
+    padding-inline: 1rem;
+  }
+
+  .breadcrumb {
+    width: 100%;
+  }
 }

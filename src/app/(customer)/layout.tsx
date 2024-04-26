@@ -1,8 +1,9 @@
 // use metadata
 import type { Metadata } from "next";
 
-// use components
+// use components, partials
 import { CustomerFooter, CustomerHeader, CustomerAppBar } from "@/partials";
+import { CustomerBreadcrumb } from "@/components";
 
 export const metadata: Metadata = {
   title: "Thông tin đặt hàng",
@@ -17,6 +18,7 @@ export default function CustomerLayout({
   return (
     <>
       <CustomerHeader />
+      <CustomerBreadcrumb />
       {children}
       <CustomerFooter />
       <CustomerAppBar />

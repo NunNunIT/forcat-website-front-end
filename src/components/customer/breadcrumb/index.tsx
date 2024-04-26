@@ -12,6 +12,9 @@ import styles from "./breadcrumb.module.css";
 const cx = classNames.bind(styles);
 
 const decryptNamePage = (namePage: string, prevNamePage: string) => {
+  console.log(`namePage: '${namePage}'`);
+  console.log(`prevNamePage: '${prevNamePage}'`);
+
   const data = {
     " ": { text: "Trang chủ", url: "/" },
     "news": { text: "Tin tức", url: "/news" },
@@ -23,9 +26,10 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     "cart": { text: "Giỏ hàng", url: "/cart" },
     "order-information": { text: "Đặt hàng", url: "/order-information" },
     "review": { text: "Đánh giá sản phẩm" },
+    "notifications": { text: "Thông báo", url: "/notifications" },
   }
 
-  if (prevNamePage == " ") {
+  if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
     return { text: "Chi tiết sản phẩm" };
   }
 
