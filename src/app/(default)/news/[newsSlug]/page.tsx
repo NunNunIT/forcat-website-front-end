@@ -27,15 +27,16 @@ interface IResponseNewsDetail {
 }
 
 // fetch data
-async function getNewsDetail(
-  slug: string,
-  aid: string
-) {
+async function getNewsDetail(slug: string, aid: string) {
   try {
     const res = await fetch(
-      `${BACKEND_URL_NEWS}/${slug}/${aid}`, {
-      next: { revalidate: 60 },
-    });
+      `${BACKEND_URL_NEWS}/${slug}/${encodeURIComponent(
+        aid.replaceAll(" ", "+")
+      )}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!res.ok) return notFound();
 
     const json: IResponseJSON = await res.json();
@@ -86,16 +87,24 @@ export default async function NewsDetailPage({
     <main className="news-detail-page-container">
       <article className="news-detail-page">
         <div className="new-detail-page--info">
-          <span className="news-detail-page__type">{newsDetail.article_type}</span>
+          <span className="news-detail-page__type">
+            {newsDetail.article_type}
+          </span>
           <h1 className="news-detail-page__name">{newsDetail.article_name}</h1>
           <address>
-            <time className="news-detail-page__date" dateTime={newsDetail.article_info.published_date}>
+            <time
+              className="news-detail-page__date"
+              dateTime={newsDetail.article_info.published_date}>
               {newsDetail.article_info.published_date
-                ? convertDateToHourDayMonthYear(newsDetail.article_info.published_date)
+                ? convertDateToHourDayMonthYear(
+                    newsDetail.article_info.published_date
+                  )
                 : ""}
             </time>
             {" - Viết bởi: "}
-            <strong className="news-detail-page__author">{newsDetail.article_info.author}</strong>
+            <strong className="news-detail-page__author">
+              {newsDetail.article_info.author}
+            </strong>
           </address>
         </div>
         <div
@@ -104,21 +113,18 @@ export default async function NewsDetailPage({
         />
       </article>
       <aside className="news-detail-page__aside">
-        <CustomerTableOfContent
-          targetClassName="news-detail-page"
-        />
+        <CustomerTableOfContent targetClassName="news-detail-page" />
       </aside>
       <section className="news-detail-page__related-page">
         <h2>Các bài viết liên quan</h2>
         <div className="related-page-container">
-          {newsDetail.related_articles.length > 0 && (
+          {newsDetail.related_articles.length > 0 &&
             newsDetail.related_articles.map((newsItem) => (
               <CustomerNewsItem
                 key={newsItem.article_id_hashed}
                 {...newsItem}
               />
-            ))
-          )}
+            ))}
         </div>
       </section>
     </main>

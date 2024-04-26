@@ -25,7 +25,7 @@ import "./page.css";
 async function getProduct(slug, pid) {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/product/${encodeURIComponent(pid)}`,
+      `${BACKEND_URL}/product/${encodeURIComponent(pid.replaceAll(" ", "+"))}`,
       {
         next: { revalidate: 60 },
       }
@@ -113,10 +113,13 @@ export default async function ProductPage({
         </div>
 
         <div className="product-content--right product-content-right mobile-hidden">
-          <div className="decoration__bow">
+          <div className="decoration-div">
             <Image
-              src="/imgs/product-page/bow.webp"
-              alt="This is a bow"
+              className="decoration-img"
+              src={`/imgs/product-page/decoration-${Math.floor(
+                Math.random() * 5
+              )}.webp`}
+              alt="Trang trí"
               fill={true}
             />
           </div>

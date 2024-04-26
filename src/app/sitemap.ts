@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const newResJson = await newsRes.json();
     const news = newResJson.data;
     const newEntries: MetadataRoute.Sitemap = news.map((item, index) => ({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/news/${item.article_slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/news/${item.article_slug}?aid=${item.article_id_hashed}`,
       lastModified: new Date(item.updatedAt),
     }));
 

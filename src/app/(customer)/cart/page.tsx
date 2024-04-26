@@ -4,8 +4,6 @@
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 import { useState, useRef, useEffect } from "react";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
 import useSWR from "swr";
 
 // import utils
@@ -21,27 +19,54 @@ const fetcher = (url: string) =>
   );
 let checkboxes, cartItem;
 
+// handle change page
+const handleCartChangePage = (event) => {
+  const changeItems = JSON.parse(localStorage.getItem("changeItems")) ?? {
+    payload: [],
+  };
+  const deleteItems = JSON.parse(localStorage.getItem("deleteItems")) ?? {
+    payload: [],
+  };
+
+  // console.log("local get change items", changeItems);
+  // console.log("local get delete items", deleteItems);
+
+  fetch(`${BACKEND_URL}/cart/updateCart`, {
+    body: JSON.stringify({
+      changedItems: changeItems.payload,
+      deletedItems: deleteItems.payload,
+    }),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  localStorage.removeItem("changeItems");
+  localStorage.removeItem("deleteItems");
+
+  // console.log("local get change items", changeItems);
+  // console.log("local get delete items", deleteItems);
+};
+
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(`${BACKEND_URL}/cart`, fetcher);
   const cart = data?.data.cartInfo;
 
-  // handle change page
-  const handleChangePage = (event) => {
-    const changedItems = store.getState().cart.changedItems;
-    const deletedItems = store.getState().cart.deletedItems;
-
-    fetch(`${BACKEND_URL}/cart/updateCart`, {
-      body: JSON.stringify({ changedItems, deletedItems }),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-  };
-
   useEffect(() => {
-    window.addEventListener("beforeunload", handleChangePage);
+    window.addEventListener("beforeunload", handleCartChangePage);
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", handleCartChangePage);
+    });
+
+    return () => {
+      window.removeEventListener("beforeunload", handleCartChangePage);
+      links.forEach((link) => {
+        link.removeEventListener("click", handleCartChangePage);
+      });
+    };
   }, []);
 
   // handle checkbox
@@ -209,14 +234,51 @@ export default function CartPage() {
     const quantity = cartItem.querySelector(
       ".quantity-input-group__input"
     ).value;
-    store.dispatch({
-      type: "updateChangedItems",
-      payload: {
-        product_id: productId,
-        variant_id: variantId,
-        quantity: quantity,
-      },
-    });
+
+    let duplicatedIndex;
+    const changeItems = JSON.parse(localStorage.getItem("changeItems")) ?? {
+      payload: [],
+    };
+
+    // Check if the item already exists in the array
+    duplicatedIndex = changeItems.payload.findIndex(
+      (item) => item.product_id === productId
+    );
+
+    // If the item already exists, update it, otherwise add it to the array
+    const updateChangeItems =
+      duplicatedIndex !== -1
+        ? [
+            ...changeItems.payload.slice(0, duplicatedIndex),
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+            ...changeItems.payload.slice(duplicatedIndex + 1),
+          ]
+        : [
+            ...changeItems.payload,
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+          ];
+
+    localStorage.removeItem("changeItems");
+    localStorage.setItem(
+      "changeItems",
+      JSON.stringify({
+        type: "changeItems",
+        payload: updateChangeItems,
+      })
+    );
+
+    // console.log(
+    //   "local get change items",
+    //   JSON.parse(localStorage.getItem("changeItems"))
+    // );
   };
 
   const handleUpdateDeletedItem = (cartItem: any) => {
@@ -224,13 +286,42 @@ export default function CartPage() {
     const variantId = cartItem.querySelector(
       ".cart-item__variant-select"
     ).value;
-    store.dispatch({
-      type: "updateDeletedItems",
-      payload: {
-        product_id: productId,
-        variant_id: variantId,
-      },
-    });
+
+    let duplicatedIndex;
+    const deleteItems = JSON.parse(localStorage.getItem("deleteItems")) ?? {
+      payload: [],
+    };
+
+    // Check if the item already exists in the array
+    duplicatedIndex = deleteItems.payload.findIndex(
+      (item) => item.variant_id === variantId
+    );
+
+    // If the item already exists, do nothing, otherwise add it to the array
+    const updateDeleteItems =
+      duplicatedIndex !== -1
+        ? deleteItems.payload
+        : [
+            ...deleteItems.payload,
+            {
+              product_id: productId,
+              variant_id: variantId,
+            },
+          ];
+
+    localStorage.removeItem("deleteItems");
+    localStorage.setItem(
+      "deleteItems",
+      JSON.stringify({
+        type: "deleteItems",
+        payload: updateDeleteItems,
+      })
+    );
+
+    // console.log(
+    //   "local get delte items",
+    //   JSON.parse(localStorage.getItem("deleteItems"))
+    // );
   };
 
   // calc prices
@@ -314,280 +405,285 @@ export default function CartPage() {
       });
     });
 
-    store.dispatch({
-      type: "addBuyItems",
-      payload: buyList,
-    });
+    localStorage.removeItem("buyItems");
+    localStorage.setItem(
+      "buyItems",
+      JSON.stringify({
+        type: "buyItems",
+        payload: buyList,
+      })
+    );
 
-    // console.log(store.getState().cart.buyItems);
+    // console.log(
+    //   "local get buy items",
+    //   JSON.parse(localStorage.getItem("buyItems"))
+    // );
   };
 
   return (
-    <Provider store={store}>
-      <main className="cart">
-        <section className="cart-product-group">
-          <div className="cart-product-group__title cart-item title">
-            <div className="title__item title__check-all">
-              <input
-                type="checkbox"
-                className="cart-checkbox"
-                ref={checkAll}
-                onClick={handleCheckAll}
-              />
-              <h4>
-                Sản phẩm (<span className="checked-num">{allItem}</span>)
-              </h4>
-            </div>
-            <div className="title__item">
-              <h4>Đơn giá</h4>
-            </div>
-            <div className="title__item">
-              <h4>Số lượng</h4>
-            </div>
-            <div className="title__item mobile-hidden">
-              <h4>Thành tiền</h4>
-            </div>
-            <div className="title__item mobile-hidden"></div>
+    <main className="cart">
+      <section className="cart-product-group">
+        <div className="cart-product-group__title cart-item title">
+          <div className="title__item title__check-all">
+            <input
+              type="checkbox"
+              className="cart-checkbox"
+              ref={checkAll}
+              onClick={handleCheckAll}
+            />
+            <h4>
+              Sản phẩm (<span className="checked-num">{allItem}</span>)
+            </h4>
           </div>
-          {cart?.map((cartItem, itemIndex) => {
-            const currentVariantIndex =
-              cartItem.product.product_variants.findIndex(
-                (item) => item._id == cartItem.variant_id
-              );
-            return (
-              <div className="cart-item" key={itemIndex}>
+          <div className="title__item">
+            <h4>Đơn giá</h4>
+          </div>
+          <div className="title__item">
+            <h4>Số lượng</h4>
+          </div>
+          <div className="title__item mobile-hidden">
+            <h4>Thành tiền</h4>
+          </div>
+          <div className="title__item mobile-hidden"></div>
+        </div>
+        {cart?.map((cartItem, itemIndex) => {
+          const currentVariantIndex =
+            cartItem.product.product_variants.findIndex(
+              (item) => item._id == cartItem.variant_id
+            );
+          return (
+            <div className="cart-item" key={itemIndex}>
+              <input
+                type="hidden"
+                name="product_id"
+                value={cartItem.product._id}
+              />
+              <div className="cart-item__info cart-item-col">
                 <input
-                  type="hidden"
-                  name="product_id"
-                  value={cartItem.product._id}
+                  type="checkbox"
+                  className="cart-checkbox"
+                  onChange={handleCheckOne}
                 />
-                <div className="cart-item__info cart-item-col">
-                  <input
-                    type="checkbox"
-                    className="cart-checkbox"
-                    onChange={handleCheckOne}
-                  />
-                  <div className="cart-item__info-div">
-                    <div className="cart-item__image-div">
-                      <CldImage
-                        className="cart-item__image"
-                        src={cartItem.product.product_imgs[0].link}
-                        alt={cartItem.product.product_imgs[0].alt}
-                        fill={true}
-                      />
-                    </div>
-                    <div className="cart-item__text-info cart-item-col">
-                      <h5
-                        className="cart-item__text-info-name"
-                        style={{
-                          whiteSpace:
-                            cartItem.product.product_variants.length != 0
-                              ? "nowrap"
-                              : "wrap",
-                        }}>
-                        {cartItem.product.product_name}
-                      </h5>
-                      {cartItem.product.product_variants.length != 0 && (
-                        <div className="cart-item__variant">
-                          <input
-                            type="hidden"
+                <div className="cart-item__info-div">
+                  <div className="cart-item__image-div">
+                    <CldImage
+                      className="cart-item__image"
+                      src={cartItem.product.product_imgs[0].link}
+                      alt={cartItem.product.product_imgs[0].alt}
+                      fill={true}
+                    />
+                  </div>
+                  <div className="cart-item__text-info cart-item-col">
+                    <h5
+                      className="cart-item__text-info-name"
+                      style={{
+                        whiteSpace:
+                          cartItem.product.product_variants.length != 0
+                            ? "nowrap"
+                            : "wrap",
+                      }}>
+                      {cartItem.product.product_name}
+                    </h5>
+                    {cartItem.product.product_variants.length != 0 && (
+                      <div className="cart-item__variant">
+                        <input
+                          type="hidden"
+                          value={
+                            cartItem.product.product_variants[
+                              currentVariantIndex
+                            ]._id
+                          }
+                        />
+                        <select
+                          className="cart-item__variant-select"
+                          onChange={handleVariantChange}>
+                          <option
+                            className="cart-item__variant-name"
                             value={
                               cartItem.product.product_variants[
                                 currentVariantIndex
                               ]._id
                             }
-                          />
-                          <select
-                            className="cart-item__variant-select"
-                            onChange={handleVariantChange}>
-                            <option
-                              className="cart-item__variant-name"
-                              value={
-                                cartItem.product.product_variants[
-                                  currentVariantIndex
-                                ]._id
-                              }
-                              key={0}>
-                              {
-                                cartItem.product.product_variants[
-                                  currentVariantIndex
-                                ].variant_name
-                              }
-                            </option>
-                            {cartItem.product.product_variants.map(
-                              (variant, variantIndex) => {
-                                if (variant._id !== cartItem.variant_id)
-                                  return (
-                                    <option
-                                      className="cart-item__variant-name"
-                                      value={variant._id}
-                                      key={variantIndex}>
-                                      {variant.variant_name}
-                                    </option>
-                                  );
-                              }
-                            )}
-                          </select>
-                          <span className="material-icons-round cart-item__variant-icon">
-                            keyboard_arrow_down
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="cart-item__unit-price cart-item-col">
-                  <input
-                    type="hidden"
-                    name="discount_amount"
-                    value={
-                      cartItem.product.product_variants[currentVariantIndex]
-                        .discount_amount
-                    }
-                  />
-                  <div className="cart-item__unit-price-after-discount">
-                    {convertNumberToMoney(
-                      (cartItem.product.product_variants[currentVariantIndex]
-                        .price *
-                        (100 -
-                          cartItem.product.product_variants[currentVariantIndex]
-                            .discount_amount)) /
-                        100
+                            key={0}>
+                            {
+                              cartItem.product.product_variants[
+                                currentVariantIndex
+                              ].variant_name
+                            }
+                          </option>
+                          {cartItem.product.product_variants.map(
+                            (variant, variantIndex) => {
+                              if (variant._id !== cartItem.variant_id)
+                                return (
+                                  <option
+                                    className="cart-item__variant-name"
+                                    value={variant._id}
+                                    key={variantIndex}>
+                                    {variant.variant_name}
+                                  </option>
+                                );
+                            }
+                          )}
+                        </select>
+                        <span className="material-icons-round cart-item__variant-icon">
+                          keyboard_arrow_down
+                        </span>
+                      </div>
                     )}
                   </div>
-                  {cartItem.product.product_variants[currentVariantIndex]
-                    .discount_amount != 0 && (
-                    <div className="cart-item__unit-price-before-discount">
-                      <del>
-                        {convertNumberToMoney(
-                          cartItem.product.product_variants[currentVariantIndex]
-                            .price
-                        )}
-                      </del>
-                    </div>
-                  )}
                 </div>
-                <div className="cart-item__quantity cart-item-col">
-                  <div className="quantity-input-group">
-                    <button
-                      className="quantity-input-group__btn-remove btn-quantity"
-                      onClick={decreaseValue}>
-                      <span className="material-icons-round quantity-input-group__icon">
-                        remove
-                      </span>
-                    </button>
-                    <input
-                      className="quantity-input-group__input input-quantity"
-                      type="number"
-                      onChange={handleChangeQuantity}
-                      min={1}
-                      max={100}
-                      placeholder={cartItem.quantity}
-                    />
-                    <button
-                      className="quantity-input-group__btn-add btn-quantity"
-                      onClick={increaseValue}>
-                      <span className="material-icons-round quantity-input-group__icon">
-                        add
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div className="cart-item__price cart-item-col mobile-hidden">
+              </div>
+              <div className="cart-item__unit-price cart-item-col">
+                <input
+                  type="hidden"
+                  name="discount_amount"
+                  value={
+                    cartItem.product.product_variants[currentVariantIndex]
+                      .discount_amount
+                  }
+                />
+                <div className="cart-item__unit-price-after-discount">
                   {convertNumberToMoney(
-                    ((cartItem.product.product_variants[currentVariantIndex]
+                    (cartItem.product.product_variants[currentVariantIndex]
                       .price *
                       (100 -
                         cartItem.product.product_variants[currentVariantIndex]
                           .discount_amount)) /
-                      100) *
-                      cartItem.quantity
+                      100
                   )}
                 </div>
-                <div
-                  className="cart-item__remove-btn cart-item-col mobile-hidden"
-                  onClick={handleDeleteCartItem}>
-                  <span className="material-icons-round">delete</span>
+                {cartItem.product.product_variants[currentVariantIndex]
+                  .discount_amount != 0 && (
+                  <div className="cart-item__unit-price-before-discount">
+                    <del>
+                      {convertNumberToMoney(
+                        cartItem.product.product_variants[currentVariantIndex]
+                          .price
+                      )}
+                    </del>
+                  </div>
+                )}
+              </div>
+              <div className="cart-item__quantity cart-item-col">
+                <div className="quantity-input-group">
+                  <button
+                    className="quantity-input-group__btn-remove btn-quantity"
+                    onClick={decreaseValue}>
+                    <span className="material-icons-round quantity-input-group__icon">
+                      remove
+                    </span>
+                  </button>
+                  <input
+                    className="quantity-input-group__input input-quantity"
+                    type="number"
+                    onChange={handleChangeQuantity}
+                    min={1}
+                    max={100}
+                    placeholder={cartItem.quantity}
+                  />
+                  <button
+                    className="quantity-input-group__btn-add btn-quantity"
+                    onClick={increaseValue}>
+                    <span className="material-icons-round quantity-input-group__icon">
+                      add
+                    </span>
+                  </button>
                 </div>
               </div>
-            );
-          })}
-        </section>
-
-        <section className="cart-bill ipad-hidden">
-          <div className="cart-bill-row">
-            <div className="cart-bill-row__title">Giá gốc</div>
-            <div className="cart-bill-row__content">{originalPrice}</div>
-          </div>
-          <div className="cart-bill-row">
-            <div className="cart-bill-row__title">Giảm giá</div>
-            <div className="cart-bill-row__content">{discountedPrice}</div>
-          </div>
-          <div className="cart-bill-row cart-bill__line"></div>
-          <div className="cart-bill-row cart-bill__total-price">
-            <div className="cart-bill-row__title">Tổng tiền</div>
-            <div className="cart-bill-row__content">{totalPrice}</div>
-          </div>
-          <Link
-            href="/order-information"
-            className="cart-bill-row cart-bill__btn"
-            onClick={handleBuyItem}>
-            Mua hàng (<span className="checked-num">{selectedItem}</span>)
-          </Link>
-          <div className="cart-bill-row cart-bill-policy">
-            Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-            <Link className="cart-bill-policy__link" href="#">
-              Điều khoản dịch vụ
-            </Link>{" "}
-            và{" "}
-            <Link className="cart-bill-policy__link" href="/privacy-policy">
-              Chính sách bảo mật
-            </Link>{" "}
-            của ForCat.
-          </div>
-        </section>
-
-        <section className="cart-bill-footer desktop-hidden ipad-display">
-          <div className="cart-footer-container">
-            <div className="cart-footer-btns">
+              <div className="cart-item__price cart-item-col mobile-hidden">
+                {convertNumberToMoney(
+                  ((cartItem.product.product_variants[currentVariantIndex]
+                    .price *
+                    (100 -
+                      cartItem.product.product_variants[currentVariantIndex]
+                        .discount_amount)) /
+                    100) *
+                    cartItem.quantity
+                )}
+              </div>
               <div
-                className="cart-footer-btns__check-all-btn cart-footer-btns__btn"
-                onClick={() => {
-                  handleCheckAllFooter();
-                  handleCheckAll();
-                }}>
-                Tất cả (<span className="checked-num">{allItem}</span>)
-              </div>
-              <div className="cart-footer-btn__delete-btn cart-footer-btns__btn">
-                Xóa
+                className="cart-item__remove-btn cart-item-col mobile-hidden"
+                onClick={handleDeleteCartItem}>
+                <span className="material-icons-round">delete</span>
               </div>
             </div>
-            <div className="cart-footer-buy-group">
-              <div className="cart-footer-buy-group__pricing">
-                <div className="pricing__total-price pricing__text">
-                  Tổng tiền:{" "}
-                  <del className="pricing__price-before-discount">
-                    {originalPrice}
-                  </del>
-                </div>
-                <div className="pricing__price-after-discount pricing__text">
-                  {totalPrice}
-                </div>
-              </div>
-              <Link
-                href="/order-information"
-                className="cart-footer-buy-group__buy-btn"
-                onClick={handleBuyItem}>
-                Mua hàng (<span className="checked-num">{selectedItem}</span>)
-              </Link>
+          );
+        })}
+      </section>
+
+      <section className="cart-bill ipad-hidden">
+        <div className="cart-bill-row">
+          <div className="cart-bill-row__title">Giá gốc</div>
+          <div className="cart-bill-row__content">{originalPrice}</div>
+        </div>
+        <div className="cart-bill-row">
+          <div className="cart-bill-row__title">Giảm giá</div>
+          <div className="cart-bill-row__content">{discountedPrice}</div>
+        </div>
+        <div className="cart-bill-row cart-bill__line"></div>
+        <div className="cart-bill-row cart-bill__total-price">
+          <div className="cart-bill-row__title">Tổng tiền</div>
+          <div className="cart-bill-row__content">{totalPrice}</div>
+        </div>
+        <Link
+          href={selectedItem > 0 ? "/order-information" : "#"}
+          className="cart-bill-row cart-bill__btn"
+          onClick={handleBuyItem}>
+          Mua hàng (<span className="checked-num">{selectedItem}</span>)
+        </Link>
+        <div className="cart-bill-row cart-bill-policy">
+          Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
+          <Link className="cart-bill-policy__link" href="#">
+            Điều khoản dịch vụ
+          </Link>{" "}
+          và{" "}
+          <Link className="cart-bill-policy__link" href="/privacy-policy">
+            Chính sách bảo mật
+          </Link>{" "}
+          của ForCat.
+        </div>
+      </section>
+
+      <section className="cart-bill-footer desktop-hidden ipad-display">
+        <div className="cart-footer-container">
+          <div className="cart-footer-btns">
+            <div
+              className="cart-footer-btns__check-all-btn cart-footer-btns__btn"
+              onClick={() => {
+                handleCheckAllFooter();
+                handleCheckAll();
+              }}>
+              Tất cả (<span className="checked-num">{allItem}</span>)
+            </div>
+            <div className="cart-footer-btn__delete-btn cart-footer-btns__btn">
+              Xóa
             </div>
           </div>
-          <div className="cart-footer-policy">
-            Bằng việc tiến hành đặt mua hàng, bạn đồng ý với Điều khoản dịch vụ,
-            Chính sách thu thập và xử lý dữ liệu cá nhân của ForCat.
+          <div className="cart-footer-buy-group">
+            <div className="cart-footer-buy-group__pricing">
+              <div className="pricing__total-price pricing__text">
+                Tổng tiền:{" "}
+                <del className="pricing__price-before-discount">
+                  {originalPrice}
+                </del>
+              </div>
+              <div className="pricing__price-after-discount pricing__text">
+                {totalPrice}
+              </div>
+            </div>
+            <Link
+              href={selectedItem > 0 ? "/order-information" : "#"}
+              className="cart-footer-buy-group__buy-btn"
+              onClick={handleBuyItem}>
+              Mua hàng (<span className="checked-num">{selectedItem}</span>)
+            </Link>
           </div>
-        </section>
-      </main>
-    </Provider>
+        </div>
+        <div className="cart-footer-policy">
+          Bằng việc tiến hành đặt mua hàng, bạn đồng ý với Điều khoản dịch vụ,
+          Chính sách thu thập và xử lý dữ liệu cá nhân của ForCat.
+        </div>
+      </section>
+    </main>
   );
 }

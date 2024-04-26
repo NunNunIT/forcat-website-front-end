@@ -11,22 +11,16 @@ import { CustomerNotificationItem, CustomerSkeletonNotificationItem } from "..";
 // import utils
 import { BACKEND_URL_NOTIFICATIONS } from "@/utils/commonConst";
 
-interface INotificationWrapperProps {
-  accessToken: string;
-}
-
 interface IDataResponseNoti {
   notifications: INotiItemProps[],
   maxPage: number;
 }
 
-const fetcher = async (url: string, accessToken: string) => {
+const fetcher = async (url: string) => {
   try {
-    console.log(accessToken);
     const res: Response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
-        "Cookie": `accessToken=${accessToken}`,
       },
       credentials: "include",
       next: { revalidate: 60 },
@@ -49,7 +43,7 @@ const getFullBackendURLNotifications = (type: string, page: string, limit: strin
     + `page=${page}&limit=${limit}`;
 }
 
-export default function NotificationWrapper(props: INotificationWrapperProps) {
+export default function NotificationWrapper() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type") ?? "all";
   const page = searchParams.get("page") ?? "1";
@@ -63,7 +57,6 @@ export default function NotificationWrapper(props: INotificationWrapperProps) {
     const fetchData = async () => {
       const data: IDataResponseNoti = await fetcher(
         getFullBackendURLNotifications(type, page, limit),
-        props.accessToken,
       );
       setData(data);
       setIsLoading(false);
@@ -81,7 +74,6 @@ export default function NotificationWrapper(props: INotificationWrapperProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Cookie": `accessToken=${props.accessToken}`,
         },
         credentials: "include",
       });
