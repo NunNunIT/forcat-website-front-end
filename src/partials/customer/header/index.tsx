@@ -1,5 +1,5 @@
 // import libs
-import classNameNames from "classnames/bind";
+import classNames from "classnames/bind";
 
 // import components
 import {
@@ -8,13 +8,13 @@ import {
   CustomerHeaderMenu,
 } from "./partials";
 
-// import css
-import styles from "./header.module.css";
-
 // import constant
 import { BACKEND_URL } from "@/utils/commonConst";
 
-const cx = classNameNames.bind(styles);
+// import css
+import styles from "./header.module.css";
+
+const cx = classNames.bind(styles);
 
 const categoryProducts = async () => {
   try {
@@ -25,7 +25,6 @@ const categoryProducts = async () => {
     const data = await response.json();
     return data.data; // Return the entire data object
   } catch (error) {
-
   }
 };
 
@@ -58,7 +57,10 @@ export default async function CustomerHeader() {
       <CustomerHeaderNav />
       <div className={cx("header__container")}>
         <CustomerHeaderMain />
-        <CustomerHeaderMenu categoryTypes={headerCategories} links={headerLinks} />
+        <CustomerHeaderMenu
+          categoryTypes={headerCategories}
+          links={headerLinks}
+        />
       </div>
     </header>
   );

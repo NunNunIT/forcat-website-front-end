@@ -6,11 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
 
-// import function from utils
-import { convertNumberToMoney } from "@/utils";
-
 // import components
 import { CustomerStarRating } from "@/components";
+
+// import function from utils
+import { convertNumberToMoney } from "@/utils";
 
 // import css
 import styles from "./header-menu.module.css";
