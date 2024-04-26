@@ -14,7 +14,6 @@ import { convertNumberToMoney } from "@/utils";
 
 // import css
 import styles from "./header-menu.module.css";
-import { relative } from "path";
 
 const cx = classNames.bind(styles);
 

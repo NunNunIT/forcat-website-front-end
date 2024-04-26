@@ -32,7 +32,7 @@
   right: 0;
   top: 100%;
   max-width: 1152px;
-  height: 304px;
+  height: 400px;
 
   padding: .75rem;
   padding-inline-end: 0;
@@ -132,8 +132,10 @@
 
 .cate-dropdown__product-img-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  /* width: 100px;
+  height: 100px; */
+  width: 100%;
+  aspect-ratio: 1/1;
 }
 
 .cate-dropdown__product-img-container img {
