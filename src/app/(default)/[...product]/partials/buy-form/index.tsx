@@ -114,15 +114,18 @@ export default function ProductBuyForm({
     localStorage.setItem(
       "buyItem",
       JSON.stringify({
-        product_id: productId,
-        product_name: productName,
-        variant_id: variantId,
-        variant_name: variantName,
-        variant_image_link: variantImageLink,
-        variant_image_alt: variantImageAlt,
-        quantity: quantity,
-        unit_price: unitPrice,
-        discount_amount: currentVariant.discount_amount,
+        type: "buyItem",
+        payload: {
+          product_id: productId,
+          product_name: productName,
+          variant_id: variantId,
+          variant_name: variantName,
+          variant_image_link: variantImageLink,
+          variant_image_alt: variantImageAlt,
+          quantity: quantity,
+          unit_price: unitPrice,
+          discount_amount: currentVariant.discount_amount,
+        },
       })
     );
 
