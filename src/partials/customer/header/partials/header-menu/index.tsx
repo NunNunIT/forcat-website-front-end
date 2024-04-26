@@ -1,7 +1,7 @@
 "use client";
 
 // import libs
-import classNameNames from "classnames/bind";
+import classNames from "classnames/bind";
 import Link from "next/link";
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
@@ -14,14 +14,13 @@ import { convertNumberToMoney } from "@/utils";
 
 // import css
 import styles from "./header-menu.module.css";
+import { relative } from "path";
 
-const cx = classNameNames.bind(styles);
+const cx = classNames.bind(styles);
 
 function CustomerHeaderMenuProductItem(
   props: IHeaderMenuProductItemProps
 ): JSX.Element {
-  // const discountPrice = props.product_price;
-
   return (
     <Link
       className={cx("cate-dropdown__product-link")}
@@ -58,11 +57,9 @@ function CustomerHeaderMenuProductItem(
             </>
           )
           : (
-            <>
-              <span className={cx("cate-dropdown__product-price")}>
-                {convertNumberToMoney(props.product_price)}
-              </span>
-            </>
+            <span className={cx("cate-dropdown__product-price")}>
+              {convertNumberToMoney(props.product_price)}
+            </span>
           )}
       </div>
     </Link >
@@ -84,7 +81,7 @@ function CustomerHeaderMenuSubCategoryItem(
         <span className={cx("cate-dropdown__img-container")}>
           <CldImage
             src={category_img}
-            alt={`Hình đại cho phân loại${category_name} của ForCat Shop`}
+            alt={`Hình đại cho phân loại ${category_name} của ForCat Shop`}
             fill
           />
         </span>
@@ -165,16 +162,18 @@ export default function CustomerHeaderMenu(
       <CustomerHeaderMenuCategoryItem
         categoryType="Danh mục sản phẩm"
       >
-        <ul className={cx("menu__cate-dropdown")}>
-          {flatCategoryTypeProduct.map(
-            (categoryName: ISubCategoryProps) => (
-              <CustomerHeaderMenuSubCategoryItem
-                key={categoryName.category_name}
-                {...categoryName}
-              />
-            )
-          )}
-        </ul>
+        <div className={cx("menu__cate-dropdown-container")}>
+          <ul className={cx("menu__cate-dropdown")}>
+            {flatCategoryTypeProduct.map(
+              (categoryName: ISubCategoryProps) => (
+                <CustomerHeaderMenuSubCategoryItem
+                  key={categoryName.category_name}
+                  {...categoryName}
+                />
+              )
+            )}
+          </ul>
+        </div>
       </CustomerHeaderMenuCategoryItem>
 
       {props.links.map((link: IHeaderLinkProps) => (
