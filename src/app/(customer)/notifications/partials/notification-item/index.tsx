@@ -4,6 +4,7 @@
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
+import Cookies from "js-cookie";
 
 // import utils
 import {
@@ -38,23 +39,28 @@ export function SkeletonNotificationItem() {
   )
 }
 
-export default function NotificationItem({ readAll, ...props }: INotiItemProps) {
+const getAccessToken = () => {
+  return Cookies.get("accessToken")?.value ?? "Khong co access token";
+}
+
+export default function NotificationItem(props: INotiItemProps) {
   const [isUnread, setIsUnread] = useState<boolean>(props.is_unread);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    if (readAll) setIsUnread(false);
-  }, [readAll]);
+    if (props.readAll) setIsUnread(false);
+  }, [props.readAll]);
 
   const handleOnClickRead = async () => {
     setIsShowModal(true);
-    setIsUnread(false);
-    isUnread && await fetch(`${BACKEND_URL_NOTIFICATIONS}/${props._id}/read`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (isUnread) {
+      setIsUnread(false);
+
+      // Gửi yêu cầu đánh dấu thông báo đã đọc
+      await props.fetcherSetRead(props._id);
+
+      props.mutate();
+    }
   };
 
   return (
