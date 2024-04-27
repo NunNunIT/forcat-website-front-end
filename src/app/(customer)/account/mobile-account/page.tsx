@@ -1,30 +1,64 @@
+"use client";
 // import libs
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 // import partials
 import { MobileLogout } from "./partials";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
 
 export default function MobileAccountPage() {
+  const [user, setUser] = useState(null);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/user/getInfo`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const data = await response.json();
+      return data.user;
+    } catch (error) {
+      console.error("Error in fetchUser:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await fetchUser();
+      if (user) {
+        setUser(user);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  const { user_name = "Đang tải...", user_avt_img = "" } = user ?? {};
+
   return (
     <main className="mobile-account-container">
       <aside className="account-aside" id="sidebar">
         <Link href="#" className="avatar">
           <span className="image-container">
-            {/* <img src="/imgs/user_avt_img/<%= (user.user.user_avt_img) ? user.user.user_avt_img : 'default.png' %>" alt="avatar <%= (user.user.user_name) ? user.user.user_name : '' %>"> */}
             <Image
               className="avatarimg"
-              src="/imgs/test.png"
-              alt="avatar"
+              src={user_avt_img}
+              alt={`avatar ${user_name}`}
               fill={true}
             />
           </span>
           <div className="user_name">
-            <h5>user name</h5>
+            <h5>{user_name}</h5>
           </div>
         </Link>
 

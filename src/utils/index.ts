@@ -119,7 +119,7 @@ function convertNumberToMoney(number: number): string {
     .trimRight();
 
   // Return the formatted currency string
-  return currency + "đ";
+  return currency + " đ";
 }
 
 function convertDateToHourDayMonthYear(dateString: string): string {

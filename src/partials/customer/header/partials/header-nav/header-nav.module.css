@@ -241,11 +241,11 @@
   display: flex;
 }
 
-.header__about-account .header__notification-icon {
+.header__notification-icon {
   position: relative;
 }
 
-.header__about-account .header__notification-dot {
+.header__notification-dot {
   position: absolute;
   top: 0;
   right: 0;
@@ -301,7 +301,7 @@
 
   display: none;
   padding-block-start: .5rem;
-  
+
   font-size: .875rem;
 }
 

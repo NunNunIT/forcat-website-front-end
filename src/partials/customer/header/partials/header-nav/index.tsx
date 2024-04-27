@@ -199,8 +199,14 @@ export default function CustomerHeaderNav() {
         </div>
         <div className={cx("header--mobile__noti-support")}>
           <Link href="/notifications" className={cx("noti--mobile")}>
-            <span className="material-icons-outlined" title="Thông báo">
+            <span
+              className={`material-icons ${cx("header__notification-icon")}`}
+              title="Thông báo"
+            >
               notifications
+              {currentUser && currentUser.recent_notification.length > 0 && (
+                <span className={cx("header__notification-dot")}></span>
+              )}
             </span>
           </Link>
           <Link href="#" className={cx("help--mobile")}>

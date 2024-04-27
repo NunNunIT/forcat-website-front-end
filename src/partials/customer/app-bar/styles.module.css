@@ -42,7 +42,7 @@
   color: var(--primary-mau0-2);
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 769px) {
   .app-bar {
     display: flex;
   }
