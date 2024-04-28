@@ -4,58 +4,33 @@
 
   width: 100%;
 
+  margin: 0;
   display: flex;
   flex-direction: column;
   border-radius: .5rem;
   gap: 1rem;
-  margin: 0;
 }
 
 .account-purchase-history__main a {
   text-decoration: none;
 }
 
-.purchase-history__status-container {
-  width: 100%;
-  height: 3rem;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-inline: 1rem;
-  border-radius: .5rem;
-
-  background-color: white;
-}
-
-.purchase-history__status {
-  height: 100%;
-
-  padding-inline: 1rem;
-
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  line-height: 3rem;
-  color: var(--dark7);
-  background-color: transparent;
-}
-
-.purchase-history__status:hover {
-  border-bottom: 2px solid var(--primary-mau0-1);
-}
-
-.purchase-history__status.is-active {
-  color: var(--primary-mau0-1);
-
-  border-bottom: 2px solid var(--primary-mau0-1);
-}
-
 .purchase-history__purchase-item-list {
+  background: transparent;
+
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
+  padding: 0;
+}
+
+.skeleton__wrapper {
+  width: 100%;
+
+  padding: 1rem;
+  border-radius: .5rem;
+  background: white;
 }
 
 @media screen and (min-width: 417px) and (max-width: 768px) {

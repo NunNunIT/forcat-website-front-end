@@ -1,38 +1,54 @@
+"use client";
+
 // import libs
-import Image from "next/image";
 import classNames from "classnames/bind";
-import { parseNumToCurrencyStr } from '@/utils';
+import Link from "next/link";
+import { CldImage } from "next-cloudinary";
+
+// import utils
+import { parseNumToCurrencyStr } from "@/utils";
 
 // import css
 import styles from "./product-item-in-order-item.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function ProductItemInOrderItem(props: ProductItemInOrderItemProps) {
-  const { url, product_name, product_sub_category, quantity, unit_price, price_discount } = props;
-  const price_final = price_discount ?? unit_price;
+export default function ProductItemInOrderItem(
+  props: IProductItemInOrderItemProps
+) {
+  const price_final: number = props.price_discount ?? props.unit_price;
 
   return (
     <div className={cx("product-item")}>
       <div className={cx("product-item__img-container")}>
-        <Image src={url ?? '/imgs/test.png'}
-          alt={`Hình ảnh sản phẩm của ${product_name ?? 'sản phẩm cho mèo'}`}
+        <CldImage
+          src={props.product_img.link}
+          alt={props.product_img.alt}
           fill
         />
       </div>
       <div className={cx("product-item__detail")}>
-        <h5>{product_name ?? 'Sản phẩm cho mèo'}</h5>
-        <span>Phân loại hàng: {product_sub_category ?? 'Hàng nhỏ'}</span>
-        <span>x{quantity}</span>
+        <h5>
+          <Link
+            className={cx("product-item__name")}
+            href={`/${props.product_slug}?pid=${props.product_id_hashed}`}
+          >
+            {props.product_name}
+          </Link>
+        </h5>
+        <span>Phân loại hàng: {props.variant_name}</span>
+        <span>x{props.quantity}</span>
       </div>
       <div className={cx("product-item__prices")}>
-        {price_discount && <span className={cx("product-item__price-base")}>
-          {parseNumToCurrencyStr(unit_price)} đ
-        </span>}
+        {props.price_discount && (
+          <span className={cx("product-item__price-base")}>
+            {parseNumToCurrencyStr(props.unit_price)} đ
+          </span>
+        )}
         <span className={cx("product-item__price-discounted")}>
           {parseNumToCurrencyStr(price_final)} đ
         </span>
       </div>
     </div>
-  )
+  );
 }

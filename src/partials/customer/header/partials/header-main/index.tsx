@@ -1,96 +1,116 @@
 "use client";
+
 // import libs
-import React, { useState } from "react";
+import classNames from "classnames/bind";
+import { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import classNameNames from "classnames/bind";
 
-// import components
-import { CustomerLogo, CustomerHeaderItemUlt } from "@/components";
+// import components, partials
+import { CustomerLogo } from "@/components";
+import { CustomerSearchBar } from "./partials";
 
 // import css
 import styles from "./header-main.module.css";
 
-const cx = classNameNames.bind(styles);
+const cx = classNames.bind(styles);
 
 export default function CustomerHeaderMain() {
-  const [showSmartSearch, setShowSmartSearch] = useState(false);
+  const [currentUser, setCurrentUser] = useState<IUserLocal | null>(null); // Định nghĩa biến currentUser ở đây
 
-  const handleInputChange = (event) => {
-    const inputValue = event.target.value;
-    setShowSmartSearch(inputValue !== ""); // Kiểm tra xem input có giá trị không
+  const getCurrentUser = (): IUserLocal | null => {
+    const storedUser = localStorage.getItem("currentUser");
+    const currentUser = storedUser ? JSON.parse(storedUser) : null;
+    return currentUser;
   };
+
+  useEffect(() => {
+    const user: IUserLocal | null = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
 
   return (
     <div className={cx("header__main")}>
       <CustomerLogo className={cx("header__logo")} />
-      <div className={cx("header__search-bar-wrapper")}>
-        <form
-          className={cx("header__search-bar__main")}
-          action="/search/results"
-          method="GET">
-          <div className={cx("header__search-bar")}>
-            <input
-              className={cx("header__search-input")}
-              id="header__search-input"
-              type="search"
-              name="searchKey"
-              placeholder="Bạn tìm gì..."
-              onChange={handleInputChange}
-            />
-            <button className={cx("header__search-btn")} type="submit">
-              <span className="material-icons-outlined">search</span>
-            </button>
-          </div>
-        </form>
-        <div
-          className={cx("header__smart-search-wrapper", {
-            "display-block": showSmartSearch, // Sử dụng điều kiện để thêm class 'display-block' khi showSmartSearch là true
-          })}
-          id="header__smart-search-wrapper"
-          style={{ display: showSmartSearch ? "block" : "none" }}>
-          {" "}
-          {/* Thay đổi thuộc tính display dựa vào giá trị của showSmartSearch */}
-          <div className={cx("header__suggest-results-content")}>
-            <CustomerHeaderItemUlt />
-            <CustomerHeaderItemUlt />
-          </div>
-          <div className={cx("header__suggest-results-more")}>
-            <Link className={cx("header__suggest-results-more-link")} href="#">
-              Xem thêm <span className={cx("highlight")}>31</span> sản phẩm
-            </Link>
-          </div>
-        </div>
-      </div>
+      <Suspense>
+        <CustomerSearchBar />
+      </Suspense>
 
       <div className={cx("dropdown-cart")}>
-        <a
+        <Link
           href="/cart"
           className={cx("header__cart-container")}
           title="Giỏ hàng">
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
+            {currentUser && currentUser.cart.length > 0 && (
+              <span className={cx("header__cart-quantity")}>
+                {currentUser.cart.length < 100 ? currentUser.cart.length : "99+"}
+              </span>
+            )}
           </div>
-        </a>
+        </Link>
         <div className={cx("dropdown-cart__content-container")}>
           <div className={cx("dropdown-cart__content")}>
-            <div className={cx("dropdown-cart__unauth-user")}>
-              <div className={cx("unauth-user__img-container")}>
-                <Image
-                  className={cx("unauth-user__img")}
-                  src="/imgs/unauth-user.png"
-                  alt="unauth-user"
-                  fill
-                />
-              </div>
-              <span className={cx("unauth-content__cart")}>
-                Đăng nhập để xem Giỏ hàng
-              </span>
-            </div>
-            <div className={cx("unauth-content__btn")}>
-              <a href="/login">Đăng nhập</a>
-              <a href="/register">Đăng ký</a>
-            </div>
+            {currentUser ? (
+              <>
+                {" "}
+                {
+                  <div className={cx("dropdown-cart__auth-user")}>
+                    {currentUser.cart.length > 0 ? (
+                      <>
+                        <div className={cx("unauth-user__img-container")}>
+                          <Image
+                            src="/imgs/icon-ATC.webp"
+                            alt="Hình ảnh của bạn có sản phẩm trong giỏ hàng"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__cart")}>
+                          Bấm <Link href="/cart">vào đây</Link>
+                          <br />
+                          để kiểm tra giỏ hàng nhé!
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div className={cx("unauth-user__img-container")}>
+                          <Image
+                            src="/imgs/nothing-result.png"
+                            alt="Hình ảnh của bạn chưa có sản phẩm trong giỏ hàng"
+                            fill
+                          />
+                        </div>
+                        <span className={cx("content__cart")}>
+                          Bạn chưa có sản phẩm
+                          <br /> trong giỏ hàng
+                        </span>
+                      </>
+                    )}
+                  </div>
+                }
+              </>
+            ) : (
+              <>
+                <div className={cx("dropdown-cart__unauth-user")}>
+                  <div className={cx("unauth-user__img-container")}>
+                    <Image
+                      className={cx("unauth-user__img")}
+                      src="/imgs/unauth-user.png"
+                      alt="unauth-user"
+                      fill
+                    />
+                  </div>
+                  <span className={cx("unauth-content__cart")}>
+                    Đăng nhập để xem Giỏ hàng
+                  </span>
+                </div>
+                <div className={cx("unauth-content__btn")}>
+                  <Link href="/login">Đăng nhập</Link>
+                  <Link href="/register">Đăng ký</Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

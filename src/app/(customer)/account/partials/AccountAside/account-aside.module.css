@@ -72,27 +72,25 @@
 
 .account__aside-nav-item.is-active>*:last-child {
   font-weight: bold;
-  text-decoration: underline;
 }
 
 .account__aside-nav-item.dangerous-action {
   color: var(--red3);
-  font-weight: bold;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
   .account__aside {
     top: 5rem;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
   .account_aside {
     top: 5rem;
   }
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 417px) {
   .account__aside {
     display: none;
   }

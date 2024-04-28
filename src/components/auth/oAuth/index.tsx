@@ -1,8 +1,9 @@
 // import libs
 import classNames from "classnames/bind";
-import React from "react";
-import Image from "next/image";
+import Cookies from "js-cookie";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import Image from "next/image";
+import React from "react";
 
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
@@ -21,7 +22,7 @@ export default function OAuth() {
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      console.log(result);
+      // console.log(result);
       const res = await fetch(BACKEND_URL + "/auth/login/google", {
         method: "POST",
         headers: {
@@ -35,8 +36,15 @@ export default function OAuth() {
       });
 
       const data = await res.json();
+
+      // console.log("login success: ", data.message);
+      // Cookies.set("accessToken", data.token);
+      // Cookies.set("currentUser", data.data._id);
+      localStorage.setItem("currentUser", JSON.stringify(data.data));
+
+      window.location.href = "/";
     } catch (error) {
-      console.log("Could not login with Google", error);
+      // console.log("Could not login with Google", error);
     }
   };
 

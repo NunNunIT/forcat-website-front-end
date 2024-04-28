@@ -1,5 +1,7 @@
 interface ProductVariant {
+  _id: string;
   variant_name: string;
+  variant_slug: string;
   price: number;
   variant_imgs: string[];
   discount_id: string;
@@ -9,6 +11,7 @@ interface ProductVariant {
 }
 
 export interface IBuyForm {
+  product_id: string;
   product_name: string;
   product_slug: string;
   product_avg_rating: number;
@@ -21,7 +24,7 @@ export interface ISliderImage {
 }
 
 export interface IReview {
-  review_id: string;
+  review_id_hashed: string;
   product_variant_name: string;
   review_rating: number;
   user_info: {

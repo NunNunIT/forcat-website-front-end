@@ -1,17 +1,62 @@
 "use client";
 
 // import libs
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Link from "next/link";
 
 // import components
 import { OrderProduct } from "./components";
 
+// import utils
+import { convertNumberToMoney } from "@/utils";
+
 // import css
 import "./page.css";
 
+// handle change page
+const handleOrderChangPage = () => {
+  localStorage.removeItem("buyItems");
+};
+
+let buyInfo = [],
+  totalWithDiscount,
+  totalWithoutDiscount;
+
 export default function SearchResultPage() {
+  useEffect(() => {
+    const buyItems = JSON.parse(localStorage.getItem("buyItems"));
+    if (buyItems) {
+      buyInfo = buyItems.payload;
+      totalWithDiscount = buyInfo.reduce(
+        (result, item) =>
+          result +
+          item.unit_price *
+            ((100 - item.discount_amount) / 100) *
+            item.quantity,
+        0
+      );
+      totalWithoutDiscount = buyInfo.reduce(
+        (result, item) => result + item.unit_price * item.quantity,
+        0
+      );
+    } else {
+      return notFound();
+    }
+
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", handleOrderChangPage);
+    });
+
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener("click", handleOrderChangPage);
+      });
+    };
+  }, []);
+
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(true);
   const [cities, setCities] = useState<any[]>([]);
@@ -73,7 +118,7 @@ export default function SearchResultPage() {
         setCities(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching data: ", error);
+        // console.error("Error fetching data: ", error);
       });
   }, []);
 
@@ -148,7 +193,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Tỉnh/Thành phố
                 </option>
-                {cities.map((city) => (
+                {(cities ?? []).map((city) => (
                   <option key={city.Id} value={city.Id}>
                     {city.Name}
                   </option>
@@ -163,7 +208,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Quận/Huyện
                 </option>
-                {districts.map((district) => (
+                {(districts ?? []).map((district) => (
                   <option key={district.Id} value={district.Id}>
                     {district.Name}
                   </option>
@@ -174,7 +219,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Phường/Xã
                 </option>
-                {wards.map((ward) => (
+                {(wards ?? []).map((ward) => (
                   <option key={ward.Id} value={ward.Id}>
                     {ward.Name}
                   </option>
@@ -240,8 +285,9 @@ export default function SearchResultPage() {
 
       <section className="order-sidebar">
         <div className="order-sidebar__product">
-          <OrderProduct />
-          <OrderProduct />
+          {(buyInfo ?? []).map((item, index) => {
+            return <OrderProduct buyInfo={item} key={index} />;
+          })}
         </div>
         <div className="order-pay__coupon">
           <input
@@ -257,11 +303,17 @@ export default function SearchResultPage() {
           <div className="order-pay__price">
             <div className="order-pay__price-container">
               <div>
-                <del className="order-pay__total-del">1.000.000đ</del>
+                {totalWithDiscount != totalWithoutDiscount && (
+                  <del className="order-pay__total-del">
+                    {convertNumberToMoney(totalWithoutDiscount)}
+                  </del>
+                )}
               </div>
               <div className="order-pay__price__main">
                 <p>Tổng tiền hàng</p>
-                <p className="order-pay__total">777.000đ</p>
+                <p className="order-pay__total">
+                  {convertNumberToMoney(totalWithDiscount)}
+                </p>
               </div>
             </div>
           </div>

@@ -6,15 +6,23 @@
 
 .product__name {
     padding-right: 10.5%;
+    margin: 0;
 }
 
 .rating {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
 .rating__average {
+    font-size: 1.2rem;
     font-weight: 500;
+}
+
+.product__star-group {
+    display: flex;
+    align-items: center;
 }
 
 .rating__stars {
@@ -105,12 +113,88 @@
     background-color: var(--blue6);
 }
 
+.cart-modal {
+    width: 100vw;
+    min-width: 300px;
+    height: 100vh;
+    z-index: 10000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-modal__bg {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg3);
+    position: absolute;
+}
+
+.cart-modal__content {
+    width: 40%;
+    height: 40%;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    position: relative;
+    background-color: var(--white);
+    color: var(--black);
+    z-index: 10001;
+}
+
+.cart-modal__image-div {
+    width: 30%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.cart-modal-close {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10002;
+}
+
+.modal-icon {
+    font-size: 2rem;
+}
+
 .buy-now-btn {
     background-color: var(--dollar-red2);
 }
 
-@media only screen and (max-width: 64rem) {
+@media only screen and (max-width: 1025px) {
     .variants__group {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width:431px) {
+
+    .product__star-group span {
+        font-size: 1.75rem;
+    }
+
+    .rating__average {
+        font-size: 1.5rem;
+    }
+
+    .product__unit-price,
+    .product__total-price {
+        font-size: 1.75rem;
+    }
+
+    .buy-btn {
+        height: 40px;
+        width: 50%;
+        border-radius: 6px;
     }
 }

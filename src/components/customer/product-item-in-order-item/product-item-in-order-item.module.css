@@ -18,6 +18,14 @@
   padding-block: .5rem;
 }
 
+.product-item__name:is(:active, :visited) {
+  color: black;
+}
+
+.product-item__name:hover {
+  color: var(--primary-mau0-2);
+}
+
 .product-item__prices {
   display: flex;
   align-items: center;

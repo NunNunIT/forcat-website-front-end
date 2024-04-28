@@ -1,7 +1,7 @@
 // import libs
-import Link from "next/link";
-import Image from "next/image"
 import classNames from "classnames/bind";
+import Link from "next/link";
+import Image from "next/image";
 
 // import components
 import { CustomerLogo } from "@/components";
@@ -11,54 +11,79 @@ import styles from "./footer.module.css";
 
 const cx = classNames.bind(styles);
 
+// interface
+interface IFooterLinkProps {
+  href: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+}
+
+const linkToSocialMedias: IFooterLinkProps[] = [
+  {
+    href: "https://www.facebook.com/forcat.official",
+    image: {
+      src: "/icon-facebook.svg",
+      alt: "Facebook",
+    },
+  },
+  {
+    href: "https://www.instagram.com/forcat_shop/",
+    image: {
+      src: "/icon-instagram.svg",
+      alt: "Instagram",
+    },
+  },
+  {
+    href: "https://www.tiktok.com/@forcat.shop7",
+    image: {
+      src: "/icon-tiktok.svg",
+      alt: "Tiktok",
+    },
+  },
+];
+
+const email: string = "forcatshop.contact@gmail.com";
+const locationURL: string = "https://maps.app.goo.gl/GbwxfoKVzvYoN1hn9";
+
 export default function Footer() {
   return (
     <footer className={cx("footer")}>
       <div className={cx("footer__container")}>
         <div className={cx("footer__company-name")}>
           <CustomerLogo className={cx("footer__logo")} white />
-          <span>Cửa hàng đồ dùng cho mèo FORCAT.</span>
+          <span>Cửa hàng đồ dùng cho mèo Forcat</span>
           <div className={cx("footer__list-social-media")}>
-            <Link href="https://www.facebook.com/forcat.official" target="_blank">
-              <span className={cx("footer__social-media-container")}>
-                <Image src="/icon-facebook.svg"
-                  alt="Icon mạng xã hội Facebook"
-                  fill
-                />
-              </span>
-            </Link>{" "}
-            <Link href="https://www.instagram.com/forcat_shop/" target="_blank">
-              <span className={cx("footer__social-media-container")}>
-                <Image src="/icon-instagram.svg"
-                  alt="Icon mạng xã hội Instagram"
-                  fill
-                />
-              </span>
-            </Link>{" "}
-            <Link href="https://www.tiktok.com/@forcat.shop7" target="_blank">
-              <span className={cx("footer__social-media-container")}>
-                <Image src="/icon-tiktok.svg"
-                  alt="Icon mạng xã hội Tiktok"
-                  fill
-                />
-              </span>
-            </Link>
+            {(linkToSocialMedias ?? []).map(
+              (link: IFooterLinkProps, index: number) => (
+                <Link key={index} href={link.href} target="_blank">
+                  <span className={cx("footer__social-media-container")}>
+                    <Image
+                      src={link.image.src}
+                      fill
+                      alt={`Icon mạng xã hội ${link.image.alt}`}
+                    />
+                  </span>
+                </Link>
+              )
+            )}
           </div>
         </div>
         <div className={cx("footer__about")}>
           <div className={cx("footer__title")}>
-            <h3>VỀ FORCAT.</h3>
+            <h3>VỀ Forcat Shop</h3>
           </div>
           <div className={cx("footer__list")}>
-            <a href="/about-us" className={cx("footer__list-item")}>
-              Giới thiệu về FORCAT.
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            <Link href="/about-us" className={cx("footer__list-item")}>
+              Giới thiệu về Forcat Shop
+            </Link>
+            <Link href="/term-of-use" className={cx("footer__list-item")}>
               Điều khoản chung
-            </a>
-            <a href="/privacy-policy" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="/privacy-policy" className={cx("footer__list-item")}>
               Chính sách bảo mật
-            </a>
+            </Link>
           </div>
         </div>
         <div className={cx("footer__help")}>
@@ -66,15 +91,15 @@ export default function Footer() {
             <h3>HỖ TRỢ</h3>
           </div>
           <div className={cx("footer__list")}>
-            <a href="#" className={cx("footer__list-item")}>
+            <Link href="#" className={cx("footer__list-item")}>
               Trung tâm trợ giúp
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="#" className={cx("footer__list-item")}>
               Chính sách bảo hành
-            </a>
-            <a href="#" className={cx("footer__list-item")}>
+            </Link>
+            <Link href="#" className={cx("footer__list-item")}>
               Chính sách trả hàng
-            </a>
+            </Link>
           </div>
         </div>
         <div className={cx("footer__contact")}>
@@ -83,34 +108,33 @@ export default function Footer() {
           </div>
           <div className={cx("footer__list")}>
             <div className={cx("footer__list-item")}>
-              <span className='material-icons-outlined'>location_on</span>
+              <span className="material-icons-outlined">location_on</span>
               <Link
-                href="https://maps.app.goo.gl/GbwxfoKVzvYoN1hn9"
+                href={locationURL}
                 target="_blank"
-                className={cx("footer__list-item")}
-              >
+                className={cx("footer__list-item")}>
                 Linh Trung, Thủ Đức, Hồ Chí Minh
               </Link>
             </div>
             <div className={cx("footer__list-item")}>
-              <span className='material-icons-outlined'>call</span>
+              <span className="material-icons-outlined">call</span>
               <span className={cx("footer__list-item", "phone")}>
-                1900 123 789
+                0559 695 594
               </span>
             </div>
             <div className={cx("footer__list-item")}>
-              <span className='material-icons-outlined'>mail</span>
-              <a href="mailto:forcatshop.contact@gmail.com"
-                className={cx("footer__list-item")}
-              >
-                forcatshop.contact@gmail.com
-              </a>
+              <span className="material-icons-outlined">mail</span>
+              <Link
+                href={`mailto:${email}`}
+                className={cx("footer__list-item")}>
+                {email}
+              </Link>
             </div>
           </div>
         </div>
-        <div className={cx("footer__copyright")}>
-          <span>2024 - Bản quyền thuộc của hàng FORCAT.</span>
-        </div>
+      </div>
+      <div className={cx("footer__copyright")}>
+        <span>2024 - Bản quyền thuộc cửa hàng FORCAT</span>
       </div>
     </footer>
   );

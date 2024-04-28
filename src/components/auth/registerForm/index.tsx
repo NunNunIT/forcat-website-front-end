@@ -1,17 +1,33 @@
 "use client";
 
-import styles from "../authForm.module.css";
-import { useState } from "react";
-import Link from "next/link";
-
+// import libs
 import classNames from "classnames/bind";
+import Link from "next/link";
+import { useState } from "react";
+
+// import utils
 import { isValidEmail } from "@/utils/index";
 import { BACKEND_URL } from "@/utils/commonConst";
+
+// import css
+import styles from "../authForm.module.css";
+
 import OAuth from "../oAuth";
 
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   // Initial state
   const initialForms = {
     user_name: "",
@@ -91,13 +107,14 @@ const RegisterForm = () => {
           body: JSON.stringify(formData), // Assuming formData is an object
         });
         const data = await res.json();
-        setLoading(false);
-
         if (data.status != 200) {
           newErrors.user_email = "Email đã được sử dụng!";
           setErrors(newErrors);
           return;
         }
+        setLoading(false);
+        localStorage.setItem("currentUser", JSON.stringify(data.data));
+        window.location.href = "/"; //xác thực thành công thì điều hướng về home
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -118,42 +135,62 @@ const RegisterForm = () => {
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="username">Họ tên</label>
-        <input
-          type="text"
-          placeholder="Nhập họ tên "
-          name="user_name"
-          id="user_name"
-          onChange={handleChange}
-        />
+        <label htmlFor="username">
+          Họ tên<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type="text"
+            placeholder="Nhập họ tên "
+            name="user_name"
+            id="user_name"
+            onChange={handleChange}
+          />
+        </div>
         {errors.user_name && (
           <p className={cx("text-error", "form-error")}>{errors.user_name}</p>
         )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="username">Email</label>
-        <input
-          type="email"
-          placeholder="Nhập email "
-          name="user_email"
-          id="user_email"
-          onChange={handleChange}
-        />
+        <label htmlFor="username">
+          Email<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type="email"
+            placeholder="Nhập email "
+            name="user_email"
+            id="user_email"
+            onChange={handleChange}
+          />
+        </div>
         {errors.user_email && (
           <p className={cx("text-error", "form-error")}>{errors.user_email}</p>
         )}
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="password">Mật khẩu</label>
-        <input
-          type="password"
-          placeholder="Nhập mật khẩu"
-          name="user_password"
-          id="user_password"
-          onChange={handleChange}
-        />
+        <label htmlFor="password">
+          Mật khẩu<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type={showPassword ? "text" : "password"}
+            placeholder="Nhập mật khẩu"
+            name="user_password"
+            id="user_password"
+            onChange={handleChange}
+          />
+          <span
+            className={cx("material-icons-outlined eye-open", "icon")}
+            onClick={handleTogglePassword}>
+            {showPassword ? "visibility_off" : "visibility"}
+          </span>
+        </div>
         {errors.user_password && (
           <p className={cx("text-error", "form-error")}>
             {errors.user_password}
@@ -162,14 +199,24 @@ const RegisterForm = () => {
       </div>
 
       <div className={cx("form-auth__input-content")}>
-        <label htmlFor="passwordRepeat">Xác nhận mật khẩu</label>
-        <input
-          type="password"
-          placeholder="Nhập lại mật khẩu"
-          name="passwordRepeat"
-          id="passwordRepeat"
-          onChange={handleChange}
-        />
+        <label htmlFor="passwordRepeat">
+          Xác nhận mật khẩu<span className={cx("red-start")}> *</span>
+        </label>
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input-field")}
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Nhập lại mật khẩu"
+            name="passwordRepeat"
+            id="passwordRepeat"
+            onChange={handleChange}
+          />
+          <span
+            className={cx("material-icons-outlined eye-open", "icon")}
+            onClick={handleToggleConfirmPassword}>
+            {showConfirmPassword ? "visibility_off" : "visibility"}
+          </span>
+        </div>
         {errors.passwordRepeat && (
           <p className={cx("text-error", "form-error")}>
             {errors.passwordRepeat}
@@ -186,6 +233,13 @@ const RegisterForm = () => {
       )}
 
       <OAuth />
+      <div className={cx("register-note")}>
+        <p>
+          Bằng việc nhấn nút đăng ký, bạn đồng ý với các{" "}
+          <Link href="/term-of-use">điều khoản</Link> và{" "}
+          <Link href="/privacy-policy">chính sách bảo mật</Link> của chúng tôi
+        </p>
+      </div>
     </form>
   );
 };

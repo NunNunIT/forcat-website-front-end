@@ -1,7 +1,7 @@
 "use client";
 // import libs
-import Link from "next/link";
 import classNames from "classnames/bind";
+import Link from "next/link";
 import Image from "next/image";
 
 // import css
@@ -16,17 +16,17 @@ export default function CustomerCategoryCard({
   initValue: ICategoryCardProps;
 }) {
   return (
-    <div className={cx("categoryCard-container")}>
-      <Link href="#" className={cx("categoryCard__link")}>
-        <div className={cx("categoryCard-image-div")}>
+    <div className={cx("category-card")}>
+      <Link href={`/search-result?searchKey=${initValue.name}`} className={cx("category__link")}>
+        <div className={cx("category-image-div")}>
           <Image
-            className={cx("categoryCard__link-image")}
+            className={cx("category__link-image")}
             src={initValue.url}
             alt="product image"
             fill={true}
           />
         </div>
-        <p className={cx("categoryCard__link-name")}>{initValue.name}</p>
+        <h3 className={cx("category__link-name")}>{initValue.name}</h3>
       </Link>
     </div>
   );

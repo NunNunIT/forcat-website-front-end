@@ -3,10 +3,10 @@
 // import libs
 import classNames from "classnames/bind";
 import Image from "next/image";
-import { CldImage, CldVideoPlayer } from "next-cloudinary";
+import { CldImage } from "next-cloudinary";
 
 // import components
-import { CustomerRating } from "@/components";
+import { CustomerStarRating } from "@/components";
 
 // import css
 import styles from "./review-header.module.css";
@@ -52,17 +52,15 @@ export default function ProductReviewHeader({
   return (
     <div className={cx("review-header")}>
       <div className={cx("review-overview")}>
-        <h5>Tổng quan</h5>
+        <h4>Tổng quan</h4>
         <div className={cx("review-overview__summary-info")}>
           <div className={cx("review-overview__info")}>
             <span className={cx("review-overview__average")}>
               {reviewOverview.avg_rating}
             </span>
-            <CustomerRating
-              initValue={{
-                fontSize: "24px",
-                rating: reviewOverview.avg_rating,
-              }}></CustomerRating>
+            <CustomerStarRating
+              className={cx("review-overview__star-group")}
+              rating={reviewOverview.avg_rating}></CustomerStarRating>
           </div>
           <p className={cx("review-overview__total")}>
             (Tất cả {reviewOverview.total_review} đánh giá)
@@ -71,8 +69,7 @@ export default function ProductReviewHeader({
         <div
           className={cx("review-overview__detail", "review-overview-detail")}>
           <div className={cx("review-overview-detail__row")}>
-            <CustomerRating
-              initValue={{ fontSize: "24px", rating: 5 }}></CustomerRating>
+            <CustomerStarRating rating={5}></CustomerStarRating>
             <div className={cx("review-overview-detail__progress-div")}>
               <div
                 className={cx("review-overview-detail__progress-bar")}
@@ -93,8 +90,7 @@ export default function ProductReviewHeader({
             </span>
           </div>
           <div className={cx("review-overview-detail__row")}>
-            <CustomerRating
-              initValue={{ fontSize: "24px", rating: 4 }}></CustomerRating>
+            <CustomerStarRating rating={4}></CustomerStarRating>
             <div className={cx("review-overview-detail__progress-div")}>
               <div
                 className={cx("review-overview-detail__progress-bar")}
@@ -115,8 +111,7 @@ export default function ProductReviewHeader({
             </span>
           </div>
           <div className={cx("review-overview-detail__row")}>
-            <CustomerRating
-              initValue={{ fontSize: "24px", rating: 3 }}></CustomerRating>
+            <CustomerStarRating rating={3}></CustomerStarRating>
             <div className={cx("review-overview-detail__progress-div")}>
               <div
                 className={cx("review-overview-detail__progress-bar")}
@@ -137,8 +132,7 @@ export default function ProductReviewHeader({
             </span>
           </div>
           <div className={cx("review-overview-detail__row")}>
-            <CustomerRating
-              initValue={{ fontSize: "24px", rating: 2 }}></CustomerRating>
+            <CustomerStarRating rating={2}></CustomerStarRating>
             <div className={cx("review-overview-detail__progress-div")}>
               <div
                 className={cx("review-overview-detail__progress-bar")}
@@ -159,8 +153,7 @@ export default function ProductReviewHeader({
             </span>
           </div>
           <div className={cx("review-overview-detail__row")}>
-            <CustomerRating
-              initValue={{ fontSize: "24px", rating: 1 }}></CustomerRating>
+            <CustomerStarRating rating={1}></CustomerStarRating>
             <div className={cx("review-overview-detail__progress-div")}>
               <div
                 className={cx("review-overview-detail__progress-bar")}
@@ -202,13 +195,13 @@ export default function ProductReviewHeader({
               />
             </div>{" "}
             <p className={cx("image-overview__empty-noti-text")}>
-              Sản phẩm này chưa có đánh giá bằng hình ảnh và video
+              Sản phẩm này chưa có đánh giá bằng hình ảnh và video!
             </p>
           </div>
         )}
         {!isImageEmpty && isVideoEmpty && (
           <>
-            <h5>Tất cả hình ảnh</h5>
+            <h4>Tất cả hình ảnh</h4>
             {isImageEmpty && (
               <div className={cx("image-overview__empty-noti-div")}>
                 <div className={cx("image-overview__empty-noti-img-div")}>
@@ -220,7 +213,7 @@ export default function ProductReviewHeader({
                   />
                 </div>{" "}
                 <p className={cx("image-overview__empty-noti-text")}>
-                  Sản phẩm này chưa có đánh giá bằng hình ảnh
+                  Sản phẩm này chưa có đánh giá bằng hình ảnh!
                 </p>
               </div>
             )}
@@ -264,7 +257,7 @@ export default function ProductReviewHeader({
               </div>
             )}
 
-            <h5>Tất cả video</h5>
+            <h4>Tất cả video</h4>
             {isVideoEmpty && (
               <div className={cx("image-overview__empty-noti-div")}>
                 <div className={cx("image-overview__empty-noti-img-div")}>
@@ -276,7 +269,7 @@ export default function ProductReviewHeader({
                   />
                 </div>{" "}
                 <p className={cx("image-overview__empty-noti-text")}>
-                  Sản phẩm này chưa có đánh giá bằng video
+                  Sản phẩm này chưa có đánh giá bằng video!
                 </p>
               </div>
             )}

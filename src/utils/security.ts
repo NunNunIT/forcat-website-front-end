@@ -1,6 +1,9 @@
 import nacl from "tweetnacl";
 
-const publicKey = Buffer.from(process.env.TWEETNACL_PULIC_KEY_BASE64, "base64");
+const publicKey = Buffer.from(
+  process.env.TWEETNACL_PUBLIC_KEY_BASE64,
+  "base64"
+);
 const secretKey = Buffer.from(
   process.env.TWEETNACL_SECRET_KEY_BASE64,
   "base64"
@@ -19,7 +22,12 @@ const encryptData = (data: string) => {
   const base64Encoded = Buffer.from(encryptedData).toString("base64");
 
   // Change + to %2B
-  const encryptedString = base64Encoded.replaceAll("+", "%2B");
+  const encryptedString = encodeURIComponent(base64Encoded)
+    .replaceAll("%21", "!")
+    .replaceAll("%27", "'")
+    .replaceAll("%28", "(")
+    .replaceAll("%29", ")")
+    .replaceAll("%2A", "*");
 
   return encryptedString;
 };

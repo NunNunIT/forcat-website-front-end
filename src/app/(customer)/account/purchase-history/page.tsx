@@ -1,83 +1,90 @@
-"use client";
-
 // import libs
-import React, { useState } from "react";
-import { CustomerOrderItem } from "./partials";
-import { isActiveClass } from "@/utils";
+import { notFound } from "next/navigation";
+
+// import utils
+import { BACKEND_URL_ORDERS, ORDER_STATUS_LIST } from "@/utils/commonConst";
+
+// import partials, components
+import { CustomerOrderItem, CustomerHistoryStatusNav } from "./partials";
+import { CustomerPagination } from "@/components";
 
 // import css
 import "./page.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const fetchData: OrderItemProps[] = [
-  {
-    order_id: 'DH001', order_status: 'unpaid', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-      { product_id: 'P002', quantity: 2, unit_price: 12000000, price_discount: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH002', order_status: 'delivering', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH003', order_status: 'finished', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH004', order_status: 'cancel', order_total_price: 23600000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-  {
-    order_id: 'DH005', order_status: 'unpaid', order_total_price: 2360000, order_detail: [
-      { product_id: 'P001', quantity: 2, unit_price: 11800000 },
-    ]
-  },
-]
+interface IDataResponseOrder {
+  orders: IOrderItemProps[];
+  maxPage: number;
+}
 
+const fetcher: (url: string) => Promise<IDataResponseOrder> = async (
+  url: string
+) => {
+  const res: Response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    next: { revalidate: 60 },
+  });
 
-export default function PurchaseHistoryPage() {
-  const [statusPurchaseHistory, setStatusPurchaseHistory] = useState('all');
+  if (!res.ok) {
+    return notFound();
+  }
 
-  const orders = (() => fetchData)();
+  const json: IResponseJSON = await res.json();
+  if (!json.success) {
+    return notFound();
+  }
+
+  return json.data as IDataResponseOrder;
+};
+
+const getFullBackendURLOrders = (status: string, page: string): string => {
+  return (
+    BACKEND_URL_ORDERS +
+    "?" +
+    (status === "all" ? "" : `type=${status}&`) +
+    `page=${page}&limit=3`
+  );
+};
+
+export default async function PurchaseHistoryPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  // get searchParam status, page
+  const currentStatus = searchParams?.status ?? "all";
+  const currentPage = searchParams?.page ?? "1";
+
+  const fullURL: string = getFullBackendURLOrders(currentStatus, currentPage);
+
+  // const { data, error, isLoading, mutate } = useSWR(fullURL, fetcher);
+  const data = await fetcher(fullURL);
+
+  // check valid status
+  if (!ORDER_STATUS_LIST.includes(currentStatus)) return notFound;
+
+  // check valid page
+  if (parseInt(currentPage) < 1) return notFound;
 
   return (
-    <main className="account-purchase-history__main">
-      <nav className="purchase-history__status-container">
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'all')}`}
-          onClick={() => setStatusPurchaseHistory('all')}
-        >
-          Tất cả
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'unpaid')}`}
-          onClick={() => setStatusPurchaseHistory('unpaid')}
-        >
-          Chờ thanh toán
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'delivering')}`}
-          onClick={() => setStatusPurchaseHistory('delivering')}
-        >
-          Đang giao hàng
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'finished')}`}
-          onClick={() => setStatusPurchaseHistory('finished')}
-        >
-          Hoàn thành
-        </button>
-        <button className={`purchase-history__status ${isActiveClass(statusPurchaseHistory, 'cancel')}`}
-          onClick={() => setStatusPurchaseHistory('cancel')}
-        >
-          Đã hủy
-        </button>
-      </nav>
+    <div className="account-purchase-history__main">
+      <CustomerHistoryStatusNav />
 
       <section className="purchase-history__purchase-item-list">
-        {orders.map((order: OrderItemProps, index: number) =>
-          <CustomerOrderItem key={index} {...order} />)
-        }
+        {(data.orders ?? []).length === 0 ? (
+          <p>Bạn hiện tại chưa đơn hàng nào!!!</p>
+        ) : (
+          (data.orders ?? []).map((order: IOrderItemProps) => (
+            <CustomerOrderItem key={order._id} {...order} />
+          ))
+        )}
+
+        {/* Pagination */}
+        <CustomerPagination maxPage={data?.maxPage ?? 1} />
       </section>
-    </main>
-  )
+    </div>
+  );
 }

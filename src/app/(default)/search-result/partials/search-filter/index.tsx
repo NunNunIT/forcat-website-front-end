@@ -106,8 +106,7 @@ export default function SearchResultFilter() {
               "search-result__filter-normal__content",
               "search-result__filter-normal__content_cover"
             )}
-            onClick={(e: any) => handleFilterItemClick(e)}
-          >
+            onClick={(e: any) => handleFilterItemClick(e)}>
             <p>Danh mục</p>
             <span className={cx("material-icons-round dropdown-button")}>
               expand_more
@@ -175,8 +174,7 @@ export default function SearchResultFilter() {
               "search-result__filter-normal__content",
               "search-result__filter-normal__content_cover"
             )}
-            onClick={(e: any) => handleFilterItemClick(e)}
-          >
+            onClick={(e: any) => handleFilterItemClick(e)}>
             <p>Giá tiền</p>
             <span className={cx("material-icons-round dropdown-button")}>
               expand_more
@@ -233,8 +231,7 @@ export default function SearchResultFilter() {
               "search-result__filter-normal__content",
               "search-result__filter-normal__content_cover"
             )}
-            onClick={(e: any) => handleFilterItemClick(e)}
-          >
+            onClick={(e: any) => handleFilterItemClick(e)}>
             <p>Đánh giá</p>
             <span className={cx("material-icons-round dropdown-button")}>
               expand_more

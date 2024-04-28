@@ -1,9 +1,15 @@
 // use metadata
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // use styles
 import "./global.css";
+
+// import components
+import { Scrollup, ContactAside } from "@/components";
 
 const quicksand = Quicksand({
   weight: "500",
@@ -13,19 +19,26 @@ const quicksand = Quicksand({
 export const metadata: Metadata = {
   applicationName: "ForCat",
   referrer: "origin-when-cross-origin",
-  keywords: ["Cửa hàng phụ kiện thú cưng"],
+  keywords: [
+    "cửa hàng, phụ kiện, thú cưng, ForCat, ForCatShop, FORCAT, FORCATSHOP, forcat, forcatshop,forCat, Forcat,forcatShop,forCatShop, thu cung, thú cung, phụ kien, phụ kiện mèo, phu kien meo, FORcat, forCAT, ForCat Shop - Cửa hàng phụ kiện thú cưng, forcat shop, ForCat Shop, FORCAT SHOP, Forcat Shop, Forcat shop, forcat shop - cửa hàng phụ kiện thú cưng",
+  ],
   title: {
-    template: "ForCat. %s",
-    default: "ForCat.",
+    template: "ForCat | %s ",
+    default: "ForCat",
   },
   description:
-    "Chào mừng bạn đến với TECHTWO - địa chỉ mua sắm trực tuyến hàng đầu về điện máy! Khám phá thế giới công nghệ với sự đa dạng và chất lượng tốt nhất từ máy tính, điện thoại di động đến các sản phẩm gia dụng thông minh. Mua sắm an toàn, thuận tiện và tiết kiệm ngay hôm nay với các ưu đãi độc quyền. TECHTWO - Nơi nâng cao cuộc sống thông qua công nghệ!.",
-  authors: [
-    {
-      name: "Lê Đức Mạnh",
-      url: "https://github.com/namtuthien",
-    },
-  ],
+    "ForCat tự hào là cửa hàng uy tín hàng đầu, chuyên cung cấp các sản phẩm và phụ kiện dành cho thú cưng. Khám phá bộ sưu tập đa dạng của chúng tôi bao gồm đồ chơi, thức ăn, đồ dùng vệ sinh và nhiều hơn nữa để chăm sóc và làm hài lòng thú cưng của bạn.",
+  openGraph: {
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmjwq3ebx/image/upload/v1713440707/SEO_Images/Open%20Graph%20Image/openGraph_img.png",
+        alt: "Ảnh nền",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function CustomerLayout({
@@ -35,7 +48,14 @@ export default function CustomerLayout({
 }>) {
   return (
     <html lang="vi" className={quicksand.className}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <Scrollup />
+        <ContactAside />
+      </body>
+      <GoogleAnalytics gaId="G-YQ5DTD2VQS" />
     </html>
   );
 }

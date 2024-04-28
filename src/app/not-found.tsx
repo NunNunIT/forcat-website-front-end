@@ -1,4 +1,5 @@
 // import libs
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,6 +8,12 @@ import { CustomerHeader, CustomerFooter, CustomerAppBar } from "@/partials";
 
 // import css
 import "./not-found.css";
+
+export const metadata: Metadata = {
+  title: "404 Page",
+  description:
+    "Xin lỗi, trang bạn đang tìm kiếm không tồn tại hoặc đã bị di chuyển. ForCat Shop luôn cố gắng cập nhật và cung cấp các trang thông tin đầy đủ và chính xác nhất. Vui lòng kiểm tra lại đường dẫn hoặc quay trở lại trang chủ để tìm kiếm thông tin khác. Chân thành xin lỗi về sự bất tiện này và cảm ơn bạn đã ghé thăm ForCat Shop!",
+};
 
 export default function NotFound() {
   return (

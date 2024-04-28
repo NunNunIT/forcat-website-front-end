@@ -1,11 +1,16 @@
 // import libs
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // import css
 import "./page.css";
 
+export const metadata: Metadata = {
+  title: "About us",
+  description:
+    "ForCat Shop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Với đội ngũ đam mê và kinh nghiệm, chúng tôi cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất. Hãy cùng tìm hiểu thêm về chúng tôi và cách chúng tôi có thể giúp bạn chăm sóc và yêu thương thú cưng của mình một cách tốt nhất!",
+};
 export default function AboutUsPage() {
   return (
     <main className="about-us__container">
@@ -89,7 +94,7 @@ export default function AboutUsPage() {
                 alt="Chất lượng thật - Giá trị thật"></Image>
             </div>
             <h4>Nguyễn Thị Hồng Nhung</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -100,7 +105,7 @@ export default function AboutUsPage() {
                 alt="Tích điểm"></Image>
             </div>
             <h4>Phan Nguyễn Hải Yến</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -111,7 +116,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Đức Mạnh</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -122,7 +127,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Trung Hiếu</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -133,7 +138,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Viết Kha</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -144,7 +149,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Nhật Tấn</h4>
-            <p>"Slogan Slogannnn"</p>
+            <p>&quot;Slogan Slogannnn&quot;</p>
           </div>
         </div>
       </section>

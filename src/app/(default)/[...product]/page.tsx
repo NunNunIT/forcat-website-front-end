@@ -1,4 +1,5 @@
 // import libs
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -23,15 +24,38 @@ import "./page.css";
 // fetch data
 async function getProduct(slug, pid) {
   try {
-    const res = await fetch(`${BACKEND_URL}/product/${pid}`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${BACKEND_URL}/product/${encodeURIComponent(pid.replaceAll(" ", "+"))}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
     if (!res.ok || slug[2]) return notFound();
 
     return res.json();
   } catch {
     return notFound();
   }
+}
+
+export async function generateMetadata(
+  {
+    params,
+    searchParams,
+  }: {
+    params: { product: string };
+    searchParams?: { [key: string]: string };
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = params.product;
+  const { pid } = searchParams;
+  const res = await getProduct(slug, pid);
+
+  return {
+    title: res.data.product.product_name,
+    description: res.data.product.product_short_description,
+  };
 }
 
 export default async function ProductPage({
@@ -45,16 +69,18 @@ export default async function ProductPage({
   const { pid } = searchParams;
   const res = await getProduct(slug, pid);
   const productInfo: IBuyForm = {
-    product_name: res.product.product_name,
-    product_slug: res.product.product_slug,
-    product_avg_rating: res.product.product_avg_rating,
-    product_variants: res.product.product_variants,
+    product_id: res.data.product._id,
+    product_name: res.data.product.product_name,
+    product_slug: res.data.product.product_slug,
+    product_avg_rating: res.data.product.product_avg_rating,
+    product_variants: res.data.product.product_variants,
   };
 
   const productImgs = res.data.product.product_imgs;
   const productDetails = res.data.product.product_detail;
   const productDescription = res.data.product.product_description;
   const productReviews = res.data.product.recent_reviews;
+  const productId = res.data.product._id;
   const reviewOverview = {
     total_review: res.data.product.review_count.reduce(
       (total, current) => total + current,
@@ -65,7 +91,6 @@ export default async function ProductPage({
     recent_images: res.data.product.recent_images,
     recent_videos: res.data.product.recent_videos,
   };
-  const productId = res.data.product._id;
 
   return (
     <main className="product">
@@ -88,10 +113,13 @@ export default async function ProductPage({
         </div>
 
         <div className="product-content--right product-content-right mobile-hidden">
-          <div className="decoration__bow">
+          <div className="decoration-div">
             <Image
-              src="/imgs/product-page/bow.webp"
-              alt="This is a bow"
+              className="decoration-img"
+              src={`/imgs/product-page/decoration-${Math.floor(
+                Math.random() * 5
+              )}.webp`}
+              alt="Trang trí"
               fill={true}
             />
           </div>
