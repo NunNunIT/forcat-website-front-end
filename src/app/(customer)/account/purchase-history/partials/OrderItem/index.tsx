@@ -67,12 +67,14 @@ export default function OrderItem(props: IOrderItemProps) {
       </span>
       <hr />
       <div className={cx("order-item__product-list")}>
-        {props.order_details.map((product: IProductItemInOrderItemProps) => (
-          <CustomerProductItemInOrderItem
-            key={product.product_id_hashed}
-            {...product}
-          />
-        ))}
+        {(props.order_details ?? []).map(
+          (product: IProductItemInOrderItemProps) => (
+            <CustomerProductItemInOrderItem
+              key={product.product_id_hashed}
+              {...product}
+            />
+          )
+        )}
       </div>
       <hr />
       <div className={cx("order-item--bottom")}>
@@ -82,8 +84,7 @@ export default function OrderItem(props: IOrderItemProps) {
         <div className={cx("order-item__button-wrapper")}>
           <Link
             className={`btn btn--outlined pri`}
-            href={`/account/purchase-history/${props._id}`}
-          >
+            href={`/account/purchase-history/${props._id}`}>
             <span>Xem chi tiết</span>
           </Link>
           {props.order_status == "unpaid" && (

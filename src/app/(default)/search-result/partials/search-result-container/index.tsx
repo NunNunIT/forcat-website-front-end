@@ -513,7 +513,7 @@ export default function SearchResultPage({ searchKey, searchResults }) {
         <div className="search-result__main-card">
           {searchResultsProducts &&
             searchResultsProducts.length >= 0 &&
-            searchResultsProducts.map((product) => (
+            (searchResultsProducts ?? []).map((product) => (
               <>
                 <CustomerProductCard
                   key={product.product_id_hashed}

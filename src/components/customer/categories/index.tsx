@@ -26,7 +26,7 @@ export default function Categories() {
     setLoadedData(productData);
   }, []);
 
-  const PRODUCT = loadedData.map((item) => (
+  const PRODUCT = (loadedData ?? []).map((item) => (
     <SwiperSlide key={item.id}>
       <CustomerCategoryCard
         initValue={{

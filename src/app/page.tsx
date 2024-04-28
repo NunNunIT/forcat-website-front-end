@@ -77,7 +77,7 @@ export default async function Home() {
             </Link>
             <span className="tip-products__title-after"></span>
           </h1>
-          <CustomerCategories/>
+          <CustomerCategories />
         </div>
         <div className="wrapper color">
           <div className="content-container">
@@ -102,7 +102,7 @@ export default async function Home() {
             <div className="tip-products__content">
               {newestProducts &&
                 newestProducts.length &&
-                newestProducts.map((product) => (
+                (newestProducts ?? []).map((product) => (
                   <CustomerProductCard
                     key={product.product_id_hashed}
                     product={product}
@@ -167,7 +167,7 @@ export default async function Home() {
             <div className="tip-products__content">
               {discountProducts &&
                 discountProducts.length &&
-                discountProducts.map((product) => (
+                (discountProducts ?? []).map((product) => (
                   <CustomerProductCard
                     key={product.product_id_hashed}
                     product={product}

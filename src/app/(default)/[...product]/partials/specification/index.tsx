@@ -42,7 +42,7 @@ export default function ProductSpecification({
           "specifications__table",
           isSeeMoreActive ? "full-height" : ""
         )}>
-        {Object.keys(productDetails).map((key, index) => {
+        {(Object.keys(productDetails) ?? []).map((key, index) => {
           return (
             <div className={cx("specifications__item")} key={index}>
               <div className={cx("specifications__type")}>
