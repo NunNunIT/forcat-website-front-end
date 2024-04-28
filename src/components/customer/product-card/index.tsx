@@ -51,11 +51,11 @@ export default function CustomerProductCard({ product }) {
             <h3>
               {product.highest_discount && product.lowest_price ? (
                 <>
-                  {convertNumberToMoney(product.lowest_price)}đ
-                  <small>{convertNumberToMoney(product.product_price)}đ</small>
+                  {convertNumberToMoney(product.lowest_price)}
+                  <small>{convertNumberToMoney(product.product_price)}</small>
                 </>
               ) : (
-                <>{convertNumberToMoney(product.product_price)}đ</>
+                <>{convertNumberToMoney(product.product_price)}</>
               )}
             </h3>
           </div>

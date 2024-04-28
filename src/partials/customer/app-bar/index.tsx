@@ -22,14 +22,14 @@ const appBarData = [
     text: "Danh mục",
   },
   {
-    url: "/news",
-    iconData: "article",
-    text: "Tin tức",
-  },
-  {
     url: "/search/results?hotProduct=true",
     iconData: "local_fire_department",
     text: "HOT",
+  },
+  {
+    url: "/news",
+    iconData: "article",
+    text: "Tin tức",
   },
   {
     url: ["/account/mobile-account", "/login", "/register", "/forgot"],
