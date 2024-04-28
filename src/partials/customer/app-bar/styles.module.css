@@ -29,7 +29,7 @@
 }
 
 .app-bar__element {
-  width: 10rem;
+  width: 15vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,9 +48,27 @@
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 431px) {
   .app-bar__container {
     width: 100%;
+    padding-inline: 1.2rem;
+  }
+
+  .app-bar__element {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .app-bar__container {
     padding-inline: 1rem;
+  }
+
+  .app-bar__element {
+    width: 18vw;
+  }
+
+  .app-bar__element {
+    font-size: 0.8125rem;
   }
 }

@@ -3,3 +3,9 @@
   font-size: 1.5rem;
   margin: 0 0.1rem;
 }
+
+@media only screen and (max-width: 280px) {
+  .star {
+    font-size: 1.25rem;
+  }
+}
