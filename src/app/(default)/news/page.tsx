@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const getFullBackendArticleUrl = (page: string, limit: string): string => {
   return `${BACKEND_URL_NEWS}?page=${page}&limit=${limit}`;
-}
+};
 
 interface IResponseNews {
   articles: INewsItemProps[];
@@ -37,7 +37,7 @@ const fetcher = async (url: string) => {
 
   const json: IResponseJSON = await res.json();
   return json.data as IResponseNews;
-}
+};
 
 export default async function NewsPage({
   searchParams,
@@ -53,7 +53,7 @@ export default async function NewsPage({
     <main className="news-page__container">
       <h1>Tin tức</h1>
       <section className="news__group-news-item">
-        {data.articles.map((articleData: INewsItemProps) => (
+        {(data.articles ?? []).map((articleData: INewsItemProps) => (
           <CustomerNewsItem
             key={articleData.article_id_hashed}
             {...articleData}

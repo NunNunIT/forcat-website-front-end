@@ -10,7 +10,7 @@ export default function ContactAside() {
       <ul className="contact-aside__list">
         <li className="contact-aside__item">
           <Link
-            href="https://zalo.me/0979810730"
+            href="https://zalo.me/0559695594"
             target="blank"
             className="contact-aside__icon">
             <Image

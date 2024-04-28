@@ -186,6 +186,12 @@
   }
 }
 
+@media only screen and (max-width: 640px) {
+  .product-card {
+    height: 300px;
+  }
+}
+
 @media only screen and (max-width: 431px) {
   .product-card {
     width: 49%;
@@ -207,19 +213,21 @@
 
 @media only screen and (max-width: 321px) {
   .product-card {
-    width: 49%;
-    height: 316px;
+    height: 280px;
   }
 
-  .search-result__main-card {
-    gap: 2%;
+  .product-bottom-details {
+    padding: 8px;
   }
 
-  .product-details p {
-    display: none;
+  .product__card--badge {
+    font-size: 0.8125rem;
+  }
+  .product-category {
+    font-size: 10px;
   }
 
-  .product-tumb {
-    width: 80%;
+  .product-bottom-details {
+    min-height: 62px;
   }
 }

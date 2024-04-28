@@ -20,7 +20,7 @@ export default function CustomerCarouselCard({ product }) {
       <div key={product.product_id} className={cx("carousel__card")}>
         <Link
           className={cx("carousel__card-main")}
-          href={`/${product.product_slug}?pid=${product.product_id}`}>
+          href={`/${product.product_slug}?pid=${product.product_id_hashed}`}>
           {product.highest_discount ? (
             <div className={cx("carousel__card--badge")}>
               - {product.highest_discount} %

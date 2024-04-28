@@ -1,0 +1,104 @@
+.contact__container {
+    width: 90%;
+    margin: 8px auto;
+}
+
+.contact__customer-support,
+.contact__social-media {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 7px #dfdfdf;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.gray {
+    color: var(--del-gray);
+    font-weight: 200;
+}
+
+.contact__tittle {
+    text-align: center;
+}
+
+.contact__tittle--after::after {
+    content: "::after";
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: #000000;
+    margin: 8px auto 20px;
+}
+
+.contact__customer-support__call,
+.contact__customer-support__email,
+.contact__social-media__facebook,
+.contact__social-media__instagram,
+.contact__social-media__zalo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 4px 0px 4px;
+}
+
+.contact {
+    font-family: "Material Icons Outlined";
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: var(--bg-gray);
+}
+
+.contact__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    aspect-ratio: 1 / 1 ;
+    line-height: 44px;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.contact__icon.facebook {
+    background-color: #1876F1;
+}
+
+.contact__icon-img.facebook {
+    padding: 4px;
+}
+
+
+.contact__icon-img {
+    border-radius: 50%;
+}
+
+.contact__icon-img.call {
+    padding: 12px;
+    background-color: var(--dollar-red2); 
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: var(--primary-mau4-2);
+}
+
+@media only screen and (max-width: 321px) {
+    .contact__customer-support,
+    .contact__social-media {
+        padding: 12px;
+    }
+}

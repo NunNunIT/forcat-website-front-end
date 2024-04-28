@@ -446,7 +446,7 @@ export default function CartPage() {
           </div>
           <div className="title__item mobile-hidden"></div>
         </div>
-        {cart?.map((cartItem, itemIndex) => {
+        {(cart ?? []).map((cartItem, itemIndex) => {
           const currentVariantIndex =
             cartItem.product.product_variants.findIndex(
               (item) => item._id == cartItem.variant_id
@@ -478,13 +478,13 @@ export default function CartPage() {
                       className="cart-item__text-info-name"
                       style={{
                         whiteSpace:
-                          cartItem.product.product_variants.length != 0
+                          (cartItem.product.product_variants ?? []).length != 0
                             ? "nowrap"
                             : "wrap",
                       }}>
                       {cartItem.product.product_name}
                     </h5>
-                    {cartItem.product.product_variants.length != 0 && (
+                    {(cartItem.product.product_variants ?? []).length != 0 && (
                       <div className="cart-item__variant">
                         <input
                           type="hidden"
@@ -511,7 +511,7 @@ export default function CartPage() {
                               ].variant_name
                             }
                           </option>
-                          {cartItem.product.product_variants.map(
+                          {(cartItem.product.product_variants ?? []).map(
                             (variant, variantIndex) => {
                               if (variant._id !== cartItem.variant_id)
                                 return (

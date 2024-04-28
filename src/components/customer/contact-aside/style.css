@@ -107,9 +107,23 @@
     opacity: 1;
 }
 
-@media only screen and (max-width: 64rem)
+@media only screen and (max-width: 1024px)
 {
     .contact-aside__container {
         left: 30px;
     }
 }
+
+@media only screen and (max-width: 821px) {
+    .contact-aside__container {
+        left: 10px;
+    }
+}
+
+@media only screen and (max-width: 431px)
+{
+    .contact-aside__container {
+        display: none;
+    }
+}
+

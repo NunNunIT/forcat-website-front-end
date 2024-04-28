@@ -210,7 +210,7 @@ export default function ProductBuyForm({
       <div className={cx("product__variants", "variants")}>
         <h3 className={cx("variants__title")}>Loại sản phẩm</h3>
         <div className={cx("variants__group")}>
-          {productInfo.product_variants.map((item, index) => {
+          {(productInfo.product_variants ?? []).map((item, index) => {
             return (
               <React.Fragment key={index}>
                 <ProductVariant

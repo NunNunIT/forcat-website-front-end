@@ -3,6 +3,7 @@
 // import libs
 import { useEffect, useState } from "react";
 import { useSearchParams, notFound } from "next/navigation";
+import useSWR, { Fetcher } from "swr";
 
 // import partials
 import { CustomerPagination } from "@/components";
@@ -12,36 +13,60 @@ import { CustomerNotificationItem, CustomerSkeletonNotificationItem } from "..";
 import { BACKEND_URL_NOTIFICATIONS } from "@/utils/commonConst";
 
 interface IDataResponseNoti {
-  notifications: INotiItemProps[],
+  notifications: INotiItemProps[];
   maxPage: number;
 }
 
-const fetcher = async (url: string) => {
-  try {
-    const res: Response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return notFound();
+const fetcher: Fetcher<IDataResponseNoti, string> = async (url: string) => {
+  const res: Response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    next: { revalidate: 60 },
+  });
 
-    const json: IResponseJSON = await res.json();
-    if (!json.success) return notFound();
-
-    return json.data as IDataResponseNoti;
-  } catch (error) {
-    console.error(error);
-    return notFound();
+  const json: IResponseJSON = await res.json();
+  if (!json.success) {
+    // Đã xử lý throw error ở phía client
+    throw json;
   }
-}
 
-const getFullBackendURLNotifications = (type: string, page: string, limit: string): string => {
-  return BACKEND_URL_NOTIFICATIONS + "?"
-    + ((type === "all") ? "" : `type=${type}&`)
-    + `page=${page}&limit=${limit}`;
-}
+  return json.data as IDataResponseNoti;
+};
+
+const getFullBackendURLNotifications = (
+  type: string,
+  page: string,
+  limit: string
+): string => {
+  return (
+    BACKEND_URL_NOTIFICATIONS +
+    "?" +
+    (type === "all" ? "" : `type=${type}&`) +
+    `page=${page}&limit=${limit}`
+  );
+};
+
+const fetcherSetReadAll = async () => {
+  await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+};
+
+const fethcerSetRead = async (notification_id: string) => {
+  await fetch(`${BACKEND_URL_NOTIFICATIONS}/${notification_id}/read`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+};
 
 export default function NotificationWrapper() {
   const searchParams = useSearchParams();
@@ -50,64 +75,63 @@ export default function NotificationWrapper() {
   const limit = searchParams.get("limit") ?? "3";
 
   const [readAll, setReadAll] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<IDataResponseNoti | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data: IDataResponseNoti = await fetcher(
-        getFullBackendURLNotifications(type, page, limit),
-      );
-      setData(data);
-      setIsLoading(false);
-    };
-    fetchData();
-    console.log("data:", data);
-  }, []);
+  const fullBackendURLNotifications = getFullBackendURLNotifications(
+    type,
+    page,
+    limit
+  );
+  const { data, error, isLoading, mutate } = useSWR(
+    fullBackendURLNotifications,
+    fetcher
+  );
 
   const handleOnClickReadAll = async () => {
     if (!readAll) {
       setReadAll(true);
 
       // Gửi yêu cầu đánh dấu tất cả thông báo đã đọc
-      await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      await fetcherSetReadAll();
+
+      mutate();
     }
   };
+
+  if (error) {
+    console.error(">> Error: ", error);
+    return notFound();
+  }
 
   return (
     <>
       <div className="notification__content--top">
         <h2 className="notification__title">Thông báo</h2>
-        <button
-          className="btn_ pri_"
-          onClick={handleOnClickReadAll}
-        >
+        <button className="btn_ pri_" onClick={handleOnClickReadAll}>
           <span>Đánh dấu tất cả đã đọc</span>
         </button>
       </div>
-      {isLoading
-        ? (<CustomerSkeletonNotificationItem />)
-        : data?.notifications?.map((notification: INotiItemProps) => (
+      {isLoading ? (
+        <CustomerSkeletonNotificationItem />
+      ) : (
+        (data?.notifications ?? []).map((notification: INotiItemProps) => (
           <CustomerNotificationItem
             key={notification._id}
             {...notification}
             readAll={readAll}
+            mutate={mutate}
+            fetcherSetRead={fethcerSetRead}
           />
-        ))}
+        ))
+      )}
 
       {/* Fill blank */}
       <div className="tag-make-fill-blank" />
 
       {/* Pagination */}
-      {!isLoading && data && <div className="noti__pagination">
-        <CustomerPagination maxPage={data?.maxPage} />
-      </div>}
+      {!isLoading && data && (
+        <div className="noti__pagination">
+          <CustomerPagination maxPage={data.maxPage} />
+        </div>
+      )}
     </>
-  )
+  );
 }

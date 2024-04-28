@@ -168,6 +168,8 @@ interface INotiItemProps {
   updatedAt: string;
   is_unread: boolean;
   readAll?: boolean;
+  mutate?: any;
+  fetcherSetRead?: (url: string) => void;
 }
 
 interface IResponseJSON {
