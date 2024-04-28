@@ -3,6 +3,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 // import utils
 import { isValidEmail } from "@/utils/index";
@@ -74,7 +75,7 @@ const LoginForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData), // Assuming formData is an object
-          credentials: "include", 
+          credentials: "include",
         });
         let data = await res.json();
         setLoading(false);
@@ -82,6 +83,7 @@ const LoginForm = () => {
           console.log("Login successful");
           // Set the localStorage and currentUser state
           localStorage.setItem("currentUser", JSON.stringify(data.data));
+          Cookies.set("currentUser", data.token);
           window.location.href = "/"; //xác thực thành công thì điều hướng về home
         }
 
