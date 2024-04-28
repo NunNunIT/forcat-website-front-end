@@ -77,7 +77,7 @@ export default async function Home() {
             </Link>
             <span className="tip-products__title-after"></span>
           </h1>
-          <CustomerCategories/>
+          <CustomerCategories />
         </div>
         <div className="wrapper color">
           <div className="content-container">
@@ -111,7 +111,9 @@ export default async function Home() {
             </div>
           </div>
           <div className="banner-wrapper">
-            <Link className="banner-img--half" href="#">
+            <Link
+              className="banner-img--half"
+              href="/search-result?searchKey=reflex">
               <Image
                 className="banner-img"
                 fill={true}
@@ -119,7 +121,10 @@ export default async function Home() {
                 alt="banner-info"
               />
             </Link>
-            <Link className="banner-img--half" href="#">
+            <Link
+              className="banner-img--half"
+              href="https://www.facebook.com/forcat.official"
+              target="_blank">
               <Image
                 className="banner-img"
                 fill={true}
@@ -129,7 +134,10 @@ export default async function Home() {
             </Link>
           </div>
           <div className="banner-wrapper">
-            <Link className="banner-img--half" href="#">
+            <Link
+              className="banner-img--half"
+              href="https://www.facebook.com/lawsforpawsvietnam"
+              target="_blank">
               <Image
                 className="banner-img"
                 fill={true}
@@ -137,7 +145,7 @@ export default async function Home() {
                 alt="banner-info"
               />
             </Link>
-            <Link className="banner-img--half" href="#">
+            <Link className="banner-img--half" href="/about-us">
               <Image
                 className="banner-img"
                 fill={true}
@@ -147,7 +155,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="banner-wrapper">
-            <Link className="banner-img--full" href="#">
+            <Link className="banner-img--full" href="/news">
               <Image
                 className="banner-img"
                 fill={true}
