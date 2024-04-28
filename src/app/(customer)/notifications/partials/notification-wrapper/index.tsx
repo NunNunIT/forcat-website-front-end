@@ -13,7 +13,7 @@ import { CustomerNotificationItem, CustomerSkeletonNotificationItem } from "..";
 import { BACKEND_URL_NOTIFICATIONS } from "@/utils/commonConst";
 
 interface IDataResponseNoti {
-  notifications: INotiItemProps[],
+  notifications: INotiItemProps[];
   maxPage: number;
 }
 
@@ -33,13 +33,20 @@ const fetcher: Fetcher<IDataResponseNoti, string> = async (url: string) => {
   }
 
   return json.data as IDataResponseNoti;
-}
+};
 
-const getFullBackendURLNotifications = (type: string, page: string, limit: string): string => {
-  return BACKEND_URL_NOTIFICATIONS + "?"
-    + ((type === "all") ? "" : `type=${type}&`)
-    + `page=${page}&limit=${limit}`;
-}
+const getFullBackendURLNotifications = (
+  type: string,
+  page: string,
+  limit: string
+): string => {
+  return (
+    BACKEND_URL_NOTIFICATIONS +
+    "?" +
+    (type === "all" ? "" : `type=${type}&`) +
+    `page=${page}&limit=${limit}`
+  );
+};
 
 const fetcherSetReadAll = async () => {
   await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
@@ -49,7 +56,7 @@ const fetcherSetReadAll = async () => {
     },
     credentials: "include",
   });
-}
+};
 
 const fethcerSetRead = async (notification_id: string) => {
   await fetch(`${BACKEND_URL_NOTIFICATIONS}/${notification_id}/read`, {
@@ -59,7 +66,7 @@ const fethcerSetRead = async (notification_id: string) => {
     },
     credentials: "include",
   });
-}
+};
 
 export default function NotificationWrapper() {
   const searchParams = useSearchParams();
@@ -68,8 +75,15 @@ export default function NotificationWrapper() {
   const limit = searchParams.get("limit") ?? "3";
 
   const [readAll, setReadAll] = useState<boolean>(false);
-  const fullBackendURLNotifications = getFullBackendURLNotifications(type, page, limit);
-  const { data, error, isLoading, mutate } = useSWR(fullBackendURLNotifications, fetcher);
+  const fullBackendURLNotifications = getFullBackendURLNotifications(
+    type,
+    page,
+    limit
+  );
+  const { data, error, isLoading, mutate } = useSWR(
+    fullBackendURLNotifications,
+    fetcher
+  );
 
   const handleOnClickReadAll = async () => {
     if (!readAll) {
@@ -91,16 +105,14 @@ export default function NotificationWrapper() {
     <>
       <div className="notification__content--top">
         <h2 className="notification__title">Thông báo</h2>
-        <button
-          className="btn_ pri_"
-          onClick={handleOnClickReadAll}
-        >
+        <button className="btn_ pri_" onClick={handleOnClickReadAll}>
           <span>Đánh dấu tất cả đã đọc</span>
         </button>
       </div>
-      {isLoading
-        ? (<CustomerSkeletonNotificationItem />)
-        : data?.notifications?.map((notification: INotiItemProps) => (
+      {isLoading ? (
+        <CustomerSkeletonNotificationItem />
+      ) : (
+        (data?.notifications ?? []).map((notification: INotiItemProps) => (
           <CustomerNotificationItem
             key={notification._id}
             {...notification}
@@ -108,15 +120,18 @@ export default function NotificationWrapper() {
             mutate={mutate}
             fetcherSetRead={fethcerSetRead}
           />
-        ))}
+        ))
+      )}
 
       {/* Fill blank */}
       <div className="tag-make-fill-blank" />
 
       {/* Pagination */}
-      {!isLoading && data && <div className="noti__pagination">
-        <CustomerPagination maxPage={data.maxPage} />
-      </div>}
+      {!isLoading && data && (
+        <div className="noti__pagination">
+          <CustomerPagination maxPage={data.maxPage} />
+        </div>
+      )}
     </>
-  )
+  );
 }

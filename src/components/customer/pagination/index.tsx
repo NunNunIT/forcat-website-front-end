@@ -63,7 +63,7 @@ export default function CustomerPagination(props: IPaginationProps) {
         allParams={allParams}
       />
       {!objContinue.isLeftContinue && <span>...</span>}
-      {pages.map((page) => (
+      {(pages ?? []).map((page) => (
         <PaginationItem
           key={page}
           pathName={pathName}

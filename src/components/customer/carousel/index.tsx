@@ -114,9 +114,9 @@ const CustomerCarousel = () => {
       // If the carousel is at the end, scroll to the beginning
       else if (
         Math.ceil(carousel.scrollLeft) ===
-        carousel.scrollWidth - carousel.offsetWidth ||
+          carousel.scrollWidth - carousel.offsetWidth ||
         Math.ceil(carousel.scrollLeft) - 1 ===
-        carousel.scrollWidth - carousel.offsetWidth
+          carousel.scrollWidth - carousel.offsetWidth
       ) {
         carousel.classList.add("no-transition");
         // Scroll to the original first item
@@ -245,7 +245,7 @@ const CustomerCarousel = () => {
   //   };
   // }, [dragStart, dragging, dragStop, infiniteScroll, autoPlay, timeoutId]);
 
-  useEffect(() => { }, [carouselRef.current]);
+  useEffect(() => {}, [carouselRef.current]);
 
   return (
     <div ref={wrapperRef} className={cx("wrapper-carousel")}>
@@ -275,7 +275,7 @@ const CustomerCarousel = () => {
           onMouseLeave={dragStop}
           onScroll={infiniteScroll}>
           {topRatedProducts &&
-            topRatedProducts.map((product) => (
+            (topRatedProducts ?? []).map((product) => (
               <li key={product.product_id} className={cx("carousel__card")}>
                 <Link
                   className={cx("carousel__card-main")}

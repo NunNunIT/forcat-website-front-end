@@ -101,7 +101,7 @@ export default function CustomerAccountAside() {
       <hr />
       <nav>
         <ul className={cx("account__aside-nav")}>
-          {asideNavData.map((navData, index) => (
+          {(asideNavData ?? []).map((navData, index) => (
             <li key={index}>
               <Link
                 href={navData.url}
@@ -114,7 +114,7 @@ export default function CustomerAccountAside() {
               </Link>
             </li>
           ))}
-          <li key={asideNavData.length}>
+          <li key={(asideNavData ?? []).length}>
             <button
               onClick={handleLogout}
               className={cx("account__aside-nav-item", "dangerous-action")}>

@@ -18,7 +18,7 @@ import { sliderImgs } from "./dataslider";
 const cx = classNames.bind(styles);
 
 export default function CustomerSlider() {
-  const SLIDER_CARD = sliderImgs.map((item) => (
+  const SLIDER_CARD = (sliderImgs ?? []).map((item) => (
     <SwiperSlide className="custom-slide" key={item.id}>
       <CustomerSliderCard
         initValue={{

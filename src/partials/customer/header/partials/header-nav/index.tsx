@@ -178,7 +178,7 @@ export default function CustomerHeaderNav() {
               </Link>
               <div className={cx("header__auth-dropdown-container")}>
                 <div className={cx("header__auth-dropdown")}>
-                  {optionsInHeaderAuth.map((option) => (
+                  {(optionsInHeaderAuth ?? []).map((option) => (
                     <Link
                       key={option.text}
                       className={cx("header__auth-dropdown-item")}

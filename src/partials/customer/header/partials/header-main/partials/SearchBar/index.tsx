@@ -85,8 +85,7 @@ export default function SearchBar() {
       <form
         className={cx("header__search-bar__main")}
         action="/search-result"
-        method="GET"
-      >
+        method="GET">
         <div className={cx("header__search-bar")}>
           <input
             className={cx("header__search-input")}
@@ -107,11 +106,10 @@ export default function SearchBar() {
           "display-block": showSmartSearch,
         })}
         id="header__smart-search-wrapper"
-        style={{ display: showSmartSearch ? "block" : "none" }}
-      >
+        style={{ display: showSmartSearch ? "block" : "none" }}>
         <div className={cx("header__suggest-results-content")}>
           {showSmartSearch &&
-            searchResults.map((product) => (
+            (searchResults ?? []).map((product) => (
               <CustomerHeaderItemUlt
                 key={product.product_id_hashed}
                 product={product}
@@ -121,13 +119,13 @@ export default function SearchBar() {
         <div className={cx("header__suggest-results-more")}>
           <Link
             className={cx("header__suggest-results-more-link")}
-            href={`/search-result?searchKey=${inputValue}`}
-          >
+            href={`/search-result?searchKey=${inputValue}`}>
             Xem thêm{" "}
-            <span className={cx("highlight")}>{totalSearchResults}</span> sản phẩm
+            <span className={cx("highlight")}>{totalSearchResults}</span> sản
+            phẩm
           </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -13,10 +13,13 @@ import styles from "./table-of-content.module.css";
 
 const cx = classNames.bind(styles);
 
-export default function TableOfContent(
-  { targetClassName, className }:
-    { targetClassName: string, className?: string, }
-) {
+export default function TableOfContent({
+  targetClassName,
+  className,
+}: {
+  targetClassName: string;
+  className?: string;
+}) {
   const [headings, setHeadings] = useState<any[]>([]);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function TableOfContent(
   }, []);
 
   return (
-    <Suspense fallback={ <LoadingSpinner />}>
+    <Suspense fallback={<LoadingSpinner />}>
       <details className={`${cx("table-of-content-container")} ${className}`}>
         <summary className={cx("table-of-content__title")}>
           <h2>Nội dung</h2>
@@ -39,7 +42,7 @@ export default function TableOfContent(
           </span>
         </summary>
         <ul className={cx("table-of-content__list")}>
-          {headings.map((heading) => {
+          {(headings ?? []).map((heading) => {
             const level = heading.tagName.toLowerCase();
             const id = heading.getAttribute("id");
             return (
@@ -48,8 +51,7 @@ export default function TableOfContent(
                 className={cx(
                   "table-of-content__item",
                   `table-of-content__item--${level}`
-                )}
-              >
+                )}>
                 <Link href={`#${id}`}>{heading.textContent}</Link>
               </li>
             );
@@ -57,5 +59,5 @@ export default function TableOfContent(
         </ul>
       </details>
     </Suspense>
-  )
+  );
 }

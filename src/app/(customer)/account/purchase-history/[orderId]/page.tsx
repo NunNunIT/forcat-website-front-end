@@ -40,7 +40,7 @@ const fetcher = async (url: string) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Cookie": `accessToken=${cookies().get("accessToken").value}`,
+        Cookie: `accessToken=${cookies().get("accessToken").value}`,
       },
       credentials: "include",
     });
@@ -50,11 +50,11 @@ const fetcher = async (url: string) => {
     console.error(error);
     return notFound();
   }
-}
+};
 
 const getFullBackendURLOrder = (orderId: string): string => {
   return `${BACKEND_URL_ORDERS}/${orderId}`;
-}
+};
 
 export default async function PurchaseDetailPage({
   params,
@@ -127,7 +127,7 @@ export default async function PurchaseDetailPage({
           <span>Thông tin sản phẩm</span>
         </h2>
         <div className="order-detail__products-wrapper">
-          {order_details.map((product) => (
+          {(order_details ?? []).map((product) => (
             <CustomerProductItemInOrderItem
               key={product.product_id_hashed}
               {...product}

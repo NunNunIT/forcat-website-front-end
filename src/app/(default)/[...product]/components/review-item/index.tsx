@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { CldImage } from "next-cloudinary";
 
 // import components
-import { CustomerRating } from "@/components";
+import { CustomerStarRating } from "@/components";
 
 // import interfaces
 import { IReview } from "../../interfaces";
@@ -45,11 +45,8 @@ export default function ProductReviewItem({
             <span className={cx("review-item__rating-number")}>
               {review.review_rating}/5
             </span>
-            <CustomerRating
-              initValue={{
-                fontSize: "24px",
-                rating: review.review_rating,
-              }}></CustomerRating>
+            <CustomerStarRating
+              rating={review.review_rating}></CustomerStarRating>
           </div>
           <div className={cx("review-item__variant")}>
             Phân loại: {review.product_variant_name}
