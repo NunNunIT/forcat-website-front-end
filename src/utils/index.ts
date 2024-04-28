@@ -115,7 +115,8 @@ function convertNumberToMoney(number: number): string {
   // Format the number as currency using toLocaleString
   const currency = number
     .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
-    .replace(/₫/g, "");
+    .replace(/₫/g, "")
+    .trim();
 
   // Return the formatted currency string
   // console.log(currency);
