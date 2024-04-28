@@ -55,17 +55,19 @@ export default function Footer() {
           <CustomerLogo className={cx("footer__logo")} white />
           <span>Cửa hàng đồ dùng cho mèo Forcat</span>
           <div className={cx("footer__list-social-media")}>
-            {linkToSocialMedias.map((link: IFooterLinkProps, index: number) => (
-              <Link key={index} href={link.href} target="_blank">
-                <span className={cx("footer__social-media-container")}>
-                  <Image
-                    src={link.image.src}
-                    fill
-                    alt={`Icon mạng xã hội ${link.image.alt}`}
-                  />
-                </span>
-              </Link>
-            ))}
+            {(linkToSocialMedias ?? []).map(
+              (link: IFooterLinkProps, index: number) => (
+                <Link key={index} href={link.href} target="_blank">
+                  <span className={cx("footer__social-media-container")}>
+                    <Image
+                      src={link.image.src}
+                      fill
+                      alt={`Icon mạng xã hội ${link.image.alt}`}
+                    />
+                  </span>
+                </Link>
+              )
+            )}
           </div>
         </div>
         <div className={cx("footer__about")}>
@@ -110,8 +112,7 @@ export default function Footer() {
               <Link
                 href={locationURL}
                 target="_blank"
-                className={cx("footer__list-item")}
-              >
+                className={cx("footer__list-item")}>
                 Linh Trung, Thủ Đức, Hồ Chí Minh
               </Link>
             </div>
@@ -125,8 +126,7 @@ export default function Footer() {
               <span className="material-icons-outlined">mail</span>
               <Link
                 href={`mailto:${email}`}
-                className={cx("footer__list-item")}
-              >
+                className={cx("footer__list-item")}>
                 {email}
               </Link>
             </div>

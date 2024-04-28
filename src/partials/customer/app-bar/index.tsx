@@ -43,7 +43,7 @@ export default function AppBar() {
   return (
     <div className={cx("app-bar")}>
       <div className={cx("app-bar__container")}>
-        {appBarData.map((navData, index) => {
+        {(appBarData ?? []).map((navData, index) => {
           const isActive = Array.isArray(navData.url)
             ? navData.url.includes(pathName)
             : pathName === navData.url;

@@ -24,10 +24,6 @@
     font-weight: 600;
 }
 
-.product-description__title {
-    padding-bottom: 8px;
-}
-
 .product-description-content {
     max-height: 600px;
     display: flex;

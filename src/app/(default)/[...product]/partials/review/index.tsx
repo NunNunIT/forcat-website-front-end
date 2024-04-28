@@ -58,7 +58,7 @@ export default function ProductReview({
 
       <div className={cx("product-review__all-reviews", "reviews")}>
         <h4 className={cx("reviews__title")}>Tất cả đánh giá</h4>
-        {productReviews.length == 0 && (
+        {(productReviews ?? []).length == 0 && (
           <>
             <div className={cx("reviews__empty-review-div")}>
               <Image
@@ -72,10 +72,10 @@ export default function ProductReview({
             </p>
           </>
         )}
-        {productReviews.length != 0 && (
+        {(productReviews ?? []).length != 0 && (
           <>
             <div className={cx("reviews__group")}>
-              {productReviews.map((review, index) => {
+              {(productReviews ?? []).map((review, index) => {
                 return (
                   <React.Fragment key={index}>
                     <ProductReviewItem

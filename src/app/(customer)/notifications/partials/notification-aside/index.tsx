@@ -53,15 +53,14 @@ export default function NotificationAside() {
       <hr />
       <nav>
         <ul className={cx("notification__aside-nav")}>
-          {asideNavData.map((navData, index) => (
+          {(asideNavData ?? []).map((navData, index) => (
             <li key={index}>
               <Link
                 href={navData.url}
                 className={cx(
                   "notification__aside-nav-item",
                   isActiveClassWithBool(navData.url === currentURL)
-                )}
-              >
+                )}>
                 <span>{navData.text}</span>
               </Link>
             </li>

@@ -118,8 +118,8 @@ export default async function NewsDetailPage({
       <section className="news-detail-page__related-page">
         <h2>Các bài viết liên quan</h2>
         <div className="related-page-container">
-          {newsDetail.related_articles.length > 0 &&
-            newsDetail.related_articles.map((newsItem) => (
+          {(newsDetail.related_articles ?? []).length > 0 &&
+            (newsDetail.related_articles ?? []).map((newsItem) => (
               <CustomerNewsItem
                 key={newsItem.article_id_hashed}
                 {...newsItem}

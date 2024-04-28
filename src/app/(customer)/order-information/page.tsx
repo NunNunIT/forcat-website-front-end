@@ -193,7 +193,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Tỉnh/Thành phố
                 </option>
-                {cities.map((city) => (
+                {(cities ?? []).map((city) => (
                   <option key={city.Id} value={city.Id}>
                     {city.Name}
                   </option>
@@ -208,7 +208,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Quận/Huyện
                 </option>
-                {districts.map((district) => (
+                {(districts ?? []).map((district) => (
                   <option key={district.Id} value={district.Id}>
                     {district.Name}
                   </option>
@@ -219,7 +219,7 @@ export default function SearchResultPage() {
                 <option value="" selected>
                   Chọn Phường/Xã
                 </option>
-                {wards.map((ward) => (
+                {(wards ?? []).map((ward) => (
                   <option key={ward.Id} value={ward.Id}>
                     {ward.Name}
                   </option>
@@ -285,7 +285,7 @@ export default function SearchResultPage() {
 
       <section className="order-sidebar">
         <div className="order-sidebar__product">
-          {buyInfo.map((item, index) => {
+          {(buyInfo ?? []).map((item, index) => {
             return <OrderProduct buyInfo={item} key={index} />;
           })}
         </div>
