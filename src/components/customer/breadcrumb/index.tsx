@@ -12,9 +12,6 @@ import styles from "./breadcrumb.module.css";
 const cx = classNames.bind(styles);
 
 const decryptNamePage = (namePage: string, prevNamePage: string) => {
-  console.log(`namePage: '${namePage}'`);
-  console.log(`prevNamePage: '${prevNamePage}'`);
-
   const data = {
     " ": { text: "Trang chủ", url: "/" },
     "news": { text: "Tin tức", url: "/news" },
