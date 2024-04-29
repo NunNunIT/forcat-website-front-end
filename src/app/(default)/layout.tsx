@@ -10,7 +10,7 @@ export default function DefaultLayout({
   return (
     <>
       <CustomerHeader />
-      <CustomerBreadcrumb />
+      {/* <CustomerBreadcrumb /> */}
       {children}
       <CustomerFooter />
       <CustomerAppBar></CustomerAppBar>

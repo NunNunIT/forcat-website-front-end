@@ -59,9 +59,12 @@ export default function ProductSpecification({
         {!isSeeMoreActive && (
           <div className={cx("see-more-btn__gradient")}></div>
         )}
-        <div className={cx("see-more-btn__text")} onClick={handleSeeMore}>
+        <button
+          className={cx("see-more-btn__text")}
+          onClick={handleSeeMore}
+          type="button">
           {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
-        </div>
+        </button>
       </div>
     </section>
   );

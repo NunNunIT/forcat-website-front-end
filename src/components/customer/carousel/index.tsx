@@ -1,14 +1,19 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+// import libs
 import classNames from "classnames/bind";
-import styles from "./carousel.module.css";
-import { CustomerStarRating } from "@/components";
-import { BACKEND_URL, CLOUDINARY_URL } from "@/utils/commonConst";
+import Link from "next/link";
 import { CldImage } from "next-cloudinary";
+import React, { useRef, useEffect, useState } from "react";
+
+// import components
+import { CustomerStarRating } from "@/components";
+
+// import utils
+import { BACKEND_URL, CLOUDINARY_URL } from "@/utils/commonConst";
 import { convertNumberToMoney } from "@/utils";
+
+import styles from "./carousel.module.css";
 
 const cx = classNames.bind(styles);
 
@@ -53,6 +58,8 @@ const CustomerCarousel = () => {
       console.error("Error fetching top rated products:", error);
     }
   };
+
+  console.log("daaaaaaaaaaaa", topRatedProducts);
 
   useEffect(() => {
     loadTopRatedProducts(); // Load top rated products when component mounts

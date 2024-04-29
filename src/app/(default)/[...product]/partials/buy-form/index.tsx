@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // import components
 import { CustomerQuantityInputGroup, CustomerStarRating } from "@/components";
@@ -30,9 +30,7 @@ const cx = classNames.bind(styles);
 
 function filterCurrentVariant(productVariants, currentVariantSlug) {
   return productVariants.filter(
-    (variant) =>
-      createSlug(variant.variant_name) ==
-      decodeURIComponent(createSlug(currentVariantSlug))
+    (variant) => variant.variant_slug == currentVariantSlug
   )[0];
 }
 
@@ -61,22 +59,22 @@ export default function ProductBuyForm({
   pid,
   productInfo,
   currentVariantSlug,
-  mobileOnly,
+  desktopOnly,
   ...props
 }: {
   pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
-  mobileOnly?: string;
+  desktopOnly?: string;
 }) {
   const filteredVariant = filterCurrentVariant(
     productInfo.product_variants,
     currentVariantSlug
   );
-  const currentVariant =
-    currentVariantSlug == "" || !filteredVariant
-      ? productInfo.product_variants[0]
-      : filteredVariant;
+
+  const currentVariant = !filteredVariant
+    ? productInfo.product_variants[0]
+    : filteredVariant;
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
@@ -186,7 +184,7 @@ export default function ProductBuyForm({
 
   return (
     <section
-      className={cx("product-buy-form", "product", mobileOnly)}
+      className={cx("product-buy-form", "product", desktopOnly)}
       ref={buyFormRef}>
       <h1 className={cx("product__name")}>{productInfo.product_name}</h1>
       <div className={cx("product__rating", "rating")}>
@@ -211,21 +209,35 @@ export default function ProductBuyForm({
         <h3 className={cx("variants__title")}>Loại sản phẩm</h3>
         <div className={cx("variants__group")}>
           {(productInfo.product_variants ?? []).map((item, index) => {
-            return (
-              <React.Fragment key={index}>
-                <ProductVariant
-                  pid={pid}
-                  variant={{
-                    id: item._id,
-                    name: item.variant_name,
-                    url: `/${productInfo.product_slug}/${item.variant_slug}}`,
-                    image: {
-                      url: (item.variant_imgs[0] as any).link,
-                      alt: (item.variant_imgs[0] as any).alt,
-                    },
-                  }}></ProductVariant>
-              </React.Fragment>
-            );
+            const variantInfo = {
+              id: item._id,
+              name: item.variant_name,
+              url: `/${productInfo.product_slug}/${item.variant_slug}`,
+              image: {
+                url: (item.variant_imgs[0] as any).link,
+                alt: (item.variant_imgs[0] as any).alt,
+              },
+            };
+
+            if (!filteredVariant && index == 0) {
+              return (
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={variantInfo}
+                    firstActive={true}></ProductVariant>
+                </React.Fragment>
+              );
+            } else {
+              return (
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={variantInfo}
+                    firstActive={false}></ProductVariant>
+                </React.Fragment>
+              );
+            }
           })}
         </div>
       </div>

@@ -12,10 +12,10 @@ const cx = classNames.bind(styles);
 
 export default function ProductDescription({
   productDescription,
-  mobileOnly,
+  desktopOnly,
 }: {
   productDescription: string;
-  mobileOnly?: string;
+  desktopOnly?: string;
 }) {
   const [isSeeMoreActive, setIsSeeMoreActive] = useState(false);
 
@@ -24,7 +24,7 @@ export default function ProductDescription({
   };
 
   return (
-    <section className={cx("product-description", mobileOnly)}>
+    <section className={cx("product-description", desktopOnly)}>
       <div className={cx("product-description__title-div")}>
         <h3 className={cx("product-description__title")}>Mô tả sản phẩm</h3>
         <div className={cx("product-description__see-more")}>
@@ -51,9 +51,12 @@ export default function ProductDescription({
         {!isSeeMoreActive && (
           <div className={cx("see-more-btn__gradient")}></div>
         )}
-        <div className={cx("see-more-btn__text")} onClick={handleSeeMore}>
+        <button
+          className={cx("see-more-btn__text")}
+          onClick={handleSeeMore}
+          type="button">
           {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
-        </div>
+        </button>
       </div>
     </section>
   );
