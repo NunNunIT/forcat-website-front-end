@@ -210,6 +210,9 @@ export default function ProductBuyForm({
       cartModal.classList.remove("hidden");
 
       handleChangeHeaderCartQuantity(productId, variantId, quantity);
+
+      // auto close modal after 1s
+      setTimeout(handleCloseModal, 1000);
     } else {
       window.location.href = "/login";
     }

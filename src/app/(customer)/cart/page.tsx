@@ -172,10 +172,16 @@ export default function CartPage() {
   const handleDeleteCartItem = (event) => {
     const current = event.currentTarget;
     const cartItem = current.parentElement;
+
     handleUpdateDeletedItem(cartItem);
     cartItem.remove();
+
     setAllItem(allItem - 1);
     calcPrices();
+
+    // handle header cart
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    headerCartQuantity.innerHTML = allItem.toString();
   };
 
   // Quantity input group

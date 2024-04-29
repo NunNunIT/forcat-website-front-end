@@ -21,6 +21,7 @@ section {
 }
 
 .product-content {
+    width: 100%;
     display: grid;
     grid-template-columns: 482px 1fr;
     gap: 12px;
