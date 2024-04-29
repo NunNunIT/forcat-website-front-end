@@ -108,22 +108,24 @@ export default function ProductBuyForm({
     );
     const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
 
-    localStorage.removeItem("buyItem");
+    localStorage.removeItem("buyItems");
     localStorage.setItem(
-      "buyItem",
+      "buyItems",
       JSON.stringify({
-        type: "buyItem",
-        payload: {
-          product_id: productId,
-          product_name: productName,
-          variant_id: variantId,
-          variant_name: variantName,
-          variant_image_link: variantImageLink,
-          variant_image_alt: variantImageAlt,
-          quantity: quantity,
-          unit_price: unitPrice,
-          discount_amount: currentVariant.discount_amount,
-        },
+        type: "buyItems",
+        payload: [
+          {
+            product_id: productId,
+            product_name: productName,
+            variant_id: variantId,
+            variant_name: variantName,
+            variant_image_link: variantImageLink,
+            variant_image_alt: variantImageAlt,
+            quantity: quantity,
+            unit_price: unitPrice,
+            discount_amount: currentVariant.discount_amount,
+          },
+        ],
       })
     );
 

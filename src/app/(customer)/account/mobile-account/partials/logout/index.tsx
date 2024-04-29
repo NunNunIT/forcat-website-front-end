@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import classNames from "classnames/bind";
+import Cookies from "js-cookie";
 
 import { BACKEND_URL } from "@/utils/commonConst";
 
@@ -34,12 +35,15 @@ export default function MobileLogout() {
         },
       });
 
-      if (res.ok) {
-        localStorage.removeItem("currentUser");
-        window.location.href = "/"; // Đặt currentUser thành null sau khi đăng xuất
-      } else {
+      if (!res.ok) {
         console.error("Logout failed:", await res.text());
+        return;
       }
+
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
+      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      return;
     } catch (error) {
       // console.error("Logout error:", error);
     }
