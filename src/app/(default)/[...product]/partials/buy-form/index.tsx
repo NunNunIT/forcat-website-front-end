@@ -94,37 +94,43 @@ export default function ProductBuyForm({
   const handleBuyItem = (event) => {
     // event.preventDefault();
 
-    const productId = productInfo.product_id;
-    const productName = productInfo.product_name;
-    const variantId = currentVariant._id;
-    const variantName = currentVariant.variant_name;
-    const variantImageLink = currentVariant.variant_imgs[0].link;
-    const variantImageAlt = currentVariant.variant_imgs[0].alt;
-    const quantity = Number(
-      buyFormRef.current.querySelector(".quantity-input-group__input").value
-    );
-    const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
+    if (isLogIn) {
+      const productId = productInfo.product_id;
+      const productName = productInfo.product_name;
+      const variantId = currentVariant._id;
+      const variantName = currentVariant.variant_name;
+      const variantImageLink = currentVariant.variant_imgs[0].link;
+      const variantImageAlt = currentVariant.variant_imgs[0].alt;
+      const quantity = Number(
+        buyFormRef.current.querySelector(".quantity-input-group__input").value
+      );
+      const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
 
-    localStorage.removeItem("buyItems");
-    localStorage.setItem(
-      "buyItems",
-      JSON.stringify({
-        type: "buyItems",
-        payload: [
-          {
-            product_id: productId,
-            product_name: productName,
-            variant_id: variantId,
-            variant_name: variantName,
-            variant_image_link: variantImageLink,
-            variant_image_alt: variantImageAlt,
-            quantity: quantity,
-            unit_price: unitPrice,
-            discount_amount: currentVariant.discount_amount,
-          },
-        ],
-      })
-    );
+      localStorage.removeItem("buyItems");
+      localStorage.setItem(
+        "buyItems",
+        JSON.stringify({
+          type: "buyItems",
+          payload: [
+            {
+              product_id: productId,
+              product_name: productName,
+              variant_id: variantId,
+              variant_name: variantName,
+              variant_image_link: variantImageLink,
+              variant_image_alt: variantImageAlt,
+              quantity: quantity,
+              unit_price: unitPrice,
+              discount_amount: currentVariant.discount_amount,
+            },
+          ],
+        })
+      );
+
+      window.location.href = "/order-information";
+    } else {
+      window.location.href = "/login";
+    }
 
     // console.log("local", JSON.parse(localStorage.getItem("addBuyItems")));
   };
@@ -302,7 +308,8 @@ export default function ProductBuyForm({
           }}
           takeQuantity={setQuantityValue}></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>
-          {currentVariant?.in_stock ?? 0} sản phẩm có thể mua
+          {currentVariant?.in_stock ?? 0} sản phẩm{" "}
+          <span className={cx("product__is-stock-responsive")}>có thể mua</span>
         </p>
       </div>
       <div className={cx("product__total-price-div")}>
@@ -346,15 +353,14 @@ export default function ProductBuyForm({
           </div>
         </div>
 
-        <Link
-          href={isLogIn ? "/order-information" : "/login"}
+        <div
           className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}
           onClick={handleBuyItem}>
           <span className={cx("material-icons-round", "buy-btn-icon")}>
             savings
           </span>
           <span className={cx("buy-btn-text")}>Mua ngay</span>
-        </Link>
+        </div>
       </div>
     </section>
   );

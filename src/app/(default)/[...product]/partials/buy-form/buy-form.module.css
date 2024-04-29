@@ -75,7 +75,6 @@
 }
 
 .product__is-stock {
-    margin-left: 8px;
     color: var(--dark11);
 }
 
@@ -193,6 +192,10 @@
         font-size: 1.5rem;
     }
 
+    .product__is-stock-responsive {
+        display: none;
+    }
+
     .product__unit-price,
     .product__total-price {
         font-size: 1.75rem;
@@ -202,5 +205,11 @@
         height: 40px;
         width: 50%;
         border-radius: 6px;
+    }
+}
+
+@media only screen and (max-width: 321px) {
+    .product__quantity {
+        gap: 0.5rem;
     }
 }
