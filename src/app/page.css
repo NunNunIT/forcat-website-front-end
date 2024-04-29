@@ -1,13 +1,12 @@
 .main-container {
   width: 100%;
   margin: -0.5rem auto;
-  background-color: #fffbf3;
 }
 
 .content-container {
   width: 80%;
   margin: 0 auto;
-  padding: 12px 0;
+  padding: 4px 0;
   max-width: 1152px;
   display: flex;
   flex-direction: column;
@@ -24,6 +23,10 @@
   /* padding: 0px 0px 2px 0; */
 }
 
+.padding-bottom{
+  padding-bottom: 24px;
+}
+
 section {
   max-width: 1152px;
 }
@@ -32,7 +35,7 @@ section {
   border-radius: 4px;
   display: inherit;
   flex-direction: column;
-  padding: 24px 12px;
+  padding: 12px;
 }
 
 .tip-products-wrapper.new-products {
@@ -61,7 +64,8 @@ section {
 
 .tip-products__label {
   display: flex;
-  padding: 12px 0px;
+  font-size: 1.8rem;
+  /* padding: 4px 0px; */
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;

@@ -59,6 +59,12 @@ section {
     object-fit: contain;
 }
 
+.related-container {
+    background-color: #ffecbd;
+    padding: 2rem 1rem;
+    border-radius: 8px;
+}
+
 @media only screen and (max-width: 1025px) {
     .product {
         width: 90%;

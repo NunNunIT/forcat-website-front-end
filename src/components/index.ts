@@ -5,6 +5,7 @@ export { default as AuthForgotForm } from "./auth/forgotForm";
 
 // customer components
 export { default as CustomerCarouselSlider } from "./customer/carousel-wrapper";
+export { default as CustomerNewsCarouselSlider } from "./customer/news-carousel-wrapper";
 export { default as CustomerSlider } from "./customer/slider";
 export { default as CustomerCategories } from "./customer/categories";
 export { default as CustomerCategoryCard } from "./customer/category-card";

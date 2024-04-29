@@ -37,12 +37,13 @@ export default function OAuth() {
 
       const data = await res.json();
 
-      // console.log("login success: ", data.message);
-      // Cookies.set("accessToken", data.token);
-      // Cookies.set("currentUser", data.data._id);
-      localStorage.setItem("currentUser", JSON.stringify(data.data));
-
-      window.location.href = "/";
+      if (data.status === 200) {
+        console.log("Login successful");
+        // Set the localStorage and currentUser state
+        localStorage.setItem("currentUser", JSON.stringify(data.data));
+        Cookies.set("currentUser", data.token);
+        window.location.href = "/"; //xác thực thành công thì điều hướng về home
+      }
     } catch (error) {
       // console.log("Could not login with Google", error);
     }

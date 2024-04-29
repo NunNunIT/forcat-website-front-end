@@ -12,6 +12,7 @@ import {
   ProductReview,
 } from "./partials";
 
+import { CustomerCarouselSlider } from "@/components";
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
 
@@ -35,6 +36,25 @@ async function getProduct(slug, pid) {
     return res.json();
   } catch {
     return notFound();
+  }
+}
+
+// fetch data
+async function getRelatedProducts(slug, pid) {
+  try {
+    const res = await fetch(
+      `${BACKEND_URL}/product/getRecommend/${encodeURIComponent(
+        pid.replaceAll(" ", "+")
+      )}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    // if (!res.ok || slug[2]) return notFound();
+    const data = await res.json();
+    return data.data;
+  } catch {
+    // return notFound();
   }
 }
 
@@ -68,6 +88,7 @@ export default async function ProductPage({
   const slug = params.product;
   const { pid } = searchParams;
   const res = await getProduct(slug, pid);
+  const relatedProducts = await getRelatedProducts(slug, pid);
   const productInfo: IBuyForm = {
     product_id: res.data.product._id,
     product_name: res.data.product.product_name,
@@ -135,6 +156,12 @@ export default async function ProductPage({
         reviewOverview={reviewOverview}
         productReviews={productReviews}
         productId={productId}></ProductReview>
+      <div className="related-container">
+      <h2 className="tip-products__label">
+        Xem các sản phẩm gợi ý khác
+      </h2>
+      <CustomerCarouselSlider productList={relatedProducts} />
+      </div>
     </main>
   );
 }

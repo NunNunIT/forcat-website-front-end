@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 
 // import global components
 import { CustomerCarouselSlider } from "@/components";
+import { CustomerNewsCarouselSlider } from "@/components";
 import { CustomerProductCard } from "@/components";
 import { CustomerSlider } from "@/components";
 import { CustomerCategories } from "@/components";
@@ -18,6 +19,25 @@ export const metadata: Metadata = {
   title: "ForCat | Trang chủ",
   description:
     "Chào mừng bạn đến với ForCat Shop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Tại đây, chúng tôi cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất để giúp bạn chăm sóc và yêu thương thú cưng của mình. Khám phá ngay bộ sưu tập sản phẩm đa dạng và đăng ký tài khoản để nhận ưu đãi đặc biệt. Hãy bắt đầu hành trình mua sắm và chăm sóc thú cưng của bạn tại ForCat Shop ngay hôm nay!",
+};
+
+const fetchTopRatedProducts = async () => {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/productList/getTopRatedProducts`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch top rated products");
+    // }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    // console.error("Error fetching top rated products:", error);
+    // throw error;
+  }
 };
 
 const fetchNewestProducts = async () => {
@@ -62,43 +82,63 @@ const fetchDiscountProducts = async () => {
   }
 };
 
+// interface IResponseNews {
+//   articles: INewsItemProps[];
+//   maxPage: number;
+// }
+
+const fetchArticles = async () => {
+  const response = await fetch(
+    `${BACKEND_URL}/articles/unlimited?page=1&limit=6`,
+    {
+      next: { revalidate: 60 },
+    }
+  );
+  // if (!res.ok) return notFound();
+  const json = await response.json();
+  return json.data;
+};
+
 export default async function Home() {
+  let topRatedProducts = await fetchTopRatedProducts();
   let newestProducts = await fetchNewestProducts();
   let discountProducts = await fetchDiscountProducts();
+  let articles = await fetchArticles();
+
   return (
     <>
       <CustomerHeader />
       <main className="main-container">
         <CustomerSlider />
         <div className="content-container">
-          <h1 className="tip-products__label">
+          <h2 className="tip-products__label">
             <Link href="/search-result" className="tip-products__title">
               Danh mục
             </Link>
             <span className="tip-products__title-after"></span>
-          </h1>
+          </h2>
           <CustomerCategories />
         </div>
         <div className="wrapper color">
           <div className="content-container">
-            <h1 className="tip-products__label">
+            <h2 className="tip-products__label">
               <Link href="/search-result" className="tip-products__title">
                 Gợi ý hôm nay
               </Link>
               <span className="tip-products__title-after"></span>
-            </h1>
-            <CustomerCarouselSlider />
+            </h2>
+            <CustomerCarouselSlider productList={topRatedProducts} />
           </div>
         </div>
 
         <section className="content-container tip-products-wrapper wrapper--white">
           <div className="tip-products">
-            <h1 className="tip-products__label">
+            <h2 className="tip-products__label">
               <Link href="/search-result" className="tip-products__title">
                 Hàng mới về
               </Link>
               <span className="tip-products__title-after"></span>
-            </h1>
+            </h2>
             <div className="tip-products__content">
               {newestProducts &&
                 newestProducts.length &&
@@ -158,12 +198,12 @@ export default async function Home() {
           </div>
 
           <div className="tip-products">
-            <h1 className="tip-products__label">
+            <h2 className="tip-products__label">
               <Link href="#" className="tip-products__title">
                 Khuyến mãi hấp dẫn
               </Link>
               <span className="tip-products__title-after"></span>
-            </h1>
+            </h2>
             <div className="tip-products__content">
               {discountProducts &&
                 discountProducts.length &&
@@ -176,6 +216,17 @@ export default async function Home() {
             </div>
           </div>
         </section>
+        <div className="wrapper color padding-bottom">
+          <div className="content-container">
+            <h2 className="tip-products__label">
+              <Link href="/news" className="tip-products__title">
+                Tin tức hằng ngày
+              </Link>
+              <span className="tip-products__title-after"></span>
+            </h2>
+            <CustomerNewsCarouselSlider newList={articles} />
+          </div>
+        </div>
       </main>
       <CustomerFooter />
       <CustomerAppBar />
