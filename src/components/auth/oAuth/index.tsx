@@ -40,6 +40,7 @@ export default function OAuth() {
       // console.log("login success: ", data.message);
       // Cookies.set("accessToken", data.token);
       // Cookies.set("currentUser", data.data._id);
+      localStorage.removeItem("currentUser");
       localStorage.setItem("currentUser", JSON.stringify(data.data));
 
       window.location.href = "/";

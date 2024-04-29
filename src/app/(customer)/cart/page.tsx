@@ -52,7 +52,7 @@ const handleCartChangePage = (event) => {
 
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(`${BACKEND_URL}/cart`, fetcher);
-  const cart = data?.data.cartInfo;
+  const cart = data?.data?.cartInfo;
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleCartChangePage);
