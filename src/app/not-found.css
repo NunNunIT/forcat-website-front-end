@@ -1,6 +1,5 @@
 .main-container {
     width: 100%;
-    box-shadow: 0 2px 7px #dfdfdf;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +12,7 @@
     aspect-ratio: 1 / 1;
     background-color: var(--white);
     border-radius: 50%;
+    box-shadow: 0 2px 7px var(--dark12);
     display: flex;
     flex-direction: column;
     justify-content: center;

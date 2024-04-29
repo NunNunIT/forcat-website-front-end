@@ -436,7 +436,12 @@ section {
     }
 
     .cart-bill-footer {
+        padding: 8px;
         bottom: 64px;
+    }
+
+    .cart-footer-buy-group {
+        gap: 8px;
     }
 
     .cart-footer-btns {
