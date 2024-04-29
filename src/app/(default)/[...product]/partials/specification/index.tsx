@@ -48,9 +48,11 @@ export default function ProductSpecification({
               <div className={cx("specifications__type")}>
                 {productDetails[key].name}
               </div>
-              <div className={cx("specifications__info")}>
-                {productDetails[key].value}
-              </div>
+              <div
+                className={cx("specifications__info")}
+                dangerouslySetInnerHTML={{
+                  __html: productDetails[key].value,
+                }}></div>
             </div>
           );
         })}

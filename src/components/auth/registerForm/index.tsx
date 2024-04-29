@@ -113,6 +113,7 @@ const RegisterForm = () => {
           return;
         }
         setLoading(false);
+        localStorage.removeItem("currentUser");
         localStorage.setItem("currentUser", JSON.stringify(data.data));
         window.location.href = "/"; //xác thực thành công thì điều hướng về home
       } catch (error) {

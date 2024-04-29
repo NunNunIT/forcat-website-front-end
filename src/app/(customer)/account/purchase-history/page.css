@@ -25,6 +25,42 @@
   padding: 0;
 }
 
+.purchase-history__no-order {
+  width: 100%;
+  height: 100%;
+
+  background: white;
+
+  padding: 1rem;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.purchase-history__no-order-img-container {
+  width: 100%;
+  position: relative;
+  min-height: 10rem;
+}
+
+.purchase-history__no-order-img-container img {
+  object-fit: contain;
+}
+
+.purchase-history__no-order-text {
+  text-align: center;
+}
+
+.purchase-history__no-order-text a:is(:link, :visited, :active) {
+  color: var(--primary-mau0-2);
+}
+
+.purchase-history__no-order-text a:hover {
+  text-decoration: underline;
+}
+
 .skeleton__wrapper {
   width: 100%;
 

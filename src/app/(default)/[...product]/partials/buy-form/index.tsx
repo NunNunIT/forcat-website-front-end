@@ -108,22 +108,24 @@ export default function ProductBuyForm({
     );
     const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
 
-    localStorage.removeItem("buyItem");
+    localStorage.removeItem("buyItems");
     localStorage.setItem(
-      "buyItem",
+      "buyItems",
       JSON.stringify({
-        type: "buyItem",
-        payload: {
-          product_id: productId,
-          product_name: productName,
-          variant_id: variantId,
-          variant_name: variantName,
-          variant_image_link: variantImageLink,
-          variant_image_alt: variantImageAlt,
-          quantity: quantity,
-          unit_price: unitPrice,
-          discount_amount: currentVariant.discount_amount,
-        },
+        type: "buyItems",
+        payload: [
+          {
+            product_id: productId,
+            product_name: productName,
+            variant_id: variantId,
+            variant_name: variantName,
+            variant_image_link: variantImageLink,
+            variant_image_alt: variantImageAlt,
+            quantity: quantity,
+            unit_price: unitPrice,
+            discount_amount: currentVariant.discount_amount,
+          },
+        ],
       })
     );
 
@@ -134,6 +136,50 @@ export default function ProductBuyForm({
   const handleCloseModal = () => {
     const cartModal = cartModalRef.current;
     cartModal.classList.add("hidden");
+  };
+
+  // handle change header cart quantity
+  const handleChangeHeaderCartQuantity = (
+    productId: string,
+    variantId: string,
+    quantity: number
+  ) => {
+    // Add header cart when add cart
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const cartItems = currentUser.cart ?? [];
+
+    // Check if the item already exists in the array
+    const duplicatedIndex = cartItems.findIndex(
+      (item) => item.product_id === productId && item.variant_id == variantId
+    );
+
+    const updateAddCartItems =
+      duplicatedIndex !== -1
+        ? [
+            ...cartItems.slice(0, duplicatedIndex),
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+            ...cartItems.slice(duplicatedIndex + 1),
+          ]
+        : [
+            ...cartItems,
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+          ];
+
+    currentUser.cart = updateAddCartItems;
+
+    localStorage.removeItem("currentUser");
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    headerCartQuantity.innerHTML = currentUser.cart.length;
   };
 
   // handle add cart
@@ -162,11 +208,15 @@ export default function ProductBuyForm({
 
       const cartModal = cartModalRef.current;
       cartModal.classList.remove("hidden");
+
+      handleChangeHeaderCartQuantity(productId, variantId, quantity);
+    } else {
+      window.location.href = "/login";
     }
   };
 
   useEffect(() => {
-    isLogIn = localStorage.getItem("currentUser");
+    isLogIn = localStorage.getItem("currentUser") ? true : false;
 
     window.addEventListener("beforeunload", handleProductChangePage);
     const links = document.querySelectorAll("a");
