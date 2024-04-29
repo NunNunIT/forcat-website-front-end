@@ -32,7 +32,15 @@ const appBarData = [
     text: "Tin tức",
   },
   {
-    url: ["/account/mobile-account", "/login", "/register", "/forgot"],
+    url: [
+      "/account/mobile-account",
+      "/account/information",
+      "/account/purchase-history",
+      "/account/change-password",
+      "/login",
+      "/register",
+      "/forgot",
+    ],
     iconData: "account_circle",
     text: "Tài khoản",
   },
@@ -44,12 +52,26 @@ export default function AppBar() {
     <div className={cx("app-bar")}>
       <div className={cx("app-bar__container")}>
         {(appBarData ?? []).map((navData, index) => {
-          const isActive = Array.isArray(navData.url)
-            ? navData.url.includes(pathName)
-            : pathName === navData.url;
+          let isActive;
+          if (index === 0) {
+            isActive = appBarData.slice(-4).every((data) => {
+              if (Array.isArray(data.url)) {
+                return !data.url.includes(pathName);
+              } else {
+                return data.url !== pathName;
+              }
+            });
+          } else {
+            isActive = Array.isArray(navData.url)
+              ? navData.url.includes(pathName)
+              : pathName === navData.url;
+          }
+          const url = Array.isArray(navData.url) ? navData.url[0] : navData.url;
           return (
-            <div key={index} className={cx("app-bar__element")}>
-              <Link href={navData.url[0]} className={cx({ active: isActive })}>
+            <div
+              key={`${navData.text}-${navData.iconData}`}
+              className={cx("app-bar__element")}>
+              <Link href={url} className={cx({ active: isActive })}>
                 <span
                   className={cx("material-icons-outlined nav__icon", {
                     active: isActive,
@@ -57,7 +79,7 @@ export default function AppBar() {
                   {navData.iconData}
                 </span>
               </Link>
-              <Link href={navData.url[0]} className={cx({ active: isActive })}>
+              <Link href={url} className={cx({ active: isActive })}>
                 {navData.text}
               </Link>
             </div>

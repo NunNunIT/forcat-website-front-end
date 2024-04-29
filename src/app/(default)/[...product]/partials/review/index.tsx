@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // import components
-import { ProductReviewItem } from "../../components";
 import { CustomerPagination } from "@/components";
+import { ProductReviewItem } from "../../components";
 
 // import paritals
 import { ProductReviewHeader, ProductImageModal } from "./partials";

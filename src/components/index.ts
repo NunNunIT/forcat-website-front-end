@@ -20,6 +20,7 @@ export { default as CustomerPagination } from "./customer/pagination";
 export { default as CustomerCarouselCard } from "./customer/carousel-card";
 export { default as Scrollup } from "./customer/scroll-up";
 export { default as ContactAside } from "./customer/contact-aside";
+export { default as CustomerBreadcrumb } from "./customer/breadcrumb";
 
 // default components
 export { default as LoadingSpinner } from "./default/loading";

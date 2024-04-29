@@ -1,0 +1,9 @@
+.sub-category__img-div {
+    width: 15%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.sub-category__img {
+    border-radius: 0.5rem;
+}

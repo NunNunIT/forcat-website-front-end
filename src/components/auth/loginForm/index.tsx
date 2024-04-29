@@ -75,13 +75,14 @@ const LoginForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData), // Assuming formData is an object
-          credentials: "include", 
+          credentials: "include",
         });
         let data = await res.json();
         setLoading(false);
         if (data.status === 200) {
           console.log("Login successful");
           // Set the localStorage and currentUser state
+          localStorage.removeItem("currentUser");
           localStorage.setItem("currentUser", JSON.stringify(data.data));
           Cookies.set("currentUser", data.token);
           window.location.href = "/"; //xác thực thành công thì điều hướng về home

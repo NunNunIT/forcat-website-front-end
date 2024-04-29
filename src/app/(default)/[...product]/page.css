@@ -21,6 +21,7 @@ section {
 }
 
 .product-content {
+    width: 100%;
     display: grid;
     grid-template-columns: 482px 1fr;
     gap: 12px;
@@ -59,6 +60,10 @@ section {
     object-fit: contain;
 }
 
+.desktop-hidden {
+    display: none !important;
+}
+
 .related-container {
     background-color: #ffecbd;
     padding: 2rem 1rem;
@@ -89,6 +94,14 @@ section {
 }
 
 @media only screen and (max-width: 821px) {
+    .tablet-hidden {
+        display: none !important;
+    }
+
+    .tablet-display {
+        display: flex !important;
+    }
+
     .product {
         gap: 8px;
     }
@@ -118,16 +131,12 @@ section {
     }
 }
 
-.desktop-hidden {
-    display: none !important;
-}
-
 @media only screen and (max-width: 431px) {
     .mobile-hidden {
         display: none !important;
     }
 
-    .desktop-hidden {
+    .mobile-display {
         display: flex !important;
     }
 

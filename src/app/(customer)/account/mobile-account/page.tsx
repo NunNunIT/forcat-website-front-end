@@ -14,18 +14,13 @@ import "./page.css";
 export default function MobileAccountPage() {
   const [user, setUser] = useState(null);
 
-  const fetchUser = async () => {
+  const fetchUser = () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/user/getInfo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      const data = await response.json();
-      return data.user;
+      const currentUser = localStorage.getItem("currentUser");
+      if (currentUser) {
+        return JSON.parse(currentUser);
+      }
+      return null;
     } catch (error) {
       console.error("Error in fetchUser:", error);
       return null;
@@ -57,8 +52,8 @@ export default function MobileAccountPage() {
               fill={true}
             />
           </span>
-          <div className="user_name">
-            <h5>{user_name}</h5>
+          <div>
+            <h5 className="user_name">{user_name}</h5>
           </div>
         </Link>
 
