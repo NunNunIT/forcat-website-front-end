@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 // import utils
 import { isActiveClass } from "@/utils";
@@ -74,12 +75,15 @@ export default function CustomerAccountAside() {
         },
       });
 
-      if (res.ok) {
-        localStorage.removeItem("currentUser");
-        window.location.href = "/"; // Đặt currentUser thành null sau khi đăng xuất
-      } else {
+      if (!res.ok) {
         console.error("Logout failed:", await res.text());
+        return;
       }
+
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
+      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      return;
     } catch (error) {
       // console.error("Logout error:", error);
     }
