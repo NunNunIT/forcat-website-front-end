@@ -43,7 +43,7 @@ function CustomerHeaderMenuProductItem(
         {props.product_name}
       </span>
       <div>
-        {props.highest_discount ? (
+        {props.highest_discount > 0 ? (
           <>
             <span className={cx("cate-dropdown__product-price")}>
               {convertNumberToMoney(props.lowest_price ?? 0)}
