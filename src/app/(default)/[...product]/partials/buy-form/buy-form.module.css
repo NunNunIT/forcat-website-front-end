@@ -62,7 +62,7 @@
 .variants__group {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, minmax(140px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
 
@@ -138,6 +138,7 @@
 
 .cart-modal__content {
     width: 40%;
+    min-width: 250px;
     height: 40%;
     border-radius: 0.5rem;
     display: flex;
@@ -157,6 +158,10 @@
     position: relative;
 }
 
+.cart-modal__text {
+    text-align: center;
+}
+
 .cart-modal-close {
     cursor: pointer;
     position: absolute;
@@ -173,17 +178,13 @@
     background-color: var(--dollar-red2);
 }
 
-@media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 821px) {
     .variants__group {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media only screen and (max-width: 431px) {
-    .variants__group {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .product__star-group span {
         font-size: 1.75rem;
     }

@@ -5,18 +5,13 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
 
 // import components
 import { CustomerQuantityInputGroup, CustomerStarRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import {
-  convertNumberToMoney,
-  convertMoneyToNumber,
-  createSlug,
-} from "@/utils";
+import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
@@ -60,12 +55,14 @@ export default function ProductBuyForm({
   productInfo,
   currentVariantSlug,
   desktopOnly,
+  mobileOnly,
   ...props
 }: {
   pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
   desktopOnly?: string;
+  mobileOnly?: string;
 }) {
   const filteredVariant = filterCurrentVariant(
     productInfo.product_variants,
@@ -158,7 +155,7 @@ export default function ProductBuyForm({
         ? [
             ...cartItems.slice(0, duplicatedIndex),
             {
-              product_id: productId,
+              product: productId,
               variant_id: variantId,
               quantity: quantity,
             },
@@ -167,7 +164,7 @@ export default function ProductBuyForm({
         : [
             ...cartItems,
             {
-              product_id: productId,
+              product: productId,
               variant_id: variantId,
               quantity: quantity,
             },
@@ -179,7 +176,8 @@ export default function ProductBuyForm({
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
     const headerCartQuantity = document.querySelector(".header-cart-quantity");
-    headerCartQuantity.innerHTML = currentUser.cart.length;
+    if (headerCartQuantity)
+      headerCartQuantity.innerHTML = currentUser?.cart?.length ?? 0;
   };
 
   // handle add cart
@@ -237,7 +235,7 @@ export default function ProductBuyForm({
 
   return (
     <section
-      className={cx("product-buy-form", "product", desktopOnly)}
+      className={cx("product-buy-form", "product", desktopOnly, mobileOnly)}
       ref={buyFormRef}>
       <h1 className={cx("product__name")}>{productInfo.product_name}</h1>
       <div className={cx("product__rating", "rating")}>
@@ -342,7 +340,9 @@ export default function ProductBuyForm({
                 fill={true}
               />
             </div>
-            <h3>Sản phẩm đã được thêm vào giỏ hàng</h3>
+            <h3 className={cx("cart-modal__text")}>
+              Sản phẩm đã được thêm vào giỏ hàng
+            </h3>
           </div>
         </div>
 

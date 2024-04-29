@@ -168,6 +168,38 @@ export default function CartPage() {
     setSelectedItem(selected.length);
   };
 
+  // handle change header cart quantity
+  const handleChangeHeaderCartQuantity = (
+    productId: string,
+    variantId: string
+  ) => {
+    // Add header cart when add cart
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const cartItems = currentUser.cart ?? [];
+
+    // Check if the item already exists in the array
+    const duplicatedIndex = cartItems.findIndex(
+      (item) => item.product === productId && item.variant_id == variantId
+    );
+
+    const updateDeleteCartItems =
+      duplicatedIndex !== -1
+        ? [
+            ...cartItems.slice(0, duplicatedIndex),
+            ...cartItems.slice(duplicatedIndex + 1),
+          ]
+        : [...cartItems];
+
+    currentUser.cart = updateDeleteCartItems;
+
+    localStorage.removeItem("currentUser");
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    if (headerCartQuantity)
+      headerCartQuantity.innerHTML = currentUser?.cart?.length ?? 0;
+  };
+
   // delete cart item
   const handleDeleteCartItem = (event) => {
     const current = event.currentTarget;
@@ -180,8 +212,11 @@ export default function CartPage() {
     calcPrices();
 
     // handle header cart
-    const headerCartQuantity = document.querySelector(".header-cart-quantity");
-    headerCartQuantity.innerHTML = allItem.toString();
+    const productId = cartItem.querySelector("input[name='product_id']").value;
+    const variantId = cartItem.querySelector(
+      ".cart-item__variant-select"
+    ).value;
+    handleChangeHeaderCartQuantity(productId, variantId);
   };
 
   // Quantity input group
@@ -617,7 +652,7 @@ export default function CartPage() {
         })}
       </section>
 
-      <section className="cart-bill ipad-hidden">
+      <section className="cart-bill tablet-hidden">
         <div className="cart-bill-row">
           <div className="cart-bill-row__title">Giá gốc</div>
           <div className="cart-bill-row__content">{originalPrice}</div>
@@ -650,7 +685,7 @@ export default function CartPage() {
         </div>
       </section>
 
-      <section className="cart-bill-footer desktop-hidden ipad-display">
+      <section className="cart-bill-footer desktop-hidden tablet-display">
         <div className="cart-footer-container">
           <div className="cart-footer-btns">
             <div

@@ -104,7 +104,8 @@ export default async function ProductPage({
             pid={pid}
             productInfo={productInfo}
             currentVariantSlug={slug[1] ?? ""}
-            desktopOnly="desktop-hidden"></ProductBuyForm>
+            desktopOnly="desktop-hidden"
+            mobileOnly="mobile-display"></ProductBuyForm>
           <ProductSpecification
             productDetails={productDetails}></ProductSpecification>
           <ProductDescription

@@ -43,7 +43,7 @@ export default function CustomerHeaderMain() {
           title="Giỏ hàng">
           <div className={cx("header__cart")}>
             <span className="material-icons">shopping_cart</span>
-            {currentUser && currentUser.cart.length > 0 && (
+            {currentUser && (
               <span
                 className={cx("header__cart-quantity", "header-cart-quantity")}>
                 {currentUser.cart.length < 100

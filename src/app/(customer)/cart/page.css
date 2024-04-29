@@ -277,12 +277,12 @@ section {
         grid-template-columns: none;
     }
 
-    .ipad-hidden {
-        display: none;
+    .tablet-hidden {
+        display: none !important;
     }
 
-    .ipad-display {
-        display: flex;
+    .tablet-display {
+        display: flex !important;
     }
 
     section {
