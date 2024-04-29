@@ -12,9 +12,6 @@ import styles from "./breadcrumb.module.css";
 const cx = classNames.bind(styles);
 
 const decryptNamePage = (namePage: string, prevNamePage: string) => {
-  console.log(`namePage: '${namePage}'`);
-  console.log(`prevNamePage: '${prevNamePage}'`);
-
   const data = {
     " ": { text: "Trang chủ", url: "/" },
     "news": { text: "Tin tức", url: "/news" },
@@ -52,14 +49,13 @@ export default function Breadcrumb() {
     <Suspense fallback={<>Đang nạp dữ liệu</>}>
       <nav className={cx("breadcrumb__container")}>
         <ul className={cx("breadcrumb")}>
-          {/* <li>{data.map(d => d.text).join("-")}</li> */}
-          {data.map((d, index: number) => (
-            <li key={index}>
+          {data.map((d, index: number) => {
+            return d && <li key={index}>
               {d.url
-                ? <Link href={d.url}>{d.text}</Link>
-                : <span>{d.text}</span>}
+                ? <Link href={d?.url}>{d.text}</Link>
+                : <span>{d?.text}</span>}
             </li>
-          ))}
+          })}
         </ul>
       </nav>
     </Suspense>
