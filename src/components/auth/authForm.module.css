@@ -134,6 +134,10 @@
   color: var(--dark-blue)
 }
 
+.register-note a:hover{
+  color: var(--luminos-blue)
+}
+
 /* forgot form */
 .hidden {
   display: none;
