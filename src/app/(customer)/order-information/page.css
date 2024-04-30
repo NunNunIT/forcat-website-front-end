@@ -282,6 +282,10 @@ input::-webkit-calendar-picker-indicator {
   color: var(--primary-color-2);
 }
 
+.order__product--mobile {
+  display: none;
+}
+
 /* 1024px - Mini PC */
 @media screen and (max-width: 1024px) {
   .order-pay__submit button {
@@ -349,7 +353,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 /* 416px - Mobile */
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 431px) {
   h2 {
     font-size: 1rem;
   }
@@ -363,10 +367,17 @@ input::-webkit-calendar-picker-indicator {
   del {
     font-size: 0.8125rem;
   }
-
-  .order-sidebar {
-    display: none;
+  .order-container {
+    flex-direction: column;
   }
+
+  #order-form {
+    width: 100%;
+  }
+
+  /* .order-sidebar {
+    display: none;
+  } */
 
   .location__input-group input,
   .order-detail__input input,
@@ -410,6 +421,14 @@ input::-webkit-calendar-picker-indicator {
     width: 40%;
     height: 40px;
     font-size: 1rem;
+  }
+
+  .order-sidebar__product {
+    display: none;
+  }
+
+  .order__product--mobile {
+    display: block;
   }
 
   /* body {
