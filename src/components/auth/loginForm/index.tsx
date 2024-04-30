@@ -18,10 +18,13 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
-  const currentUserCookieValue = localStorage.getItem("currentUser");
-  // Nếu có currentUser trong localStorage, chuyển hướng đến trang chính
-  if (currentUserCookieValue) {
-    window.location.href = "/";
+  if (typeof window !== "undefined") {
+    // Code sử dụng localStorage
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      // Redirect or handle accordingly
+      window.location.href = "/";
+    }
   }
 
   const [showPassword, setShowPassword] = useState(false);

@@ -18,10 +18,13 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
-  const currentUserCookieValue = localStorage.getItem("currentUser");
-  // Nếu có currentUser trong localStorage, chuyển hướng đến trang chính
-  if (currentUserCookieValue) {
-    window.location.href = "/";
+  if (typeof window !== "undefined") {
+    // Code sử dụng localStorage
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      // Redirect or handle accordingly
+      window.location.href = "/";
+    }
   }
   const [showPassword, setShowPassword] = useState(false);
 
@@ -128,7 +131,6 @@ const RegisterForm = () => {
           Cookies.set("currentUser", data.token);
           window.location.href = "/"; //xác thực thành công thì điều hướng về home
         }
-
       } catch (error) {
         setLoading(false);
         setError(true);
