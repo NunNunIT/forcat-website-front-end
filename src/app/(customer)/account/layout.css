@@ -13,7 +13,7 @@ button {
   align-items: center;
   outline: none;
   border: none;
-  padding: 0 ;
+  padding: 0;
 
   background: transparent;
   color: black;
@@ -96,15 +96,16 @@ button {
   gap: 1rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
   .account-container {
     width: 90%;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 821px) {
   .account-container {
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
   }
 
   .purchase-history__status {
@@ -112,7 +113,7 @@ button {
   }
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 431px) {
   .account-container {
     width: 100%;
 
