@@ -132,10 +132,6 @@ export default function InformationPage() {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("Error updating user");
-      }
-
       const data = await response.json();
       console.log("User updated successfully:", data.user);
       localStorage.setItem("currentUser", JSON.stringify(data.user));
@@ -167,7 +163,6 @@ export default function InformationPage() {
                       </label>
                       <div className="userName">
                         <input
-                          defaultValue={user.user_name}
                           type="text"
                           id="userName"
                           name="userName"

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "@/utils/commonConst";
 
 // import components
 import { OrderProduct } from "./components";
@@ -148,6 +149,47 @@ export default function SearchResultPage() {
     }
   }
 
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+
+   const handleSubmit = async (event) => {
+     event.preventDefault();
+
+    if (paymentMethod === '3') {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/payment/create-payment-link`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: parseInt(totalWithDiscount),
+            }),
+            credentials: "include",
+          }
+        );
+
+        const data = await response.json();
+
+        if (response) {
+          let url = data.data.checkoutUrl;
+          window.location.href = url;
+        }
+      } catch (error) {
+        console.error("Error in handleSubmit:", error);
+      }
+    }
+      
+     
+
+     
+   };
+
   return (
     // <main className="order-container">
     <>
@@ -157,7 +199,7 @@ export default function SearchResultPage() {
           return <OrderProduct buyInfo={item} key={index} />;
         })}
       </div>
-      <form id="order-form">
+      <form id="order-form" onSubmit={handleSubmit}>
         {/* onSubmit={submitOrderForm} */}
         <section className="order-detail">
           <div className="order-detail__customer">
@@ -259,6 +301,7 @@ export default function SearchResultPage() {
                   name="pay-method"
                   value="1"
                   required
+                  onChange={handlePaymentMethodChange}
                 />
                 <label htmlFor="radio1">
                   Thanh toán trực tiếp khi nhận hàng
@@ -271,6 +314,7 @@ export default function SearchResultPage() {
                   name="pay-method"
                   value="2"
                   required
+                  onChange={handlePaymentMethodChange}
                 />
                 <label htmlFor="radio2">Thanh toán qua MOMO</label>
               </div>
@@ -281,6 +325,7 @@ export default function SearchResultPage() {
                   name="pay-method"
                   value="3"
                   required
+                  onChange={handlePaymentMethodChange}
                 />
                 <label htmlFor="radio3">Thanh toán qua Internet Banking</label>
               </div>
