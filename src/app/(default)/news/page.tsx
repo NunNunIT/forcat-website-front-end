@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 // import partials, components
-import { CustomerNewsItem } from "./partials";
+import { CustomerNewsItem, CustomerSearchNewBar } from "./partials";
 import { CustomerPagination } from "@/components";
 
 // import utils
@@ -51,7 +51,10 @@ export default async function NewsPage({
 
   return (
     <main className="news-page__container">
-      <h1>Tin tức</h1>
+      <div className="news-page__top">
+        <h1>Tin tức</h1>
+        <CustomerSearchNewBar />
+      </div>
       <section className="news__group-news-item">
         {(data.articles ?? []).map((articleData: INewsItemProps) => (
           <CustomerNewsItem
