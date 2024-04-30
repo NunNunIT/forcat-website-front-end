@@ -22,7 +22,7 @@ const appBarData = [
     text: "Danh mục",
   },
   {
-    url: "/search/results?hotProduct=true",
+    url: "/search-result?sortBy=hot",
     iconData: "local_fire_department",
     text: "HOT",
   },
@@ -48,6 +48,7 @@ const appBarData = [
 
 export default function AppBar() {
   const pathName = usePathname();
+
   return (
     <div className={cx("app-bar")}>
       <div className={cx("app-bar__container")}>

@@ -14,28 +14,35 @@ const cx = classNames.bind(styles);
 const decryptNamePage = (namePage: string, prevNamePage: string) => {
   const data = {
     " ": { text: "Trang chủ", url: "/" },
-    "news": { text: "Tin tức", url: "/news" },
-    "account": { text: "Tài khoản" },
-    "information": { text: "Thông tin cá nhân", url: "/account/information" },
-    "purchase-history": { text: "Lịch sử đơn hàng", url: "/account/purchase-history" },
-    "change-password": { text: "Đổi mật khẩu", url: "/account/change-password" },
+    news: { text: "Tin tức", url: "/news" },
+    account: { text: "Tài khoản" },
+    information: { text: "Thông tin cá nhân", url: "/account/information" },
+    "purchase-history": {
+      text: "Lịch sử đơn hàng",
+      url: "/account/purchase-history",
+    },
+    "change-password": {
+      text: "Đổi mật khẩu",
+      url: "/account/change-password",
+    },
     "search-result": { text: "Kết quả tìm kiếm" },
-    "cart": { text: "Giỏ hàng", url: "/cart" },
+    cart: { text: "Giỏ hàng", url: "/cart" },
     "order-information": { text: "Đặt hàng", url: "/order-information" },
-    "review": { text: "Đánh giá sản phẩm" },
-    "notifications": { text: "Thông báo", url: "/notifications" },
-  }
+    review: { text: "Đánh giá sản phẩm" },
+    notifications: { text: "Thông báo", url: "/notifications" },
+    category: { text: "Danh mục sản phẩm", url: "/category" },
+  };
 
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
     return { text: "Chi tiết sản phẩm" };
   }
 
   if (!data[namePage] && data[prevNamePage]) {
-    return { text: `Chi tiết ${data[prevNamePage].text.toLowerCase()}` }
+    return { text: `Chi tiết ${data[prevNamePage].text.toLowerCase()}` };
   }
 
   return data[namePage];
-}
+};
 
 export default function Breadcrumb() {
   const pathName: string = " " + usePathname();
@@ -50,14 +57,20 @@ export default function Breadcrumb() {
       <nav className={cx("breadcrumb__container")}>
         <ul className={cx("breadcrumb")}>
           {data.map((d, index: number) => {
-            return d && <li key={index}>
-              {d.url
-                ? <Link href={d?.url}>{d.text}</Link>
-                : <span>{d?.text}</span>}
-            </li>
+            return (
+              d && (
+                <li key={index}>
+                  {d.url ? (
+                    <Link href={d?.url}>{d.text}</Link>
+                  ) : (
+                    <span>{d?.text}</span>
+                  )}
+                </li>
+              )
+            );
           })}
         </ul>
       </nav>
     </Suspense>
-  )
+  );
 }

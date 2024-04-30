@@ -37,13 +37,13 @@ export default function OAuth() {
 
       const data = await res.json();
 
-      // console.log("login success: ", data.message);
-      // Cookies.set("accessToken", data.token);
-      // Cookies.set("currentUser", data.data._id);
-      localStorage.removeItem("currentUser");
-      localStorage.setItem("currentUser", JSON.stringify(data.data));
-
-      window.location.href = "/";
+      if (data.status === 200) {
+        console.log("Login successful");
+        // Set the localStorage and currentUser state
+        localStorage.setItem("currentUser", JSON.stringify(data.data));
+        Cookies.set("currentUser", data.token);
+        window.location.href = "/"; //xác thực thành công thì điều hướng về home
+      }
     } catch (error) {
       // console.log("Could not login with Google", error);
     }
@@ -51,7 +51,7 @@ export default function OAuth() {
 
   return (
     <div className={cx("form-auth__social-media")}>
-      <p> Hoặc đăng ký bằng</p>
+      <p> Hoặc đăng nhập bằng</p>
       <div className={cx("form-auth__social-buttons")}>
         <button
           type="button"
@@ -62,7 +62,7 @@ export default function OAuth() {
 
         <button type="button" className={cx("social-image")}>
           <Image
-            src="/imgs/social_media//facebook-icon.svg"
+            src="/imgs/social_media/facebook-icon.svg"
             alt="Facebook"
             fill
           />

@@ -75,7 +75,7 @@ export default function ProductReviewItem({
             return (
               <div
                 className={cx("review-item__image-div")}
-                onClick={handleOpenModal}
+                // onClick={handleOpenModal}
                 key={index}>
                 <CldImage
                   className={cx("review-item__image")}

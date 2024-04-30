@@ -45,7 +45,7 @@ const linkToSocialMedias: IFooterLinkProps[] = [
 ];
 
 const email: string = "forcatshop.contact@gmail.com";
-const locationURL: string = "https://maps.app.goo.gl/GbwxfoKVzvYoN1hn9";
+const locationURL: string = "https://maps.app.goo.gl/cfvEL5VyP3TfBLGTA";
 
 export default function Footer() {
   return (

@@ -21,6 +21,7 @@ section {
 }
 
 .product-content {
+    width: 100%;
     display: grid;
     grid-template-columns: 482px 1fr;
     gap: 12px;
@@ -61,6 +62,12 @@ section {
 
 .desktop-hidden {
     display: none !important;
+}
+
+.related-container {
+    background-color: #ffecbd;
+    padding: 2rem 1rem;
+    border-radius: 8px;
 }
 
 @media only screen and (max-width: 1025px) {
