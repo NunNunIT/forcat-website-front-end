@@ -1,7 +1,3 @@
-body {
-  background-color: white !important;
-}
-
 .about-us__container {
   width: 80%;
   max-width: 1152px;
@@ -9,6 +5,7 @@ body {
   flex-direction: column;
   padding: 0 0 1.5rem;
   gap: 2vh;
+  background-color: white !important;
 }
 
 .about-us__about-information {
