@@ -3,7 +3,6 @@
   /* max-width: 1152px; */
   display: flex;
   flex-direction: column;
-  padding: 0 0.5rem;
   /* gap: 2vh; */
   padding-top: 4rem;
   background-color: white;
@@ -12,8 +11,11 @@
   margin-bottom: 0;
 }
 
-.about-us__container>section {
+.about-us__about-information,
+.about-us__about-members,
+.about-us__about-value {
   width: 100%;
+  max-width: unset !important;
 }
 
 section.white {
@@ -289,7 +291,7 @@ h1.about-us__about-information__title {
   justify-content: flex-start;
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 860px) {
   .about-us__value__container,
   .about-us__about-value__wrapper,
   .about-us__members__container,
@@ -297,22 +299,6 @@ h1.about-us__about-information__title {
   .about-us__service__container,
   .about-us__about-information__wrapper {
     width: 90%;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .about-us__container {
-    width: 100%;
-    padding-inline: 1rem;
-  }
-
-  .about-us__value__container,
-  .about-us__about-value__wrapper,
-  .about-us__members__container,
-  .about-us__about-members__wrapper,
-  .about-us__service__container,
-  .about-us__about-information__wrapper {
-    width: 100%;
   }
 
   .about-us__members__wrapper {
@@ -340,8 +326,31 @@ h1.about-us__about-information__title {
   .about-us__about-members {
     padding: 32px 12px 12px 32px;
   }
+}
 
-  .about-information {
-    
+@media screen and (max-width: 430px) {
+  .about-us__container {
+    width: 100%;
+  }
+
+  .about-us__value__container,
+  .about-us__about-value__wrapper,
+  .about-us__members__container,
+  .about-us__about-members__wrapper,
+  .about-us__service__container,
+  .about-us__about-information__wrapper {
+    width: 100%;
+  }
+
+  .about-us__about-members {
+    padding: 12px;
+  }
+  .about-us__members__container {
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  .about-us__members__wrapper {
+    width: 40%;
   }
 }

@@ -1,6 +1,6 @@
 .search-result__container {
   width: 80%;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 4px 0;
   max-width: 1152px;
   display: flex;

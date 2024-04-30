@@ -1,6 +1,6 @@
 .main-container {
   width: 100%;
-  margin: 0 auto;
+  margin: -0.5rem auto;
 }
 
 .content-container {
@@ -27,9 +27,9 @@
   padding-bottom: 24px;
 }
 
-section {
+/* section {
   max-width: 1152px;
-}
+} */
 
 .tip-products-wrapper {
   border-radius: 4px;
