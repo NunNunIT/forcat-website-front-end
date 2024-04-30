@@ -59,7 +59,7 @@ export default function Breadcrumb() {
 
   return (
     <Suspense fallback={<>Đang nạp dữ liệu</>}>
-      <nav className={cx("breadcrumb__container")}>
+      <nav className={cx("breadcrumb__container", "breadcrumb-container")}>
         <ul className={cx("breadcrumb")}>
           {data.map((d, index: number) => {
             return (

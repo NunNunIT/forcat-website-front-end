@@ -74,10 +74,10 @@ export default function AboutUsPage() {
       </section>
       <section className="about-us__about-members">
         <div className="about-us__about-members__wrapper">
-          <h1 className="about-us__about-members__title">
+          <div className="about-us__about-members__title">
             Đội ngũ nhân viên
             <span className="about-us__about-members__title-after"></span>
-          </h1>
+          </div>
           <h4 className="about-us__about-members__subtitle">
             Chúng tôi tạo dựng môi trường làm việc thân thiện cho nhân viên, các
             cấp quản lý luôn lắng nghe, thấu hiểu, hỗ trợ cho nhân viên mình có
@@ -163,10 +163,10 @@ export default function AboutUsPage() {
       </section> */}
       <section className="about-us__about-value">
         <div className="about-us__about-value__wrapper">
-          <h1 className="about-us__about-value__title">
+          <div className="about-us__about-value__title">
             Giá trị cốt lõi
             <span className="about-us__about-value__title-after"></span>
-          </h1>
+          </div>
           <h4 className="about-us__about-value__subtitle">
             Vì sứ mệnh tạo nên những giá trị thương hiệu, chúng tôi đã, đang và
             sẽ luôn nỗ lực hết mình vì sự phát triển – khẳng định thương hiệu

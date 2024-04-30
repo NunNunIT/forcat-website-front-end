@@ -37,7 +37,7 @@ export default async function CategoryPage() {
     <main className="category-container">
       {(category ?? []).map((item, itemIndex) => {
         return (
-          <div className="category__item" key={itemIndex}>
+          <section className="category__item" key={itemIndex}>
             <Link
               href={`/search-result?category=${item.category_type}`}
               className="category__title">
@@ -70,7 +70,7 @@ export default async function CategoryPage() {
                 );
               })}
             </div>
-          </div>
+          </section>
         );
       })}
     </main>
