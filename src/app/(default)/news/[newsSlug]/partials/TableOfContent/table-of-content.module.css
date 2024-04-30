@@ -54,7 +54,7 @@
   text-decoration: underline;
 }
 
-.table-of-content__item a:is(:visited, :active) {
+.table-of-content__item a:is(:link, :visited, :active) {
   color: unset;
 }
 

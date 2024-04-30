@@ -22,6 +22,7 @@ section {
 .news-page__container h1 {
   grid-area: h1;
 
+  margin-block: .25rem;
   font-weight: bold;
 }
 
