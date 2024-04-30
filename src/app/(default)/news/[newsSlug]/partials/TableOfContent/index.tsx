@@ -53,6 +53,7 @@ export default function TableOfContent({
           {(headings ?? []).map((heading) => {
             const level = heading.tagName.toLowerCase();
             const id = heading.getAttribute("id");
+            if (id === "ref") return "";
             return (
               <li
                 key={id}
