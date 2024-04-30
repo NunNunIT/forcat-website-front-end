@@ -50,8 +50,7 @@
 }
 
 .table-of-content__item a:is(:hover, :focus) {
-  color: var(--primary-mau0-2);
-  text-decoration: underline;
+  color: var(--primary-mau4-2) !important;
 }
 
 .table-of-content__item a:is(:link, :visited, :active) {
