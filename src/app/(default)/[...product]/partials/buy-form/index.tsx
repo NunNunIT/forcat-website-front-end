@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // import components
 import { CustomerQuantityInputGroup, CustomerStarRating } from "@/components";
@@ -30,9 +30,7 @@ const cx = classNames.bind(styles);
 
 function filterCurrentVariant(productVariants, currentVariantSlug) {
   return productVariants.filter(
-    (variant) =>
-      createSlug(variant.variant_name) ==
-      decodeURIComponent(createSlug(currentVariantSlug))
+    (variant) => variant.variant_slug == currentVariantSlug
   )[0];
 }
 
@@ -61,22 +59,22 @@ export default function ProductBuyForm({
   pid,
   productInfo,
   currentVariantSlug,
-  mobileOnly,
+  desktopOnly,
   ...props
 }: {
   pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
-  mobileOnly?: string;
+  desktopOnly?: string;
 }) {
   const filteredVariant = filterCurrentVariant(
     productInfo.product_variants,
     currentVariantSlug
   );
-  const currentVariant =
-    currentVariantSlug == "" || !filteredVariant
-      ? productInfo.product_variants[0]
-      : filteredVariant;
+
+  const currentVariant = !filteredVariant
+    ? productInfo.product_variants[0]
+    : filteredVariant;
 
   const [quantityValue, setQuantityValue] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
@@ -110,22 +108,24 @@ export default function ProductBuyForm({
     );
     const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
 
-    localStorage.removeItem("buyItem");
+    localStorage.removeItem("buyItems");
     localStorage.setItem(
-      "buyItem",
+      "buyItems",
       JSON.stringify({
-        type: "buyItem",
-        payload: {
-          product_id: productId,
-          product_name: productName,
-          variant_id: variantId,
-          variant_name: variantName,
-          variant_image_link: variantImageLink,
-          variant_image_alt: variantImageAlt,
-          quantity: quantity,
-          unit_price: unitPrice,
-          discount_amount: currentVariant.discount_amount,
-        },
+        type: "buyItems",
+        payload: [
+          {
+            product_id: productId,
+            product_name: productName,
+            variant_id: variantId,
+            variant_name: variantName,
+            variant_image_link: variantImageLink,
+            variant_image_alt: variantImageAlt,
+            quantity: quantity,
+            unit_price: unitPrice,
+            discount_amount: currentVariant.discount_amount,
+          },
+        ],
       })
     );
 
@@ -136,6 +136,50 @@ export default function ProductBuyForm({
   const handleCloseModal = () => {
     const cartModal = cartModalRef.current;
     cartModal.classList.add("hidden");
+  };
+
+  // handle change header cart quantity
+  const handleChangeHeaderCartQuantity = (
+    productId: string,
+    variantId: string,
+    quantity: number
+  ) => {
+    // Add header cart when add cart
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const cartItems = currentUser.cart ?? [];
+
+    // Check if the item already exists in the array
+    const duplicatedIndex = cartItems.findIndex(
+      (item) => item.product_id === productId && item.variant_id == variantId
+    );
+
+    const updateAddCartItems =
+      duplicatedIndex !== -1
+        ? [
+            ...cartItems.slice(0, duplicatedIndex),
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+            ...cartItems.slice(duplicatedIndex + 1),
+          ]
+        : [
+            ...cartItems,
+            {
+              product_id: productId,
+              variant_id: variantId,
+              quantity: quantity,
+            },
+          ];
+
+    currentUser.cart = updateAddCartItems;
+
+    localStorage.removeItem("currentUser");
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    headerCartQuantity.innerHTML = currentUser.cart.length;
   };
 
   // handle add cart
@@ -164,11 +208,15 @@ export default function ProductBuyForm({
 
       const cartModal = cartModalRef.current;
       cartModal.classList.remove("hidden");
+
+      handleChangeHeaderCartQuantity(productId, variantId, quantity);
+    } else {
+      window.location.href = "/login";
     }
   };
 
   useEffect(() => {
-    isLogIn = localStorage.getItem("currentUser");
+    isLogIn = localStorage.getItem("currentUser") ? true : false;
 
     window.addEventListener("beforeunload", handleProductChangePage);
     const links = document.querySelectorAll("a");
@@ -186,7 +234,7 @@ export default function ProductBuyForm({
 
   return (
     <section
-      className={cx("product-buy-form", "product", mobileOnly)}
+      className={cx("product-buy-form", "product", desktopOnly)}
       ref={buyFormRef}>
       <h1 className={cx("product__name")}>{productInfo.product_name}</h1>
       <div className={cx("product__rating", "rating")}>
@@ -211,21 +259,35 @@ export default function ProductBuyForm({
         <h3 className={cx("variants__title")}>Loại sản phẩm</h3>
         <div className={cx("variants__group")}>
           {(productInfo.product_variants ?? []).map((item, index) => {
-            return (
-              <React.Fragment key={index}>
-                <ProductVariant
-                  pid={pid}
-                  variant={{
-                    id: item._id,
-                    name: item.variant_name,
-                    url: `/${productInfo.product_slug}/${item.variant_slug}}`,
-                    image: {
-                      url: (item.variant_imgs[0] as any).link,
-                      alt: (item.variant_imgs[0] as any).alt,
-                    },
-                  }}></ProductVariant>
-              </React.Fragment>
-            );
+            const variantInfo = {
+              id: item._id,
+              name: item.variant_name,
+              url: `/${productInfo.product_slug}/${item.variant_slug}`,
+              image: {
+                url: (item.variant_imgs[0] as any).link,
+                alt: (item.variant_imgs[0] as any).alt,
+              },
+            };
+
+            if (!filteredVariant && index == 0) {
+              return (
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={variantInfo}
+                    firstActive={true}></ProductVariant>
+                </React.Fragment>
+              );
+            } else {
+              return (
+                <React.Fragment key={index}>
+                  <ProductVariant
+                    pid={pid}
+                    variant={variantInfo}
+                    firstActive={false}></ProductVariant>
+                </React.Fragment>
+              );
+            }
           })}
         </div>
       </div>

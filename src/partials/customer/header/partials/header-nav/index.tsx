@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import classNameNames from "classnames/bind";
+import Cookies from "js-cookie";
 
 // import components
 import { CustomerLogo } from "@/components";
@@ -49,6 +50,7 @@ export default function CustomerHeaderNav() {
       }
 
       localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
       setCurrentUser(null);
       window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
       return;

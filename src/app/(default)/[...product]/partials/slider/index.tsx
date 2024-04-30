@@ -18,11 +18,13 @@ export default function CustomerProductSlider({
   productImgs,
   desktopOnly,
   mobileOnly,
+  tabletOnly,
   ...prop
 }: {
   productImgs: ISliderImage[];
   desktopOnly?: string;
   mobileOnly?: string;
+  tabletOnly?: string;
 }) {
   // border thumbnail when hovered
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,7 +47,7 @@ export default function CustomerProductSlider({
 
   // scroll thumbnails container when button is clicked
   const thumbnailsContainer = useRef(null);
-  const SCROLL_OFFSET = 150;
+  const SCROLL_OFFSET = 200;
   const handleScrollLeft = () => {
     if (thumbnailsContainer.current) {
       const container = thumbnailsContainer.current as HTMLDivElement;
@@ -126,23 +128,25 @@ export default function CustomerProductSlider({
         </div>
 
         {currentIndex > 0 && (
-          <div
+          <button
             className={cx("slider__btn", "slider__back", desktopOnly)}
-            onClick={handleClickLeft}>
+            onClick={handleClickLeft}
+            type="button">
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_back_ios
             </span>
-          </div>
+          </button>
         )}
 
         {currentIndex < productImgs.length - 1 && (
-          <div
+          <button
             className={cx("slider__btn", "slider__forward", desktopOnly)}
-            onClick={handleClickRight}>
+            onClick={handleClickRight}
+            type="button">
             <span className={cx("material-icons-round", "slider__icon")}>
               arrow_forward_ios
             </span>
-          </div>
+          </button>
         )}
 
         <div className={cx("slider__current-index")}>
@@ -152,7 +156,7 @@ export default function CustomerProductSlider({
 
       <div className={cx("slider__thumbnails-div")}>
         <div className={cx("slider__thumbnails")} ref={thumbnailsContainer}>
-          {(productImgs.slice(0, productImgs.length - 1) ?? []).map(
+          {(productImgs.slice(0, productImgs.length) ?? []).map(
             (img, index) => (
               <div className={cx("slider__thumbnail-div")} key={index}>
                 <CldImage
@@ -170,21 +174,23 @@ export default function CustomerProductSlider({
           )}
         </div>
 
-        <div
-          className={cx("slider__btn", "slider__back", mobileOnly)}
-          onClick={handleScrollLeft}>
+        <button
+          className={cx("slider__btn", "slider__back", tabletOnly)}
+          onClick={handleScrollLeft}
+          type="button">
           <span className={cx("material-icons-round", "slider__icon")}>
             arrow_back_ios
           </span>
-        </div>
+        </button>
 
-        <div
-          className={cx("slider__btn", "slider__forward", mobileOnly)}
-          onClick={handleScrollRight}>
+        <button
+          className={cx("slider__btn", "slider__forward", tabletOnly)}
+          onClick={handleScrollRight}
+          type="button">
           <span className={cx("material-icons-round", "slider__icon")}>
             arrow_forward_ios
           </span>
-        </div>
+        </button>
       </div>
     </section>
   );

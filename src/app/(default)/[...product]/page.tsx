@@ -98,18 +98,18 @@ export default async function ProductPage({
         <div className="product-content--left product-content-left">
           <ProductSlider
             productImgs={productImgs}
-            mobileOnly="mobile-hidden"
-            desktopOnly="desktop-hidden"></ProductSlider>
+            desktopOnly="desktop-hidden tablet-display"
+            tabletOnly="tablet-hidden"></ProductSlider>
           <ProductBuyForm
             pid={pid}
             productInfo={productInfo}
             currentVariantSlug={slug[1] ?? ""}
-            mobileOnly="desktop-hidden"></ProductBuyForm>
+            desktopOnly="desktop-hidden"></ProductBuyForm>
           <ProductSpecification
             productDetails={productDetails}></ProductSpecification>
           <ProductDescription
             productDescription={productDescription}
-            mobileOnly="desktop-hidden"></ProductDescription>
+            desktopOnly="desktop-hidden mobile-display"></ProductDescription>
         </div>
 
         <div className="product-content--right product-content-right mobile-hidden">

@@ -1,0 +1,1 @@
+export { default as CustomerPurchaseDetailWrapper } from "./PurchaseDetailWrapper";

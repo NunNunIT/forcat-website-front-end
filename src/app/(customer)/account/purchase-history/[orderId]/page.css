@@ -110,6 +110,11 @@
   margin-bottom: .5rem;
 }
 
+.order-detail__cost--skeleton {
+  float: right;
+  min-width: 20rem;
+}
+
 .order-detail__cost {
   float: right;
 
