@@ -34,7 +34,7 @@ export default function OrderProduct({ buyInfo }: { buyInfo: IBuyInfo }) {
                 {buyInfo.product_name}
               </h4>
               <p className={cx("order-product__variant")}>
-                Phân loại hàng: {buyInfo.product_name}
+                Phân loại: {buyInfo.variant_name}
               </p>
               <p className={cx("order-product__amount")}>x{buyInfo.quantity}</p>
             </div>

@@ -14,7 +14,7 @@ section {
     "group-news group-banner"
     "pagination pagination";
   grid-template-columns: 9fr 3fr;
-  column-gap: min(4rem, 8vw);
+  column-gap: 2rem;
   row-gap: 1rem;
   margin: 1rem auto;
 }
@@ -29,12 +29,14 @@ section {
 .news__group-news-item {
   grid-area: group-news;
 
+  padding: 1rem;
+  background-color: white;
+
   display: grid;
   grid-template-areas:
     "news-item news-item";
   grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(1rem, 2vw, 2rem);
-  row-gap: clamp(2rem, 4vw, 4rem);
+  gap: 1rem;
 }
 
 .news__group-banner {

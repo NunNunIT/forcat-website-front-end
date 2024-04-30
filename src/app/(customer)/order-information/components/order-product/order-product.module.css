@@ -1,5 +1,6 @@
 .order-product__element {
   display: flex;
+  gap: 3%;
   background-color: white;
   flex-direction: row;
   justify-content: space-between;
