@@ -1,5 +1,6 @@
 // import libs
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -64,13 +65,16 @@ export default async function NewsPage({
         ))}
       </section>
       <aside className="news__group-banner">
-        <div className="news__banner-container">
+        <Link
+          href="/search-result?discount=True"
+          className="news__banner-container"
+        >
           <Image
             src="/imgs/banner/banner.webp"
             alt="The first banner in news-page"
             fill
           />
-        </div>
+        </Link>
       </aside>
       <CustomerPagination className="news__pagination" maxPage={data.maxPage} />
     </main>
