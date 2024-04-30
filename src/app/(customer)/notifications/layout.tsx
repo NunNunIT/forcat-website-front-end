@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { CustomerNotificationAside } from "./partials";
 
 export const metadata: Metadata = {
-  title: "Forcat | Thông báo",
+  title: "Thông báo",
   description:
     "Trang này cung cấp thông tin quan trọng và cập nhật từ ForCat Shop.",
 };

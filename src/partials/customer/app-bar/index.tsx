@@ -22,7 +22,7 @@ const appBarData = [
     text: "Danh mục",
   },
   {
-    url: "/search-result?sortBy=hot",
+    url: "/search-result",
     iconData: "local_fire_department",
     text: "HOT",
   },
@@ -57,15 +57,15 @@ export default function AppBar() {
           if (index === 0) {
             isActive = appBarData.slice(-4).every((data) => {
               if (Array.isArray(data.url)) {
-                return !data.url.includes(pathName);
+                return !data.url.some((url) => pathName.includes(url));
               } else {
-                return data.url !== pathName;
+                return !pathName.includes(data.url);
               }
             });
           } else {
             isActive = Array.isArray(navData.url)
-              ? navData.url.includes(pathName)
-              : pathName === navData.url;
+              ? navData.url.some((url) => pathName.includes(url))
+              : pathName.includes(navData.url);
           }
           const url = Array.isArray(navData.url) ? navData.url[0] : navData.url;
           return (

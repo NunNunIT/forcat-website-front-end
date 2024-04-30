@@ -14,7 +14,13 @@ import { BACKEND_URL_ORDERS } from "@/utils/commonConst";
 import "./page.css";
 
 const fetcher: Fetcher<IReviewItem[], string> = async (url: string) => {
-  const RES: Response = await fetch(url);
+  const RES: Response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
   const JSON: IResponseJSON = await RES.json();
   // if (!JSON.success) throw JSON;
   return JSON.data as IReviewItem[];

@@ -10,7 +10,7 @@ section {
 
   display: grid;
   grid-template-areas:
-    "h1 h1"
+    "h1 group-banner"
     "group-news group-banner"
     "pagination pagination";
   grid-template-columns: 9fr 3fr;
@@ -19,11 +19,58 @@ section {
   margin: 1rem auto;
 }
 
-.news-page__container h1 {
+.news-page__top {
   grid-area: h1;
 
-  margin-block: .25rem;
+  /* margin-block: .25rem;
+  font-weight: bold; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: .5rem;
+}
+
+.news-page__top h1 {
+  margin-block: 0;
   font-weight: bold;
+}
+
+.news-page__top>form {
+  width: fit-content;
+  display: flex;
+}
+
+.news-page__top>form>input {
+  padding: .5rem 1rem;
+  border: 2px solid #e5e5e5;
+  border-radius: .5rem 0 0 .5rem !important;
+  width: 100%;
+  max-width: 25rem;
+}
+
+.news-page__top>form>input:placeholder-shown {
+  color: #e5e5e5;
+}
+
+.news-page__search-btn {
+  width: 3.5rem;
+  height: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0 .5rem .5rem 0;
+  border: none;
+  background-color: var(--primary-mau0-2);
+  color: var(--white);
+}
+
+.news-page__search-btn:hover {
+  background-color: var(--primary-mau0-3);
+  cursor: pointer;
 }
 
 .news__group-news-item {
@@ -44,10 +91,12 @@ section {
 }
 
 .news__banner-container {
+  display: flex;
+  top: calc(var(--header-height-without-nav) + 1rem);
   width: 100%;
   aspect-ratio: 8/20;
-
-  position: relative;
+  position: sticky;
+  justify-content: flex-start;
 }
 
 .news__pagination {
@@ -68,7 +117,7 @@ section {
   }
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 821px) {
   .news-page__container {
     grid-template-columns: 8fr 4fr;
     gap: 1rem;
@@ -79,7 +128,15 @@ section {
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 431px) {
+  .news-page__top {
+    padding: 0;
+  }
+
+  .news-page__top>form {
+    display: none;
+  }
+
   .news-page__container {
     width: 100%;
     padding-inline: 1rem;
@@ -88,7 +145,11 @@ section {
       "group-news"
       "pagination";
     grid-template-columns: 1fr;
+  }
 
+  .news__group-news-item {
+    padding: 0;
+    background-color: transparent;
   }
 
   .news__group-banner {

@@ -112,9 +112,9 @@ export default async function Home() {
         <CustomerSlider />
         <div className="content-container">
           <h2 className="tip-products__label">
-            <div className="tip-products__title non-hover">
+            <span className="tip-products__title non-hover">
               Danh mục
-            </div>
+            </span>
             <span className="tip-products__title-after"></span>
           </h2>
           <CustomerCategories />

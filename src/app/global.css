@@ -11,7 +11,7 @@
   --black-o20: rgba(0, 0, 0, 0.2);
   --green: #119726;
   --white-gray: #f9f9f9;
-  --bg-white: #f1f1f1;
+  --bg-white: #f8f8f8;
   --bg-gray: #f5f6f8;
   --del-gray: #868181;
   --bg-white-o30: rgba(241, 241, 241, 0.3);
@@ -176,7 +176,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
-  background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar {
