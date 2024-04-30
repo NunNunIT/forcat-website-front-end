@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 export default function AboutUsPage() {
   return (
     <main className="about-us__container">
-      <section className="about-us__about-information">
+      <section className="about-us__about-information white">
         <div className="about-us__about-information__wrapper">
           <h1 className="about-us__about-information__title">
-            FORCAT SHOP - Cửa hàng Online
+            FORCAT SHOP - Cửa hàng Vật phẩm dành cho Mèo
             <span className="about-us__about-information__title-after"></span>
           </h1>
           <h4 className="about-us__about-information__subtitle">
@@ -72,7 +72,7 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-      <section className="about-us__about-members">
+      <section className="about-us__about-members brown-img">
         <div className="about-us__about-members__wrapper">
           <div className="about-us__about-members__title">
             Đội ngũ nhân viên
@@ -161,7 +161,7 @@ export default function AboutUsPage() {
           alt="about-us-banner-1"
         />
       </section> */}
-      <section className="about-us__about-value">
+      <section className="about-us__about-value brown">
         <div className="about-us__about-value__wrapper">
           <div className="about-us__about-value__title">
             Giá trị cốt lõi

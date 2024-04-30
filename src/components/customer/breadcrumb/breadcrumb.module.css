@@ -5,6 +5,7 @@
   align-items: center;
 
   overflow-y: scroll;
+  z-index: 9999;
 }
 
 .breadcrumb__container::-webkit-scrollbar {
