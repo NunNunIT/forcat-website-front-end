@@ -24,8 +24,17 @@
   background: transparent;
 }
 
+.pagination-container button:hover,
+.pagination-container a:hover {
+  border: 2px solid var(--primary-mau0-2);
+  color: var(--primary-mau0-2);
+  cursor: pointer; /* Specify cursor type, e.g., pointer */
+  font-weight: bold;
+} 
+
 .pagination-container button:disabled {
-  background: var(--white-o2);
+  background: transparent;
+  border: none;
   color: var(--black-o8);
   cursor: not-allowed;
 }
