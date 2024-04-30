@@ -55,6 +55,8 @@ body {
 	text-align: center;
 	margin-bottom: 12px;
 	margin-top: 8px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 #sidebar .side-menu {
@@ -163,7 +165,10 @@ body {
 	background-color: #FAFAFA;
 	border-radius: 8px;
 	margin: auto;
-	width: 55%;
+	top: 10%;
+	width: 80%;
+	min-width:100px;
+	max-width: 500px;
 	height: auto;
 	display: flex;
 	justify-content: space-between;

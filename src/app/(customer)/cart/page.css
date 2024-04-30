@@ -277,12 +277,12 @@ section {
         grid-template-columns: none;
     }
 
-    .ipad-hidden {
-        display: none;
+    .tablet-hidden {
+        display: none !important;
     }
 
-    .ipad-display {
-        display: flex;
+    .tablet-display {
+        display: flex !important;
     }
 
     section {
@@ -436,7 +436,12 @@ section {
     }
 
     .cart-bill-footer {
+        padding: 8px;
         bottom: 64px;
+    }
+
+    .cart-footer-buy-group {
+        gap: 8px;
     }
 
     .cart-footer-btns {

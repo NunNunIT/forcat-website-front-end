@@ -20,7 +20,7 @@ export default function CustomerCarouselCard({ product }) {
       <div className={cx("carousel__card")}>
         <Link
           className={cx("carousel__card-main")}
-          href={`/${product.product_slug}?pid=${product.product_id_hashed}`}>
+          href={`/${product.product_slug}/${product.variant_slug}?pid=${product.product_id_hashed}`}>
           {product.highest_discount ? (
             <div className={cx("carousel__card--badge")}>
               - {product.highest_discount} %
@@ -42,23 +42,22 @@ export default function CustomerCarouselCard({ product }) {
               <div className={cx("carousel__card-rate")}>
                 <CustomerStarRating rating={product.product_avg_rating} />
               </div>
-              <h4 title={product.product_name}>{product.product_name}</h4>
+              <h3 title={product.product_name}>{product.product_name}</h3>
               <p> Hàng cực hot </p>
             </div>
           </div>
           <div className={cx("carousel__card-bottom-details")}>
             <div className={cx("carousel__card-price")}>
-              {product.highest_discount ? (
+            <h3>
+              {product.highest_discount && product.lowest_price ? (
                 <>
-                  <h2>{convertNumberToMoney(product.lowest_price)}</h2>
+                  {convertNumberToMoney(product.lowest_price)}
                   <small>{convertNumberToMoney(product.product_price)}</small>
                 </>
               ) : (
-                <>
-                  <h2>{convertNumberToMoney(product.product_price)}</h2>
-                  <small className={cx("display-none")}> alo</small>
-                </>
+                <>{convertNumberToMoney(product.product_price)}</>
               )}
+            </h3>
             </div>
           </div>
         </Link>

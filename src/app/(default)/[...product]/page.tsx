@@ -12,6 +12,7 @@ import {
   ProductReview,
 } from "./partials";
 
+import { CustomerCarouselSlider } from "@/components";
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
 
@@ -35,6 +36,25 @@ async function getProduct(slug, pid) {
     return res.json();
   } catch {
     return notFound();
+  }
+}
+
+// fetch data
+async function getRelatedProducts(slug, pid) {
+  try {
+    const res = await fetch(
+      `${BACKEND_URL}/product/getRecommend/${encodeURIComponent(
+        pid.replaceAll(" ", "+")
+      )}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+    // if (!res.ok || slug[2]) return notFound();
+    const data = await res.json();
+    return data.data;
+  } catch {
+    // return notFound();
   }
 }
 
@@ -68,6 +88,7 @@ export default async function ProductPage({
   const slug = params.product;
   const { pid } = searchParams;
   const res = await getProduct(slug, pid);
+  const relatedProducts = await getRelatedProducts(slug, pid);
   const productInfo: IBuyForm = {
     product_id: res.data.product._id,
     product_name: res.data.product.product_name,
@@ -98,18 +119,19 @@ export default async function ProductPage({
         <div className="product-content--left product-content-left">
           <ProductSlider
             productImgs={productImgs}
-            mobileOnly="mobile-hidden"
-            desktopOnly="desktop-hidden"></ProductSlider>
+            desktopOnly="desktop-hidden tablet-display"
+            tabletOnly="tablet-hidden"></ProductSlider>
           <ProductBuyForm
             pid={pid}
             productInfo={productInfo}
             currentVariantSlug={slug[1] ?? ""}
-            mobileOnly="desktop-hidden"></ProductBuyForm>
+            desktopOnly="desktop-hidden"
+            mobileOnly="mobile-display"></ProductBuyForm>
           <ProductSpecification
             productDetails={productDetails}></ProductSpecification>
           <ProductDescription
             productDescription={productDescription}
-            mobileOnly="desktop-hidden"></ProductDescription>
+            desktopOnly="desktop-hidden mobile-display"></ProductDescription>
         </div>
 
         <div className="product-content--right product-content-right mobile-hidden">
@@ -135,6 +157,12 @@ export default async function ProductPage({
         reviewOverview={reviewOverview}
         productReviews={productReviews}
         productId={productId}></ProductReview>
+      <div className="related-container">
+      <h2 className="tip-products__label">
+        Xem các sản phẩm gợi ý khác
+      </h2>
+      <CustomerCarouselSlider productList={relatedProducts} />
+      </div>
     </main>
   );
 }

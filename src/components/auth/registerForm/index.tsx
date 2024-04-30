@@ -4,6 +4,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 // import utils
 import { isValidEmail } from "@/utils/index";
@@ -17,6 +18,14 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  if (typeof window !== "undefined") {
+    // Code sử dụng localStorage
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      // Redirect or handle accordingly
+      window.location.href = "/";
+    }
+  }
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
@@ -107,14 +116,21 @@ const RegisterForm = () => {
           body: JSON.stringify(formData), // Assuming formData is an object
         });
         const data = await res.json();
-        if (data.status != 200) {
+        if (data.status === 400) {
           newErrors.user_email = "Email đã được sử dụng!";
           setErrors(newErrors);
+          setLoading(false);
           return;
         }
-        setLoading(false);
-        localStorage.setItem("currentUser", JSON.stringify(data.data));
-        window.location.href = "/"; //xác thực thành công thì điều hướng về home
+
+        if (data.status === 200) {
+          console.log("Login successful");
+          // Set the localStorage and currentUser state
+          localStorage.removeItem("currentUser");
+          localStorage.setItem("currentUser", JSON.stringify(data.data));
+          Cookies.set("currentUser", data.token);
+          window.location.href = "/"; //xác thực thành công thì điều hướng về home
+        }
       } catch (error) {
         setLoading(false);
         setError(true);

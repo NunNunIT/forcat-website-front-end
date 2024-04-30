@@ -1,0 +1,56 @@
+.breadcrumb__container {
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+
+  overflow-y: scroll;
+}
+
+.breadcrumb__container::-webkit-scrollbar {
+  display: none;
+}
+
+.breadcrumb {
+  border-radius: .5rem;
+  background: white;
+
+  width: 80%;
+  max-width: 1152px;
+  min-height: 2rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  margin-bottom: 0;
+
+  display: flex;
+}
+
+.breadcrumb a:is(:active, :visited) {
+  color: black;
+}
+
+.breadcrumb>*:not(:last-child)::after {
+  font-weight: 500;
+  content: "/";
+  margin-inline: .5rem;
+}
+
+.breadcrumb>*:last-child {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1025px) {
+  .breadcrumb {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 431px) {
+  .breadcrumb__container {
+    padding-inline: 1rem;
+  }
+
+  .breadcrumb {
+    width: 100%;
+  }
+}

@@ -21,7 +21,7 @@ export default function CustomerProductCard({ product }) {
   return (
     <div className={cx("product-card")}>
       <Link
-        href={`/${product.product_slug}?pid=${product.product_id_hashed}`}
+        href={`/${product.product_slug}/${product.variant_slug}?pid=${product.product_id_hashed}`}
         className={cx("product__card-main")}>
         {product.highest_discount ? (
           <div className={cx("product__card--badge")}>
@@ -43,7 +43,7 @@ export default function CustomerProductCard({ product }) {
             <div className={cx("product-rate")}>
               <CustomerStarRating rating={product.product_avg_rating} />
             </div>
-            <h4 title={product.product_name}>{product.product_name}</h4>
+            <h3 title={product.product_name}>{product.product_name}</h3>
           </div>
         </div>
         <div className={cx("product-bottom-details")}>

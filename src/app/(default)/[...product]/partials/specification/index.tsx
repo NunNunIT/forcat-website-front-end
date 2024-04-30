@@ -48,9 +48,11 @@ export default function ProductSpecification({
               <div className={cx("specifications__type")}>
                 {productDetails[key].name}
               </div>
-              <div className={cx("specifications__info")}>
-                {productDetails[key].value}
-              </div>
+              <div
+                className={cx("specifications__info")}
+                dangerouslySetInnerHTML={{
+                  __html: productDetails[key].value,
+                }}></div>
             </div>
           );
         })}
@@ -59,9 +61,12 @@ export default function ProductSpecification({
         {!isSeeMoreActive && (
           <div className={cx("see-more-btn__gradient")}></div>
         )}
-        <div className={cx("see-more-btn__text")} onClick={handleSeeMore}>
+        <button
+          className={cx("see-more-btn__text")}
+          onClick={handleSeeMore}
+          type="button">
           {isSeeMoreActive ? "Thu gọn" : "Xem thêm"}
-        </div>
+        </button>
       </div>
     </section>
   );

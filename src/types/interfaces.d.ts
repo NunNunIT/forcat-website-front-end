@@ -126,6 +126,10 @@ interface IArticleDescriptionMediaPRops {
 interface INewsItemProps {
   article_id_hashed: string;
   article_name: string;
+  article_avt?: {
+    link: string;
+    alt: string;
+  };
   article_slug: string;
   article_type: string;
   article_short_description: string;
@@ -196,7 +200,6 @@ interface IReviewItem {
 }
 
 interface IUserLocal {
-  _id: string;
   user_name: string;
   user_avt_img: string;
   recent_notification: {

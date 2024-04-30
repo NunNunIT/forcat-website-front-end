@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import classNames from "classnames/bind";
+import Cookies from "js-cookie";
 
 import { BACKEND_URL } from "@/utils/commonConst";
 
@@ -27,19 +28,22 @@ export default function MobileLogout() {
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
-        method: "POST",
+        method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      if (res.ok) {
-        localStorage.removeItem("currentUser");
-        window.location.href = "/"; // Đặt currentUser thành null sau khi đăng xuất
-      } else {
+      if (!res.ok) {
         console.error("Logout failed:", await res.text());
+        return;
       }
+
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
+      window.location.reload();
+      return;
     } catch (error) {
       // console.error("Logout error:", error);
     }

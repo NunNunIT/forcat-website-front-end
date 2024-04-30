@@ -6,9 +6,6 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-// import utils
-import { BACKEND_URL } from "@/utils/commonConst";
-
 // import components
 import { CustomerCarouselCard, LoadingSpinner } from "@/components";
 
@@ -20,42 +17,20 @@ import styles from "./carousel.module.css";
 
 const cx = classNames.bind(styles);
 
-const fetchTopRatedProducts = async () => {
-  try {
-    const response = await fetch(
-      `${BACKEND_URL}/productList/getTopRatedProducts`,
-      {
-        next: { revalidate: 60 },
-      }
-    );
-    // if (!response.ok) {
-    //   throw new Error("Failed to fetch top rated products");
-    // }
-    const data = await response.json();
-    return data.data;
-  } catch (error) {
-    // console.error("Error fetching top rated products:", error);
-    // throw error;
-  }
-};
 
-export default function CustomerCarouselSlider() {
-  const [topRatedProducts, setTopRatedProducts] = useState([]);
+export default function CustomerCarouselSlider({ productList }) {
+  const [products, setProducts] = useState([]); // State to store products
   const [loading, setLoading] = useState(true); // State to track loading status
 
+  // Fetch or receive product data using useEffect
   useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const data = await fetchTopRatedProducts();
-        setTopRatedProducts(data);
-        setLoading(false); // Set loading to false after data is fetched
-      } catch (error) {
-        // console.error("Error fetching initial data:", error);
-      }
-    };
+    // Logic to fetch or receive product data from an API or external source
+    // Replace with your actual data fetching or receiving logic
+    const fetchedProducts = productList; // Assuming productList is the data
 
-    fetchInitialData();
-  }, []);
+    setProducts(fetchedProducts);
+    setLoading(false);
+  }, [productList]); 
 
   return (
     <>
@@ -79,8 +54,8 @@ export default function CustomerCarouselSlider() {
             navigation={true}
             loop={true}
             modules={[Autoplay, Pagination, Navigation]}>
-            {topRatedProducts &&
-              (topRatedProducts ?? []).map((product) => (
+            {products &&
+              (products ?? []).map((product) => (
                 <SwiperSlide key={product.product_id_hashed}>
                   <CustomerCarouselCard product={product} />
                 </SwiperSlide>

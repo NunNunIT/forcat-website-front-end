@@ -18,6 +18,15 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
+  if (typeof window !== "undefined") {
+    // Code sử dụng localStorage
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      // Redirect or handle accordingly
+      window.location.href = "/";
+    }
+  }
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePasswordVisibility = () => {
@@ -75,13 +84,14 @@ const LoginForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData), // Assuming formData is an object
-          credentials: "include", 
+          credentials: "include",
         });
         let data = await res.json();
         setLoading(false);
         if (data.status === 200) {
           console.log("Login successful");
           // Set the localStorage and currentUser state
+          localStorage.removeItem("currentUser");
           localStorage.setItem("currentUser", JSON.stringify(data.data));
           Cookies.set("currentUser", data.token);
           window.location.href = "/"; //xác thực thành công thì điều hướng về home
@@ -94,7 +104,7 @@ const LoginForm = () => {
         }
 
         if (data.status == 401) {
-          newErrors.user_email = "Email không chính xác!";
+          // newErrors.user_email = "Email không chính xác!";
           newErrors.user_password = "Mật khẩu không chính xác!";
           setErrors(newErrors);
           return;

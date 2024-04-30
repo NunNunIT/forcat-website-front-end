@@ -5,6 +5,7 @@ export { default as AuthForgotForm } from "./auth/forgotForm";
 
 // customer components
 export { default as CustomerCarouselSlider } from "./customer/carousel-wrapper";
+export { default as CustomerNewsCarouselSlider } from "./customer/news-carousel-wrapper";
 export { default as CustomerSlider } from "./customer/slider";
 export { default as CustomerCategories } from "./customer/categories";
 export { default as CustomerCategoryCard } from "./customer/category-card";
@@ -19,6 +20,7 @@ export { default as CustomerPagination } from "./customer/pagination";
 export { default as CustomerCarouselCard } from "./customer/carousel-card";
 export { default as Scrollup } from "./customer/scroll-up";
 export { default as ContactAside } from "./customer/contact-aside";
+export { default as CustomerBreadcrumb } from "./customer/breadcrumb";
 
 // default components
 export { default as LoadingSpinner } from "./default/loading";
