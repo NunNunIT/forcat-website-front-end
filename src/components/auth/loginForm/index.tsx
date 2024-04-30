@@ -21,7 +21,7 @@ const LoginForm = () => {
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
     const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) {
+    if (currentUser) {
       // Redirect or handle accordingly
       window.location.href = "/";
     }
