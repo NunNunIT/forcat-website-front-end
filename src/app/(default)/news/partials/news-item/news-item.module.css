@@ -15,6 +15,7 @@
   background-color: white;
 
   transition: .2s ease-in-out;
+  box-shadow: 0 2px 7px #dfdfdf;
 }
 
 .news__container:hover {
@@ -46,6 +47,7 @@
 }
 
 .news__name {
+  font-size: 1.4rem ;
   height: 2.75em;
   overflow: hidden;
   text-overflow: ellipsis;

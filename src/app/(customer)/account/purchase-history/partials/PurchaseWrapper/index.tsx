@@ -51,7 +51,7 @@ const getFullBackendURLOrders = (status: string, page: string): string => {
 
 export default function PurchaseWrapper() {
   const searchParams = useSearchParams();
-  const currentStatus = searchParams.get("status") ?? "all";
+  const currentStatus = searchParams.get("type") ?? "all";
   const currentPage = searchParams.get("page") ?? "1";
   const fullURL: string = getFullBackendURLOrders(currentStatus, currentPage);
   const { data, error, isLoading } = useSWR(fullURL, fetcher);

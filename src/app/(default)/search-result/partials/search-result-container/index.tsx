@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 import { CustomerProductCard, CustomerPagination } from "@/components";
 
 // import css
-import "./search-result.css";
+// import "./search-result.css";
 
 export default function SearchResultPage({ iteamFind, searchResults }) {
   const totalResults = searchResults.totalResults;

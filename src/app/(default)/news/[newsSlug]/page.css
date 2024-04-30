@@ -21,7 +21,26 @@
 .news-detail-page address,
 .news-detail-page__date,
 .news-detail-page__author {
-  color: var(--dark7);
+  font-size: .8125rem;
+}
+
+.news-info {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.news-info__img-container {
+  aspect-ratio: 1/1;
+  width: 3rem;
+
+  position: relative;
+}
+
+.news-detail-page address {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
 }
 
 .news-detail-page img {
@@ -154,6 +173,10 @@
     padding-inline: 1rem;
     grid-template-columns: 1fr;
     gap: 0;
+  }
+
+  .news-detail-page {
+    padding: 0;
   }
 
   .related-page-container {

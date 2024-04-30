@@ -84,14 +84,14 @@
   }
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 821px) {
   .account_aside {
     top: 5rem;
   }
-}
 
-@media screen and (max-width: 417px) {
   .account__aside {
     display: none;
   }
 }
+
+@media screen and (max-width: 431px) {}

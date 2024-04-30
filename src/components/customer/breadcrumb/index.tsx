@@ -31,7 +31,15 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     review: { text: "Đánh giá sản phẩm" },
     notifications: { text: "Thông báo", url: "/notifications" },
     category: { text: "Danh mục sản phẩm", url: "/category" },
+    contact: { text: "Liên hệ", url: "/contact" },
+    "about-us": { text: "Về chúng tôi", url: "/about-us" },
+    "term-of-use": { text: "Điều khoản chung", url: "term-of-use" },
+    "privacy-policy": { text: "Chính sách bảo mật", url: "privacy-policy" }
   };
+
+  if (namePage === "mobile-account") {
+    return { text: "Điều hướng", url: "/account/mobile-account" };
+  }
 
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
     return { text: "Chi tiết sản phẩm" };
@@ -54,7 +62,7 @@ export default function Breadcrumb() {
 
   return (
     <Suspense fallback={<>Đang nạp dữ liệu</>}>
-      <nav className={cx("breadcrumb__container")}>
+      <nav className={cx("breadcrumb__container", "breadcrumb-container")}>
         <ul className={cx("breadcrumb")}>
           {data.map((d, index: number) => {
             return (
