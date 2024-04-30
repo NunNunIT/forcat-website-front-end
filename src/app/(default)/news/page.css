@@ -88,15 +88,16 @@ section {
 
 .news__group-banner {
   grid-area: group-banner;
+  display: sticky;
 }
 
 .news__banner-container {
-  position: sticky;
+  display: flex;
   top: var(--header-height-without-nav);
   width: 100%;
   aspect-ratio: 8/20;
-
   position: relative;
+  justify-content: flex-start;
 }
 
 .news__pagination {
