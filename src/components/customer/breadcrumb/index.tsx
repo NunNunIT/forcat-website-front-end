@@ -31,6 +31,7 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     review: { text: "Đánh giá sản phẩm" },
     notifications: { text: "Thông báo", url: "/notifications" },
     category: { text: "Danh mục sản phẩm", url: "/category" },
+    contact: { text: "Liên hệ", url: "/contact" },
   };
 
   if (namePage === "mobile-account") {
