@@ -23,20 +23,17 @@ async function getSearchProduct(searchParams) {
   try {
     // Khởi tạo mảng rỗng để chứa các thành phần của query string
     const queryParams = [];
-
-    // Kiểm tra và thêm searchKey vào queryParams nếu không null
     if (searchParams.searchKey) {
       queryParams.push(`searchKey=${searchParams.searchKey}`);
     }
-
-    // Kiểm tra và thêm category vào queryParams nếu không null
     if (searchParams.category) {
       queryParams.push(`category=${searchParams.category}`);
     }
-
-    // Kiểm tra và thêm discount vào queryParams nếu không null
     if (searchParams.discount) {
       queryParams.push(`discount=${searchParams.discount}`);
+    }
+    if (searchParams.topRate) {
+      queryParams.push(`sortBy=hot`);
     }
 
     // Thêm page vào queryParams
@@ -68,10 +65,23 @@ export default async function SearchResultPage({
   searchParams?: { [key: string]: string };
 }) {
   // console.log("Lấy từ url", searchKey);
+  let iteamFind;
+  if (searchParams.searchKey) {
+    iteamFind = searchParams.searchKey;
+  } else if (searchParams.category) {
+    iteamFind = searchParams.category;
+  } else if (searchParams.discount) {
+    iteamFind = "discountTrue";
+  } else if (searchParams.sortBy == "hot") {
+    iteamFind = "topRateTrue";
+  } else if (searchParams.sortBy == "new") {
+    iteamFind = "newTrue";
+  }
+
   const searchResults = await getSearchProduct(searchParams);
   return (
     <SearchResultContainer
-      searchKey={searchParams.searchKey ?? searchParams.category ?? 0}
+    iteamFind={iteamFind}
       searchResults={searchResults}
     />
   );

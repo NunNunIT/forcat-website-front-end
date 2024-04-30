@@ -15,13 +15,12 @@ import { CustomerProductCard, CustomerPagination } from "@/components";
 // import css
 import "./search-result.css";
 
-export default function SearchResultPage({ searchKey, searchResults }) {
+export default function SearchResultPage({ iteamFind, searchResults }) {
   const totalResults = searchResults.totalResults;
   const totalPage = searchResults.totalPages;
   const currentPage = searchResults.currentPage;
 
   let searchResultsProducts;
-  // console.log("Từ khóa tìm kiếm", searchKey);
 
   if (searchResults) {
     searchResultsProducts = searchResults.searchProducts;
@@ -434,15 +433,17 @@ export default function SearchResultPage({ searchKey, searchResults }) {
         <div className="search-result__main__heading">
           <p className="search-result__main__count">
             Tìm thấy{" "}
-            <span className="search-result__highlight">
-              {totalResults}
-            </span>{" "}
-            {searchKey === 0 ? (
+            <span className="search-result__highlight">{totalResults}</span>{" "}
+            {iteamFind === "discountTrue" ? (
               "sản phẩm khuyến mãi"
+            ) : iteamFind === "topRateTrue" ? (
+              "sản phẩm Hot"
+            ): iteamFind === "newTrue" ? (
+              "sản phẩm mới"
             ) : (
               <>
                 kết quả cho từ khóa &quot;
-                <span className="search-result__key">{searchKey}</span>
+                <span className="search-result__key">{iteamFind}</span>
                 &quot;
               </>
             )}

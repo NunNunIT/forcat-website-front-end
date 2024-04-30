@@ -112,9 +112,9 @@ export default async function Home() {
         <CustomerSlider />
         <div className="content-container">
           <h2 className="tip-products__label">
-            <Link href="/search-result" className="tip-products__title">
+            <div className="tip-products__title">
               Danh mục
-            </Link>
+            </div>
             <span className="tip-products__title-after"></span>
           </h2>
           <CustomerCategories />
@@ -122,8 +122,9 @@ export default async function Home() {
         <div className="wrapper color">
           <div className="content-container">
             <h2 className="tip-products__label">
-              <Link href="/search-result" className="tip-products__title">
+              <Link href="/search-result?sortBy=hot" className="tip-products__title">
                 Gợi ý hôm nay
+                <p> Xem tất cả </p>
               </Link>
               <span className="tip-products__title-after"></span>
             </h2>
@@ -134,8 +135,9 @@ export default async function Home() {
         <section className="content-container tip-products-wrapper wrapper--white">
           <div className="tip-products">
             <h2 className="tip-products__label">
-              <Link href="/search-result" className="tip-products__title">
+              <Link href="/search-result?sortBy=new" className="tip-products__title">
                 Hàng mới về
+                <p> Xem tất cả </p>
               </Link>
               <span className="tip-products__title-after"></span>
             </h2>
@@ -199,8 +201,9 @@ export default async function Home() {
 
           <div className="tip-products">
             <h2 className="tip-products__label">
-              <Link href="#" className="tip-products__title">
+              <Link href="/search-result?discount=True" className="tip-products__title">
                 Khuyến mãi hấp dẫn
+                <p> Xem tất cả </p>
               </Link>
               <span className="tip-products__title-after"></span>
             </h2>
@@ -221,6 +224,7 @@ export default async function Home() {
             <h2 className="tip-products__label">
               <Link href="/news" className="tip-products__title">
                 Tin tức hằng ngày
+                <p> Xem tất cả </p>
               </Link>
               <span className="tip-products__title-after"></span>
             </h2>

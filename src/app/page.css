@@ -70,12 +70,17 @@ section {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  color: var(--white);
 }
 
-.tip-products__title {
+.tip-products__title:hover,
+.tip-products__title:hover p {
+  color: var(--primary-mau3-1);
+}
+
+.tip-products__title, .tip-products__title p {
   text-decoration: none;
   color: black;
+  text-align: center;
 }
 
 .tip-products__title-after::after {
