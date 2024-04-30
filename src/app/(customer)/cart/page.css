@@ -382,6 +382,7 @@ section {
     .cart {
         width: 100%;
         margin: 0;
+        padding: 1rem;
         background-color: var(--white);
         gap: 0px;
     }

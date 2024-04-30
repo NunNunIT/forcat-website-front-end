@@ -54,7 +54,7 @@ export default function ProductVariant({
           fill={true}
         />
       </div>
-      <span className={cx("variant__name")}>{variant.name}</span>
+      <div className={cx("variant__name")}>{variant.name}</div>
     </Link>
   );
 }

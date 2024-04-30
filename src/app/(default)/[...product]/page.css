@@ -87,6 +87,18 @@ section {
     }
 }
 
+@media only screen and (max-width: 921px) {
+    .product-content {
+        grid-template-columns: 340px 1fr;
+    }
+
+    .decoration-div {
+        width: 80px;
+        height: 80px;
+        right: -16px;
+    }
+}
+
 @media only screen and (max-width: 821px) {
     .tablet-hidden {
         display: none !important;
@@ -122,6 +134,24 @@ section {
         width: 80px;
         height: 80px;
         right: -20px;
+    }
+}
+
+@media only screen and (max-width: 725px) {
+    .product-content {
+        grid-template-columns: 260px 1fr;
+    }
+
+    .decoration-div {
+        width: 60px;
+        height: 60px;
+        right: -12px;
+    }
+}
+
+@media only screen and (max-width: 621px) {
+    .product-content {
+        grid-template-columns: 210px 1fr;
     }
 }
 
