@@ -12,7 +12,7 @@ section {
   grid-template-areas:
     "h1 group-banner"
     "group-news group-banner"
-    "pagination pagination";
+    "pagination group-banner";
   grid-template-columns: 9fr 3fr;
   column-gap: 2rem;
   row-gap: 1rem;
@@ -88,14 +88,19 @@ section {
 
 .news__group-banner {
   grid-area: group-banner;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
 }
 
 .news__banner-container {
   display: flex;
-  top: calc(var(--header-height-without-nav) + 1rem);
+  /* top: calc(var(--header-height-without-nav) + 1rem); */
   width: 100%;
   aspect-ratio: 8/20;
-  position: sticky;
+  position: relative;
   justify-content: flex-start;
 }
 

@@ -65,10 +65,21 @@ export default async function NewsPage({
         ))}
       </section>
       <aside className="news__group-banner">
+        {(data.articles ?? []) && (data.articles.length > 4) && (
+          <Link
+            href="/search-result?discount=True"
+            className="news__banner-container">
+            <Image
+              src="/imgs/banner/banner.png"
+              alt="Banner discount Khuyễn mãi"
+              fill
+            />
+          </Link>
+        )}
+
         <Link
           href="/search-result?discount=True"
-          className="news__banner-container"
-        >
+          className="news__banner-container">
           <Image
             src="/imgs/banner/banner.png"
             alt="Banner discount Khuyễn mãi"
