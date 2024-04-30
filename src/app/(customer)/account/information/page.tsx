@@ -167,7 +167,6 @@ useEffect(() => {
                       </label>
                       <div className="userName">
                         <input
-                          defaultValue={user.user_name}
                           type="text"
                           id="userName"
                           name="userName"
