@@ -8,7 +8,7 @@
 .not-found-container {
     width: 50%;
     max-width: 500px;
-    min-width: 240px;
+    min-width: 100px;
     aspect-ratio: 1 / 1;
     background-color: var(--white);
     border-radius: 50%;
@@ -22,7 +22,9 @@
 
 .not-found__image-div {
     position: relative;
-    width: 60%;
+    margin: 0 auto;
+    min-height: 100px;
+    max-height: 500px;
     aspect-ratio: 1 / 1;
 }
 
@@ -50,9 +52,5 @@
     .not-found-container {
         width: 100%;
         gap: 4px;
-    }
-
-    .not-found__image-div {
-        width: 50%;
     }
 }
