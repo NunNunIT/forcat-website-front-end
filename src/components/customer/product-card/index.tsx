@@ -43,7 +43,7 @@ export default function CustomerProductCard({ product }) {
             <div className={cx("product-rate")}>
               <CustomerStarRating rating={product.product_avg_rating} />
             </div>
-            <h4 title={product.product_name}>{product.product_name}</h4>
+            <h3 title={product.product_name}>{product.product_name}</h3>
           </div>
         </div>
         <div className={cx("product-bottom-details")}>

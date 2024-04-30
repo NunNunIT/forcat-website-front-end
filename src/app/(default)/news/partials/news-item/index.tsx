@@ -16,6 +16,7 @@ export default function ArticleItem(props: INewsItemProps) {
     article_id_hashed,
     article_slug,
     article_name,
+    article_avt,
     article_type,
     article_short_description,
     article_info,
@@ -30,9 +31,9 @@ export default function ArticleItem(props: INewsItemProps) {
       <article className={cx("news__container")}>
         <div className={cx("news__content-container")}>
           <span className={cx("news__type")}>{article_type}</span>
-          <h2 className={cx("news__name")}>{article_name}</h2>
+          <h3 className={cx("news__name")}>{article_name}</h3>
           <div className={cx("news__info")}>
-            <address>
+            {/* <address>
               <span>
                 Bởi:{" "}
                 <strong className={cx("news__author")}>
@@ -45,7 +46,7 @@ export default function ArticleItem(props: INewsItemProps) {
                   ? convertDateToHourDayMonthYear(article_info.published_date)
                   : ""}
               </time>
-            </address>
+            </address> */}
             <p className={cx("news__short-description")}>
               {article_short_description}
             </p>
@@ -53,8 +54,8 @@ export default function ArticleItem(props: INewsItemProps) {
         </div>
         <div className={cx("news__cover-container")}>
           <Image
-            src="/imgs/news_covers/article_1.png"
-            alt={`Image cover of ${article_name}`}
+            src={`${article_avt.link}`}
+            alt={`${article_avt.alt}`}
             fill
           />
         </div>

@@ -5,18 +5,13 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
 
 // import components
 import { CustomerQuantityInputGroup, CustomerStarRating } from "@/components";
 import { ProductVariant } from "../../components";
 
 // import utils
-import {
-  convertNumberToMoney,
-  convertMoneyToNumber,
-  createSlug,
-} from "@/utils";
+import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
@@ -60,12 +55,14 @@ export default function ProductBuyForm({
   productInfo,
   currentVariantSlug,
   desktopOnly,
+  mobileOnly,
   ...props
 }: {
   pid: any;
   productInfo: IBuyForm;
   currentVariantSlug: string;
   desktopOnly?: string;
+  mobileOnly?: string;
 }) {
   const filteredVariant = filterCurrentVariant(
     productInfo.product_variants,
@@ -97,37 +94,43 @@ export default function ProductBuyForm({
   const handleBuyItem = (event) => {
     // event.preventDefault();
 
-    const productId = productInfo.product_id;
-    const productName = productInfo.product_name;
-    const variantId = currentVariant._id;
-    const variantName = currentVariant.variant_name;
-    const variantImageLink = currentVariant.variant_imgs[0].link;
-    const variantImageAlt = currentVariant.variant_imgs[0].alt;
-    const quantity = Number(
-      buyFormRef.current.querySelector(".quantity-input-group__input").value
-    );
-    const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
+    if (isLogIn) {
+      const productId = productInfo.product_id;
+      const productName = productInfo.product_name;
+      const variantId = currentVariant._id;
+      const variantName = currentVariant.variant_name;
+      const variantImageLink = currentVariant.variant_imgs[0].link;
+      const variantImageAlt = currentVariant.variant_imgs[0].alt;
+      const quantity = Number(
+        buyFormRef.current.querySelector(".quantity-input-group__input").value
+      );
+      const unitPrice = convertMoneyToNumber(unitPriceRef.current.innerHTML);
 
-    localStorage.removeItem("buyItems");
-    localStorage.setItem(
-      "buyItems",
-      JSON.stringify({
-        type: "buyItems",
-        payload: [
-          {
-            product_id: productId,
-            product_name: productName,
-            variant_id: variantId,
-            variant_name: variantName,
-            variant_image_link: variantImageLink,
-            variant_image_alt: variantImageAlt,
-            quantity: quantity,
-            unit_price: unitPrice,
-            discount_amount: currentVariant.discount_amount,
-          },
-        ],
-      })
-    );
+      localStorage.removeItem("buyItems");
+      localStorage.setItem(
+        "buyItems",
+        JSON.stringify({
+          type: "buyItems",
+          payload: [
+            {
+              product_id: productId,
+              product_name: productName,
+              variant_id: variantId,
+              variant_name: variantName,
+              variant_image_link: variantImageLink,
+              variant_image_alt: variantImageAlt,
+              quantity: quantity,
+              unit_price: unitPrice,
+              discount_amount: currentVariant.discount_amount,
+            },
+          ],
+        })
+      );
+
+      window.location.href = "/order-information";
+    } else {
+      window.location.href = "/login";
+    }
 
     // console.log("local", JSON.parse(localStorage.getItem("addBuyItems")));
   };
@@ -158,7 +161,7 @@ export default function ProductBuyForm({
         ? [
             ...cartItems.slice(0, duplicatedIndex),
             {
-              product_id: productId,
+              product: productId,
               variant_id: variantId,
               quantity: quantity,
             },
@@ -167,7 +170,7 @@ export default function ProductBuyForm({
         : [
             ...cartItems,
             {
-              product_id: productId,
+              product: productId,
               variant_id: variantId,
               quantity: quantity,
             },
@@ -179,7 +182,8 @@ export default function ProductBuyForm({
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
     const headerCartQuantity = document.querySelector(".header-cart-quantity");
-    headerCartQuantity.innerHTML = currentUser.cart.length;
+    if (headerCartQuantity)
+      headerCartQuantity.innerHTML = currentUser?.cart?.length ?? 0;
   };
 
   // handle add cart
@@ -210,6 +214,9 @@ export default function ProductBuyForm({
       cartModal.classList.remove("hidden");
 
       handleChangeHeaderCartQuantity(productId, variantId, quantity);
+
+      // auto close modal after 1s
+      setTimeout(handleCloseModal, 1000);
     } else {
       window.location.href = "/login";
     }
@@ -234,7 +241,7 @@ export default function ProductBuyForm({
 
   return (
     <section
-      className={cx("product-buy-form", "product", desktopOnly)}
+      className={cx("product-buy-form", "product", desktopOnly, mobileOnly)}
       ref={buyFormRef}>
       <h1 className={cx("product__name")}>{productInfo.product_name}</h1>
       <div className={cx("product__rating", "rating")}>
@@ -301,7 +308,8 @@ export default function ProductBuyForm({
           }}
           takeQuantity={setQuantityValue}></CustomerQuantityInputGroup>
         <p className={cx("product__is-stock")}>
-          {currentVariant?.in_stock ?? 0} sản phẩm có thể mua
+          {currentVariant?.in_stock ?? 0} sản phẩm{" "}
+          <span className={cx("product__is-stock-responsive")}>có thể mua</span>
         </p>
       </div>
       <div className={cx("product__total-price-div")}>
@@ -339,19 +347,20 @@ export default function ProductBuyForm({
                 fill={true}
               />
             </div>
-            <h3>Sản phẩm đã được thêm vào giỏ hàng</h3>
+            <h3 className={cx("cart-modal__text")}>
+              Sản phẩm đã được thêm vào giỏ hàng
+            </h3>
           </div>
         </div>
 
-        <Link
-          href={isLogIn ? "/order-information" : "/login"}
+        <div
           className={cx("buy-btns__buy-now", "buy-now-btn", "buy-btn")}
           onClick={handleBuyItem}>
           <span className={cx("material-icons-round", "buy-btn-icon")}>
             savings
           </span>
           <span className={cx("buy-btn-text")}>Mua ngay</span>
-        </Link>
+        </div>
       </div>
     </section>
   );

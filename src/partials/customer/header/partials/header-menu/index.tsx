@@ -72,7 +72,7 @@ function CustomerHeaderMenuSubCategoryItem(
     <li className={cx("cate-dropdown__wrapper")}>
       <Link
         className={cx("cate-dropdown__info")}
-        href={`/search-result?searchKey=${props.category_name}`}>
+        href={`/search-result?category=${props.category_name}`}>
         <span className={cx("cate-dropdown__img-container")}>
           <CldImage
             src={category_img}
@@ -88,7 +88,7 @@ function CustomerHeaderMenuSubCategoryItem(
           <span>Sản phẩm bán chạy nhất</span>
           <Link
             className={cx("cate-dropdown__title-link")}
-            href={`/search-result?searchKey=${props.category_name}`}>
+            href={`/search-result?category=${props.category_name}`}>
             <span>Xem tất cả</span>
             <span className="material-icons-outlined">chevron_right</span>
           </Link>

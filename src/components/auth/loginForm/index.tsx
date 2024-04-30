@@ -18,6 +18,15 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
+  if (typeof window !== "undefined") {
+    // Code sử dụng localStorage
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      // Redirect or handle accordingly
+      window.location.href = "/";
+    }
+  }
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePasswordVisibility = () => {
@@ -95,7 +104,7 @@ const LoginForm = () => {
         }
 
         if (data.status == 401) {
-          newErrors.user_email = "Email không chính xác!";
+          // newErrors.user_email = "Email không chính xác!";
           newErrors.user_password = "Mật khẩu không chính xác!";
           setErrors(newErrors);
           return;
