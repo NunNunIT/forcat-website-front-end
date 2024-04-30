@@ -32,6 +32,9 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     notifications: { text: "Thông báo", url: "/notifications" },
     category: { text: "Danh mục sản phẩm", url: "/category" },
     contact: { text: "Liên hệ", url: "/contact" },
+    "about-us": { text: "Về chúng tôi", url: "/about-us" },
+    "term-of-use": { text: "Điều khoản chung", url: "term-of-use" },
+    "privacy-policy": { text: "Chính sách bảo mật", url: "privacy-policy" }
   };
 
   if (namePage === "mobile-account") {
