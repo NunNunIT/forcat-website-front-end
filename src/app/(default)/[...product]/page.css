@@ -170,6 +170,16 @@ section {
         display: flex !important;
     }
 
+    .breadcrumb-container {
+        padding: 0;
+        margin: 0;
+        background-color: var(--white);
+    }
+
+    .breadcrumb-container ul {
+        padding: 0;
+    }
+
     .product {
         width: 100%;
         padding: 12px 8px;
