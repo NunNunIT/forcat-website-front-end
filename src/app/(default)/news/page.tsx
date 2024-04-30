@@ -70,8 +70,8 @@ export default async function NewsPage({
           className="news__banner-container"
         >
           <Image
-            src="/imgs/banner/banner.webp"
-            alt="The first banner in news-page"
+            src="/imgs/banner/banner.png"
+            alt="Banner discount Khuyễn mãi"
             fill
           />
         </Link>

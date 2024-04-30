@@ -94,7 +94,7 @@ export default function AboutUsPage() {
                 alt="Chất lượng thật - Giá trị thật"></Image>
             </div>
             <h4>Nguyễn Thị Hồng Nhung</h4>
-            <p>&quot;I want it, I get it&quot;</p>
+            <p>&quot;I want it, I get it.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -105,7 +105,7 @@ export default function AboutUsPage() {
                 alt="Tích điểm"></Image>
             </div>
             <h4>Phan Nguyễn Hải Yến</h4>
-            <p>&quot;I want to be like a cat, just meow meow&quot;</p>
+            <p>&quot;Amor Fati. Hãy yêu lấy vận mệnh của bạn.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -127,7 +127,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Trung Hiếu</h4>
-            <p>&quot;Không gì là tuyệt đối, cả việc chạy deadline&quot;</p>
+            <p>&quot;Deadline bất biến giữa dòng đời vạn biến.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -138,7 +138,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Viết Kha</h4>
-            <p>&quot;Be your own light, don't need to be too bright&quot;</p>
+            <p>&quot;Be your own light, don&apos;t need to be too bright.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -149,7 +149,7 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Nhật Tấn</h4>
-            <p>&quot;Mồn lèo&quot;</p>
+            <p>&quot;Mồn lèo.&quot;</p>
           </div>
         </div>
       </section>
