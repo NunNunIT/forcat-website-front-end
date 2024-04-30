@@ -31,16 +31,16 @@ export default function InformationPage() {
       return null;
     }
   };
-useEffect(() => {
-  const getUser = async () => {
-    const user = await fetchUser();
-    if (user) {
-      setUser(user);
-    }
-  };
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await fetchUser();
+      if (user) {
+        setUser(user);
+      }
+    };
 
-  getUser();
-}, []);
+    getUser();
+  }, []);
 
   const {
     user_name = "",
@@ -50,73 +50,73 @@ useEffect(() => {
     user_address = "",
   } = user ?? {};
 
-    const [userName, setUserName] = useState("");
-    const [userBirth, setUserBirth] = useState(user_birth);
-    const [userGender, setUserGender] = useState("");
-    const [userPhone, setUserPhone] = useState("");
-    const [userAddress, setUserAddress] = useState("");
-    const [street, setStreet] = useState("");
-    const [ward, setWard] = useState("");
-    const [district, setDistrict] = useState("");
-    const [province, setProvince] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userBirth, setUserBirth] = useState(user_birth);
+  const [userGender, setUserGender] = useState("");
+  const [userPhone, setUserPhone] = useState("");
+  const [userAddress, setUserAddress] = useState("");
+  const [street, setStreet] = useState("");
+  const [ward, setWard] = useState("");
+  const [district, setDistrict] = useState("");
+  const [province, setProvince] = useState("");
 
-    const handleDateChange = (date) => {
-      setUserBirth(date);
-    };
+  const handleDateChange = (date) => {
+    setUserBirth(date);
+  };
 
-    const handleStreetChange = (event) => {
-      setStreet(event.target.value);
-      setUserAddress(
-        `${event.target.value}, ${ward}, ${district}, ${province}`
+  const handleStreetChange = (event) => {
+    setStreet(event.target.value);
+    setUserAddress(
+      `${event.target.value}, ${ward}, ${district}, ${province}`
+    );
+  };
+
+  const handleWardChange = (event) => {
+    setWard(event.target.value);
+    setUserAddress(
+      `${street}, ${event.target.value}, ${district}, ${province}`
+    );
+  };
+
+  const handleDistrictChange = (event) => {
+    setDistrict(event.target.value);
+    setUserAddress(`${street}, ${ward}, ${event.target.value}, ${province}`);
+  };
+
+  const handleProvinceChange = (event) => {
+    setProvince(event.target.value);
+    setUserAddress(`${street}, ${ward}, ${district}, ${event.target.value}`);
+  };
+
+  const validateUserName = (userName: string): boolean => {
+    const re =
+      /^[a-zA-Z\sàáạảãăắằẵặẳâầấậẩẫđèéẹẻẽêềếệểễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữìíịỉĩỳýỵỷỹ]+$/;
+    return re.test(String(userName).trim());
+  };
+
+  const validateUserPhone = (userPhone: string): boolean => {
+    const re = /^[0-9]{10}$/;
+    return re.test(String(userPhone).trim());
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!validateUserName(userName)) {
+      console.error(
+        "Tên người dùng không hợp lệ. Chỉ chấp nhận chữ cái và khoảng trắng."
       );
-    };
+      return;
+    }
 
-    const handleWardChange = (event) => {
-      setWard(event.target.value);
-      setUserAddress(
-        `${street}, ${event.target.value}, ${district}, ${province}`
+    if (!validateUserPhone(userPhone)) {
+      console.error(
+        "Số điện thoại không hợp lệ. Chỉ chấp nhận 10 chữ số."
       );
-    };
+      return;
+    }
 
-    const handleDistrictChange = (event) => {
-      setDistrict(event.target.value);
-      setUserAddress(`${street}, ${ward}, ${event.target.value}, ${province}`);
-    };
-
-    const handleProvinceChange = (event) => {
-      setProvince(event.target.value);
-      setUserAddress(`${street}, ${ward}, ${district}, ${event.target.value}`);
-    };
-
-    const validateUserName = (userName: string): boolean => {
-      const re =
-        /^[a-zA-Z\sàáạảãăắằẵặẳâầấậẩẫđèéẹẻẽêềếệểễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữìíịỉĩỳýỵỷỹ]+$/;
-      return re.test(String(userName).trim());
-    };
-
-    const validateUserPhone = (userPhone: string): boolean => {
-      const re = /^[0-9]{10}$/;
-      return re.test(String(userPhone).trim());
-    };
-  
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-
-      if (!validateUserName(userName)) {
-        console.error(
-          "Tên người dùng không hợp lệ. Chỉ chấp nhận chữ cái và khoảng trắng."
-        );
-        return;
-      }
-
-      if (!validateUserPhone(userPhone)) {
-        console.error(
-          "Số điện thoại không hợp lệ. Chỉ chấp nhận 10 chữ số."
-        );
-        return;
-      }
-      
-      try {
+    try {
       const response = await fetch(`${BACKEND_URL}/user/edit`, {
         method: "PUT",
         headers: {
@@ -144,7 +144,7 @@ useEffect(() => {
     } catch (error) {
       console.error("Error in handleSubmit:", error);
     }
-    };
+  };
 
   if (isEditing) {
     return (
@@ -349,10 +349,9 @@ useEffect(() => {
                 </div>
                 <h3
                   className="information-item__edit"
-                  onClick={() => setIsEditing(true)}>
-                  
-                    Sửa
-                  
+                  onClick={() => setIsEditing(true)}
+                >
+                  Sửa
                 </h3>
               </div>
               <div className="information-item__main">
@@ -389,5 +388,5 @@ useEffect(() => {
         </section>
       </main>
     );
-}
+  }
 }

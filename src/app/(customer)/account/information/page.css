@@ -75,6 +75,209 @@
   width: 20%;
 }
 
+.information-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.information-item--top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.information-item__info {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.information-item__info p {
+  font-size: 1rem;
+}
+
+.information-item__edit {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-mau0-2);
+}
+
+.information-item__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.information-item__product-detail {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.information-item__product-name {
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.information-item__product-name h5 {
+  display: flex;
+  width: 20%;
+}
+
+.userName {
+  width: 60%;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.userBirth {
+  width: 60%;
+  border-bottom: 2px solid #eaeaea;
+}
+
+
+.userSex {
+  width: 35%;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.dropdown {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIxIDE5Ij48dGl0bGU+QXJ0Ym9hcmQgMTwvdGl0bGU+PGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjMDAwIj48Zz48cGF0aCBkPSJNMCAwaDF2MTlIMFYweiIgaWQ9IlNoYXBlIiBmaWxsLW9wYWNpdHk9Ii4xNSIvPjxwYXRoIGQ9Ik0xMSA4aDEwbC01IDUtNS01eiIgZmlsbC1vcGFjaXR5PSIuNSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==),
+    none;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.userEmail {
+  width: 60%;
+  border-bottom: 2px solid #eaeaea;
+
+}
+
+.userPhone {
+  width: 60%;
+  border-bottom: 2px solid #eaeaea;
+
+}
+
+.userAddress {
+  width: 60%;
+  border-bottom: 2px solid #eaeaea;
+
+}
+
+.information-item__product-name {
+  display: flex;
+  flex-direction: row;
+}
+
+.information-item__product-name label {
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 20%;
+}
+
+#userSex {
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-indent: 4px;
+  padding-right: 10px;
+}
+
+#userBirth {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 12px;
+  padding: 0 0 0 0;
+  /* text-indent: 4px; */
+}
+
+.popup__button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.popup__button a.btn.btn--outlined.pri.btn-cancel-edit {
+  width: 76.51px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0px 24px;
+}
+
+.btn-save {
+  width: 76.51px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0px 24px;
+}
+
+.information-item__product-detail input,
+select {
+  height: 40px;
+  font-size: 16px;
+  outline-color: var(--primary-color-1);
+}
+
+.information-item__product-detail select,
+.information-item__product-detail input[type="date"] {
+  cursor: pointer;
+}
+
+.information-item__product-detail input {
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.information-item__product-name {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.userBirth span {
+  display: flex;
+  cursor: pointer;
+  padding: 8px;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+}
+
+.information-item__product-name .error-message {
+  display: flex;
+  color: red;
+  font-size: 13px;
+  position: absolute;
+  bottom: -7px;
+  justify-content: center;
+  margin-top: 8px;
+  text-indent: 8px;
+}
+
+span.red-start {
+  color: red;
+}
+
+.react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-left: -10px;
+}
+
 @media only screen and (max-width: 1025px) {
   .information__status {
     padding: .75rem 1.5rem;
