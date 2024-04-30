@@ -39,7 +39,7 @@ export default function TableOfContent({
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <details className={`${cx("table-of-content-container")} ${className}`}>
+      <details className={`${cx("table-of-content-container")} ${className}`} open>
         <summary className={cx("table-of-content__title")}>
           <h2>Nội dung</h2>
           <span className={cx(`material-icons-outlined ${cx("icon-on")}`)}>
