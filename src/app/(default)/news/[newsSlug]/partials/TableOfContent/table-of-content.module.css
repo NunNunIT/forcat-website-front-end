@@ -29,7 +29,7 @@
   cursor: pointer;
 }
 
-.table-of-content__title h2{
+.table-of-content__title h2 {
   margin: 0;
 }
 
@@ -54,7 +54,7 @@
   text-decoration: underline;
 }
 
-.table-of-content__item a:is(:visited, :active) {
+.table-of-content__item a:is(:link, :visited, :active) {
   color: unset;
 }
 
@@ -65,4 +65,10 @@
 
 .table-of-content__item--h4 {
   margin-left: 1rem;
+}
+
+@media screen and (max-width: 431px) {
+  .table-of-content-container {
+    display: none;
+  }
 }

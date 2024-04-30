@@ -26,7 +26,8 @@ export default function ArticleItem(props: INewsItemProps) {
   return (
     <Link
       className={cx("news__link")}
-      href={`/news/${article_slug}?aid=${article_id_hashed}`}>
+      href={`/news/${article_slug}?aid=${article_id_hashed}`}
+    >
       <article className={cx("news__container")}>
         <div className={cx("news__content-container")}>
           <span className={cx("news__type")}>{article_type}</span>

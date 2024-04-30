@@ -308,7 +308,7 @@
   }
 }
 
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 821px) {
   .header__menu {
     display: none;
   }
@@ -318,4 +318,4 @@
   }
 }
 
-@media only screen and (max-width: 417px) {}
+@media only screen and (max-width: 431px) {}
