@@ -44,52 +44,10 @@ export async function middleware(request: NextRequest) {
   console.log("currentUserCookie", currentUserCookieValue);
   const res = await fetchUser(currentUserCookieValue);
 
-  if (res.status == 200) {
+  if (res.status == 200 ) {
     return NextResponse.next();
-    // console.log("Fake AccessToken !!!");
-    // const response = NextResponse.redirect(new URL("/login", request.url));
-    // response.headers.set(
-    //   "Set-Cookie",
-    //   `currentUser=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-    // );
-    // response.headers.set(
-    //   "Set-Cookie",
-    //   `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-    // );
-    // return response;
   }
   return NextResponse.redirect(new URL("/login", request.url));
-
-  // const accessTokenString = request.cookies.get("accessToken");
-  // console.log("Thứ tao cần", accessTokenString)
-
-  // if (
-  //   !accessTokenString &&
-  //   (request.url.includes("/login") || request.url.includes("/register"))
-  // ) {
-  //   return NextResponse.next();
-  // } else if (accessTokenString && request.url.includes("/logout")) {
-  //   return NextResponse.next();
-  // } else if (accessTokenString) {
-  //   const res = await fetchUser(accessTokenString.value);
-  //   if (res.status !== 200 && res.success == true) {
-  //     console.log("Fake AccessToken !!!");
-  //     const response = NextResponse.redirect(new URL("/login", request.url));
-  //     response.headers.set(
-  //       "Set-Cookie",
-  //       `currentUser=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-  //     );
-  //     response.headers.set(
-  //       "Set-Cookie",
-  //       `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; Secure; HttpOnly`
-  //     );
-  //     return response;
-  //   }
-  //   return NextResponse.next();
-  // }
-
-  // Nếu không có token hoặc giải mã thất bại, chuyển hướng đến trang đăng nhập
-  // return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {

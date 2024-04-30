@@ -18,6 +18,11 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  const currentUserCookieValue = localStorage.getItem("currentUser");
+  // Nếu có currentUser trong localStorage, chuyển hướng đến trang chính
+  if (currentUserCookieValue) {
+    window.location.href = "/";
+  }
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
