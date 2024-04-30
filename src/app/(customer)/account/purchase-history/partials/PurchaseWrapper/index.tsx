@@ -42,10 +42,10 @@ const fetcher: Fetcher<IDataResponseOrder, string> = async (url: string) => {
 
 const getFullBackendURLOrders = (status: string, page: string): string => {
   return (
-    BACKEND_URL_ORDERS +
-    "?" +
-    (status === "all" ? "" : `type=${status}&`) +
-    `page=${page}&limit=3`
+    BACKEND_URL_ORDERS
+    + "?"
+    + (status === "all" ? "" : `type=${status}&`)
+    + `page=${page}&limit=3`
   );
 };
 
@@ -61,7 +61,7 @@ export default function PurchaseWrapper() {
       {isLoading && (
         <CustomerSkeletonOrderItem />
       )}
-      {!isLoading && data.orders.length === 0 ? (
+      {!isLoading && (data?.orders ?? []).length === 0 ? (
         <div className="purchase-history__no-order">
           <div className="purchase-history__no-order-img-container">
             <Image
