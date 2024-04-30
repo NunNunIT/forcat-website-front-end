@@ -15,6 +15,7 @@
   background-color: white;
 
   transition: .2s ease-in-out;
+  box-shadow: 0 2px 7px #dfdfdf;
 }
 
 .news__container:hover {
@@ -40,21 +41,22 @@
   padding: .25rem .75rem;
   border-radius: .75rem;
 
-  background: var(--primary-mau0-2);
+  background: var(--primary-mau4-7);
   color: white;
-  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .news__name {
   height: 2.75em;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  color: var(--primary-mau0-2);
+  font-weight: 700;
+  color: #363636;
 }
 
 .news__container:hover .news__name {
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  color: var(--primary-mau4-2);
 }
 
 .news__author {
@@ -73,10 +75,9 @@
 
 .news__short-description {
   height: 2.5em;
-
   margin-top: 1.5rem;
   line-height: 1.25em;
-
+  color: var(--dark10);
   overflow: hidden;
   text-overflow: ellipsis;
 }

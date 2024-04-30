@@ -45,7 +45,7 @@ export default async function NewsPage({
   searchParams?: { [key: string]: string | undefined };
 }) {
   const page = searchParams?.page ?? "1";
-  const limit = searchParams?.limit ?? "2";
+  const limit = searchParams?.limit ?? "6";
   const fullURL: string = getFullBackendArticleUrl(page, limit);
   const data: IResponseNews = await fetcher(fullURL);
 

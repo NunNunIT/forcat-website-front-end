@@ -33,6 +33,10 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     category: { text: "Danh mục sản phẩm", url: "/category" },
   };
 
+  if (namePage === "mobile-account") {
+    return { text: "Điều hướng", url: "/account/mobile-account" };
+  }
+
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
     return { text: "Chi tiết sản phẩm" };
   }

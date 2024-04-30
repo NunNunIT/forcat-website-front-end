@@ -19,10 +19,31 @@ export const metadata: Metadata = {
 };
 
 // fetch data
-async function getSearchProduct(searchKey, page) {
+async function getSearchProduct(searchParams) {
   try {
+    // Khởi tạo mảng rỗng để chứa các thành phần của query string
+    const queryParams = [];
+    if (searchParams.searchKey) {
+      queryParams.push(`searchKey=${searchParams.searchKey}`);
+    }
+    if (searchParams.category) {
+      queryParams.push(`category=${searchParams.category}`);
+    }
+    if (searchParams.discount) {
+      queryParams.push(`discount=${searchParams.discount}`);
+    }
+    if (searchParams.topRate) {
+      queryParams.push(`sortBy=hot`);
+    }
+
+    // Thêm page vào queryParams
+    queryParams.push(`page=${searchParams.page}`);
+
+    // Tạo chuỗi query bằng cách nối các thành phần trong queryParams bằng "&"
+    const queryString = queryParams.join("&");
+
     const res = await fetch(
-      `${BACKEND_URL}/productList/search?searchKey=${searchKey}&page=${page}`,
+      `${BACKEND_URL}/productList/search?${queryString}`,
       {
         next: { revalidate: 60 },
       }
@@ -43,12 +64,24 @@ export default async function SearchResultPage({
   params: { "search-result": string };
   searchParams?: { [key: string]: string };
 }) {
-  const { searchKey, page } = searchParams; // Truy cập tham số truy vấn searchKey từ params
   // console.log("Lấy từ url", searchKey);
-  const searchResults = await getSearchProduct(searchKey, page);
+  let iteamFind;
+  if (searchParams.searchKey) {
+    iteamFind = searchParams.searchKey;
+  } else if (searchParams.category) {
+    iteamFind = searchParams.category;
+  } else if (searchParams.discount) {
+    iteamFind = "discountTrue";
+  } else if (searchParams.sortBy == "hot") {
+    iteamFind = "topRateTrue";
+  } else if (searchParams.sortBy == "new") {
+    iteamFind = "newTrue";
+  }
+
+  const searchResults = await getSearchProduct(searchParams);
   return (
     <SearchResultContainer
-      searchKey={searchKey}
+    iteamFind={iteamFind}
       searchResults={searchResults}
     />
   );

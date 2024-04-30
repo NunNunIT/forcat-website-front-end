@@ -383,7 +383,7 @@
 
 @media only screen and (max-width: 769px) {}
 
-@media only screen and (max-width: 641px) {
+@media only screen and (max-width: 821px) {
   .header--mobile__noti-support {
     display: flex;
   }
@@ -394,7 +394,7 @@
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 431px) {
   .header__nav-container {
     width: 100%;
     padding-inline: 1rem;

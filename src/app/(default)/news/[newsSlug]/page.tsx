@@ -1,5 +1,6 @@
 // import libs
 import type { Metadata, ResolvingMetadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 // import partials
@@ -91,21 +92,30 @@ export default async function NewsDetailPage({
             {newsDetail.article_type}
           </span>
           <h1 className="news-detail-page__name">{newsDetail.article_name}</h1>
-          <address>
-            <time
-              className="news-detail-page__date"
-              dateTime={newsDetail.article_info.published_date}>
-              {newsDetail.article_info.published_date
-                ? convertDateToHourDayMonthYear(
+          <div className="news-info">
+            <div className="news-info__img-container">
+              <Image
+                src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/474187OKi/anh-avatar-con-meo-cute_051723184.jpg"
+                alt="Author's avatar"
+                fill
+              />
+            </div>
+            <address>
+              <strong className="news-detail-page__author">
+                {newsDetail.article_info.author}
+              </strong>
+              <time
+                className="news-detail-page__date"
+                dateTime={newsDetail.article_info.published_date}
+              >
+                {newsDetail.article_info.published_date
+                  ? convertDateToHourDayMonthYear(
                     newsDetail.article_info.published_date
                   )
-                : ""}
-            </time>
-            {" - Viết bởi: "}
-            <strong className="news-detail-page__author">
-              {newsDetail.article_info.author}
-            </strong>
-          </address>
+                  : ""}
+              </time>
+            </address>
+          </div>
         </div>
         <div
           className="news-detail-pages--content"

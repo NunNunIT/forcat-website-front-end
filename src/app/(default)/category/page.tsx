@@ -39,7 +39,7 @@ export default async function CategoryPage() {
         return (
           <section className="category__item" key={itemIndex}>
             <Link
-              href={`/search-result?searchKey=${item.category_type}`}
+              href={`/search-result?category=${item.category_type}`}
               className="category__title">
               <h2 className="category__title-text">{item.category_type}</h2>
               <div className="category__title-div"></div>
@@ -48,7 +48,7 @@ export default async function CategoryPage() {
               {(item.subCategories ?? []).map((subItem, subItemIndex) => {
                 return (
                   <Link
-                    href={`/search-result?searchKey=${subItem.category_name}`}
+                    href={`/search-result?category=${subItem.category_name}`}
                     className="sub-category__item"
                     key={subItemIndex}>
                     <CategoryImage

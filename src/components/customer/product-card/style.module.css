@@ -86,7 +86,7 @@
 }
 
 
-.product-details h4 {
+.product-details h3 {
   font-weight: 500;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -103,9 +103,7 @@
   font-weight: 600 !important;
 }
 
-
-
-.product-details h4:hover {
+.product-card:hover .product-details h3 {
   color: var(--primary-mau4-2);
 }
 
