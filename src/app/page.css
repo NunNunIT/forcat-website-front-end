@@ -83,6 +83,10 @@ section {
   text-align: center;
 }
 
+.non-hover:hover {
+  color: black;
+}
+
 .tip-products__title-after::after {
   content: "::after";
   content: "";
