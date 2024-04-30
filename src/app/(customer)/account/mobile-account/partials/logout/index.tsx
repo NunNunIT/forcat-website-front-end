@@ -28,7 +28,7 @@ export default function MobileLogout() {
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
-        method: "POST",
+        method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export default function MobileLogout() {
 
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
-      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      window.location.reload();
       return;
     } catch (error) {
       // console.error("Logout error:", error);

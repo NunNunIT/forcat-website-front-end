@@ -433,13 +433,19 @@ export default function SearchResultPage({ searchKey, searchResults }) {
         </h1>
         <div className="search-result__main__heading">
           <p className="search-result__main__count">
-            Tìm thấy
+            Tìm thấy{" "}
             <span className="search-result__highlight">
-              {" "}
-              {totalResults}{" "}
+              {totalResults}
             </span>{" "}
-            kết quả cho từ khóa &quot;
-            <span className="search-result__key">{searchKey} </span>&quot;
+            {searchKey === 0 ? (
+              "sản phẩm khuyến mãi"
+            ) : (
+              <>
+                kết quả cho từ khóa &quot;
+                <span className="search-result__key">{searchKey}</span>
+                &quot;
+              </>
+            )}
           </p>
           {/* <SearchResultSort /> */}
           <div

@@ -95,7 +95,7 @@ const LoginForm = () => {
         }
 
         if (data.status == 401) {
-          newErrors.user_email = "Email không chính xác!";
+          // newErrors.user_email = "Email không chính xác!";
           newErrors.user_password = "Mật khẩu không chính xác!";
           setErrors(newErrors);
           return;

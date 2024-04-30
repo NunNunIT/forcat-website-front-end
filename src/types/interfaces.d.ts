@@ -200,7 +200,6 @@ interface IReviewItem {
 }
 
 interface IUserLocal {
-  _id: string;
   user_name: string;
   user_avt_img: string;
   recent_notification: {

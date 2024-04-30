@@ -51,7 +51,7 @@ export default function OAuth() {
 
   return (
     <div className={cx("form-auth__social-media")}>
-      <p> Hoặc đăng ký bằng</p>
+      <p> Hoặc đăng nhập bằng</p>
       <div className={cx("form-auth__social-buttons")}>
         <button
           type="button"
@@ -62,7 +62,7 @@ export default function OAuth() {
 
         <button type="button" className={cx("social-image")}>
           <Image
-            src="/imgs/social_media//facebook-icon.svg"
+            src="/imgs/social_media/facebook-icon.svg"
             alt="Facebook"
             fill
           />

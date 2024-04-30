@@ -19,10 +19,34 @@ export const metadata: Metadata = {
 };
 
 // fetch data
-async function getSearchProduct(searchKey, page) {
+async function getSearchProduct(searchParams) {
   try {
+    // Khởi tạo mảng rỗng để chứa các thành phần của query string
+    const queryParams = [];
+
+    // Kiểm tra và thêm searchKey vào queryParams nếu không null
+    if (searchParams.searchKey) {
+      queryParams.push(`searchKey=${searchParams.searchKey}`);
+    }
+
+    // Kiểm tra và thêm category vào queryParams nếu không null
+    if (searchParams.category) {
+      queryParams.push(`category=${searchParams.category}`);
+    }
+
+    // Kiểm tra và thêm discount vào queryParams nếu không null
+    if (searchParams.discount) {
+      queryParams.push(`discount=${searchParams.discount}`);
+    }
+
+    // Thêm page vào queryParams
+    queryParams.push(`page=${searchParams.page}`);
+
+    // Tạo chuỗi query bằng cách nối các thành phần trong queryParams bằng "&"
+    const queryString = queryParams.join("&");
+
     const res = await fetch(
-      `${BACKEND_URL}/productList/search?searchKey=${searchKey}&page=${page}`,
+      `${BACKEND_URL}/productList/search?${queryString}`,
       {
         next: { revalidate: 60 },
       }
@@ -43,12 +67,11 @@ export default async function SearchResultPage({
   params: { "search-result": string };
   searchParams?: { [key: string]: string };
 }) {
-  const { searchKey, page } = searchParams; // Truy cập tham số truy vấn searchKey từ params
   // console.log("Lấy từ url", searchKey);
-  const searchResults = await getSearchProduct(searchKey, page);
+  const searchResults = await getSearchProduct(searchParams);
   return (
     <SearchResultContainer
-      searchKey={searchKey}
+      searchKey={searchParams.searchKey ?? searchParams.category ?? 0}
       searchResults={searchResults}
     />
   );
