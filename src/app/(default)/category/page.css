@@ -1,11 +1,10 @@
 .category-container {
-    width: 100%;
+    width: 90%;
     padding: 8px;
-    margin: 0;
-    background-color: var(--white);
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .category__item {
@@ -71,4 +70,11 @@
     display: flex;
     justify-content: flex-end;
     color: var(--dark10);
+}
+
+@media only screen and (max-width:431px) {
+    .category-container {
+        width: 100%;
+        background-color: var(--white);
+    }
 }

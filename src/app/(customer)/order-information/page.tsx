@@ -151,6 +151,12 @@ export default function SearchResultPage() {
   return (
     // <main className="order-container">
     <>
+      <div></div>
+      <div className="order__product--mobile">
+        {(buyInfo ?? []).map((item, index) => {
+          return <OrderProduct buyInfo={item} key={index} />;
+        })}
+      </div>
       <form id="order-form">
         {/* onSubmit={submitOrderForm} */}
         <section className="order-detail">
