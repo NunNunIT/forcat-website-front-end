@@ -398,6 +398,10 @@
         gap: 0px;
     }
 
+    .cart section {
+        padding: 0
+    }
+
     .mobile-hidden {
         display: none;
     }
