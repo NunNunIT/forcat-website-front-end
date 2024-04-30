@@ -104,7 +104,8 @@ button {
 
 @media screen and (max-width: 821px) {
   .account-container {
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
   }
 
   .purchase-history__status {
