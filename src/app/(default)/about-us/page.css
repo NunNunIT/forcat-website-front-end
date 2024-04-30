@@ -228,6 +228,10 @@ body {
   margin-bottom: .5rem;
 }
 
+.about-us__members__imgs__cover img {
+  object-fit: contain;
+}
+
 .about-us__members__wrapper {
   display: flex;
   flex-direction: column;
@@ -236,7 +240,7 @@ body {
   cursor: context-menu;
   margin-top: .75rem;
   padding: .5rem;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 1025px) {

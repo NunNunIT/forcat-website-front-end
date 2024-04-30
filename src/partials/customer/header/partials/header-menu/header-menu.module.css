@@ -235,15 +235,19 @@
 }
 
 .menu__item .menu__hot-product {
-  color: var(--fire-orange);
+  color: #ed6e00;
 }
 
 .menu__item .menu__promo {
-  color: var(--pink);
+  color: #ef2e31;
 }
 
 .menu__item .menu__news {
   color: var(--luminos-blue);
+}
+
+.menu__item .menu__about-us {
+  color: #8f3a0f;
 }
 
 .menu__item:hover {
