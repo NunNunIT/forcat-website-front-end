@@ -82,16 +82,16 @@ export default function CartPage() {
   }, [data]);
 
   // handle prices
-  const [originalPrice, setOriginalPrice] = useState("0 đ");
-  const [discountedPrice, setDiscountedPrice] = useState("0 đ");
-  const [totalPrice, setTotalPrice] = useState("0 đ");
+  const [originalPrice, setOriginalPrice] = useState("0đ");
+  const [discountedPrice, setDiscountedPrice] = useState("0đ");
+  const [totalPrice, setTotalPrice] = useState("0đ");
 
   // handle count
   const [selectedItem, setSelectedItem] = useState(0);
   const [allItem, setAllItem] = useState(0);
 
   useEffect(() => {
-    setAllItem(cartItem.length);
+    if (cartItem) setAllItem(cartItem.length);
   }, [cartItem]);
 
   // calc prices
@@ -365,6 +365,29 @@ export default function CartPage() {
     // );
   };
 
+  const handleDeleteMultiple = () => {
+    const cartItems = document.querySelectorAll(
+      ".cart-item .cart-item__first-div .cart-checkbox:checked"
+    );
+
+    cartItems.forEach((item) => {
+      const cartItem = item.parentElement.parentElement;
+      const productId = (
+        cartItem.querySelector("input[name='product_id']") as HTMLInputElement
+      ).value;
+      const variantId = (
+        cartItem.querySelector(".cart-item__variant-select") as HTMLInputElement
+      ).value;
+
+      // handle delete cart
+      handleUpdateDeletedItem(cartItem);
+      cartItem.remove();
+
+      // handle header cart
+      handleChangeHeaderCartQuantity(productId, variantId);
+    });
+  };
+
   // calc prices
   const calcProductPrice = (quantity: number, inputGroupEle) => {
     const current = inputGroupEle;
@@ -472,20 +495,26 @@ export default function CartPage() {
               ref={checkAll}
               onClick={handleCheckAll}
             />
-            <h4>
+            <h3>
               Sản phẩm (<span className="checked-num">{allItem}</span>)
-            </h4>
-          </div>
-          <div className="title__item">
-            <h4>Đơn giá</h4>
-          </div>
-          <div className="title__item">
-            <h4>Số lượng</h4>
+            </h3>
           </div>
           <div className="title__item mobile-hidden">
-            <h4>Thành tiền</h4>
+            <h3>Đơn giá</h3>
           </div>
-          <div className="title__item mobile-hidden"></div>
+          <div className="title__item mobile-hidden">
+            <h3>Số lượng</h3>
+          </div>
+          <div className="title__item mobile-hidden">
+            <h3>Thành tiền</h3>
+          </div>
+          <div className="title__item"></div>
+          <button
+            className="cart-footer-btn__delete-btn cart-footer-btns__btn desktop-hidden mobile-display"
+            type="button"
+            onClick={handleDeleteMultiple}>
+            Xóa
+          </button>
         </div>
         {(cart ?? []).map((cartItem, itemIndex) => {
           const currentVariantIndex =
@@ -494,85 +523,80 @@ export default function CartPage() {
             );
           return (
             <div className="cart-item" key={itemIndex}>
-              <input
-                type="hidden"
-                name="product_id"
-                value={cartItem.product._id}
-              />
-              <div className="cart-item__info cart-item-col">
+              <div className="cart-item__first-div">
+                <input
+                  type="hidden"
+                  name="product_id"
+                  value={cartItem.product._id}
+                />
                 <input
                   type="checkbox"
                   className="cart-checkbox"
                   onChange={handleCheckOne}
                 />
-                <div className="cart-item__info-div">
-                  <div className="cart-item__image-div">
-                    <CldImage
-                      className="cart-item__image"
-                      src={cartItem.product.product_imgs[0].link}
-                      alt={cartItem.product.product_imgs[0].alt}
-                      fill={true}
-                    />
-                  </div>
-                  <div className="cart-item__text-info cart-item-col">
-                    <h5
-                      className="cart-item__text-info-name"
-                      style={{
-                        whiteSpace:
-                          (cartItem.product.product_variants ?? []).length != 0
-                            ? "nowrap"
-                            : "wrap",
-                      }}>
-                      {cartItem.product.product_name}
-                    </h5>
-                    {(cartItem.product.product_variants ?? []).length != 0 && (
-                      <div className="cart-item__variant">
-                        <input
-                          type="hidden"
-                          value={
-                            cartItem.product.product_variants[
-                              currentVariantIndex
-                            ]._id
-                          }
-                        />
-                        <select
-                          className="cart-item__variant-select"
-                          onChange={handleVariantChange}>
-                          <option
-                            className="cart-item__variant-name"
-                            value={
-                              cartItem.product.product_variants[
-                                currentVariantIndex
-                              ]._id
-                            }
-                            key={0}>
-                            {
-                              cartItem.product.product_variants[
-                                currentVariantIndex
-                              ].variant_name
-                            }
-                          </option>
-                          {(cartItem.product.product_variants ?? []).map(
-                            (variant, variantIndex) => {
-                              if (variant._id !== cartItem.variant_id)
-                                return (
-                                  <option
-                                    className="cart-item__variant-name"
-                                    value={variant._id}
-                                    key={variantIndex}>
-                                    {variant.variant_name}
-                                  </option>
-                                );
-                            }
-                          )}
-                        </select>
-                        <span className="material-icons-round cart-item__variant-icon">
-                          keyboard_arrow_down
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                <div className="cart-item__image-div">
+                  <CldImage
+                    className="cart-item__image"
+                    src={cartItem.product.product_imgs[0].link}
+                    alt={cartItem.product.product_imgs[0].alt}
+                    fill={true}
+                  />
                 </div>
+              </div>
+              <div className="cart-item__info-div cart-item-col">
+                <h4
+                  className="cart-item__text-info-name"
+                  style={{
+                    whiteSpace:
+                      (cartItem.product.product_variants ?? []).length != 0
+                        ? "nowrap"
+                        : "wrap",
+                  }}>
+                  {cartItem.product.product_name}
+                </h4>
+                {(cartItem.product.product_variants ?? []).length != 0 && (
+                  <div className="cart-item__variant">
+                    <input
+                      type="hidden"
+                      value={
+                        cartItem.product.product_variants[currentVariantIndex]
+                          ._id
+                      }
+                    />
+                    <select
+                      className="cart-item__variant-select"
+                      onChange={handleVariantChange}>
+                      <option
+                        className="cart-item__variant-name"
+                        value={
+                          cartItem.product.product_variants[currentVariantIndex]
+                            ._id
+                        }
+                        key={0}>
+                        {
+                          cartItem.product.product_variants[currentVariantIndex]
+                            .variant_name
+                        }
+                      </option>
+                      {(cartItem.product.product_variants ?? []).map(
+                        (variant, variantIndex) => {
+                          if (variant._id !== cartItem.variant_id)
+                            return (
+                              <option
+                                className="cart-item__variant-name"
+                                value={variant._id}
+                                key={variantIndex}>
+                                {variant.variant_name}
+                              </option>
+                            );
+                        }
+                      )}
+                    </select>
+                    <span className="material-icons-round cart-item__variant-icon">
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="cart-item__unit-price cart-item-col">
                 <input
@@ -687,18 +711,26 @@ export default function CartPage() {
 
       <section className="cart-bill-footer desktop-hidden tablet-display">
         <div className="cart-footer-container">
-          <div className="cart-footer-btns">
+          <div className="cart-footer-btns small-mobile-hidden">
             <div
               className="cart-footer-btns__check-all-btn cart-footer-btns__btn"
               onClick={() => {
                 handleCheckAllFooter();
                 handleCheckAll();
               }}>
-              Tất cả (<span className="checked-num">{allItem}</span>)
+              Tất cả
+              <span className="checked-num mobile-hidden">
+                {" ("}
+                {allItem}
+                {")"}
+              </span>
             </div>
-            <div className="cart-footer-btn__delete-btn cart-footer-btns__btn">
+            <button
+              className="cart-footer-btn__delete-btn cart-footer-btns__btn mobile-hidden"
+              type="button"
+              onClick={handleDeleteMultiple}>
               Xóa
-            </div>
+            </button>
           </div>
           <div className="cart-footer-buy-group">
             <div className="cart-footer-buy-group__pricing">
