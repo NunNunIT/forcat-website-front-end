@@ -16,7 +16,7 @@ export default async function PurchaseHistoryPage({
   searchParams: { [key: string]: string };
 }) {
   // get searchParam status, page
-  const currentStatus = searchParams?.status ?? "all";
+  const currentStatus = searchParams?.type ?? "all";
   const currentPage = searchParams?.page ?? "1";
 
   // check valid status

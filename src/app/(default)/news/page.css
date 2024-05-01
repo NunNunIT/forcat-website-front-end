@@ -10,7 +10,7 @@ section {
 
   display: grid;
   grid-template-areas:
-    "h1 h1"
+    "h1 group-banner"
     "group-news group-banner"
     "pagination pagination";
   grid-template-columns: 9fr 3fr;
@@ -91,10 +91,12 @@ section {
 }
 
 .news__banner-container {
+  display: flex;
+  top: calc(var(--header-height-without-nav) + 1rem);
   width: 100%;
   aspect-ratio: 8/20;
-
-  position: relative;
+  position: sticky;
+  justify-content: flex-start;
 }
 
 .news__pagination {

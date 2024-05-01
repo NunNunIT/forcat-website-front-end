@@ -18,12 +18,16 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
+  const currentUserCookie = Cookies.get("currentUser");
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
     const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
+    if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
       window.location.href = "/";
+    } else {
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
     }
   }
 

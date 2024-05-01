@@ -90,11 +90,11 @@ export default function AboutUsPage() {
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyenthihongnhung.jpg"
                 alt="Chất lượng thật - Giá trị thật"></Image>
             </div>
             <h4>Nguyễn Thị Hồng Nhung</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;I want it, I get it.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -105,51 +105,51 @@ export default function AboutUsPage() {
                 alt="Tích điểm"></Image>
             </div>
             <h4>Phan Nguyễn Hải Yến</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Amor Fati. Hãy yêu lấy vận mệnh của bạn.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/leducmanh.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Đức Mạnh</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Tôi yêu mèo của tôi&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/letrunghieu.jpg"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Trung Hiếu</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Deadline bất biến giữa dòng đời vạn biến.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyenvietkha.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Viết Kha</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Be your own light, don&apos;t need to be too bright.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyennhattan.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Nhật Tấn</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Mồn lèo.&quot;</p>
           </div>
         </div>
       </section>

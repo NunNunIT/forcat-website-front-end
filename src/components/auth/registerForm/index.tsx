@@ -18,14 +18,19 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  const currentUserCookie = Cookies.get("currentUser");
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
     const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
+    if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
       window.location.href = "/";
+    } else {
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
     }
   }
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
