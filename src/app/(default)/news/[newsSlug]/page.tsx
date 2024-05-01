@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 // import partials
 import { CustomerTableOfContent } from "./partials";
+import { CustomerNewsItem } from "../partials";
 
 // import utils
 import { BACKEND_URL_NEWS } from "@/utils/commonConst";
@@ -12,7 +13,6 @@ import { convertDateToHourDayMonthYear } from "@/utils";
 
 // import css
 import "./page.css";
-import { CustomerNewsItem } from "../partials";
 
 interface IResponseNewsDetail {
   article_name: string;
@@ -95,7 +95,7 @@ export default async function NewsDetailPage({
           <div className="news-info">
             <div className="news-info__img-container">
               <Image
-                src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/474187OKi/anh-avatar-con-meo-cute_051723184.jpg"
+                src="/imgs/news-author.webp"
                 alt="Author's avatar"
                 fill
               />

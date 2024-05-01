@@ -674,7 +674,7 @@ export default function CartPage() {
         </Link>
         <div className="cart-bill-row cart-bill-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-          <Link className="cart-bill-policy__link" href="#">
+          <Link className="cart-bill-policy__link" href="/term-of-use">
             Điều khoản dịch vụ
           </Link>{" "}
           và{" "}
@@ -721,8 +721,15 @@ export default function CartPage() {
           </div>
         </div>
         <div className="cart-footer-policy">
-          Bằng việc tiến hành đặt mua hàng, bạn đồng ý với Điều khoản dịch vụ,
-          Chính sách thu thập và xử lý dữ liệu cá nhân của ForCat.
+          Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
+          <Link className="cart-bill-policy__link" href="/term-of-use">
+            Điều khoản dịch vụ
+          </Link>{" "}
+          và{" "}
+          <Link className="cart-bill-policy__link" href="/privacy-policy">
+            Chính sách bảo mật
+          </Link>{" "}
+          của ForCat.
         </div>
       </section>
     </main>

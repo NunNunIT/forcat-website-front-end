@@ -22,7 +22,7 @@ export default function AboutUsPage() {
           </h1>
         </div>
       </section>
-      <div className="term-of-use-content-page ">
+      <div className="term-of-use-content-page">
         <h2>1. Giới thiệu</h2>
         <p>Chào mừng quý khách hàng đến với FORCAT</p>
         <p>

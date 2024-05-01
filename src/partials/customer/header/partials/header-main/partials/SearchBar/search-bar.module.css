@@ -110,7 +110,7 @@
   }
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 821px) {
   .header__search-bar-wrapper {
     width: clamp(75%, 80vw, 100%);
 
@@ -118,7 +118,7 @@
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 431px) {
   .header__search-bar-wrapper {
     width: 100%;
     justify-content: flex-start;
