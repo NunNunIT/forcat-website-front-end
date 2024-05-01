@@ -33,10 +33,10 @@ export default function SearchResultPage() {
       buyInfo = buyItems.payload;
       totalWithDiscount = buyInfo.reduce(
         (result, item) =>
-          result +
-          item.unit_price *
-          ((100 - item.discount_amount) / 100) *
-          item.quantity,
+          result
+          + item.unit_price
+          * ((100 - item.discount_amount) / 100)
+          * item.quantity,
         0
       );
       totalWithoutDiscount = buyInfo.reduce(
