@@ -38,7 +38,7 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
   };
 
   if (namePage === "mobile-account") {
-    return { text: "Tài khoản", url: "/account/mobile-account" };
+    return { text: "Điều hướng", url: "/account/mobile-account" };
   }
 
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
