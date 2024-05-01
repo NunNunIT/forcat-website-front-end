@@ -30,13 +30,6 @@ export default function SearchResultPage() {
     const buyItems = JSON.parse(localStorage.getItem("buyItems"));
     if (buyItems) {
       buyInfo = buyItems.payload;
-      let demo = buyInfo.map((product) => ({
-            product_id: product.product_id,
-            variant_id: product.variant_id,
-            quantity: product.quantity,
-            unit_price: product.unit_price,
-          }));
-      console.log(demo);
       totalWithDiscount = buyInfo.reduce(
         (result, item) =>
           result +
@@ -67,11 +60,14 @@ export default function SearchResultPage() {
 
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(true);
-  const [userName, setUserName] = useState<string>("");
-  const [userPhone, setUserPhone] = useState<string>("");
   const [cities, setCities] = useState<any[]>([]);
   const [districts, setDistricts] = useState<any[]>([]);
   const [wards, setWards] = useState<any[]>([]);
+  const [userName, setUserName] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [district, setDistrict] = useState<string>("");
+  const [ward, setWard] = useState<string>("");
   const [street, setStreet] = useState<string>("");
   const [note, setNote] = useState<string>("");
 
@@ -141,6 +137,7 @@ export default function SearchResultPage() {
   function handleCityChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedCityId = event.target.value;
     const selectedCity = cities.find((city) => city.Id === selectedCityId);
+    setCity(selectedCity.Name);
 
     if (selectedCity) {
       setDistricts(selectedCity.Districts);
@@ -156,12 +153,21 @@ export default function SearchResultPage() {
     const selectedDistrict = districts.find(
       (district) => district.Id === selectedDistrictId
     );
+    setDistrict(selectedDistrict.Name);
 
     if (selectedDistrict) {
       setWards(selectedDistrict.Wards);
     } else {
       setWards([]);
     }
+  }
+
+  function handleWardChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const selectedWardId = event.target.value;
+    const selectedWard = wards.find(
+      (ward) => ward.Id === selectedWardId
+    );
+    setWard(selectedWard.Name);
   }
 
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -187,9 +193,9 @@ export default function SearchResultPage() {
           },
           order_address: {
             street: street,
-            ward: wards,
-            district: districts,
-            province: cities,
+            ward: ward,
+            district: district,
+            province: city,
           },
           order_note: note,
           order_total_cost: parseInt(totalWithDiscount),
@@ -205,7 +211,7 @@ export default function SearchResultPage() {
 
       const data = await response.json();
 
-      if (response) {
+      if (data?.success) {
         alert("Đặt hàng thành công!");
         window.location.href =
           "https://www.forcatshop.com/account/purchase-history?type=unpaid";
@@ -320,7 +326,11 @@ export default function SearchResultPage() {
                 ))}
               </select>
 
-              <select className="location__select" id="ward" required>
+              <select
+                className="location__select"
+                id="ward"
+                required
+                onChange={handleWardChange}>
                 <option value="" selected>
                   Chọn Phường/Xã
                 </option>
