@@ -24,6 +24,11 @@
   font-size: .8125rem;
 }
 
+.news-detail-page__date {
+  color: var(--dark6);
+  font-family: sans-serif!important;
+}
+
 .news-info {
   display: flex;
   align-items: center;
