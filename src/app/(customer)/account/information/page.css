@@ -64,7 +64,6 @@
 }
 
 .information-item__product-name {
-  padding: 0.6rem;
   display: flex;
   flex-direction: row;
 }
@@ -115,31 +114,25 @@
   gap: 0.8rem;
 }
 
-.information-item__product-name {
-  padding: 0.6rem;
-  display: flex;
-  flex-direction: row;
-}
-
-.information-item__product-name h5 {
-  display: flex;
-  width: 20%;
+.padding-bottom {
+  padding-top: 12px;
+  padding-bottom: 4px;
 }
 
 .userName {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 .userBirth {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 
 .userSex {
   width: 35%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 .dropdown {
@@ -151,19 +144,19 @@
 
 .userEmail {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
 .userPhone {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
 .userAddress {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
@@ -285,10 +278,6 @@ span.red-start {
 
   .information__status {
     padding: .75rem 1.5rem;
-  }
-
-  .information-item {
-    padding: .75rem;
   }
 
   .information-item__product-name label {

@@ -231,7 +231,7 @@ export default function InformationPage() {
                     </div>
 
                     <div className="order-detail__location location">
-                      <h5>Địa chỉ</h5>
+                      <h5 className="padding-bottom">Địa chỉ</h5>
                       <div className="information-item__product-name">
                         <label htmlFor="province">
                           Tỉnh:
