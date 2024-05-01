@@ -2,6 +2,7 @@
 // import libs
 import classNames from "classnames/bind";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
@@ -18,13 +19,15 @@ import styles from "../authForm.module.css";
 const cx = classNames.bind(styles);
 
 const LoginForm = () => {
+  const router = useRouter();
   const currentUserCookie = Cookies.get("currentUser");
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
-      window.location.href = "/";
+      // window.location.href = "/";
+      router.push("/");
     } else {
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
@@ -126,9 +129,7 @@ const LoginForm = () => {
       <div className={cx("form-auth__title")}>
         <h1>Chào mừng bạn quay trở lại!</h1>
         <Link href="/register">
-          <h3>
-            Chưa có tài khoản? <b>Đăng ký ngay</b>{" "}
-          </h3>
+          <h3> Chưa có tài khoản? <b>Đăng ký ngay</b></h3>
         </Link>
       </div>
 
