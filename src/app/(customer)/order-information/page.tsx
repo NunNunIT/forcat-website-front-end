@@ -224,20 +224,7 @@ export default function SearchResultPage() {
 
     if (paymentMethod === '3') {
       try {
-        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", },
-          body: JSON.stringify({ amount: parseInt(totalWithDiscount), }),
-          credentials: "include",
-        });
-
-        const json = await resPayment.json();
-        if (!json.success)
-          throw json;
-
-        const url = json.data.checkoutUrl;
-        const orderCode = json.data.orderCode;
-        await fetch(`${BACKEND_URL}/orders/`, {
+        const resBE = await await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
           headers: { "Content-Type": "application/json", },
           body: JSON.stringify({
@@ -252,7 +239,6 @@ export default function SearchResultPage() {
               province: city,
             },
             order_payment: "internet_banking",
-            orderCode,
             order_note: note,
             order_total_cost: parseInt(totalWithDiscount),
             order_details: buyInfo.map((product) => ({
@@ -264,6 +250,25 @@ export default function SearchResultPage() {
           }),
           credentials: "include",
         });
+
+        const jsonBE = await resBE.json();
+        if (!jsonBE.success)
+          throw jsonBE;
+
+        const { orderCode } = jsonBE.data;
+
+        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({ amount: parseInt(totalWithDiscount), orderCode, }),
+          credentials: "include",
+        });
+
+        const jsonPayment = await resPayment.json();
+        if (!jsonPayment.success)
+          throw jsonPayment;
+
+        const { checkoutUrl: url } = jsonPayment.data;
 
         router.push(url);
       } catch (error) {
