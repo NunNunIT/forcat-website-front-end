@@ -12,6 +12,7 @@ import { BACKEND_URL } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
+import { decryptData } from "@/utils/security";
 
 const fetcher = (url: string) =>
   fetch(url, { method: "GET", credentials: "include" }).then((res) =>
@@ -53,7 +54,22 @@ const handleCartChangePage = (event) => {
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(`${BACKEND_URL}/cart`, fetcher);
   const cart = data?.data?.cartInfo;
-  // console.log(cart);
+
+  // console.log(
+  //   "decode",
+  //   decodeURIComponent(
+  //     "eAYgSn8i55jGQlsSPMrGqdB47rBPOhfpspc%2F%2F8lz8Fv74lelwNiOOA%3D%3D"
+  //   )
+  // );
+  // console.log(
+  //   "json",
+  //   JSON.stringify(
+  //     decodeURIComponent(
+  //       "eAYgSn8i55jGQlsSPMrGqdB47rBPOhfpspc%2F%2F8lz8Fv74lelwNiOOA%3D%3D"
+  //     )
+  //   )
+  // );
+
   useEffect(() => {
     window.addEventListener("beforeunload", handleCartChangePage);
     const links = document.querySelectorAll("a");
@@ -530,7 +546,10 @@ export default function CartPage() {
                 <input
                   type="hidden"
                   name="product_id"
-                  value={cartItem.product._id}
+                  value={decodeURIComponent(cartItem.product._id).replace(
+                    " ",
+                    "+"
+                  )}
                 />
                 <input
                   type="checkbox"

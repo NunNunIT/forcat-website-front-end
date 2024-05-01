@@ -116,7 +116,10 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Đức Mạnh</h4>
-            <p>&quot;Tôi yêu mèo của tôi&quot;</p>
+            <p>
+              &quot;Cái đẹp chỉ đơn giản là hiện thực được nhìn qua con mắt yêu
+              thương.&quot;
+            </p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -138,7 +141,9 @@ export default function AboutUsPage() {
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Viết Kha</h4>
-            <p>&quot;Be your own light, don&apos;t need to be too bright.&quot;</p>
+            <p>
+              &quot;Be your own light, don&apos;t need to be too bright.&quot;
+            </p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">

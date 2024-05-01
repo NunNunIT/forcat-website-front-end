@@ -90,7 +90,10 @@ export default async function ProductPage({
   const res = await getProduct(slug, pid);
   const relatedProducts = await getRelatedProducts(slug, pid);
   const productInfo: IBuyForm = {
-    product_id: res.data.product.product_id_hashed,
+    product_id: decodeURIComponent(res.data.product.product_id_hashed).replace(
+      " ",
+      "+"
+    ),
     // product_id_hashed: res.data.product.product_id_hashed,s
     product_name: res.data.product.product_name,
     product_slug: res.data.product.product_slug,
