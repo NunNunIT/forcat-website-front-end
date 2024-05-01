@@ -1,10 +1,11 @@
 // import libs
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 // import partials, components
-import { CustomerNewsItem } from "./partials";
+import { CustomerNewsItem, CustomerSearchNewBar } from "./partials";
 import { CustomerPagination } from "@/components";
 
 // import utils
@@ -51,7 +52,10 @@ export default async function NewsPage({
 
   return (
     <main className="news-page__container">
-      <h1>Tin tức</h1>
+      <div className="news-page__top">
+        <h1>Tin tức</h1>
+        <CustomerSearchNewBar />
+      </div>
       <section className="news__group-news-item">
         {(data.articles ?? []).map((articleData: INewsItemProps) => (
           <CustomerNewsItem
@@ -61,13 +65,27 @@ export default async function NewsPage({
         ))}
       </section>
       <aside className="news__group-banner">
-        <div className="news__banner-container">
+        {(data.articles ?? []) && (data.articles.length > 4) && (
+          <Link
+            href="/search-result?discount=True"
+            className="news__banner-container">
+            <Image
+              src="/imgs/banner/banner.png"
+              alt="Banner discount Khuyễn mãi"
+              fill
+            />
+          </Link>
+        )}
+
+        <Link
+          href="/search-result?discount=True"
+          className="news__banner-container">
           <Image
-            src="/imgs/banner/banner.webp"
-            alt="The first banner in news-page"
+            src="/imgs/banner/banner.png"
+            alt="Banner discount Khuyễn mãi"
             fill
           />
-        </div>
+        </Link>
       </aside>
       <CustomerPagination className="news__pagination" maxPage={data.maxPage} />
     </main>

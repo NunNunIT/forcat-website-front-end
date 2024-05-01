@@ -5,6 +5,7 @@
   align-items: center;
 
   overflow-y: scroll;
+  z-index: 1;
 }
 
 .breadcrumb__container::-webkit-scrollbar {
@@ -46,11 +47,9 @@
 }
 
 @media screen and (max-width: 431px) {
-  .breadcrumb__container {
-    padding-inline: 1rem;
-  }
-
   .breadcrumb {
     width: 100%;
+    margin-block-start: 0;
+    border-radius: 0;
   }
 }

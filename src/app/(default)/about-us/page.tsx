@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 export default function AboutUsPage() {
   return (
     <main className="about-us__container">
-      <section className="about-us__about-information">
+      <section className="about-us__about-information white">
         <div className="about-us__about-information__wrapper">
           <h1 className="about-us__about-information__title">
-            FORCAT SHOP - Cửa hàng Online
+            FORCAT SHOP - Cửa hàng Vật phẩm dành cho Mèo
             <span className="about-us__about-information__title-after"></span>
           </h1>
           <h4 className="about-us__about-information__subtitle">
@@ -72,7 +72,7 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-      <section className="about-us__about-members">
+      <section className="about-us__about-members brown-img">
         <div className="about-us__about-members__wrapper">
           <div className="about-us__about-members__title">
             Đội ngũ nhân viên
@@ -90,11 +90,11 @@ export default function AboutUsPage() {
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyenthihongnhung.jpg"
                 alt="Chất lượng thật - Giá trị thật"></Image>
             </div>
             <h4>Nguyễn Thị Hồng Nhung</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;I want it, I get it.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
@@ -105,51 +105,56 @@ export default function AboutUsPage() {
                 alt="Tích điểm"></Image>
             </div>
             <h4>Phan Nguyễn Hải Yến</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Amor Fati. Hãy yêu lấy vận mệnh của bạn.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/leducmanh.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Đức Mạnh</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>
+              &quot;Cái đẹp chỉ đơn giản là hiện thực được nhìn qua con mắt yêu
+              thương.&quot;
+            </p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/letrunghieu.jpg"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Lê Trung Hiếu</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Deadline bất biến giữa dòng đời vạn biến.&quot;</p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyenvietkha.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Viết Kha</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>
+              &quot;Be your own light, don&apos;t need to be too bright.&quot;
+            </p>
           </div>
           <div className="about-us__members__wrapper">
             <div className="about-us__members__imgs__cover">
               <Image
                 className="about-us__members__img"
                 fill={true}
-                src="/imgs/about-us/phannguyenhaiyen.webp"
+                src="/imgs/about-us/nguyennhattan.webp"
                 alt="Hỗ trợ giao hàng toàn quốc"></Image>
             </div>
             <h4>Nguyễn Nhật Tấn</h4>
-            <p>&quot;Slogan Slogannnn&quot;</p>
+            <p>&quot;Mồn lèo.&quot;</p>
           </div>
         </div>
       </section>
@@ -161,7 +166,7 @@ export default function AboutUsPage() {
           alt="about-us-banner-1"
         />
       </section> */}
-      <section className="about-us__about-value">
+      <section className="about-us__about-value brown">
         <div className="about-us__about-value__wrapper">
           <div className="about-us__about-value__title">
             Giá trị cốt lõi

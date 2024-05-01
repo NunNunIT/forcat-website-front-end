@@ -47,6 +47,7 @@
 }
 
 .news__name {
+  font-size: 1.4rem ;
   height: 2.75em;
   overflow: hidden;
   text-overflow: ellipsis;

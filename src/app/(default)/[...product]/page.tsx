@@ -90,7 +90,11 @@ export default async function ProductPage({
   const res = await getProduct(slug, pid);
   const relatedProducts = await getRelatedProducts(slug, pid);
   const productInfo: IBuyForm = {
-    product_id: res.data.product._id,
+    product_id: decodeURIComponent(res.data.product.product_id_hashed).replace(
+      " ",
+      "+"
+    ),
+    // product_id_hashed: res.data.product.product_id_hashed,s
     product_name: res.data.product.product_name,
     product_slug: res.data.product.product_slug,
     product_avg_rating: res.data.product.product_avg_rating,
@@ -158,10 +162,8 @@ export default async function ProductPage({
         productReviews={productReviews}
         productId={productId}></ProductReview>
       <div className="related-container">
-      <h2 className="tip-products__label">
-        Xem các sản phẩm gợi ý khác
-      </h2>
-      <CustomerCarouselSlider productList={relatedProducts} />
+        <h2 className="tip-products__label">Xem các sản phẩm gợi ý khác</h2>
+        <CustomerCarouselSlider productList={relatedProducts} />
       </div>
     </main>
   );

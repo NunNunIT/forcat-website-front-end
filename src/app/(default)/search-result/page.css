@@ -1,10 +1,10 @@
 .search-result__container {
   width: 80%;
+  margin: 1rem auto;
+  padding: 4px 0;
   max-width: 1152px;
   display: flex;
   flex-direction: column;
-  padding: 0 0 24px;
-  /* margin-top: 178px; */
 }
 
 .search-result__main {
@@ -112,6 +112,10 @@
 }
 
 @media only screen and (max-width: 1024px) {
+  .search-result__container {
+    width: 90%;
+  }
+  
   .dropdown-content--sort {
     top: 67%;
     right: 11%;
@@ -119,7 +123,7 @@
 }
 
 /*Responsive-tablet*/
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 821px) {
   .search-result__container {
     width: 90%;
   }
@@ -219,9 +223,11 @@
 }
 
 /*Responsive-smartphone*/
-@media only screen and (max-width: 416px) {
+@media only screen and (max-width: 432px) {
   .search-result__container {
     width: 100%;
+    padding: 0;
+    margin-bottom: 0;
   }
 
   .search-result__filter {

@@ -70,16 +70,16 @@ export default function CustomerHeaderNav() {
       <div className={cx("header__nav-container")}>
         <div className={cx("header__support-info")}>
           <div className={cx("dropdown-help")}>
-            <Link href="#">
+            <Link href="/contact">
               <span className="material-icons-outlined">help</span>
               Hỗ trợ
             </Link>
             <div className={cx("dropdown-help__content-container")}>
               <div className={cx("dropdown-help__content")}>
                 <div className={cx("dropdown-help__qr-code-container")}>
-                  <Image src="/imgs/qr-zalo.png" alt="help" fill />
+                  <Image src="/imgs/icon-ATC.webp" alt="help" fill />
                 </div>
-                <p>Quét mã QR để gửi thông tin cần hỗ trợ đến chúng tôi</p>
+                <span>Nhấp <Link href="/contact">vào đây</Link> để được hỗ trợ nhé!!!</span>
               </div>
             </div>
           </div>

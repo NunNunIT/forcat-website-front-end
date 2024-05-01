@@ -367,8 +367,10 @@ input::-webkit-calendar-picker-indicator {
   del {
     font-size: 0.8125rem;
   }
+
   .order-container {
     flex-direction: column;
+    margin: 0;
   }
 
   #order-form {

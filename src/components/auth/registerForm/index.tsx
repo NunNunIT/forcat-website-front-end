@@ -18,14 +18,19 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  const currentUserCookie = Cookies.get("currentUser");
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
     const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
+    if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
       window.location.href = "/";
+    } else {
+      localStorage.removeItem("currentUser");
+      Cookies.remove("currentUser");
     }
   }
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
@@ -252,8 +257,8 @@ const RegisterForm = () => {
       <div className={cx("register-note")}>
         <p>
           Bằng việc nhấn nút đăng ký, bạn đồng ý với các{" "}
-          <Link href="/term-of-use">điều khoản</Link> và{" "}
-          <Link href="/privacy-policy">chính sách bảo mật</Link> của chúng tôi
+          <Link href="/term-of-use">Điều khoản</Link> và{" "}
+          <Link href="/privacy-policy">Chính sách bảo mật</Link> của chúng tôi
         </p>
       </div>
     </form>

@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 export default function HistoryStatusNav() {
   const searchParams = useSearchParams();
-  const currentStatus = searchParams.get("status") ?? "all";
+  const currentStatus = searchParams.get("type") ?? "all";
 
   const pathName = usePathname();
 
@@ -33,7 +33,7 @@ export default function HistoryStatusNav() {
           href={
             pathName
             + "?"
-            + (status === "all" ? "" : `status=${status}`)
+            + (status === "all" ? "" : `type=${status}`)
           }
         >
           {convertOrderStatusToStr(status)}

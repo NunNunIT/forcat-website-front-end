@@ -152,7 +152,8 @@ export default function ProductBuyForm({
     const cartItems = currentUser.cart ?? [];
 
     // Check if the item already exists in the array
-    const duplicatedIndex = cartItems.findIndex(
+    let duplicatedIndex = -1;
+    duplicatedIndex = cartItems.findIndex(
       (item) => item.product_id === productId && item.variant_id == variantId
     );
 
@@ -208,7 +209,7 @@ export default function ProductBuyForm({
         })
       );
 
-      // console.log("local", JSON.parse(localStorage.getItem("addCartItems")));
+      // console.log("local", JSON.parse(localStorage.getItem("addCartItem")));
 
       const cartModal = cartModalRef.current;
       cartModal.classList.remove("hidden");

@@ -12,6 +12,7 @@ interface ProductVariant {
 
 export interface IBuyForm {
   product_id: string;
+  // product_id_hashed: string;
   product_name: string;
   product_slug: string;
   product_avg_rating: number;

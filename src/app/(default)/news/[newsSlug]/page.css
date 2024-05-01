@@ -24,6 +24,11 @@
   font-size: .8125rem;
 }
 
+.news-detail-page__date {
+  color: var(--dark6);
+  font-family: sans-serif!important;
+}
+
 .news-info {
   display: flex;
   align-items: center;
@@ -33,6 +38,9 @@
 .news-info__img-container {
   aspect-ratio: 1/1;
   width: 3rem;
+
+  border-radius: 100%;
+  overflow: hidden;
 
   position: relative;
 }
@@ -173,6 +181,10 @@
     padding-inline: 1rem;
     grid-template-columns: 1fr;
     gap: 0;
+  }
+
+  .news-detail-page {
+    padding: 0;
   }
 
   .related-page-container {
