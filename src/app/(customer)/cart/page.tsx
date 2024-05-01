@@ -196,7 +196,8 @@ export default function CartPage() {
     // Check if the item already exists in the array
     let duplicatedIndex = -1;
     duplicatedIndex = cartItems.findIndex(
-      (item) => item.product === productId && item.variant_id == variantId
+      (item) =>
+        item.product === decryptData(productId) && item.variant_id == variantId
     );
 
     const updateDeleteCartItems =
@@ -323,7 +324,7 @@ export default function CartPage() {
               quantity: quantity,
             },
           ];
-    console.log("up", updateChangeItems);
+    // console.log("up", updateChangeItems);
 
     localStorage.removeItem("changeItems");
     localStorage.setItem(
