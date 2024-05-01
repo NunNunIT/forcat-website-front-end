@@ -1,17 +1,17 @@
 "use client";
 
 // import libs
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_URL, ORDER_STATUS_LIST } from "@/utils/commonConst";
 
 // import components
 import { OrderProduct } from "./components";
 
 // import utils
 import { convertNumberToMoney } from "@/utils";
+import { BACKEND_URL, ORDER_STATUS_LIST } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
@@ -26,6 +26,7 @@ let buyInfo = [],
   totalWithoutDiscount;
 
 export default function SearchResultPage() {
+  const router = useRouter();
   useEffect(() => {
     const buyItems = JSON.parse(localStorage.getItem("buyItems"));
     if (buyItems) {
@@ -34,8 +35,8 @@ export default function SearchResultPage() {
         (result, item) =>
           result +
           item.unit_price *
-            ((100 - item.discount_amount) / 100) *
-            item.quantity,
+          ((100 - item.discount_amount) / 100) *
+          item.quantity,
         0
       );
       totalWithoutDiscount = buyInfo.reduce(
@@ -176,82 +177,100 @@ export default function SearchResultPage() {
     setPaymentMethod(event.target.value);
   };
 
-   const handleSubmit = async (event) => {
-     event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-   if (paymentMethod === '1') {
-    try {
-      const response = await fetch(`${BACKEND_URL}/orders/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          order_buyer: {
-            order_name: userName,
-            order_phone: userPhone,
+    if (paymentMethod === '1') {
+      try {
+        const response = await fetch(`${BACKEND_URL}/orders/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          order_address: {
-            street: street,
-            ward: ward,
-            district: district,
-            province: city,
-          },
-          order_note: note,
-          order_total_cost: parseInt(totalWithDiscount),
-          order_details: buyInfo.map((product) => ({
-            product_id: product.product_id,
-            variant_id: product.variant_id,
-            quantity: product.quantity,
-            unit_price: product.unit_price,
-          })),
-        }),
-        credentials: "include",
-      });
+          body: JSON.stringify({
+            order_buyer: {
+              order_name: userName,
+              order_phone: userPhone,
+            },
+            order_address: {
+              street: street,
+              ward: ward,
+              district: district,
+              province: city,
+            },
+            order_note: note,
+            order_total_cost: parseInt(totalWithDiscount),
+            order_details: buyInfo.map((product) => ({
+              product_id_hashed: product.product_id,
+              variant_id: product.variant_id,
+              quantity: product.quantity,
+              unit_price: product.unit_price,
+            })),
+          }),
+          credentials: "include",
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data?.success) {
-        alert("Đặt hàng thành công!");
-        window.location.href =
-          "https://www.forcatshop.com/account/purchase-history?type=unpaid";
+        if (!data?.success)
+          return;
+
+        // alert("Đặt hàng thành công!");
+        router.push("/account/purchase-history?type=unpaid");
+      } catch (error) {
+
       }
-    } catch (error) {
-      
     }
-   }
 
     if (paymentMethod === '3') {
       try {
-        const response = await fetch(
-          `${BACKEND_URL}/payment/create-payment-link`,
-          {
+        const [resBE, resPayment] = await Promise.all([
+          fetch(`${BACKEND_URL}/orders/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              amount: parseInt(totalWithDiscount),
+              order_buyer: {
+                order_name: userName,
+                order_phone: userPhone,
+              },
+              order_address: {
+                street: street,
+                ward: ward,
+                district: district,
+                province: city,
+              },
+              order_note: note,
+              order_total_cost: parseInt(totalWithDiscount),
+              order_details: buyInfo.map((product) => ({
+                product_id_hashed: product.product_id,
+                variant_id: product.variant_id,
+                quantity: product.quantity,
+                unit_price: product.unit_price,
+              })),
             }),
             credentials: "include",
-          }
-        );
+          }),
+          fetch(`${BACKEND_URL}/payment/create-payment-link`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify({ amount: parseInt(totalWithDiscount), }),
+            credentials: "include",
+          }),
+        ])
 
-        const data = await response.json();
+        const json = await resPayment.json();
 
-        if (response) {
-          let url = data.data.checkoutUrl;
-          window.location.href = url;
+        if (json) {
+          let url = json.data.checkoutUrl;
+          router.push(url);
         }
       } catch (error) {
         console.error("Error in handleSubmit:", error);
       }
     }
-      
-     
-
-     
-   };
+  };
 
   return (
     // <main className="order-container">
