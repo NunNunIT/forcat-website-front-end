@@ -11,7 +11,6 @@
   flex-direction: column;
   /* gap: 24px; */
   width: 100%;
-  padding: 1rem;
 }
 
 
@@ -45,7 +44,7 @@
 .information-item__edit {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--primary-mau0-2);
+  color: var(--primary-mau4-2);
   cursor: pointer;
 
 }
@@ -100,12 +99,6 @@
 
 .information-item__info p {
   font-size: 1rem;
-}
-
-.information-item__edit {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-mau0-2);
 }
 
 .information-item__main {
@@ -289,9 +282,6 @@ span.red-start {
 }
 
 @media only screen and (max-width: 821px) {
-  h5 {
-    font-size: 0.875rem;
-  }
 
   .information__status {
     padding: .75rem 1.5rem;
@@ -309,6 +299,10 @@ span.red-start {
 @media only screen and (max-width: 431px) {
   .information-item--top h3 {
     font-size: 1.5rem;
+  }
+
+  .information__main {
+    padding: 0;
   }
 
   .information-item__product-detail h5 {

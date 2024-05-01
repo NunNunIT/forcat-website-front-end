@@ -65,7 +65,7 @@ export default function PurchaseWrapper() {
         <div className="purchase-history__no-order">
           <div className="purchase-history__no-order-img-container">
             <Image
-              src="/imgs/no-order.webp"
+              src="/imgs/purchase/empty.png"
               alt="No order"
               fill={true}
             />

@@ -12,6 +12,7 @@ export default function ChangePasswordPage() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [isOldPasswordVisible, setOldPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -99,20 +100,15 @@ export default function ChangePasswordPage() {
           credentials: "include",
         });
 
-        if (!response.ok) {
-          console.log(`API call failed with status ${response.status}`);
-          throw new Error("Error updating password");
-        }
-
-        console.log("API called successfully");
-
         const data = await response.json();
 
-        if (data.message) {
-          alert(data.message);
-          window.location.href = "/account/information";
-        } else {
-          throw new Error("Error updating password");
+        if (data.status !== 200) {
+          newErrors.oldPassword = "Mật khẩu sai!";
+          setErrors(newErrors);
+        }
+
+        if (data.status == 200) {
+          setSuccess(true)
         }
       } catch (error) {
         console.error("Error:", error);
@@ -122,15 +118,14 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <main className="account-information__main">
-      <section className="change-pass__main" id="info">
+    <section className="account-information__main">
+      <div className="change-pass__main" id="info">
         <div className="change-pass-item">
           <div className="change-pass-item--top">
             <div className="change-pass-item__info">
-              <h4>Đổi mật khẩu</h4>
+              <h2>Đổi mật khẩu</h2>
             </div>
           </div>
-          <hr />
 
           <form
             id="form-change-pass"
@@ -241,8 +236,11 @@ export default function ChangePasswordPage() {
                     <div className="error">{errors.confirmPassword}</div>
                   )}
                 </div>
-                <div className="popup__button">
-                  <button className="btn btn--filled pri save" type="submit">
+                {isSuccess && (
+                    <div className="success">Đổi mật khẩu thành công</div>
+                  )}
+                <div className="button_wrapper">
+                  <button className="save" type="submit">
                     Xác nhận
                   </button>
                 </div>
@@ -250,7 +248,7 @@ export default function ChangePasswordPage() {
             </div>
           </form>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

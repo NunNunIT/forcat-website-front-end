@@ -56,7 +56,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  color: var(--fire-orange);
+  color: var(--dollar-red2);
 }
 
 .order-product__product-detail {

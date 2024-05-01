@@ -116,8 +116,9 @@ button {
 @media screen and (max-width: 431px) {
   .account-container {
     width: 100%;
-
+    padding: 0;
     display: block;
-    padding-inline: 1rem;
+    margin-bottom: 0;
+    /* padding-inline: 1rem; */
   }
 }

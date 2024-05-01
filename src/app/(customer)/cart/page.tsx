@@ -574,12 +574,13 @@ export default function CartPage() {
                   className="cart-item__link">
                   <h4
                     className="cart-item__text-info-name"
-                    style={{
-                      whiteSpace:
-                        (cartItem.product.product_variants ?? []).length != 0
-                          ? "nowrap"
-                          : "wrap",
-                    }}>
+                    // style={{
+                    //   whiteSpace:
+                    //     (cartItem.product.product_variants ?? []).length != 0
+                    //       ? "nowrap"
+                    //       : "wrap",
+                    // }}
+                    >
                     {cartItem.product.product_name}
                   </h4>
                 </Link>

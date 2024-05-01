@@ -280,7 +280,7 @@ export default function SearchResultPage() {
   return (
     // <main className="order-container">
     <>
-      <div></div>
+      {/* <div></div> */}
       <div className="order__product--mobile">
         {(buyInfo ?? []).map((item, index) => {
           return <OrderProduct buyInfo={item} key={index} />;
@@ -402,7 +402,7 @@ export default function SearchResultPage() {
                   Thanh toán trực tiếp khi nhận hàng
                 </label>
               </div>
-              <div>
+              {/* <div>
                 <input
                   type="radio"
                   id="radio2"
@@ -412,7 +412,7 @@ export default function SearchResultPage() {
                   onChange={handlePaymentMethodChange}
                 />
                 <label htmlFor="radio2">Thanh toán qua MOMO</label>
-              </div>
+              </div> */}
               <div>
                 <input
                   type="radio"
