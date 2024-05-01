@@ -1,17 +1,17 @@
 "use client";
 
 // import libs
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "@/utils/commonConst";
 
 // import components
 import { OrderProduct } from "./components";
 
 // import utils
 import { convertNumberToMoney } from "@/utils";
+import { BACKEND_URL, ORDER_STATUS_LIST } from "@/utils/commonConst";
 
 // import css
 import "./page.css";
@@ -26,16 +26,17 @@ let buyInfo = [],
   totalWithoutDiscount;
 
 export default function SearchResultPage() {
+  const router = useRouter();
   useEffect(() => {
     const buyItems = JSON.parse(localStorage.getItem("buyItems"));
     if (buyItems) {
       buyInfo = buyItems.payload;
       totalWithDiscount = buyInfo.reduce(
         (result, item) =>
-          result +
-          item.unit_price *
-            ((100 - item.discount_amount) / 100) *
-            item.quantity,
+          result
+          + item.unit_price
+          * ((100 - item.discount_amount) / 100)
+          * item.quantity,
         0
       );
       totalWithoutDiscount = buyInfo.reduce(
@@ -63,6 +64,13 @@ export default function SearchResultPage() {
   const [cities, setCities] = useState<any[]>([]);
   const [districts, setDistricts] = useState<any[]>([]);
   const [wards, setWards] = useState<any[]>([]);
+  const [userName, setUserName] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [district, setDistrict] = useState<string>("");
+  const [ward, setWard] = useState<string>("");
+  const [street, setStreet] = useState<string>("");
+  const [note, setNote] = useState<string>("");
 
   // Kiểm tra định dạng họ và tên
   function validateName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -85,6 +93,8 @@ export default function SearchResultPage() {
       errorSpan.textContent = "Vui lòng điền họ và tên người nhận hàng!";
       errorSpan.style.display = "block";
     }
+
+    setUserName(nameInput.value);
   }
 
   // Kiểm tra định dạng số điện thoại Việt Nam
@@ -107,6 +117,8 @@ export default function SearchResultPage() {
       errorSpan.style.display = "block";
       errorSpan.textContent = "Vui lòng điền số điện thoại người nhận hàng!";
     }
+
+    setUserPhone(phoneNumberInput.value);
   }
 
   useEffect(() => {
@@ -126,6 +138,7 @@ export default function SearchResultPage() {
   function handleCityChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedCityId = event.target.value;
     const selectedCity = cities.find((city) => city.Id === selectedCityId);
+    setCity(selectedCity.Name);
 
     if (selectedCity) {
       setDistricts(selectedCity.Districts);
@@ -141,6 +154,7 @@ export default function SearchResultPage() {
     const selectedDistrict = districts.find(
       (district) => district.Id === selectedDistrictId
     );
+    setDistrict(selectedDistrict.Name);
 
     if (selectedDistrict) {
       setWards(selectedDistrict.Wards);
@@ -149,46 +163,114 @@ export default function SearchResultPage() {
     }
   }
 
+  function handleWardChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const selectedWardId = event.target.value;
+    const selectedWard = wards.find(
+      (ward) => ward.Id === selectedWardId
+    );
+    setWard(selectedWard.Name);
+  }
+
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
 
-   const handleSubmit = async (event) => {
-     event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    if (paymentMethod === '3') {
+    if (paymentMethod === '1') {
       try {
-        const response = await fetch(
-          `${BACKEND_URL}/payment/create-payment-link`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+        const response = await fetch(`${BACKEND_URL}/orders/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            order_buyer: {
+              order_name: userName,
+              order_phone: userPhone,
             },
-            body: JSON.stringify({
-              amount: parseInt(totalWithDiscount),
-            }),
-            credentials: "include",
-          }
-        );
+            order_address: {
+              street: street,
+              ward: ward,
+              district: district,
+              province: city,
+            },
+            order_payment: "cod",
+            order_note: note,
+            order_total_cost: parseInt(totalWithDiscount),
+            order_details: buyInfo.map((product) => ({
+              product_id_hashed: product.product_id,
+              variant_id: product.variant_id,
+              quantity: product.quantity,
+              unit_price: product.unit_price,
+            })),
+          }),
+          credentials: "include",
+        });
 
         const data = await response.json();
 
-        if (response) {
-          let url = data.data.checkoutUrl;
-          window.location.href = url;
-        }
+        if (!data?.success)
+          return;
+
+        router.push("/account/purchase-history?type=unpaid");
+      } catch (error) {
+
+      }
+    }
+
+    if (paymentMethod === '3') {
+      try {
+        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({ amount: parseInt(totalWithDiscount), }),
+          credentials: "include",
+        });
+
+        const json = await resPayment.json();
+        if (!json.success)
+          throw json;
+
+        const url = json.data.checkoutUrl;
+        const orderCode = json.data.orderCode;
+        await fetch(`${BACKEND_URL}/orders/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({
+            order_buyer: {
+              order_name: userName,
+              order_phone: userPhone,
+            },
+            order_address: {
+              street: street,
+              ward: ward,
+              district: district,
+              province: city,
+            },
+            order_payment: "internet_banking",
+            orderCode,
+            order_note: note,
+            order_total_cost: parseInt(totalWithDiscount),
+            order_details: buyInfo.map((product) => ({
+              product_id_hashed: product.product_id,
+              variant_id: product.variant_id,
+              quantity: product.quantity,
+              unit_price: product.unit_price,
+            })),
+          }),
+          credentials: "include",
+        });
+
+        router.push(url);
       } catch (error) {
         console.error("Error in handleSubmit:", error);
       }
     }
-      
-     
-
-     
-   };
+  };
 
   return (
     // <main className="order-container">
@@ -208,7 +290,7 @@ export default function SearchResultPage() {
               <div className="order-detail__input">
                 <input
                   name="buyerName"
-                  // value="Họ và tên mặc định"
+                  value={userName}
                   onChange={validateName}
                   type="text"
                   placeholder="Họ và tên"
@@ -219,7 +301,7 @@ export default function SearchResultPage() {
               <div className="order-detail__input">
                 <input
                   name="buyerPhone"
-                  // value="Số điện thoại mặc định"
+                  value={userPhone}
                   onChange={validatePhoneNumber}
                   type="text"
                   placeholder="Số điện thoại"
@@ -263,7 +345,11 @@ export default function SearchResultPage() {
                 ))}
               </select>
 
-              <select className="location__select" id="ward" required>
+              <select
+                className="location__select"
+                id="ward"
+                required
+                onChange={handleWardChange}>
                 <option value="" selected>
                   Chọn Phường/Xã
                 </option>
@@ -278,6 +364,8 @@ export default function SearchResultPage() {
                 name="address"
                 type="text"
                 placeholder="Số nhà, tên đường..."
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
                 required
               />
             </div>
@@ -288,7 +376,9 @@ export default function SearchResultPage() {
             <textarea
               className="note__text-area"
               name="note"
-              placeholder="Hãy nhập yêu cầu kèm theo (tùy chọn)..."></textarea>
+              placeholder="Hãy nhập yêu cầu kèm theo (tùy chọn)..."
+              onChange={(e) => setNote(e.target.value)}
+              value={note}></textarea>
           </div>
 
           <div className="order-detail__pay-method pay-method">

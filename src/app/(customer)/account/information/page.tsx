@@ -353,28 +353,28 @@ export default function InformationPage() {
                 <div className="information-item__product-detail">
                   <div className="information-item__product-name">
                     <h5>Tên người dùng:</h5>
-                    <span>{user_name}</span>
+                    <p>{user_name}</p>
                   </div>
                   <div className="information-item__product-name">
                     <h5>Ngày sinh:</h5>
-                    <span>
+                    <p>
                       {new Date(user_birth).toLocaleDateString("vi-VN")}
-                    </span>
+                    </p>
                   </div>
 
                   <div className="information-item__product-name">
                     <h5>Giới tính:</h5>
-                    <span>{user_gender}</span>
+                    <p>{user_gender}</p>
                   </div>
 
                   <div className="information-item__product-name">
                     <h5>Số điện thoại:</h5>
-                    <span>{user_phone}</span>
+                    <p>{user_phone}</p>
                   </div>
 
                   <div className="information-item__product-name">
                     <h5>Địa chỉ:</h5>
-                    <span>{user_address}</span>
+                    <p>{user_address}</p>
                   </div>
                 </div>
               </div>
