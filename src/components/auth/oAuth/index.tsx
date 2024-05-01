@@ -56,7 +56,8 @@ export default function OAuth() {
         <button
           type="button"
           onClick={handleGoogleClick}
-          className={cx("social-image")}>
+          className={cx("social-image")}
+        >
           <Image src="/imgs/social_media/google-icon.jpg" alt="Google" fill />
         </button>
 
