@@ -53,7 +53,7 @@ const handleCartChangePage = (event) => {
 export default function CartPage() {
   const { data, error, isLoading } = useSWR(`${BACKEND_URL}/cart`, fetcher);
   const cart = data?.data?.cartInfo;
-
+  // console.log(cart);
   useEffect(() => {
     window.addEventListener("beforeunload", handleCartChangePage);
     const links = document.querySelectorAll("a");
@@ -178,7 +178,8 @@ export default function CartPage() {
     const cartItems = currentUser.cart ?? [];
 
     // Check if the item already exists in the array
-    const duplicatedIndex = cartItems.findIndex(
+    let duplicatedIndex = -1;
+    duplicatedIndex = cartItems.findIndex(
       (item) => item.product === productId && item.variant_id == variantId
     );
 
@@ -276,12 +277,12 @@ export default function CartPage() {
       ".quantity-input-group__input"
     ).value;
 
-    let duplicatedIndex;
     const changeItems = JSON.parse(localStorage.getItem("changeItems")) ?? {
       payload: [],
     };
 
     // Check if the item already exists in the array
+    let duplicatedIndex = -1;
     duplicatedIndex = changeItems.payload.findIndex(
       (item) => item.product_id === productId
     );
@@ -306,6 +307,7 @@ export default function CartPage() {
               quantity: quantity,
             },
           ];
+    console.log("up", updateChangeItems);
 
     localStorage.removeItem("changeItems");
     localStorage.setItem(
@@ -328,7 +330,7 @@ export default function CartPage() {
       ".cart-item__variant-select"
     ).value;
 
-    let duplicatedIndex;
+    let duplicatedIndex = -1;
     const deleteItems = JSON.parse(localStorage.getItem("deleteItems")) ?? {
       payload: [],
     };
@@ -517,10 +519,11 @@ export default function CartPage() {
           </button>
         </div>
         {(cart ?? []).map((cartItem, itemIndex) => {
-          const currentVariantIndex =
-            cartItem.product.product_variants.findIndex(
-              (item) => item._id == cartItem.variant_id
-            );
+          let currentVariantIndex = cartItem.product.product_variants.findIndex(
+            (item) => item._id == cartItem.variant_id
+          );
+          currentVariantIndex =
+            currentVariantIndex == -1 ? 0 : currentVariantIndex;
           return (
             <div className="cart-item" key={itemIndex}>
               <div className="cart-item__first-div">
@@ -534,26 +537,32 @@ export default function CartPage() {
                   className="cart-checkbox"
                   onChange={handleCheckOne}
                 />
-                <div className="cart-item__image-div">
+                <Link
+                  href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
+                  className="cart-item__image-div cart-item__link">
                   <CldImage
                     className="cart-item__image"
                     src={cartItem.product.product_imgs[0].link}
                     alt={cartItem.product.product_imgs[0].alt}
                     fill={true}
                   />
-                </div>
+                </Link>
               </div>
               <div className="cart-item__info-div cart-item-col">
-                <h4
-                  className="cart-item__text-info-name"
-                  style={{
-                    whiteSpace:
-                      (cartItem.product.product_variants ?? []).length != 0
-                        ? "nowrap"
-                        : "wrap",
-                  }}>
-                  {cartItem.product.product_name}
-                </h4>
+                <Link
+                  href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
+                  className="cart-item__link">
+                  <h4
+                    className="cart-item__text-info-name"
+                    style={{
+                      whiteSpace:
+                        (cartItem.product.product_variants ?? []).length != 0
+                          ? "nowrap"
+                          : "wrap",
+                    }}>
+                    {cartItem.product.product_name}
+                  </h4>
+                </Link>
                 {(cartItem.product.product_variants ?? []).length != 0 && (
                   <div className="cart-item__variant">
                     <input
