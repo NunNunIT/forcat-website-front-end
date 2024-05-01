@@ -19,6 +19,7 @@
 
 .order-item--top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: .25rem;
 
@@ -64,6 +65,10 @@
   gap: .5rem;
 
   text-align: right;
+}
+
+.order-item__btn {
+  padding-inline: 0 !important;
 }
 
 .order-item__total-price {

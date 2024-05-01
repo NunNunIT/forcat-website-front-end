@@ -74,7 +74,6 @@ export default function PurchaseDetailPage(props: { orderId: string }) {
 
   return (
     <main className="order-detail">
-
       <div className="order-detail--top">
         <span className="order-detail__overview">
           <h2>Chi tiết hóa đơn: #{props.orderId}</h2>

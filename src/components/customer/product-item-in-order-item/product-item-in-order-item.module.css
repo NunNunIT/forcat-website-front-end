@@ -39,7 +39,7 @@
   margin-right: .5rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 821px) {
   .product-item__prices {
     flex-direction: column;
     flex-flow: column-reverse;
@@ -49,5 +49,14 @@
 
   .product-item__price-base {
     margin: unset;
+  }
+}
+
+@media screen and (max-width: 431px) {
+  .product-item {
+    /* display: grid; */
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: flex-end;
   }
 }
