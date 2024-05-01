@@ -257,8 +257,8 @@ const RegisterForm = () => {
       <div className={cx("register-note")}>
         <p>
           Bằng việc nhấn nút đăng ký, bạn đồng ý với các{" "}
-          <Link href="/term-of-use">điều khoản</Link> và{" "}
-          <Link href="/privacy-policy">chính sách bảo mật</Link> của chúng tôi
+          <Link href="/term-of-use">Điều khoản</Link> và{" "}
+          <Link href="/privacy-policy">Chính sách bảo mật</Link> của chúng tôi
         </p>
       </div>
     </form>
