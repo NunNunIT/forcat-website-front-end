@@ -3,6 +3,7 @@
 // import libs
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import classNameNames from "classnames/bind";
 import Cookies from "js-cookie";
@@ -19,6 +20,7 @@ import { BACKEND_URL } from "@/utils/commonConst";
 const cx = classNameNames.bind(styles);
 
 export default function CustomerHeaderNav() {
+  const router = useRouter();
   const [currentUser, setCurrentUser] = useState<IUserLocal | null>(null); // Định nghĩa biến currentUser ở đây
 
   const getCurrentUser = (): IUserLocal | null => {
@@ -52,7 +54,9 @@ export default function CustomerHeaderNav() {
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
       setCurrentUser(null);
-      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      // window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      router.refresh();
+
       return;
     } catch (error) {
       // console.error("Logout error:", error);

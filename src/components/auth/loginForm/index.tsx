@@ -27,7 +27,7 @@ const LoginForm = () => {
     if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
       // window.location.href = "/";
-      router.push("/");
+      router.refresh();
     } else {
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
@@ -101,7 +101,8 @@ const LoginForm = () => {
           localStorage.removeItem("currentUser");
           localStorage.setItem("currentUser", JSON.stringify(data.data));
           Cookies.set("currentUser", data.token);
-          window.location.href = "/"; //xác thực thành công thì điều hướng về home
+          // window.location.href = "/"; //xác thực thành công thì điều hướng về home
+          router.push("/");
         }
 
         if (data.status == 404) {
