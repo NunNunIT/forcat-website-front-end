@@ -1,4 +1,4 @@
-.form-auth{
+.form-auth {
   max-width: 80vw;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   padding: 10px 0 10px 0;
 }
 
-.form-auth input{
+.form-auth input {
   padding: 16px;
   background-color: var(--bg);
   color: var(--textColor);
@@ -24,7 +24,7 @@
   font-size: 16px;
 }
 
-.form-auth__title{
+.form-auth__title {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -32,30 +32,34 @@
   gap: 12px;
 }
 
-.form-auth label{
+.form-auth label {
   text-align: left;
   font-weight: 600;
 }
 
-.form-auth__title a{
+.form-auth__title a {
   color: var(--dark7)
 }
 
-.form-auth__title a:hover{
+.form-auth__title a:hover {
   color: var(--dark6)
 }
 
-.form-auth .form-button{
-  padding: 20px 0;
+.form-auth .form-button {
+  padding: 1.5rem 0;
   width: 100%;
   cursor: pointer;
   background-color: var(--primary-mau3-1);
   color: var(--white);
   font-weight: bold;
   border: none;
-  border-radius: 5px;
-  margin: 10px 0 10px 0;
+  border-radius: .25rem;
+  margin: .5rem 0;
   opacity: 0.95;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: unset;
 }
 
 .form-button:hover {
@@ -87,17 +91,20 @@
   border-radius: 50%;
   border: none;
   margin-right: 10px;
-  background-color: #f0f0f0; /* Màu nền */
+  background-color: #f0f0f0;
+  /* Màu nền */
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  overflow: hidden; /* Để cắt hình ảnh trong phần nút */
+  overflow: hidden;
+  /* Để cắt hình ảnh trong phần nút */
 }
 
 .form-auth__social-buttons button:hover {
-  background-color: #e0e0e0; /* Màu nền hover */
+  background-color: #e0e0e0;
+  /* Màu nền hover */
 }
 
 .form-auth__social-buttons button:focus {
@@ -120,7 +127,7 @@
   left: 0;
 }
 
-.align-right{
+.align-right {
   display: flex;
   justify-content: flex-end;
   color: var(--dark5)
@@ -130,11 +137,11 @@
   text-align: center;
 }
 
-.register-note a{
+.register-note a {
   color: var(--dark-blue)
 }
 
-.register-note a:hover{
+.register-note a:hover {
   color: var(--luminos-blue)
 }
 
@@ -173,7 +180,8 @@
   margin-left: 10px;
   font-size: 0.95rem;
 }
-.send-again .resend .limit{
+
+.send-again .resend .limit {
   display: flex;
   flex-direction: row;
   font-size: 1 rem;
@@ -190,25 +198,31 @@
 .send-again a {
   color: var(--dark7)
 }
+
 .send-again a:hover {
   color: var(--dark6)
 }
+
 span.red-start {
   color: red;
 }
+
 .input-container {
   position: relative;
   width: 100%;
 }
+
 .input-field {
   width: 100%;
 }
+
 .icon {
   position: absolute;
   top: 50%;
   right: 4%;
   transform: translateY(-50%);
 }
+
 .otp-error {
   /* position: absolute; */
   margin: auto;
