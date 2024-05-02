@@ -98,11 +98,6 @@ export default function NotificationWrapper() {
     }
   };
 
-  if (error) {
-    console.error(">> Error: ", error);
-    return notFound();
-  }
-
   return (
     <>
       <div className="notification__content--top">
