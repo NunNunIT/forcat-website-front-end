@@ -41,8 +41,9 @@
 }
 
 .product__unit-price {
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     font-weight: 600;
+    color: var(--dollar-red)
 }
 
 .product__discount-amount {
@@ -64,6 +65,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 12px;
+}
+
+.product__variants h3,
+.product__quantity h3,
+.product__total-price-div h3 {
+    color: var(--dark10);
+    font-size: 1.2rem;
 }
 
 .product__quantity,
@@ -174,7 +182,8 @@
 }
 
 .buy-now-btn {
-    background-color: var(--dollar-red2);
+    background-color: var(--dollar-red);
+    /* background-color: #ef2e31; */
 }
 
 @media only screen and (max-width: 431px) {
