@@ -37,10 +37,6 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     "privacy-policy": { text: "Chính sách bảo mật", url: "privacy-policy" }
   };
 
-  if (namePage === "mobile-account") {
-    return { text: "Điều hướng", url: "/account/mobile-account" };
-  }
-
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {
     return { text: "Chi tiết sản phẩm" };
   }
