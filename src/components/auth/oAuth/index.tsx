@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import Cookies from "js-cookie";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 // import utils
@@ -16,13 +17,13 @@ import { app } from "./firebase";
 const cx = classNames.bind(styles);
 
 export default function OAuth() {
+  const router = useRouter();
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      // console.log(result);
       const res = await fetch(BACKEND_URL + "/auth/login/google", {
         method: "POST",
         headers: {
@@ -42,7 +43,7 @@ export default function OAuth() {
         // Set the localStorage and currentUser state
         localStorage.setItem("currentUser", JSON.stringify(data.data));
         Cookies.set("currentUser", data.token);
-        window.location.href = "/"; //xác thực thành công thì điều hướng về home
+        router.push("/");
       }
     } catch (error) {
       // console.log("Could not login with Google", error);

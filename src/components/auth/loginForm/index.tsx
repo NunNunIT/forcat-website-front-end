@@ -27,7 +27,7 @@ const LoginForm = () => {
     if (currentUser && currentUserCookie) {
       // Redirect or handle accordingly
       // window.location.href = "/";
-      router.refresh();
+      router.push("/");
     } else {
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
