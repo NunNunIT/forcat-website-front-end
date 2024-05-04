@@ -12,5 +12,5 @@ export default function AccountLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return children;
 }

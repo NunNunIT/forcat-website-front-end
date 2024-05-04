@@ -1,7 +1,9 @@
 "use client";
 
 // import libs
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams, notFound } from "next/navigation";
 import useSWR, { Fetcher } from "swr";
 
@@ -96,11 +98,6 @@ export default function NotificationWrapper() {
     }
   };
 
-  if (error) {
-    console.error(">> Error: ", error);
-    return notFound();
-  }
-
   return (
     <>
       <div className="notification__content--top">
@@ -112,19 +109,37 @@ export default function NotificationWrapper() {
       {isLoading ? (
         <CustomerSkeletonNotificationItem />
       ) : (
-        (data?.notifications ?? []).map((notification: INotiItemProps) => (
-          <CustomerNotificationItem
-            key={notification._id}
-            {...notification}
-            readAll={readAll}
-            mutate={mutate}
-            fetcherSetRead={fethcerSetRead}
-          />
-        ))
+        ((data?.notifications ?? []).length > 0)
+          ? data?.notifications.map((notification: INotiItemProps) => (
+            <CustomerNotificationItem
+              key={notification._id}
+              {...notification}
+              readAll={readAll}
+              mutate={mutate}
+              fetcherSetRead={fethcerSetRead}
+            />
+          ))
+          : <>
+            <div className="notification__no-notification">
+              <div className="notification__no-notification-img-container">
+                <Image
+                  src="/imgs/purchase/empty.png"
+                  alt="No notification"
+                  fill={true}
+                />
+              </div>
+              <span className="notification__no-notification-text">
+                Bạn chưa có thông báo thuộc loại này!!!<br />
+                Hãy thử <Link href="/search-result?searchKey=">mua sắm</Link> để có những trải nghiệm tuyệt vời nhất.
+              </span>
+            </div>
+          </>
       )}
 
       {/* Fill blank */}
-      <div className="tag-make-fill-blank" />
+      {!isLoading && data && data.maxPage > 1 && (
+        <div className="tag-make-fill-blank" />
+      )}
 
       {/* Pagination */}
       {!isLoading && data && (

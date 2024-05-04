@@ -196,7 +196,8 @@ export default function CartPage() {
     // Check if the item already exists in the array
     let duplicatedIndex = -1;
     duplicatedIndex = cartItems.findIndex(
-      (item) => item.product === productId && item.variant_id == variantId
+      (item) =>
+        item.product === decryptData(productId) && item.variant_id == variantId
     );
 
     const updateDeleteCartItems =
@@ -323,7 +324,7 @@ export default function CartPage() {
               quantity: quantity,
             },
           ];
-    console.log("up", updateChangeItems);
+    // console.log("up", updateChangeItems);
 
     localStorage.removeItem("changeItems");
     localStorage.setItem(
@@ -573,12 +574,13 @@ export default function CartPage() {
                   className="cart-item__link">
                   <h4
                     className="cart-item__text-info-name"
-                    style={{
-                      whiteSpace:
-                        (cartItem.product.product_variants ?? []).length != 0
-                          ? "nowrap"
-                          : "wrap",
-                    }}>
+                    // style={{
+                    //   whiteSpace:
+                    //     (cartItem.product.product_variants ?? []).length != 0
+                    //       ? "nowrap"
+                    //       : "wrap",
+                    // }}
+                    >
                     {cartItem.product.product_name}
                   </h4>
                 </Link>

@@ -3,6 +3,7 @@
 // import libs
 import classNames from "classnames/bind";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
@@ -18,6 +19,7 @@ import OAuth from "../oAuth";
 const cx = classNames.bind(styles);
 
 const RegisterForm = () => {
+  const router = useRouter();
   const currentUserCookie = Cookies.get("currentUser");
   if (typeof window !== "undefined") {
     // Code sử dụng localStorage
@@ -132,9 +134,10 @@ const RegisterForm = () => {
           console.log("Login successful");
           // Set the localStorage and currentUser state
           localStorage.removeItem("currentUser");
-          localStorage.setItem("currentUser", JSON.stringify(data.data));
-          Cookies.set("currentUser", data.token);
-          window.location.href = "/"; //xác thực thành công thì điều hướng về home
+          // localStorage.setItem("currentUser", JSON.stringify(data.data));
+          // Cookies.set("currentUser", data.token);
+          // window.location.href = "/"; //xác thực thành công thì điều hướng về home
+          router.push("/login");
         }
       } catch (error) {
         setLoading(false);

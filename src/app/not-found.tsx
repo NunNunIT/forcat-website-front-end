@@ -19,7 +19,7 @@ export default function NotFound() {
   return (
     <>
       <CustomerHeader></CustomerHeader>
-      <main className="main-container">
+      <main className="not-found-main-container">
         <div className="not-found-container">
           <div className="not-found__image-div">
             <Image

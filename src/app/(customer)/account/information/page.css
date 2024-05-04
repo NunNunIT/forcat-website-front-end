@@ -11,7 +11,6 @@
   flex-direction: column;
   /* gap: 24px; */
   width: 100%;
-  padding: 1rem;
 }
 
 
@@ -45,7 +44,7 @@
 .information-item__edit {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--primary-mau0-2);
+  color: var(--primary-mau4-2);
   cursor: pointer;
 
 }
@@ -65,7 +64,6 @@
 }
 
 .information-item__product-name {
-  padding: 0.6rem;
   display: flex;
   flex-direction: row;
 }
@@ -102,12 +100,6 @@
   font-size: 1rem;
 }
 
-.information-item__edit {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-mau0-2);
-}
-
 .information-item__main {
   display: flex;
   flex-direction: column;
@@ -122,31 +114,25 @@
   gap: 0.8rem;
 }
 
-.information-item__product-name {
-  padding: 0.6rem;
-  display: flex;
-  flex-direction: row;
-}
-
-.information-item__product-name h5 {
-  display: flex;
-  width: 20%;
+.padding-bottom {
+  padding-top: 12px;
+  padding-bottom: 4px;
 }
 
 .userName {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 .userBirth {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 
 .userSex {
   width: 35%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 }
 
 .dropdown {
@@ -158,19 +144,19 @@
 
 .userEmail {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
 .userPhone {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
 .userAddress {
   width: 60%;
-  border-bottom: 2px solid #eaeaea;
+  /* border-bottom: 2px solid #eaeaea; */
 
 }
 
@@ -289,16 +275,9 @@ span.red-start {
 }
 
 @media only screen and (max-width: 821px) {
-  h5 {
-    font-size: 0.875rem;
-  }
 
   .information__status {
     padding: .75rem 1.5rem;
-  }
-
-  .information-item {
-    padding: .75rem;
   }
 
   .information-item__product-name label {
@@ -309,6 +288,10 @@ span.red-start {
 @media only screen and (max-width: 431px) {
   .information-item--top h3 {
     font-size: 1.5rem;
+  }
+
+  .information__main {
+    padding: 0;
   }
 
   .information-item__product-detail h5 {

@@ -4,7 +4,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -36,6 +36,7 @@ const asideNavData = [
 ];
 
 export default function CustomerAccountAside() {
+  const router = useRouter();
   const pathName = usePathname();
   const [user, setUser] = useState(null);
 
@@ -68,7 +69,6 @@ export default function CustomerAccountAside() {
 
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
-        method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +82,8 @@ export default function CustomerAccountAside() {
 
       localStorage.removeItem("currentUser");
       Cookies.remove("currentUser");
-      window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      // window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
+      router.refresh();
       return;
     } catch (error) {
       // console.error("Logout error:", error);

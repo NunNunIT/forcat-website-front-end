@@ -25,11 +25,12 @@
     border-top: 1px solid var(--outline1);
     display: grid;
     grid-template-columns: repeat(6, 1fr) 40px;
-    gap: 12px;
+    gap: 8px;
 }
 
 .title {
     border: none;
+    color: var(--dark6);
 }
 
 .title__item {
@@ -42,6 +43,11 @@
     width: 16px;
     min-width: 16px;
     aspect-ratio: 1 / 1;
+}
+
+input[type='checkbox']:checked {
+    background-color: var(--primary-mau3-1)!important;
+    color: white;
 }
 
 .title__check-all {
@@ -100,20 +106,21 @@
 
 .cart-item__text-info-name {
     width: 100%;
+    height: 3rem;
     overflow: hidden;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-overflow: ellipsis;
 }
 
 .cart-item__variant {
-    width: 150px;
+    width: 10rem;
     cursor: pointer;
-    padding: 8px;
+    padding: 4px;
     border-radius: 4px;
-    background-color: var(--pink);
+    background-color: var(--yellow10);
     display: flex;
     gap: 8px;
-    color: var(--white);
+    color: var(--dark9);
     font-weight: 500;
     font-size: 1rem;
 }
@@ -123,7 +130,7 @@
     -webkit-appearance: none;
     outline: none;
     background-color: transparent;
-    color: var(--white);
+    color: var(--dark9);
     font-weight: 500;
     font-size: 1rem;
 }
@@ -143,23 +150,30 @@
 
 .cart-item__unit-price-before-discount {
     color: var(--dark11);
+    font-size: smaller;
 }
 
 .quantity-input-group {
     display: flex;
     align-items: center;
-    gap: 4px;
+    /* gap: 4px; */
+    border: 1px solid var(--outline1);
+    border-radius: 4px;
 }
 
 .btn-quantity {
-    width: 32px;
-    height: 28px;
-    border: 1px solid var(--outline1);
+    /* width: 32px; */
+    /* height: 28px; */
+    /* border: 1px solid var(--outline1); */
     border-radius: 4px;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btn-quantity span {
+    font-size: 1.4rem;
 }
 
 .btn-quantity:hover {
@@ -182,6 +196,8 @@
 
 .cart-item__price {
     font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--dollar-red2);
 }
 
 .cart-item__remove-btn {
@@ -227,16 +243,16 @@
 .cart-bill__total-price .cart-bill-row__content {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--blue6);
+    color: var(--dollar-red);
 }
 
 .cart-bill__btn {
     cursor: pointer;
     padding: 8px 0px;
-    border-radius: 36px;
+    border-radius: 8px;
     font-size: 1.125rem;
     color: var(--white);
-    background-color: var(--blue6);
+    background-color: var(--primary-mau3-1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -357,11 +373,11 @@
     }
 
     .cart-footer-btns__check-all-btn {
-        background-color: var(--blue6);
+        background-color: var(--primary-mau0-2);
     }
 
     .cart-footer-btn__delete-btn {
-        background-color: var(--pink);
+        background-color: var(--red2);
         justify-content: center;
         align-items: center;
     }
@@ -391,14 +407,14 @@
     .pricing__price-after-discount {
         font-size: 1.5rem;
         font-weight: 600;
-        color: var(--blue6);
+        color: var(--dollar-red)
     }
 
     .cart-footer-buy-group__buy-btn {
         min-width: 110px;
         padding: 8px 12px;
-        border-radius: 24px;
-        background-color: var(--blue6);
+        border-radius: 8px;
+        background-color: var(--primary-mau3-1);
         color: var(--white);
         font-size: 1.125rem;
     }
@@ -435,7 +451,7 @@
         padding: 8px 0px;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(auto-fit, minmax(35px, 1fr));
-        gap: 8px;
+        gap: 4px;
     }
 
     .quantity-input-group {
@@ -471,12 +487,12 @@
     .cart-item__info-div {
         grid-column: 3 / span 3;
         grid-row: 1 / span 1;
-        gap: 4px;
+        gap: 8px;
     }
 
     .cart-item__text-info-name {
         overflow: visible;
-        white-space: wrap !important;
+        /* white-space: wrap !important; */
     }
 
     .cart-item__text-info {
@@ -484,7 +500,7 @@
     }
 
     .cart-item__variant {
-        width: fit-content;
+        /* width: fit-content; */
     }
 
     .cart-item__unit-price {
@@ -497,6 +513,7 @@
 
     .cart-item__unit-price-after-discount {
         font-weight: 600;
+        color: var(--dollar-red2)    
     }
 
     .cart-item__quantity {

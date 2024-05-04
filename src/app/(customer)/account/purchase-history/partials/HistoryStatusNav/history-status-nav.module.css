@@ -33,3 +33,21 @@
 
   border-bottom: 2px solid var(--primary-mau0-1);
 }
+
+@media screen and (max-width: 431px) {
+  .purchase-history__status-container {
+    padding-inline: 1rem;
+    gap: 1rem;
+    overflow-y: scroll;
+  }
+
+  .purchase-history__status-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .purchase-history__status {
+    display: inline-block;
+    text-wrap: nowrap;
+    min-width: unset;
+  }
+}

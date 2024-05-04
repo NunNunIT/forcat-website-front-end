@@ -15,7 +15,7 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
   const data = {
     " ": { text: "Trang chủ", url: "/" },
     news: { text: "Tin tức", url: "/news" },
-    account: { text: "Tài khoản" },
+    account: { text: "Tài khoản", url: "/account/mobile-account" },
     information: { text: "Thông tin cá nhân", url: "/account/information" },
     "purchase-history": {
       text: "Lịch sử đơn hàng",
@@ -38,7 +38,7 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
   };
 
   if (namePage === "mobile-account") {
-    return { text: "Điều hướng", url: "/account/mobile-account" };
+    return null;
   }
 
   if (!Object.keys(data).includes(namePage) && prevNamePage == " ") {

@@ -8,7 +8,6 @@
   padding: 1rem;
   justify-content: center;
   align-items: center;
-
   border-radius: .25rem;
 }
 
@@ -37,6 +36,8 @@
   align-items: center;
   width: 100% !important;
   height: 100%;
+  background-color: white;
+  margin: 0;
   /* margin-bottom: 100px; */
 }
 
@@ -112,7 +113,7 @@
   justify-content: center;
   height: 48px;
   background: transparent;
-  background: var(--dollar-red);
+  background: brown;
   border-radius: 12px;
   padding: 4px;
   margin-bottom: 8px;
@@ -282,11 +283,5 @@ a.btn.btn--filled.pri.btn-logout {
 
   .mobile-account-container {
     display: flex;
-  }
-}
-
-@media screen and (max-width: 431px) {
-  body {
-    background-color: white;
   }
 }

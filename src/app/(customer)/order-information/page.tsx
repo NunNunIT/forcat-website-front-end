@@ -198,6 +198,7 @@ export default function SearchResultPage() {
               district: district,
               province: city,
             },
+            order_payment: "cod",
             order_note: note,
             order_total_cost: parseInt(totalWithDiscount),
             order_details: buyInfo.map((product) => ({
@@ -215,7 +216,6 @@ export default function SearchResultPage() {
         if (!data?.success)
           return;
 
-        // alert("Đặt hàng thành công!");
         router.push("/account/purchase-history?type=unpaid");
       } catch (error) {
 
@@ -224,48 +224,53 @@ export default function SearchResultPage() {
 
     if (paymentMethod === '3') {
       try {
-        const [resBE, resPayment] = await Promise.all([
-          fetch(`${BACKEND_URL}/orders/`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+        const resBE = await await fetch(`${BACKEND_URL}/orders/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({
+            order_buyer: {
+              order_name: userName,
+              order_phone: userPhone,
             },
-            body: JSON.stringify({
-              order_buyer: {
-                order_name: userName,
-                order_phone: userPhone,
-              },
-              order_address: {
-                street: street,
-                ward: ward,
-                district: district,
-                province: city,
-              },
-              order_note: note,
-              order_total_cost: parseInt(totalWithDiscount),
-              order_details: buyInfo.map((product) => ({
-                product_id_hashed: product.product_id,
-                variant_id: product.variant_id,
-                quantity: product.quantity,
-                unit_price: product.unit_price,
-              })),
-            }),
-            credentials: "include",
+            order_address: {
+              street: street,
+              ward: ward,
+              district: district,
+              province: city,
+            },
+            order_payment: "internet_banking",
+            order_note: note,
+            order_total_cost: parseInt(totalWithDiscount),
+            order_details: buyInfo.map((product) => ({
+              product_id_hashed: product.product_id,
+              variant_id: product.variant_id,
+              quantity: product.quantity,
+              unit_price: product.unit_price,
+            })),
           }),
-          fetch(`${BACKEND_URL}/payment/create-payment-link`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({ amount: parseInt(totalWithDiscount), }),
-            credentials: "include",
-          }),
-        ])
+          credentials: "include",
+        });
 
-        const json = await resPayment.json();
+        const jsonBE = await resBE.json();
+        if (!jsonBE.success)
+          throw jsonBE;
 
-        if (json) {
-          let url = json.data.checkoutUrl;
-          router.push(url);
-        }
+        const { orderCode } = jsonBE.data;
+
+        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({ amount: parseInt(totalWithDiscount), orderCode, }),
+          credentials: "include",
+        });
+
+        const jsonPayment = await resPayment.json();
+        if (!jsonPayment.success)
+          throw jsonPayment;
+
+        const { checkoutUrl: url } = jsonPayment.data;
+
+        router.push(url);
       } catch (error) {
         console.error("Error in handleSubmit:", error);
       }
@@ -275,7 +280,7 @@ export default function SearchResultPage() {
   return (
     // <main className="order-container">
     <>
-      <div></div>
+      {/* <div></div> */}
       <div className="order__product--mobile">
         {(buyInfo ?? []).map((item, index) => {
           return <OrderProduct buyInfo={item} key={index} />;
@@ -397,7 +402,7 @@ export default function SearchResultPage() {
                   Thanh toán trực tiếp khi nhận hàng
                 </label>
               </div>
-              <div>
+              {/* <div>
                 <input
                   type="radio"
                   id="radio2"
@@ -407,7 +412,7 @@ export default function SearchResultPage() {
                   onChange={handlePaymentMethodChange}
                 />
                 <label htmlFor="radio2">Thanh toán qua MOMO</label>
-              </div>
+              </div> */}
               <div>
                 <input
                   type="radio"

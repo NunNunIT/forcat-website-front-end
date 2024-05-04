@@ -26,7 +26,7 @@
   display: flex;
 }
 
-.breadcrumb a:is(:active, :visited) {
+.breadcrumb a:is(:link, :active, :visited) {
   color: black;
 }
 
@@ -49,7 +49,12 @@
 @media screen and (max-width: 431px) {
   .breadcrumb {
     width: 100%;
-    margin-block-start: 0;
+    margin: 0;
     border-radius: 0;
+  }
+
+  .breadcrumb>*>* {
+    user-select: none;
+    text-wrap: nowrap;
   }
 }

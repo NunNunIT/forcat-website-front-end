@@ -42,6 +42,7 @@
   grid-area: --top;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .order-detail__overview {
@@ -146,9 +147,13 @@
   }
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 431px) {
   .order-detail__products {
     display: flex;
     flex-direction: column;
+  }
+
+  .order-detail>* {
+    padding: 0;
   }
 }

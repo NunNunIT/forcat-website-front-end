@@ -231,7 +231,7 @@ export default function InformationPage() {
                     </div>
 
                     <div className="order-detail__location location">
-                      <h5>Địa chỉ</h5>
+                      <h5 className="padding-bottom">Địa chỉ</h5>
                       <div className="information-item__product-name">
                         <label htmlFor="province">
                           Tỉnh:
@@ -334,20 +334,20 @@ export default function InformationPage() {
 
   } else {
     return (
-      <main className="account-information__main">
-        <section className="information__main">
+      <section className="account-information__main">
+        <div className="information__main">
           <div className="information__main__item">
             <div className="information-item">
               <div className="information-item--top">
                 <div className="information-item__info">
-                  <h3>Thông tin cá nhân</h3>
+                  <h2>Thông tin cá nhân</h2>
                 </div>
-                <h3
+                <p
                   className="information-item__edit"
                   onClick={() => setIsEditing(true)}
                 >
                   Sửa
-                </h3>
+                </p>
               </div>
               <div className="information-item__main">
                 <div className="information-item__product-detail">
@@ -380,8 +380,8 @@ export default function InformationPage() {
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
     );
   }
 }

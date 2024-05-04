@@ -351,6 +351,8 @@
   font-weight: unset !important;
   display: unset !important;
   height: min-content;
+  width: 100%;
+  text-align: right;
 }
 
 .header__auth-logout-btn:hover {

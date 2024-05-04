@@ -68,7 +68,12 @@ button {
   }
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+  .notification-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 @media screen and (max-width: 416px) {
   .notification-container {

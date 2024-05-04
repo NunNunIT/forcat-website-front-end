@@ -13,6 +13,7 @@ import { ProductVariant } from "../../components";
 // import utils
 import { convertNumberToMoney, convertMoneyToNumber } from "@/utils";
 import { BACKEND_URL } from "@/utils/commonConst";
+import { decryptData } from "@/utils/security";
 
 // import css
 import styles from "./buy-form.module.css";
@@ -34,6 +35,8 @@ const handleProductChangePage = () => {
   const addCartItem = JSON.parse(localStorage.getItem("addCartItem")) ?? {
     payload: [],
   };
+
+  // console.log(addCartItem.payload);
 
   fetch(`${BACKEND_URL}/cart/addCart`, {
     body: JSON.stringify(addCartItem.payload),
@@ -150,11 +153,13 @@ export default function ProductBuyForm({
     // Add header cart when add cart
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const cartItems = currentUser.cart ?? [];
+    // console.log("ccurrrrr", cartItems);
 
     // Check if the item already exists in the array
     let duplicatedIndex = -1;
     duplicatedIndex = cartItems.findIndex(
-      (item) => item.product_id === productId && item.variant_id == variantId
+      (item) =>
+        item.product === decryptData(productId) && item.variant_id == variantId
     );
 
     const updateAddCartItems =

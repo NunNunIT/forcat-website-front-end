@@ -19,6 +19,7 @@ import { CustomerModal } from "..";
 // import css
 import styles from "./notification-item.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import Image from "next/image";
 
 const cx = classNames.bind(styles);
 
@@ -37,10 +38,6 @@ export function SkeletonNotificationItem() {
       </div>
     </div>
   )
-}
-
-const getAccessToken = () => {
-  return Cookies.get("accessToken")?.value ?? "Khong co access token";
 }
 
 export default function NotificationItem(props: INotiItemProps) {
@@ -66,7 +63,15 @@ export default function NotificationItem(props: INotiItemProps) {
   return (
     <>
       <div className={cx("notification-item", isActiveClassWithBool(!isUnread))}>
-        <div className={cx("notification-item__cover-container")}></div>
+        <div className={cx("notification-item__cover-container")}>
+          {props.notification_type === "order"
+            ? <Image
+              src="/imgs/notifications/order-type.webp"
+              alt="Order"
+              fill
+            />
+            : null}
+        </div>
         <div className={cx("notification-item__content-wrapper")}>
           <h5 className={cx("notification-item__title")}>
             {props.notification_name}

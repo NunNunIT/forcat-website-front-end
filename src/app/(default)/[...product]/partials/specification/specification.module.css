@@ -9,6 +9,7 @@
 .specifications__title {
     display: flex;
     justify-content: space-between;
+    color: var(--dark10);
 }
 
 .specifications__see-more {

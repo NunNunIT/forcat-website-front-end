@@ -438,7 +438,7 @@ export default function SearchResultPage({ iteamFind, searchResults }) {
               "sản phẩm khuyến mãi"
             ) : iteamFind === "topRateTrue" ? (
               "sản phẩm Hot"
-            ): iteamFind === "newTrue" ? (
+            ) : iteamFind === "newTrue" ? (
               "sản phẩm mới"
             ) : (
               <>
