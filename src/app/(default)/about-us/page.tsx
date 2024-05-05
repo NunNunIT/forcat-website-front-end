@@ -71,6 +71,32 @@ export default function AboutUsPage() {
             </p>
           </div>
         </div>
+        <p>
+          FORCAT SHOP là điểm đến lý tưởng cho những người yêu mèo, nơi mang đến
+          một thế giới rộng lớn của các vật phẩm độc đáo và chất lượng cho các
+          vị thần mèo của bạn. Với mục tiêu làm hài lòng cả mèo và chủ nhân của
+          chúng, chúng tôi tự hào là điểm đến đáng tin cậy để tìm kiếm mọi thứ
+          từ thức ăn, đồ chơi, đến đồ dùng và phụ kiện.
+        </p>
+        <p>
+          Chúng tôi hiểu rõ rằng mỗi chú mèo là một cá thể độc đáo với sở thích
+          và nhu cầu riêng biệt. Đó là lý do tại FORCAT SHOP, chúng tôi không
+          chỉ cung cấp các sản phẩm thông thường mà còn đưa ra những lựa chọn đa
+          dạng, phong phú để bạn có thể tìm thấy điều phù hợp nhất cho thú cưng
+          của mình. Từ những món đồ chơi kích thích trí thông minh đến các sản
+          phẩm thú vị giúp giải trí và rèn luyện sức khỏe, chúng tôi cam kết đem
+          đến trải nghiệm mua sắm đáng nhớ cho bạn và mèo của bạn.
+        </p>
+        <p>
+          Sản phẩm tại FORCAT SHOP không chỉ đảm bảo về chất lượng mà còn mang
+          đậm phong cách và sự độc đáo. Chúng tôi luôn cập nhật xu hướng mới
+          nhất trong cộng đồng yêu mèo để đảm bảo bạn luôn có những sản phẩm mới
+          nhất và phù hợp nhất với phong cách của bạn và thú cưng. Nếu bạn đang
+          tìm kiếm một nơi đáng tin cậy để mua sắm các vật phẩm cho mèo của bạn,
+          hãy ghé thăm FORCAT SHOP. Chúng tôi cam kết sẽ mang đến cho bạn trải
+          nghiệm mua sắm tốt nhất, đồng thời giúp thú cưng của bạn có cuộc sống
+          thú vị và hạnh phúc hơn.
+        </p>
       </section>
       <section className="about-us__about-members brown-img">
         <div className="about-us__about-members__wrapper">
