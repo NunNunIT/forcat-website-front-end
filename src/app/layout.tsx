@@ -54,6 +54,8 @@ export const metadata: Metadata = {
     "Shop for cat",
     "Shop For Cat",
     "For cat Shop",
+    "SHOP FOR CAT",
+    "FORCAT SHOP",
   ],
   title: {
     template: "ForCat | %s ",
