@@ -47,6 +47,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
         priority: 0.8,
       },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/news`,
+        priority: 1,
+        changeFrequency: "daily",
+      },
       ...productEntries,
       ...newEntries,
     ];
@@ -72,6 +77,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
         priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/news`,
+        priority: 1,
+        changeFrequency: "daily",
       },
     ];
   }
