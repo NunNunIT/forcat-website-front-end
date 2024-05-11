@@ -56,6 +56,12 @@ export const metadata: Metadata = {
     "For cat Shop",
     "SHOP FOR CAT",
     "FORCAT SHOP",
+    "đồ cho mèo",
+    "phụ kiện cho mèo",
+    "phụ kiện mèo",
+    "đồ mèo",
+    "phu kien meo",
+    "do cho meo",
   ],
   title: {
     template: "ForCat | %s ",
