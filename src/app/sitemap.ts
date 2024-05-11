@@ -33,23 +33,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/about-us`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/term-of-use`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
         priority: 0.8,
       },
       {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/term-of-use`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
+        priority: 0.9,
+      },
+      {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/news`,
-        priority: 1,
+        priority: 0.9,
         changeFrequency: "daily",
       },
       ...productEntries,
@@ -64,23 +64,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/about-us`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/term-of-use`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`,
-        priority: 0.5,
-      },
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
         priority: 0.8,
       },
       {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/term-of-use`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/category`,
+        priority: 0.9,
+      },
+      {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/news`,
-        priority: 1,
+        priority: 0.9,
         changeFrequency: "daily",
       },
     ];
