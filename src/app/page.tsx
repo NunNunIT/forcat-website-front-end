@@ -18,7 +18,7 @@ import "./page.css";
 export const metadata: Metadata = {
   title: "ForCat | Trang chủ",
   description:
-    "Chào mừng bạn đến với ForCat Shop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Tại đây, chúng tôi cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất để giúp bạn chăm sóc và yêu thương thú cưng của mình. Khám phá ngay bộ sưu tập sản phẩm đa dạng và đăng ký tài khoản để nhận ưu đãi đặc biệt. Hãy bắt đầu hành trình mua sắm và chăm sóc thú cưng của bạn tại ForCat Shop ngay hôm nay!",
+    "Chào mừng bạn đến với ForCatShop - nơi mang lại những trải nghiệm tuyệt vời cho bạn và thú cưng của bạn. Tại đây, ForCat Shop cam kết cung cấp những sản phẩm chất lượng và dịch vụ tận tâm nhất để giúp bạn chăm sóc và yêu thương thú cưng của mình. Khám phá ngay bộ sưu tập sản phẩm đa dạng và đăng ký tài khoản để nhận ưu đãi đặc biệt. Hãy bắt đầu hành trình mua sắm và chăm sóc thú cưng của bạn tại ForCat Shop ngay hôm nay!",
 };
 
 const fetchTopRatedProducts = async () => {
@@ -112,9 +112,7 @@ export default async function Home() {
         <CustomerSlider />
         <div className="content-container">
           <h2 className="tip-products__label">
-            <span className="tip-products__title non-hover">
-              Danh mục
-            </span>
+            <span className="tip-products__title non-hover">Danh mục</span>
             <span className="tip-products__title-after"></span>
           </h2>
           <CustomerCategories />
@@ -122,7 +120,9 @@ export default async function Home() {
         <div className="wrapper color">
           <div className="content-container">
             <h2 className="tip-products__label">
-              <Link href="/search-result?sortBy=hot" className="tip-products__title">
+              <Link
+                href="/search-result?sortBy=hot"
+                className="tip-products__title">
                 Gợi ý hôm nay
                 <p> Xem tất cả </p>
               </Link>
@@ -135,7 +135,9 @@ export default async function Home() {
         <section className="content-container tip-products-wrapper wrapper--white">
           <div className="tip-products">
             <h2 className="tip-products__label">
-              <Link href="/search-result?sortBy=new" className="tip-products__title">
+              <Link
+                href="/search-result?sortBy=new"
+                className="tip-products__title">
                 Hàng mới về
                 <p> Xem tất cả </p>
               </Link>
@@ -209,7 +211,9 @@ export default async function Home() {
 
           <div className="tip-products">
             <h2 className="tip-products__label">
-              <Link href="/search-result?discount=True" className="tip-products__title">
+              <Link
+                href="/search-result?discount=True"
+                className="tip-products__title">
                 Khuyến mãi hấp dẫn
                 <p> Xem tất cả </p>
               </Link>

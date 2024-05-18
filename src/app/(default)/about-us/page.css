@@ -23,15 +23,20 @@ section.white {
 }
 
 section.brown-img {
-  background-color: #3f271b; /* Màu nền mặc định */
-  background-image: url('../../../../public/imgs/about-us/background-member.png'); /* Đường dẫn đến hình ảnh nền */
-  background-size: cover; /* Hiển thị hình ảnh sao cho nó phủ đầy toàn bộ background */
-  background-position: center; /* Hiển thị hình ảnh ở giữa */
+  background-color: #3f271b;
+  /* Màu nền mặc định */
+  background-image: url('../../../../public/imgs/about-us/background-member.png');
+  /* Đường dẫn đến hình ảnh nền */
+  background-size: cover;
+  /* Hiển thị hình ảnh sao cho nó phủ đầy toàn bộ background */
+  background-position: center;
+  /* Hiển thị hình ảnh ở giữa */
   color: white;
 }
 
 section.brown {
-  background-color: #ffd68e; /* Màu nền mặc định */
+  background-color: #ffd68e;
+  /* Màu nền mặc định */
 }
 
 .about-us__about-information {
@@ -50,16 +55,31 @@ section.brown {
   padding: 0 1rem;
   align-items: center;
 }
-h1.about-us__about-information__title {
-  font-size: 2.8rem;
-  font-weight: 900!important;
+
+.about-us__content-about {
+  width: 80%;
+  max-width: 1152px;
+  margin: 0 auto;
+  margin-bottom: 24px;
 }
 
-.about-us__about-information__title, .about-us__about-value__title, .about-us__about-members__subtitle {
+.about-us__content-about p {
+  margin-top: 8px;
+}
+
+h1.about-us__about-information__title {
+  font-size: 2.8rem;
+  font-weight: 900 !important;
+}
+
+.about-us__about-information__title,
+.about-us__about-value__title,
+.about-us__about-members__subtitle {
   text-align: center;
 }
 
-.about-us__about-value__title, .about-us__about-members__title {
+.about-us__about-value__title,
+.about-us__about-members__title {
   font-weight: 800;
   font-size: 2rem;
 }
@@ -134,7 +154,7 @@ h1.about-us__about-information__title {
 .about-us__about-value {
   display: flex;
   flex-direction: column;
-  margin:-0.2rem auto;
+  margin: -0.2rem auto;
   gap: 2.5rem;
   padding-bottom: 4rem;
   padding-top: 2rem;
@@ -258,7 +278,7 @@ h1.about-us__about-information__title {
   display: block;
   width: 60px;
   height: 2px;
-  background: #000000;
+  background: white;
   margin: .75rem auto .1rem;
 }
 
@@ -292,6 +312,7 @@ h1.about-us__about-information__title {
 }
 
 @media screen and (max-width: 860px) {
+
   .about-us__value__container,
   .about-us__about-value__wrapper,
   .about-us__members__container,
@@ -342,9 +363,14 @@ h1.about-us__about-information__title {
     width: 100%;
   }
 
+  .about-us__content-about {
+    width: 90%;
+  }
+
   .about-us__about-members {
     padding: 12px;
   }
+
   .about-us__members__container {
     padding: 0;
     justify-content: space-between;
