@@ -1,0 +1,20 @@
+.admin-layout {
+  height: 100%;
+
+  display: flex;
+  gap: 1rem;
+  flex-grow: 2;
+}
+
+.admin-layout-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+
+  padding-inline-end: 1rem;
+}
+
+.admin-layout main {
+  flex-grow: 2;
+  margin: 1rem 0;
+}
