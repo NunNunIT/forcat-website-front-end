@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({
                 {convertNumberToMoney(table.getFilteredSelectedRowModel().rows.reduce(
                   (acc, row) => {
                     console.log(JSON.stringify(row.original));
-                    return acc + row.original.order_total_cost
+                    return acc + (row.original as IAdminOrderProps).order_total_cost
                   },
                   0
                 ))}
