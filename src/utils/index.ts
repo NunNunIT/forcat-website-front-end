@@ -100,6 +100,28 @@ function convertOrderStatusToIconData(order_status: string): string {
   return "Unexpected Order Status";
 }
 
+function convertOrderStatusToTailwindCSSBackground(order_status: string): string {
+  const map: Object = {
+    "unpaid": "bg-gray-100 text-gray-700",
+    "delivering": "bg-blue-100 text-blue-700",
+    "finished": "bg-green-100 text-green-700",
+    "cancel": "bg-red-100 text-red-700",
+  }
+
+  return map[order_status] ?? "";
+}
+
+function convertOrderStatusToTailwindCSSForeground(order_status: string): string {
+  const map: Object = {
+    "unpaid": "bg-gray-700",
+    "delivering": "bg-blue-700",
+    "finished": "bg-green-700",
+    "cancel": "bg-red-700",
+  }
+
+  return map[order_status] ?? "";
+}
+
 function convertMoneyToNumber(money: string): number {
   return Number(
     money.replaceAll("đ", "").replaceAll(".", "").replaceAll("&nbsp;", "")
@@ -134,6 +156,19 @@ function convertDateToHourDayMonthYear(dateString: string): string {
   const year: number = date.getUTCFullYear();
 
   return `${hours}:${minutes} - ${day}/${month}/${year}`;
+}
+
+function convertDateToYearMonthDayHourMinute(dateString: string): string {
+  const date = new Date(dateString);
+
+  const hours: string = ("0" + date.getUTCHours()).slice(-2);
+  const minutes: string = ("0" + date.getUTCMinutes()).slice(-2);
+
+  const day: string = ("0" + date.getUTCDate()).slice(-2);
+  const month: string = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+  const year: number = date.getUTCFullYear();
+
+  return `${year}/${month}/${day} ${hours}:${minutes}`;
 }
 
 function isValidEmail(email: string): boolean {
@@ -186,6 +221,41 @@ function objectToSearchParams(obj: Object) {
   return searchParams;
 }
 
+function convertPaymentMethod(payment: string) {
+  const map: Object = {
+    "internet_banking": "online",
+    "cod": "trực tiếp"
+  }
+
+  return map[payment] ?? "Không xác định";
+}
+
+function convertPaymentToTailwindCSSBackground(payment: string): string {
+  const map: Object = {
+    "internet_banking": "bg-orange-100 text-orange-700",
+    "cod": "bg-green-100 text-green-700"
+  }
+
+  return map[payment] ?? "";
+}
+
+function convertLocationToString(location: IAdminOrderAddressProps) {
+  return `${location.province}, ${location.district}, ${location.ward}, ${location.street}`;
+}
+
+// Convert Date type Thứ hai, ngày ... tháng năm ..., lúc ...
+function convertDateToFormatWWDDMMYYHHMMSS(date: Date): string {
+  const dayOfWeek = new Intl.DateTimeFormat("vi-VN", { weekday: "long" }).format(date);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = new Intl.DateTimeFormat("vi-VN", { month: "long" }).format(date).toLowerCase().toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const hour = date.getHours().toString().padStart(2, "0");
+  const minute = date.getMinutes().toString().padStart(2, "0");
+  const second = date.getSeconds().toString().padStart(2, "0");
+
+  return `${dayOfWeek}, ngày ${day} ${month} năm ${year}, lúc ${hour}:${minute}:${second}`;
+}
+
 export {
   parseNumToCurrencyStr,
   cleanDateFormatInput,
@@ -194,6 +264,9 @@ export {
   convertMoneyToNumber,
   convertNumberToMoney,
   convertDateToHourDayMonthYear,
+  convertDateToYearMonthDayHourMinute,
+  convertOrderStatusToTailwindCSSBackground,
+  convertOrderStatusToTailwindCSSForeground,
   isValidEmail,
   convertOrderStatusToStr,
   isActiveClass,
@@ -204,4 +277,8 @@ export {
   isActiveClassWithBool,
   createSlug,
   objectToSearchParams,
+  convertPaymentMethod,
+  convertPaymentToTailwindCSSBackground,
+  convertLocationToString,
+  convertDateToFormatWWDDMMYYHHMMSS,
 };
