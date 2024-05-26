@@ -1,6 +1,7 @@
 "use client";
 
 // import libs
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import useSWR, { Fetcher } from "swr";
 import Image from "next/image";
@@ -21,6 +22,7 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/admin/ui/button";
 import { Separator } from "@/components/admin/ui/separator";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/admin/ui/dropdown-menu";
 import BadgeOrderStatus from "../components/badge-order-status";
 import BadgePaymentMethod from "../components/badge-payment-method";
 
@@ -30,6 +32,7 @@ import {
   convertNumberToMoney,
   convertDateToYearMonthDayHourMinute,
 } from "@/utils";
+import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 
 const fetcher: Fetcher<IAdminSingleOrderProps, string> = async (url: string) => {
   const res: Response = await fetch(url, {
@@ -44,9 +47,30 @@ const fetcher: Fetcher<IAdminSingleOrderProps, string> = async (url: string) => 
   return json.data as IAdminSingleOrderProps;
 }
 
+const updateOrderStatus = async (orderId: string, status: TOrderStatus) => {
+  const res: Response = await fetch(`${BACKEND_URL_ADMIN_ORDER}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", },
+    credentials: "include",
+    body: JSON.stringify({ order_id: orderId, order_status: status }),
+  });
+
+  const json: IResponseJSON = await res.json();
+  if (!json.success) throw json;
+
+  return json.data as IAdminSingleOrderProps;
+}
+
 export default function AdminOrderIDPage({ params }: { params: { orderId: string } }) {
+  const [orderStatus, setOrderStatus] = useState<TOrderStatus | null>(null);
   const url: string = `${BACKEND_URL_ADMIN_ORDER}/${params.orderId}`;
   const { data, error, isLoading } = useSWR(url, fetcher);
+
+  useEffect(() => {
+    if (data) {
+      setOrderStatus(data.order.order_status);
+    }
+  }, [data?.order?.order_status])
 
   return (
     <main>
@@ -73,8 +97,14 @@ export default function AdminOrderIDPage({ params }: { params: { orderId: string
               <Table className="rounded-md border block">
                 <TableHeader>
                   <TableRow className="bg-slate-50">
-                    <TableCell colSpan={7}>
+                    <TableCell colSpan={5}>
                       <h2 className="text-xl font-bold">Chi tiết đơn hàng #{params.orderId}</h2>
+                    </TableCell>
+                    <TableCell colSpan={2}>
+                      <div className="flex gap-2 items-center justify-end">
+                        Thanh toán:
+                        <BadgePaymentMethod payment={data.order.order_payment} />
+                      </div>
                     </TableCell>
                   </TableRow>
                   <TableRow className="font-bold">
@@ -118,16 +148,40 @@ export default function AdminOrderIDPage({ params }: { params: { orderId: string
               <div className="rounded-md border">
                 <div className="flex gap-2 p-4 items-center bg-slate-50">
                   <h2 className="text-xl font-bold">Trạng thái đơn hàng</h2>
-                  <BadgePaymentMethod payment={data.order.order_payment} />
-                  <BadgeOrderStatus order_status={data.order.order_status} />
+                  {orderStatus === "delivering"
+                    ? <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <BadgeOrderStatus order_status={orderStatus} />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        {["finished", "cancel"].map((status: TOrderStatus) => (
+                          <DropdownMenuItem key={status}
+                            onClick={() => {
+                              setOrderStatus(status);
+                              data.order.order_process_info?.push({
+                                status,
+                                date: new Date().toISOString()
+                              })
+                              updateOrderStatus(params.orderId, status);
+                            }}>
+                            <BadgeOrderStatus
+                              order_status={status}
+                              className="w-full"
+                            />
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    : <BadgeOrderStatus order_status={orderStatus} />
+                  }
                 </div>
                 <Separator />
                 <div className="p-4">
                   <div className="flex gap-2 flex-col">
                     <h3 className="font-bold mb-1 text-black">Quá trình đơn hàng</h3>
-                    {data.order.order_process_info?.filter(
-                      (process) => process.status !== "unpaid"
-                    ).map((process, index) => (
+                    {data.order.order_process_info?.sort((a, b) => {
+                      return new Date(b.date).getTime() - new Date(a.date).getTime();
+                    }).map((process, index) => (
                       <>
                         <div key={index} className="flex gap-2 items-center">
                           <span className="text-slate-500 font-mono">
@@ -137,13 +191,6 @@ export default function AdminOrderIDPage({ params }: { params: { orderId: string
                         </div>
                       </>
                     ))}
-                    {/* <span>{convertDateToFormatWWDDMMYYHHMMSS(new Date(data.order.createdAt))}</span> */}
-                    <div className="flex gap-2 items-center">
-                      <span className="text-slate-500 font-mono">
-                        {convertDateToYearMonthDayHourMinute(data.order.createdAt)}
-                      </span>
-                      <BadgeOrderStatus order_status="unpaid" />
-                    </div>
                   </div>
                   <Separator className="mt-2" />
                   <div className="mt-2 text-slate-500">

@@ -253,6 +253,7 @@ interface IAdminCustomerInOrderProps {
 
 interface IAdminBadgeOrderStatusProps {
   order_status: TOrderStatus;
+  className?: string;
 }
 
 interface IBadgePaymentMethodProps {

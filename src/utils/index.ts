@@ -28,7 +28,7 @@ function convertDateFormat(inputDate: string): string {
 }
 
 function convertOrderStatusToStr(order_status: string): string {
-  switch (order_status.toLowerCase()) {
+  switch (order_status?.toLowerCase()) {
     case "all":
       return "Tất cả";
     case "unpaid":
