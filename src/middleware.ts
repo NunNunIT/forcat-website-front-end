@@ -43,8 +43,9 @@ export async function middleware(request: NextRequest) {
   }
   console.log("currentUserCookie", currentUserCookieValue);
   const res = await fetchUser(currentUserCookieValue);
+  console.log("res", res.status, res.message);
 
-  if (res.status == 200 ) {
+  if (res.status == 200) {
     return NextResponse.next();
   }
   return NextResponse.redirect(new URL("/login", request.url));
