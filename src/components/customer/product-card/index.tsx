@@ -21,6 +21,7 @@ export default function CustomerProductCard({ product }) {
   return (
     <div className={cx("product-card")}>
       <Link
+        rel="canonical"
         href={`/${product.product_slug}/${product.variant_slug}?pid=${product.product_id_hashed}`}
         className={cx("product__card-main")}>
         {product.highest_discount ? (

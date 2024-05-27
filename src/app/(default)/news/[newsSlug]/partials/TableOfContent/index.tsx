@@ -39,7 +39,9 @@ export default function TableOfContent({
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <details className={`${cx("table-of-content-container")} ${className}`} open>
+      <details
+        className={`${cx("table-of-content-container")} ${className}`}
+        open>
         <summary className={cx("table-of-content__title")}>
           <h2>Nội dung</h2>
           <span className={cx(`material-icons-outlined ${cx("icon-on")}`)}>
@@ -61,7 +63,9 @@ export default function TableOfContent({
                   "table-of-content__item",
                   `table-of-content__item--${level}`
                 )}>
-                <Link href={`${pathname}?${searchParamsStr}#${id}`}>
+                <Link
+                  rel="canonical"
+                  href={`${pathname}?${searchParamsStr}#${id}`}>
                   {heading.textContent}
                 </Link>
               </li>

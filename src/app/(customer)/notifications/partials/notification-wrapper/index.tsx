@@ -108,32 +108,37 @@ export default function NotificationWrapper() {
       </div>
       {isLoading ? (
         <CustomerSkeletonNotificationItem />
+      ) : (data?.notifications ?? []).length > 0 ? (
+        data?.notifications.map((notification: INotiItemProps) => (
+          <CustomerNotificationItem
+            key={notification._id}
+            {...notification}
+            readAll={readAll}
+            mutate={mutate}
+            fetcherSetRead={fethcerSetRead}
+          />
+        ))
       ) : (
-        ((data?.notifications ?? []).length > 0)
-          ? data?.notifications.map((notification: INotiItemProps) => (
-            <CustomerNotificationItem
-              key={notification._id}
-              {...notification}
-              readAll={readAll}
-              mutate={mutate}
-              fetcherSetRead={fethcerSetRead}
-            />
-          ))
-          : <>
-            <div className="notification__no-notification">
-              <div className="notification__no-notification-img-container">
-                <Image
-                  src="/imgs/purchase/empty.png"
-                  alt="No notification"
-                  fill={true}
-                />
-              </div>
-              <span className="notification__no-notification-text">
-                Bạn chưa có thông báo thuộc loại này!!!<br />
-                Hãy thử <Link href="/search-result?searchKey=">mua sắm</Link> để có những trải nghiệm tuyệt vời nhất.
-              </span>
+        <>
+          <div className="notification__no-notification">
+            <div className="notification__no-notification-img-container">
+              <Image
+                src="/imgs/purchase/empty.png"
+                alt="No notification"
+                fill={true}
+              />
             </div>
-          </>
+            <span className="notification__no-notification-text">
+              Bạn chưa có thông báo thuộc loại này!!!
+              <br />
+              Hãy thử{" "}
+              <Link rel="canonical" href="/search-result?searchKey=">
+                mua sắm
+              </Link>{" "}
+              để có những trải nghiệm tuyệt vời nhất.
+            </span>
+          </div>
+        </>
       )}
 
       {/* Fill blank */}

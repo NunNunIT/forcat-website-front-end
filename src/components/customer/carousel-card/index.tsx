@@ -19,6 +19,7 @@ export default function CustomerCarouselCard({ product }) {
     <>
       <div className={cx("carousel__card")}>
         <Link
+          rel="canonical"
           className={cx("carousel__card-main")}
           href={`/${product.product_slug}/${product.variant_slug}?pid=${product.product_id_hashed}`}>
           {product.highest_discount ? (
@@ -48,16 +49,16 @@ export default function CustomerCarouselCard({ product }) {
           </div>
           <div className={cx("carousel__card-bottom-details")}>
             <div className={cx("carousel__card-price")}>
-            <h3>
-              {product.highest_discount && product.lowest_price ? (
-                <>
-                  {convertNumberToMoney(product.lowest_price)}
-                  <small>{convertNumberToMoney(product.product_price)}</small>
-                </>
-              ) : (
-                <>{convertNumberToMoney(product.product_price)}</>
-              )}
-            </h3>
+              <h3>
+                {product.highest_discount && product.lowest_price ? (
+                  <>
+                    {convertNumberToMoney(product.lowest_price)}
+                    <small>{convertNumberToMoney(product.product_price)}</small>
+                  </>
+                ) : (
+                  <>{convertNumberToMoney(product.product_price)}</>
+                )}
+              </h3>
             </div>
           </div>
         </Link>

@@ -34,7 +34,7 @@ const decryptNamePage = (namePage: string, prevNamePage: string) => {
     contact: { text: "Liên hệ", url: "/contact" },
     "about-us": { text: "Về chúng tôi", url: "/about-us" },
     "term-of-use": { text: "Điều khoản chung", url: "term-of-use" },
-    "privacy-policy": { text: "Chính sách bảo mật", url: "privacy-policy" }
+    "privacy-policy": { text: "Chính sách bảo mật", url: "privacy-policy" },
   };
 
   if (namePage === "mobile-account") {
@@ -69,7 +69,9 @@ export default function Breadcrumb() {
               d && (
                 <li key={index}>
                   {d.url ? (
-                    <Link href={d?.url}>{d.text}</Link>
+                    <Link rel="canonical" href={d?.url}>
+                      {d.text}
+                    </Link>
                   ) : (
                     <span>{d?.text}</span>
                   )}

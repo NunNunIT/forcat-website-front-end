@@ -31,7 +31,7 @@ export default function NotFound() {
           <p className="not-found__text">
             Trang bạn đang truy cập hiện không khả dụng
           </p>
-          <Link className="not-found__button" href="/">
+          <Link rel="canonical" className="not-found__button" href="/">
             Về trang chủ
           </Link>
         </div>

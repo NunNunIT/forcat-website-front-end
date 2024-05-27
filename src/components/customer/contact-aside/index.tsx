@@ -10,6 +10,7 @@ export default function ContactAside() {
       <ul className="contact-aside__list">
         <li className="contact-aside__item">
           <Link
+            rel="canonical"
             href="https://zalo.me/0559695594"
             target="blank"
             className="contact-aside__icon">
@@ -25,6 +26,7 @@ export default function ContactAside() {
         </li>
         <li className="contact-aside__item">
           <Link
+            rel="canonical"
             href="https://www.facebook.com/forcat.official"
             target="blank"
             className="contact-aside__icon facebook">
@@ -39,7 +41,10 @@ export default function ContactAside() {
           </Link>
         </li>
         <li className="contact-aside__item">
-          <Link href="tel: 0795849949" className="contact-aside__icon">
+          <Link
+            rel="canonical"
+            href="tel: 0795849949"
+            className="contact-aside__icon">
             <Image
               className="contact-aside__icon-img call"
               fill={true}

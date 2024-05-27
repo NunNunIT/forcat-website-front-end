@@ -104,6 +104,7 @@ export default function CustomerAccountAside() {
           {(asideNavData ?? []).map((navData, index) => (
             <li key={index}>
               <Link
+                rel="canonical"
                 href={navData.url}
                 className={cx(
                   "account__aside-nav-item",
