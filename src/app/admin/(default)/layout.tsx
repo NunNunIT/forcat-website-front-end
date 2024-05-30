@@ -13,9 +13,9 @@ export default function AdminLayout(
   { children }: { children: React.ReactNode }
 ) {
   return (
-    <div className={cx("admin-layout")}>
+    <div className={`${cx("admin-layout")} scrollbar`}>
       <AdminSidebar />
-      <div className={cx("admin-layout-content")}>
+      <div className={`${cx("admin-layout-content")} scrollbar`}>
         <AdminHeader />
         {children}
         <AdminFooter />

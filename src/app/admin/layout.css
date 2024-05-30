@@ -75,3 +75,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--background);
+  }
+}

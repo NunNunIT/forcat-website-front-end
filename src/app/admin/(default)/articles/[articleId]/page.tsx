@@ -10,6 +10,8 @@ import { ArticleForm } from "./partials";
 
 // import utils
 import { BACKEND_URL_ADMIN_ARTICLE } from "@/utils/commonConst";
+import { Button, buttonVariants } from "@/components/admin/ui/button";
+import { Loader2 } from "lucide-react";
 
 const fetcher: Fetcher<IAdminArticleProps, string> = async (url: string) => {
   const res: Response = await fetch(url, {
@@ -41,15 +43,33 @@ export default function AdminArticleDetailPage({ params }: { params: { articleId
             <Link href="https://www.forcatshop.com"> Forcatshop.com</Link>
           </p>
         </div>
+        <div className="flex justify-end">
+          {isLoading
+            ? <Button disabled>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Chuyển đến trang bài viết
+            </Button>
+            : error
+              ? <></>
+              : <Link
+                className={buttonVariants({ variant: "default" })}
+                href={`/news/${data.article_slug}?aid=${data.article_id_hashed}`}
+                target="_blank" rel="noopener noreferrer"
+              >
+                Chuyển đến trang bài viết
+              </Link>
+          }
+        </div>
       </div>
       <Separator className="my-4" />
-      {isLoading && <div>Loading...</div>}
-      {error && <span>Error: {JSON.stringify(error)}</span>}
-      {data &&
-        <>
-          {/* <div>{JSON.stringify(data)}</div> */}
-          <ArticleForm article_id_hashed={params.articleId} {...data} />
-        </>
+      {isLoading
+        ? <div>Loading...</div>
+        : error ?
+          <span>Error: {JSON.stringify(error)}</span>
+          : <>
+            {/* <div>{JSON.stringify(data)}</div> */}
+            <ArticleForm article_id_hashed={params.articleId} {...data} />
+          </>
       }
     </main >
   );

@@ -20,14 +20,13 @@ import {
   FormMessage,
 } from "@/components/admin/ui/form"
 import { Input } from "@/components/admin/ui/input"
-import { Button, buttonVariants } from "@/components/admin/ui/button";
+import { Button } from "@/components/admin/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/admin/ui/popover";
 import { Calendar } from "@/components/admin/ui/calendar"
-import Dropzone from "react-dropzone";
 import { CalendarIcon, Loader2 } from "lucide-react";
 
 // import lib
@@ -99,7 +98,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
       link: article_avt_link,
       alt: article_avt_alt,
     }
-    const article_info: { author: string, date_published: string } = {
+    const article_info: { author: string, published_date: string } = {
       author: article_author,
       published_date: format(article_date_published, "yyyy-MM-dd"),
     }
@@ -139,7 +138,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-bold">Tác giả</FormLabel>
-                <FormControl><Input placeholder="Nhập tác giả" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} placeholder="Nhập tác giả" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Tên tác giả được sử dụng để hiển thị trên trang web.</FormDescription>
               </FormItem>
@@ -152,7 +151,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-bold">Tên bài viết</FormLabel>
-                <FormControl><Input placeholder="Nhập tên bài viết" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} placeholder="Nhập tên bài viết" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Tên bài viết được sử dụng để hiển thị trên trang web.</FormDescription>
               </FormItem>
@@ -165,7 +164,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-bold">Loại bài viết</FormLabel>
-                <FormControl><Input placeholder="Nhập loại bài viết" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} placeholder="Nhập loại bài viết" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Loại bài viết được sử dụng để phân loại bài viết.</FormDescription>
               </FormItem>
@@ -178,7 +177,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-bold">Mô tả ngắn</FormLabel>
-                <FormControl><Input placeholder="Nhập mô tả ngắn" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} placeholder="Nhập mô tả ngắn" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Mô tả ngắn được sử dụng trong thẻ meta description của trang.</FormDescription>
               </FormItem>
@@ -248,7 +247,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
                   </div>
                   : <></>}
                 <FormControl>
-                  <Input placeholder="Nhập đường dẫn hình ảnh đại diện" {...field} />
+                  <Input disabled={isLoading} placeholder="Nhập đường dẫn hình ảnh đại diện" {...field} />
                 </FormControl>
               </FormItem>
 
@@ -262,7 +261,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="">Văn bản thay thế cho hình ảnh đại diện bài viết</FormLabel>
-                <FormControl><Input type="text" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} type="text" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Văn bản này được sử dụng khi hình ảnh bị hỏng.</FormDescription>
               </FormItem>
@@ -278,7 +277,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-bold">Tiêu đề phụ</FormLabel>
-                <FormControl><Input placeholder="Nhập tiêu đề phụ" {...field} /></FormControl>
+                <FormControl><Input disabled={isLoading} placeholder="Nhập tiêu đề phụ" {...field} /></FormControl>
                 <FormMessage />
                 <FormDescription>Tiêu đề phụ được sử dụng để mô tả bài viết.</FormDescription>
               </FormItem>
@@ -295,7 +294,7 @@ export default function ArticleForm(props: IAdminArticleProps) {
                 <div className="h-full flex flex-col gap-2">
                   <FormControl>
                     <Textarea
-                      className="h-full resize-none p-2 border border-gray-200 rounded-md"
+                      className="h-full resize-none p-2 border border-gray-200 rounded-md scrollbar"
                       {...field}
                     />
                   </FormControl>
