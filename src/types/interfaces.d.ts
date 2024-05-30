@@ -259,3 +259,30 @@ interface IAdminBadgeOrderStatusProps {
 interface IBadgePaymentMethodProps {
   payment: string;
 }
+
+interface IDataResponseAdminArticles {
+  maxPage: number;
+  articles: IAdminArticleProps[];
+}
+
+interface IDataResponseAdminArticle {
+  maxPage: number;
+  article: IAdminArticleProps[];
+}
+
+interface IAdminArticleProps {
+  article_id_hashed: string;
+  article_name: string;
+  article_slug: string;
+  article_avt: {
+    link: string;
+    alt: string;
+  };
+  article_type: string;
+  article_short_description: string;
+  article_author: string;
+  article_date_published: string;
+  article_subtitle?: string;
+  article_content?: string;
+  createdAt: string;
+}
