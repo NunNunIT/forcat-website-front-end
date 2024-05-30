@@ -8,6 +8,8 @@ import { DataTableViewOptions } from '../components/data-table-view-options'
 import { types } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 
+import ButtonAddArticle from './button-add-article';
+
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
 }
@@ -48,7 +50,10 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <div className='flex gap-2 items-center'>
+        <ButtonAddArticle />
+        <DataTableViewOptions table={table} />
+      </div>
     </div>
   )
 }
