@@ -10,7 +10,7 @@ export default function ButtonAddArticle() {
   return (
     <Link
       className={buttonVariants({ variant: "default", size: "sm" })}
-      href="/admin/article/add"
+      href="/admin/articles/add"
     >
       Tạo bài viết mới
     </Link>
