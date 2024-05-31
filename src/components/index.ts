@@ -3,6 +3,9 @@ export { default as AuthLoginForm } from "./auth/loginForm";
 export { default as AuthRegisterForm } from "./auth/registerForm";
 export { default as AuthForgotForm } from "./auth/forgotForm";
 
+// admin components
+export { default as AdminPagination } from "./admin/pagination";
+
 // customer components
 export { default as CustomerCarouselSlider } from "./customer/carousel-wrapper";
 export { default as CustomerNewsCarouselSlider } from "./customer/news-carousel-wrapper";

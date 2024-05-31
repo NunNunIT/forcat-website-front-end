@@ -1,0 +1,8 @@
+.admin-page {
+  display: flex;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
