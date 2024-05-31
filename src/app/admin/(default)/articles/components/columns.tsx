@@ -36,22 +36,6 @@ export const columns: ColumnDef<IAdminArticleProps>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  // {
-  //   id: "ID",
-  //   accessorKey: "article_id_hashed",
-  //   header: "ID",
-  //   cell: ({ row }) => (
-  //     <div
-  //       className="text-xs font-medium font-mono hover:cursor-pointer"
-  //       onClick={() => {
-  //         toast.success("Order ID copied to clipboard!!!");
-  //         return navigator.clipboard.writeText(row.original.article_id_hashed);
-  //       }}
-  //     >
-  //       {row.original.article_id_hashed}
-  //     </div>
-  //   )
-  // },
   {
     id: "Date",
     accessorKey: "createdAt",
