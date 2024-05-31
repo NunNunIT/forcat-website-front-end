@@ -44,7 +44,10 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Thao tác</DropdownMenuLabel>
           <DropdownMenuItem>
-            <Link href={`/news/${article.article_slug}?aid=${article.article_id_hashed}`}>
+            <Link
+              href={`/news/${article.article_slug}?aid=${article.article_id_hashed}`}
+              target="_blank"
+            >
               Xem chi tiết bài viết
             </Link>
           </DropdownMenuItem>
