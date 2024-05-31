@@ -227,8 +227,8 @@ export default function ArticleForm(props: IAdminArticleProps) {
                 </Popover>
                 <FormDescription>
                   Ngày xuất bản của bài viết.
+                  <FormMessage />
                 </FormDescription>
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -249,8 +249,9 @@ export default function ArticleForm(props: IAdminArticleProps) {
                 <FormControl>
                   <Input disabled={isLoading} placeholder="Nhập đường dẫn hình ảnh đại diện" {...field} />
                 </FormControl>
+                <FormMessage />
+                <FormDescription>Hình ảnh đại diện của bài viết. Đường dẫn phải là một URL hợp lệ.</FormDescription>
               </FormItem>
-
             )}
           />
 
