@@ -65,9 +65,6 @@ export const columns: ColumnDef<IAdminArticleProps>[] = [
         {row.original.article_name}
       </div>
     ),
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
   },
   {
     id: "Type",
