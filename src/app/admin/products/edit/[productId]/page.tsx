@@ -534,7 +534,7 @@ export default function AdminEditProductPage({
     fetchData();
   }, []);
 
-  console.log("pppppppppp", product);
+  // console.log("pppppppppp", product);
 
   return (
     <main className="add-product-container">
@@ -754,7 +754,9 @@ export default function AdminEditProductPage({
           {product?.product_variants.map((variant, index) => {
             countVariant = index + 1;
             return (
-              <div className="add-product-main__input-group add-product-variant__input-group">
+              <div
+                className="add-product-main__input-group add-product-variant__input-group"
+                key={"variant " + index}>
                 <div className="add-product-variant__title-div">
                   <h4 className="add-product-variant__title">
                     Biến thể {countVariant}
