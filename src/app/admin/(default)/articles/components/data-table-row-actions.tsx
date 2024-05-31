@@ -13,7 +13,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuLabel,
 } from '@/components/admin/ui/dropdown-menu'
@@ -44,14 +43,6 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Thao tác</DropdownMenuLabel>
-          {/* <DropdownMenuItem
-            onClick={() => {
-              toast.success("Order ID copied to clipboard!!!");
-              return navigator.clipboard.writeText(order.order_id)
-            }}
-          >
-            Copy Order ID
-          </DropdownMenuItem> */}
           <DropdownMenuItem>
             <Link href={`/news/${article.article_slug}?aid=${article.article_id_hashed}`}>
               Xem chi tiết bài viết
