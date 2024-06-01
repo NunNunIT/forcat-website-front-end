@@ -202,10 +202,9 @@ interface IReviewItem {
 interface IUserLocal {
   user_name: string;
   user_avt_img: string;
-  recent_notification: {
-    _id: string;
-  }[];
+  recent_notification: { _id: string; }[];
   cart: (any)[];
+  user_role: string;
 }
 
 interface IDataResponseAdminOrder {
