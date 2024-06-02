@@ -274,6 +274,7 @@ export default function ArticleForm() {
                   <Input
                     type="file"
                     accept="image/webp"
+                    disabled={isLoading}
                     onChange={(event) => {
                       field.onChange(event.target?.files?.[0] ?? undefined);
                     }}

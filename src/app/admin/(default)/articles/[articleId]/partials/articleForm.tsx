@@ -1,13 +1,14 @@
 "use client";
 
 // import libs
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { z } from "zod";
+import axios from "axios";
 
 // import components
 import {
@@ -37,13 +38,14 @@ import { Textarea } from "@/components/admin/ui/textarea";
 // import utils
 import { BACKEND_URL_ADMIN_ARTICLE } from "@/utils/commonConst";
 
+
+const IMAGE_TYPE_ACCEPTED = ["image/webp"]
+
 const formSchema = z.object({
   article_name: z.string().min(1, {
     message: "Tên bài viết không được để trống"
   }),
-  article_avt_link: z.string().min(1, {
-    message: "Thiếu hình ảnh đại diện cho bài viết",
-  }),
+  article_avt_link: z.string(),
   article_avt_alt: z.string().min(1, {
     message: "Thiếu văn bản thay thế cho hình ảnh đại diện bài viết"
   }),
@@ -56,7 +58,9 @@ const formSchema = z.object({
   article_author: z.string().min(1, {
     message: "Tác giả không được để trống"
   }),
-  article_date_published: z.date().max(new Date(), {
+  // max là ngày mai
+  // nếu max là ngày hiện tại thì sẽ bị lỗi
+  article_date_published: z.date().max(new Date(new Date().getTime() + 24 * 60 * 60 * 1000), {
     message: "Ngày xuất bản không được sớm hơn ngày hiện tại"
   }),
   article_subtitle: z.string().min(1, {
@@ -65,33 +69,55 @@ const formSchema = z.object({
   article_content: z.string().min(1, {
     message: "Nội dung không được để trống"
   }),
+  article_avt_blob:
+    typeof window !== "undefined" && typeof window.FileList !== "undefined"
+      ? z.optional(
+        z.instanceof(
+          window.FileList
+        ).refine(
+          (file) => file.length === 0 || IMAGE_TYPE_ACCEPTED.includes(file.item(0)?.type),
+          { message: "File không hợp lệ. Vui lòng chọn file hình ảnh có định dạng webp." }
+        ))
+      : z.optional(z.any()),
 });
 
 export default function ArticleForm(props: IAdminArticleProps) {
+  const [previewImgURL, setPreviewImgURL] = useState<string | null>(props.article_avt?.link);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      article_name: props.article_name ?? "",
-      article_type: props.article_type ?? "",
-      article_author: props.article_author ?? "",
-      article_short_description: props.article_short_description ?? "",
-      article_date_published: props.article_date_published
-        ? new Date(props.article_date_published)
-        : new Date(),
-      article_subtitle: props.article_subtitle ?? "",
-      article_content: props.article_content ?? "",
-      article_avt_link: props.article_avt.link ?? "",
-      article_avt_alt: props.article_avt.alt ?? "",
+      article_name: props.article_name,
+      article_type: props.article_type,
+      article_author: props.article_author,
+      article_short_description: props.article_short_description,
+      article_date_published: new Date(props.article_date_published),
+      article_subtitle: props.article_subtitle,
+      article_content: props.article_content,
+      article_avt_link: props.article_avt.link,
+      article_avt_alt: props.article_avt.alt,
     }
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
+  useEffect(() => {
+    const previewImgURL: string =
+      form.watch("article_avt_blob")?.length > 0
+        ? URL.createObjectURL(form.watch("article_avt_blob")[0])
+        : props.article_avt?.link;
+    console.log(previewImgURL);
+    setPreviewImgURL(previewImgURL);
+
+    return () => {
+      if (previewImgURL) URL.revokeObjectURL(previewImgURL);
+    }
+  }, [form.watch("article_avt_blob")]);
+
+  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     const {
       article_avt_link, article_avt_alt,
       article_author, article_date_published,
+      article_avt_blob,
       ...rest
     } = values;
     const article_avt: { link: string, alt: string } = {
@@ -102,30 +128,40 @@ export default function ArticleForm(props: IAdminArticleProps) {
       author: article_author,
       published_date: format(article_date_published, "yyyy-MM-dd"),
     }
-    const json = JSON.stringify({ ...rest, article_avt, article_info });
-    const res = await fetch(
-      BACKEND_URL_ADMIN_ARTICLE + "/" + props.article_id_hashed,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: json,
-      }
-    );
 
-    setIsLoading(false);
-    if (res.status !== 200) {
-      return toast.error(`Có lỗi xảy ra khi cập nhật bài viết ${res.statusText}`);
+    const formData = new FormData();
+    formData.append("article_avt_blob", article_avt_blob[0]);
+    formData.append("article_avt", JSON.stringify(article_avt));
+    formData.append("article_info", JSON.stringify(article_info));
+    for (let key in rest) {
+      formData.append(key, rest[key])
     }
 
-    return toast.success(`Bài viết "${values.article_name.length > 60
-      ? values.article_name.slice(0, 57) + "..."
-      : values.article_name
-      }" đã được cập nhật thành công`
-    );
-  }
+    try {
+      setIsLoading(true);
+      await axios.post(
+        BACKEND_URL_ADMIN_ARTICLE + "/" + props.article_id_hashed,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data", },
+          withCredentials: true,
+        }
+      )
+
+      setIsLoading(false);
+
+      return toast.success(`Bài viết "${values.article_name.length > 60
+        ? values.article_name.slice(0, 57) + "..."
+        : values.article_name
+        }" đã được cập nhật thành công`
+      );
+    } catch (err) {
+      setIsLoading(false);
+      return toast.error(`Có lỗi xảy ra khi cập nhật bài viết ${err.message}`);
+    }
+  }, []);
+
+  const fileRef = form.register("article_avt_blob");
 
   return (
     <Form {...form} >
@@ -233,24 +269,33 @@ export default function ArticleForm(props: IAdminArticleProps) {
             )}
           />
 
-
-          {/* Article Avt Link */}
+          {/* Article Image */}
           <FormField
             control={form.control}
-            name="article_avt_link"
+            name="article_avt_blob"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Hình ảnh đại diện</FormLabel>
-                {field.value
-                  ? <div className="relative w-full aspect-video">
-                    <Image src={field.value} alt="Lmao" fill />
-                  </div>
-                  : <></>}
+                <FormLabel className="">Hình ảnh đại diện bằng tệp</FormLabel>
+                <Image
+                  className="w-full aspect-video"
+                  src={previewImgURL}
+                  alt="Hình xem trước"
+                  width={512}
+                  height={100}
+                />
                 <FormControl>
-                  <Input disabled={isLoading} placeholder="Nhập đường dẫn hình ảnh đại diện" {...field} />
+                  <Input
+                    type="file"
+                    accept="image/webp"
+                    disabled={isLoading}
+                    onChange={(event) => {
+                      field.onChange(event.target?.files?.[0] ?? undefined);
+                    }}
+                    {...fileRef}
+                  />
                 </FormControl>
                 <FormMessage />
-                <FormDescription>Hình ảnh đại diện của bài viết. Đường dẫn phải là một URL hợp lệ.</FormDescription>
+                <FormDescription>Định dạng hình ảnh phải là webp.</FormDescription>
               </FormItem>
             )}
           />
