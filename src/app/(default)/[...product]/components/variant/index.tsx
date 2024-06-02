@@ -34,6 +34,7 @@ export default function ProductVariant({
 
   return (
     <Link
+      rel="canonical"
       className={cx("variant", isActive)}
       href={`${variant.url}?pid=${pid.replaceAll("+", "%2B")}`}
       title={variant.name}>

@@ -45,12 +45,14 @@ export default function OrderItem(props: IOrderItemProps) {
   const setCancel = async () => {
     try {
       const url: string = `${BACKEND_URL_ORDERS}/${props._id}/cancel`;
-      const JSON: IResponseJSON = await axios.post(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }).then((res) => res.data);
+      const JSON: IResponseJSON = await axios
+        .post(url, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+        .then((res) => res.data);
       props?.mutate();
       return JSON;
     } catch (err) {
@@ -88,22 +90,28 @@ export default function OrderItem(props: IOrderItemProps) {
         </div>
         <div className={cx("order-item__button-wrapper")}>
           <Link
+            rel="canonical"
             className={`${cx("order-item__btn")} btn btn--outlined pri`}
             href={`/account/purchase-history/${props._id}`}>
             <span>Xem chi tiết</span>
           </Link>
           {props.order_status == "unpaid" && (
-            <button className={`${cx("order-item__btn")} btn btn--outlined danger`} onClick={setCancel}>
+            <button
+              className={`${cx("order-item__btn")} btn btn--outlined danger`}
+              onClick={setCancel}>
               <span>Hủy đơn</span>
             </button>
           )}
           {props.order_status == "delivering" && (
-            <button className={`${cx("order-item__btn")} btn btn--filled sec`} disabled={true}>
+            <button
+              className={`${cx("order-item__btn")} btn btn--filled sec`}
+              disabled={true}>
               <span>Đánh giá</span>
             </button>
           )}
           {props.order_status == "finished" && (
             <Link
+              rel="canonical"
               className={`${cx("order-item__btn")} btn btn--filled sec`}
               href={`/account/purchase-history/${props._id}/review`}>
               <span>Đánh giá</span>

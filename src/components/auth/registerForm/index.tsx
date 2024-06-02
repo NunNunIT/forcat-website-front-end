@@ -151,7 +151,7 @@ const RegisterForm = () => {
       <div className={cx("form-auth__title")}>
         <h1>Đăng ký miễn phí, mua hàng thả ga!</h1>
         {/* {state?.error} */}
-        <Link href="/login">
+        <Link rel="canonical" href="/login">
           <h3>
             Đã có tài khoản? <b>Đăng nhập ngay</b>{" "}
           </h3>
@@ -260,8 +260,14 @@ const RegisterForm = () => {
       <div className={cx("register-note")}>
         <p>
           Bằng việc nhấn nút đăng ký, bạn đồng ý với các{" "}
-          <Link href="/term-of-use">Điều khoản</Link> và{" "}
-          <Link href="/privacy-policy">Chính sách bảo mật</Link> của chúng tôi
+          <Link rel="canonical" href="/term-of-use">
+            Điều khoản
+          </Link>{" "}
+          và{" "}
+          <Link rel="canonical" href="/privacy-policy">
+            Chính sách bảo mật
+          </Link>{" "}
+          của chúng tôi
         </p>
       </div>
     </form>

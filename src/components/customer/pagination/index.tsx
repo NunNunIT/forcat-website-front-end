@@ -139,6 +139,7 @@ function PaginationItem({
 }) {
   return (
     <Link
+      rel="canonical"
       className={`${cx(
         isActiveClassWithBool(currentPage === page)
       )} ${className}`}

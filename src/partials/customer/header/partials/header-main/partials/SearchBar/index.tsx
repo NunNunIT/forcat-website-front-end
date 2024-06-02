@@ -118,6 +118,7 @@ export default function SearchBar() {
         </div>
         <div className={cx("header__suggest-results-more")}>
           <Link
+            rel="canonical"
             className={cx("header__suggest-results-more-link")}
             href={`/search-result?searchKey=${inputValue}`}>
             Xem thêm{" "}

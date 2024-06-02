@@ -65,8 +65,9 @@ export default async function NewsPage({
         ))}
       </section>
       <aside className="news__group-banner">
-        {(data.articles ?? []) && (data.articles.length > 4) && (
+        {(data.articles ?? []) && data.articles.length > 4 && (
           <Link
+            rel="canonical"
             href="/search-result?discount=True"
             className="news__banner-container">
             <Image
@@ -78,6 +79,7 @@ export default async function NewsPage({
         )}
 
         <Link
+          rel="canonical"
           href="/search-result?discount=True"
           className="news__banner-container">
           <Image

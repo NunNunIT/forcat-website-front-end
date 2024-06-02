@@ -61,6 +61,7 @@ export default function NotificationAside() {
           {(asideNavData ?? []).map((navData, index) => (
             <li key={index}>
               <Link
+                rel="canonical"
                 href={navData.url}
                 className={cx(
                   "notification__aside-nav-item",

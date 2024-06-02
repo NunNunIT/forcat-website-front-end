@@ -1,7 +1,7 @@
 // Admin Partials
 export { default as AdminHeader } from "./admin/header";
 export { default as AdminFooter } from "./admin/footer";
-export { default as AdminSidebar } from "./admin/sidebar";
+export { default as AdminSideBar } from "./admin/side-bar";
 
 // Customer Partials
 export { default as CustomerFooter } from "./customer/footer";

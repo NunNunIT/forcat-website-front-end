@@ -45,9 +45,6 @@ export async function middleware(request: NextRequest) {
   const res = await fetchUser(currentUserCookieValue);
   // console.log("res", JSON.stringify(res));
 
-  // Nếu đường dẫn là "/admin/login" thì cho phép truy cập
-  if (request.nextUrl.pathname === "/admin/login") return NextResponse.next();
-
   // Nếu đường dẫn khác "/admin/login" và bắt đầu bằng "/admin" thì kiểm tra res
   // console.log("request.nextUrl.pathname", request.nextUrl.pathname);
   if (request.nextUrl.pathname.startsWith("/admin")) {
@@ -60,7 +57,7 @@ export async function middleware(request: NextRequest) {
       // Nếu role không phải là "admin" thì chuyển hướng về trang đăng nhập của admin
     }
 
-    return NextResponse.redirect(new URL("/admin/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // Nếu token chính xác

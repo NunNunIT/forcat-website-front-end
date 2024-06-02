@@ -2,7 +2,7 @@
 import classNames from "classnames/bind";
 
 // import components
-import { AdminHeader, AdminFooter, AdminSidebar } from "@/partials";
+import { AdminHeader, AdminFooter, AdminSideBar } from "@/partials";
 
 // import css
 import styles from "./layout.module.css";
@@ -14,7 +14,7 @@ export default function AdminLayout(
 ) {
   return (
     <div className={cx("admin-layout")}>
-      <AdminSidebar />
+      <AdminSideBar />
       <div className={cx("admin-layout-content")}>
         <AdminHeader />
         {children}
