@@ -1,13 +1,14 @@
 "use client";
 
 // import libs
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { z } from "zod";
+import axios from "axios";
 
 // import components
 import {
@@ -37,12 +38,12 @@ import { Textarea } from "@/components/admin/ui/textarea";
 // import utils
 import { BACKEND_URL_ADMIN_ARTICLE } from "@/utils/commonConst";
 
+
+const IMAGE_TYPE_ACCEPTED = ["image/webp"];
+
 const formSchema = z.object({
   article_name: z.string().min(1, {
     message: "Tên bài viết không được để trống"
-  }),
-  article_avt_link: z.string().min(1, {
-    message: "Thiếu hình ảnh đại diện cho bài viết",
   }),
   article_avt_alt: z.string().min(1, {
     message: "Thiếu văn bản thay thế cho hình ảnh đại diện bài viết"
@@ -51,7 +52,7 @@ const formSchema = z.object({
     message: "Loại bài viết không được để trống"
   }),
   article_short_description: z.string().min(1, {
-    message: "Mô tả ngắn không được để trống (được sử dụng để trong thẻ <meta description>)"
+    message: "Mô tả ngắn không được để trống."
   }),
   article_author: z.string().min(1, {
     message: "Tác giả không được để trống"
@@ -67,6 +68,16 @@ const formSchema = z.object({
   article_content: z.string().min(1, {
     message: "Nội dung không được để trống"
   }),
+  article_avt_blob:
+    typeof window !== "undefined" && typeof window.FileList !== "undefined"
+      ? z.optional(
+        z.instanceof(
+          window.FileList,
+        ).refine(
+          (file) => file.length === 0 || IMAGE_TYPE_ACCEPTED.includes(file.item(0)?.type),
+          { message: "Vui lòng chọn file hình ảnh có định dạng webp." }
+        ))
+      : z.optional(z.any()),
 });
 
 export default function ArticleForm() {
@@ -82,46 +93,59 @@ export default function ArticleForm() {
       article_date_published: new Date(),
       article_subtitle: "",
       article_content: "",
-      article_avt_link: "",
       article_avt_alt: "",
     }
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
+  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     const {
-      article_avt_link, article_avt_alt,
+      article_avt_alt,
       article_author, article_date_published,
+      article_avt_blob,
       ...rest
     } = values;
-    const article_avt: { link: string, alt: string } = {
-      link: article_avt_link,
+    const article_avt: { link?: string, alt: string } = {
       alt: article_avt_alt,
     }
     const article_info: { author: string, published_date: string } = {
       author: article_author,
       published_date: format(article_date_published, "yyyy-MM-dd"),
     }
-    const json = JSON.stringify({ ...rest, article_avt, article_info });
-    const res = await fetch(BACKEND_URL_ADMIN_ARTICLE, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      credentials: "include",
-      body: json,
-    });
 
-    setIsLoading(false);
-    if (res.status !== 200) {
-      return toast.error(`Có lỗi xảy ra khi cập nhật bài viết ${res.statusText}`);
+    const formData = new FormData();
+    formData.append("article_avt_blob", article_avt_blob[0]);
+    formData.append("article_avt", JSON.stringify(article_avt));
+    formData.append("article_info", JSON.stringify(article_info));
+    for (let key in rest) {
+      formData.append(key, rest[key])
     }
 
-    form.reset();
-    return toast.success(`Bài viết "${values.article_name.length > 60
-      ? values.article_name.slice(0, 57) + "..."
-      : values.article_name
-      }" đã được tạo mới thành công`
-    );
-  }
+    try {
+      setIsLoading(true);
+      await axios.post(
+        BACKEND_URL_ADMIN_ARTICLE,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data", },
+          withCredentials: true,
+        }
+      )
+
+      setIsLoading(false);
+
+      form.reset();
+      return toast.success(`Bài viết "${values.article_name.length > 60
+        ? values.article_name.slice(0, 57) + "..."
+        : values.article_name
+        }" đã được tạo mới thành công`
+      );
+    } catch (err) {
+      setIsLoading(false);
+      return toast.error(`Có lỗi xảy ra khi cập nhật bài viết ${err.message}`);
+    }
+  }, []);
+
+  const fileRef = form.register("article_avt_blob");
 
   return (
     <Form {...form} >
@@ -136,7 +160,7 @@ export default function ArticleForm() {
                 <FormLabel className="text-bold">Tác giả</FormLabel>
                 <FormControl><Input disabled={isLoading} placeholder="Nhập tác giả" {...field} /></FormControl>
                 <FormMessage />
-                <FormDescription>Tên tác giả được sử dụng để hiển thị trên trang web.</FormDescription>
+                <FormDescription>Tên tác giả của bài viết.</FormDescription>
               </FormItem>
             )}
           />
@@ -149,7 +173,7 @@ export default function ArticleForm() {
                 <FormLabel className="text-bold">Tên bài viết</FormLabel>
                 <FormControl><Input disabled={isLoading} placeholder="Nhập tên bài viết" {...field} /></FormControl>
                 <FormMessage />
-                <FormDescription>Tên bài viết được sử dụng để hiển thị trên trang web.</FormDescription>
+                <FormDescription>Tên hiển thị của bài viết</FormDescription>
               </FormItem>
             )}
           />
@@ -162,7 +186,7 @@ export default function ArticleForm() {
                 <FormLabel className="text-bold">Loại bài viết</FormLabel>
                 <FormControl><Input disabled={isLoading} placeholder="Nhập loại bài viết" {...field} /></FormControl>
                 <FormMessage />
-                <FormDescription>Loại bài viết được sử dụng để phân loại bài viết.</FormDescription>
+                <FormDescription>Loại bài viết để phân loại bài viết.</FormDescription>
               </FormItem>
             )}
           />
@@ -227,26 +251,26 @@ export default function ArticleForm() {
             )}
           />
 
-
-          {/* Article Avt Link */}
+          {/* Article Image */}
           <FormField
             control={form.control}
-            name="article_avt_link"
+            name="article_avt_blob"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Hình ảnh đại diện</FormLabel>
-                {field.value
-                  ? <div className="relative w-full aspect-video">
-                    <Image src={field.value} alt="Lmao" fill />
-                  </div>
-                  : <></>}
+                <FormLabel className="">Thêm hình ảnh đại diện bằng tệp</FormLabel>
                 <FormControl>
-                  <Input disabled={isLoading} placeholder="Nhập đường dẫn hình ảnh đại diện" {...field} />
+                  <Input
+                    type="file"
+                    accept="image/webp"
+                    onChange={(event) => {
+                      field.onChange(event.target?.files?.[0] ?? undefined);
+                    }}
+                    {...fileRef}
+                  />
                 </FormControl>
                 <FormMessage />
-                <FormDescription>Hình ảnh đại diện của bài viết. Đường dẫn hình ảnh phải là một URL hợp lệ.</FormDescription>
+                <FormDescription>Định dạng hình ảnh phải là webp.</FormDescription>
               </FormItem>
-
             )}
           />
 
@@ -263,7 +287,6 @@ export default function ArticleForm() {
               </FormItem>
             )}
           />
-
         </div>
         <div className="col-span-2 flex flex-col gap-4">
           {/* Article Subtitle */}
@@ -290,6 +313,7 @@ export default function ArticleForm() {
                 <div className="h-full flex flex-col gap-2">
                   <FormControl>
                     <Textarea
+                      disabled={isLoading}
                       className="h-full resize-none p-2 border border-gray-200 rounded-md scrollbar"
                       {...field}
                     />
@@ -301,7 +325,6 @@ export default function ArticleForm() {
             )}
           />
         </div>
-
         <Button
           className="col-span-3"
           disabled={isLoading}
