@@ -11,33 +11,73 @@ import styles from "./styles.module.css";
 
 const cx = classNames.bind(styles);
 
-const appBarData = [
+const sidebarItems = [
   {
-    url: "/",
-    iconData: "home",
-    text: "Trang chủ",
+    path: '/admin',
+    label: 'Dashboard',
+    icon: 'space_dashboard',
+    active: true, // Assuming this is for the active link
   },
   {
-    url: "/category",
-    iconData: "category",
-    text: "Danh mục",
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Danh mục',
+    icon: 'category',
   },
   {
-    url: "/news",
-    iconData: "article",
-    text: "Tin tức",
+    path: '/admin/products',
+    label: 'Sản phẩm',
+    icon: 'inventory_2',
   },
   {
-    url: "/search/results?hotProduct=true",
-    iconData: "local_fire_department",
-    text: "HOT",
+    path: '/admin/orders',
+    label: 'Đơn hàng',
+    icon: 'shopping_bag',
   },
   {
-    url: "/account/mobile-account",
-    iconData: "account_circle",
-    text: "Tài khoản",
+    path: '/admin/articles',
+    label: 'Bài viết',
+    icon: 'newspaper',
+  },
+  {
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Khách hàng',
+    icon: 'groups',
+  },
+  {
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Đánh giá',
+    icon: 'rate_review',
+  },
+  {
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Kho',
+    icon: 'warehouse',
+  },
+  {
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Báo cáo',
+    icon: 'bar_chart',
+  },
+  {
+    path: '/admin/feature_development', // Placeholder for future implementation
+    label: 'Cài đặt',
+    icon: 'settings',
+  },
+  {
+    path: '/admin/logout',
+    label: 'Đăng xuất',
+    icon: 'logout',
   },
 ];
+
+function isActivePath(currentPath: string, targetPath: string) {
+  if (currentPath === "/admin/feature_development")
+    return false;
+  if (targetPath === "/admin")
+    return currentPath === "/admin";
+
+  return currentPath.slice(0, targetPath.length) === targetPath;
+}
 
 export default function AdminSideBar(props: ILogoProps) {
   const pathName = usePathname();
@@ -64,76 +104,23 @@ export default function AdminSideBar(props: ILogoProps) {
             src="/imgs/test.png"
             alt="avt_admin"
           />
-          {/* <h4>Admin <%= admin.admin_name %></h4> */}
-          {/* <small><%= admin.admin_role %></small> */}
         </div>
 
         <div className={cx("admin-sidebar__list")}>
-          <Link
-            className={cx("admin-sidebar__list-item", "active")}
-            href="/admin/dashboard">
-            <span className={"material-icons-round"}>space_dashboard</span>
-            <p>Dashboard</p>
-          </Link>
+          {sidebarItems.map((item, index) => (
+            <Link
+              key={index} // Add unique key for React reconciliation
+              className={cx(
+                "admin-sidebar__list-item",
+                isActivePath(pathName, item.path) ? "active" : ""
+              )}
+              href={item.path}
+            >
+              <span className={"material-icons-round"}>{item.icon}</span>
+              <p>{item.label}</p>
+            </Link>
+          ))}
 
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/admin/category">
-            <span className={"material-icons-round"}>category</span>
-            <p>Danh mục</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/admin/products">
-            <span className="material-icons-round">inventory_2</span>
-            <p>Sản phẩm</p>
-          </Link>
-
-          <Link className={cx("admin-sidebar__list-item")} href="/admin/order">
-            <span className="material-icons-round">shopping_bag</span>
-            <p>Đơn hàng</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/feature_development">
-            <span className="material-icons-round">groups</span>
-            <p>Khách hàng</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/feature_development">
-            <span className="material-icons-round">rate_review</span>
-            <p>Đánh giá</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/feature_development">
-            <span className="material-icons-round">warehouse</span>
-            <p>Kho</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/feature_development">
-            <span className="material-icons-round">bar_chart</span>
-            <p>Báo cáo</p>
-          </Link>
-
-          <Link
-            className={cx("admin-sidebar__list-item")}
-            href="/feature_development">
-            <span className="material-icons-round">settings</span>
-            <p>Cài đặt</p>
-          </Link>
-
-          <Link className={cx("admin-sidebar__list-item")} href="/admin/logout">
-            <span className="material-icons-round">logout</span>
-            <p>Đăng xuất</p>
-          </Link>
         </div>
       </div>
     </aside>

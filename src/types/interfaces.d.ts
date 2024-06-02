@@ -207,3 +207,55 @@ interface IUserLocal {
   }[];
   cart: (any)[];
 }
+
+interface IDataResponseAdminOrder {
+  maxPage: number;
+  orders: IAdminOrderProps[];
+}
+
+interface IAdminOrderProps {
+  order_id: string;
+  order_buyer_name: string;
+  order_buyer_phone: string;
+  order_address: IAdminOrderAddressProps;
+  order_status: TOrderStatus;
+  order_payment: string;
+  order_total_cost: number;
+  createdAt: string;
+  order_note?: string;
+  order_details?: IProductItemInOrderItemProps[];
+  order_process_info?: {
+    status: TOrderStatus;
+    date: string;
+  }[];
+}
+
+interface IAdminOrderAddressProps {
+  street: string;
+  ward: string;
+  district: string;
+  province: string;
+}
+
+interface IAdminSingleOrderProps {
+  customer: IAdminCustomerInOrderProps;
+  order: IAdminOrderProps;
+}
+
+interface IAdminCustomerInOrderProps {
+  user_id_hashed: string;
+  user_name: string;
+  user_phone: string;
+  user_email: string;
+  user_avt_img: string;
+  user_address: IAdminOrderAddressProps;
+}
+
+interface IAdminBadgeOrderStatusProps {
+  order_status: TOrderStatus;
+  className?: string;
+}
+
+interface IBadgePaymentMethodProps {
+  payment: string;
+}

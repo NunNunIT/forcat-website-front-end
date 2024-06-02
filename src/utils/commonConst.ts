@@ -15,6 +15,8 @@ export const BACKEND_URL_NOTIFICATIONS: string = BACKEND_URL + "/notifications";
 export const NOTIFICATION_STATUS_LIST: string[] = ["all", "order", "promotion"];
 export const BACKEND_URL_NEWS: string = BACKEND_URL + "/articles";
 
+export const BACKEND_URL_ADMIN_ORDER: string = BACKEND_URL + "/admin/orders";
+
 export const CLOUDINARY_URL: string =
   "https://res.cloudinary.com/dmjwq3ebx/image/upload/v1712151655";
 export const expirationTime = Date.now() + 86400000;

@@ -1,10 +1,10 @@
 // import libs
 import React from "react";
 
-//import components
-import { AdminSideBar } from "@/partials";
+// import components
+import { Toaster } from "@/components/admin/ui/sonner";
 
-//import css
+// import css
 import "./layout.css";
 
 export default function CustomerLayout({
@@ -14,8 +14,8 @@ export default function CustomerLayout({
 }>) {
   return (
     <div className="admin-page">
-      <AdminSideBar />
       {children}
+      <Toaster />
     </div>
   );
 }
