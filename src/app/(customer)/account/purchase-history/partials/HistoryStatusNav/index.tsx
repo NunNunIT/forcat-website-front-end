@@ -23,19 +23,13 @@ export default function HistoryStatusNav() {
     <nav className={cx("purchase-history__status-container")}>
       {["all", "unpaid", "delivering", "finished", "cancel"].map((status) => (
         <Link
+          rel="canonical"
           key={status}
-          className={
-            cx(
-              "purchase-history__status",
-              isActiveClass(currentStatus, status)
-            )
-          }
-          href={
-            pathName
-            + "?"
-            + (status === "all" ? "" : `type=${status}`)
-          }
-        >
+          className={cx(
+            "purchase-history__status",
+            isActiveClass(currentStatus, status)
+          )}
+          href={pathName + "?" + (status === "all" ? "" : `type=${status}`)}>
           {convertOrderStatusToStr(status)}
         </Link>
       ))}

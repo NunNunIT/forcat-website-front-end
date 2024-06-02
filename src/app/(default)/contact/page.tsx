@@ -25,7 +25,7 @@ export default async function HelpPage() {
           <span className="material-icons-round contact">call</span>
           <div className="contact__customer-support__call--right">
             <p className="gray">Contact Number</p>
-            <Link href="tel: 0559695594" className="link">
+            <Link rel="canonical" href="tel: 0559695594" className="link">
               <h4>+84 559 695 594</h4>
             </Link>
           </div>
@@ -34,7 +34,10 @@ export default async function HelpPage() {
           <span className="material-icons-round contact">mail</span>
           <div className="contact__customer-support__email--right">
             <p className="gray">Email Address</p>
-            <Link href="mailto: forcatshop.contact@gmail.com" className="link">
+            <Link
+              rel="canonical"
+              href="mailto: forcatshop.contact@gmail.com"
+              className="link">
               <h4>forcatshop.contact@gmail.com</h4>
             </Link>
           </div>
@@ -44,6 +47,7 @@ export default async function HelpPage() {
         <h3 className="contact__social-media__tittle gray">Social Media</h3>
         <div className="contact__social-media__facebook">
           <Link
+            rel="canonical"
             href="https://www.facebook.com/forcat.official"
             target="blank"
             className="contact__icon facebook">
@@ -56,6 +60,7 @@ export default async function HelpPage() {
           <div className="contact__social-media__call--right">
             <p className="gray">Fanpage</p>
             <Link
+              rel="canonical"
               href="https://www.facebook.com/forcat.official"
               className="link">
               <h4>ForCat Shop - Everything For Your Cat</h4>
@@ -64,6 +69,7 @@ export default async function HelpPage() {
         </div>
         <div className="contact__social-media__instagram">
           <Link
+            rel="canonical"
             href="https://www.instagram.com/forcat_shop/"
             target="blank"
             className="contact__icon">
@@ -76,6 +82,7 @@ export default async function HelpPage() {
           <div className="contact__social-media__email--right">
             <p className="gray">Instagram</p>
             <Link
+              rel="canonical"
               href="https://www.instagram.com/forcat_shop/"
               className="link">
               <h4>ForCat Shop - Everything For Your Cat</h4>
@@ -84,6 +91,7 @@ export default async function HelpPage() {
         </div>
         <div className="contact__social-media__zalo">
           <Link
+            rel="canonical"
             href="https://zalo.me/0559695594"
             target="blank"
             className="contact__icon">
@@ -95,7 +103,10 @@ export default async function HelpPage() {
           </Link>
           <div className="contact__social-media__email--right">
             <p className="gray">Zalo</p>
-            <Link href="https://zalo.me/0559695594" className="link">
+            <Link
+              rel="canonical"
+              href="https://zalo.me/0559695594"
+              className="link">
               <h4>ForCat Shop - Everything For Your Cat</h4>
             </Link>
           </div>

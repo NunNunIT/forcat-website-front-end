@@ -129,8 +129,11 @@ const LoginForm = () => {
     <form className={cx("form-auth")} onSubmit={handleSubmit}>
       <div className={cx("form-auth__title")}>
         <h1>Chào mừng bạn quay trở lại!</h1>
-        <Link href="/register">
-          <h3> Chưa có tài khoản? <b>Đăng ký ngay</b></h3>
+        <Link rel="canonical" href="/register">
+          <h3>
+            {" "}
+            Chưa có tài khoản? <b>Đăng ký ngay</b>
+          </h3>
         </Link>
       </div>
 
@@ -178,7 +181,7 @@ const LoginForm = () => {
           </p>
         )}
       </div>
-      <Link href="/forgot" className={cx("align-right")}>
+      <Link rel="canonical" href="/forgot" className={cx("align-right")}>
         <p>Quên mật khẩu?</p>
       </Link>
       <button disabled={loading} className={cx("form-button")}>

@@ -52,12 +52,15 @@ export default function MobileAccountPage() {
         </div>
         <div className="none-mobile-account-container__text">
           <span className="material-icons">arrow_back</span>
-          <span>Bạn hãy điều hướng bằng cách chọn vào phần điều hướng bên cạnh nhé!!!</span>
+          <span>
+            Bạn hãy điều hướng bằng cách chọn vào phần điều hướng bên cạnh
+            nhé!!!
+          </span>
         </div>
       </main>
       <main className="mobile-account-container">
         <aside className="account-aside" id="sidebar">
-          <Link href="#" className="avatar">
+          <Link rel="canonical" href="#" className="avatar">
             <span className="image-container">
               <Image
                 className="avatarimg"
@@ -73,7 +76,7 @@ export default function MobileAccountPage() {
 
           <ul className="side-menu top">
             <li>
-              <Link href="/account/information" id="info-link">
+              <Link rel="canonical" href="/account/information" id="info-link">
                 <span className="material-icons-outlined">
                   perm_contact_calendar
                 </span>
@@ -85,7 +88,7 @@ export default function MobileAccountPage() {
             </li>
 
             <li>
-              <Link href="/account/purchase-history">
+              <Link rel="canonical" href="/account/purchase-history">
                 <span className="material-icons-outlined"> shopping_bag </span>
                 <span className="text">Lịch sử đơn mua</span>
                 <span className="material-icons-outlined arrow-icon">
@@ -94,7 +97,7 @@ export default function MobileAccountPage() {
               </Link>
             </li>
             <li>
-              <Link href="/account/change-password">
+              <Link rel="canonical" href="/account/change-password">
                 <span className="material-icons-outlined"> settings </span>
                 <span className="text">Đổi mật khẩu</span>
                 <span className="material-icons-outlined arrow-icon">

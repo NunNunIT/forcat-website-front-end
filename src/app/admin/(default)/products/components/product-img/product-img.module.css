@@ -1,0 +1,10 @@
+.product-page-table__img-div {
+    width: 100px;
+    height: 100px;
+    padding: 12px;
+    position: relative;
+}
+
+.product-page-table__img {
+    border-radius: 0.25rem;
+}

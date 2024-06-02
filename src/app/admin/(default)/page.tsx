@@ -1,4 +1,3 @@
-
 export default function AdminDashboard() {
   return <main>
     <h1>

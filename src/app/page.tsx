@@ -121,6 +121,7 @@ export default async function Home() {
           <div className="content-container">
             <h2 className="tip-products__label">
               <Link
+                rel="canonical"
                 href="/search-result?sortBy=hot"
                 className="tip-products__title">
                 Gợi ý hôm nay
@@ -136,6 +137,7 @@ export default async function Home() {
           <div className="tip-products">
             <h2 className="tip-products__label">
               <Link
+                rel="canonical"
                 href="/search-result?sortBy=new"
                 className="tip-products__title">
                 Hàng mới về
@@ -156,6 +158,7 @@ export default async function Home() {
           </div>
           <div className="banner-wrapper">
             <Link
+              rel="canonical"
               className="banner-img--half"
               href="/search-result?searchKey=reflex">
               <Image
@@ -166,6 +169,7 @@ export default async function Home() {
               />
             </Link>
             <Link
+              rel="canonical"
               className="banner-img--half"
               href="https://www.facebook.com/forcat.official"
               target="_blank">
@@ -179,6 +183,7 @@ export default async function Home() {
           </div>
           <div className="banner-wrapper">
             <Link
+              rel="canonical"
               className="banner-img--half"
               href="https://www.facebook.com/lawsforpawsvietnam"
               target="_blank">
@@ -189,7 +194,7 @@ export default async function Home() {
                 alt="banner-info"
               />
             </Link>
-            <Link className="banner-img--half" href="/about-us">
+            <Link rel="canonical" className="banner-img--half" href="/about-us">
               <Image
                 className="banner-img"
                 fill={true}
@@ -199,7 +204,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="banner-wrapper">
-            <Link className="banner-img--full" href="/news">
+            <Link rel="canonical" className="banner-img--full" href="/news">
               <Image
                 className="banner-img"
                 fill={true}
@@ -212,6 +217,7 @@ export default async function Home() {
           <div className="tip-products">
             <h2 className="tip-products__label">
               <Link
+                rel="canonical"
                 href="/search-result?discount=True"
                 className="tip-products__title">
                 Khuyến mãi hấp dẫn
@@ -234,7 +240,10 @@ export default async function Home() {
         <div className="wrapper color padding-bottom">
           <div className="content-container">
             <h2 className="tip-products__label">
-              <Link href="/news" className="tip-products__title">
+              <Link
+                rel="canonical"
+                href="/news"
+                className="tip-products__title">
                 Tin tức hằng ngày
                 <p> Xem tất cả </p>
               </Link>

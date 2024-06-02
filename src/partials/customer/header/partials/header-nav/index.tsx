@@ -74,7 +74,7 @@ export default function CustomerHeaderNav() {
       <div className={cx("header__nav-container")}>
         <div className={cx("header__support-info")}>
           <div className={cx("dropdown-help")}>
-            <Link href="/contact">
+            <Link rel="canonical" href="/contact">
               <span className="material-icons-outlined">help</span>
               Hỗ trợ
             </Link>
@@ -83,11 +83,18 @@ export default function CustomerHeaderNav() {
                 <div className={cx("dropdown-help__qr-code-container")}>
                   <Image src="/imgs/icon-ATC.webp" alt="help" fill />
                 </div>
-                <span>Nhấp <Link href="/contact">vào đây</Link> để được hỗ trợ nhé!!!</span>
+                <span>
+                  Nhấp{" "}
+                  <Link rel="canonical" href="/contact">
+                    vào đây
+                  </Link>{" "}
+                  để được hỗ trợ nhé!!!
+                </span>
               </div>
             </div>
           </div>
           <Link
+            rel="canonical"
             href="tel: 0559 695 594"
             className={cx("header__support-info__hotline")}>
             <span className="material-icons-outlined">call</span>
@@ -98,6 +105,7 @@ export default function CustomerHeaderNav() {
         <div className={cx("header__about-account")}>
           <div className={cx("dropdown-noti")}>
             <Link
+              rel="canonical"
               className={cx("header__notifications")}
               href="/notifications"
               title="Trang thông báo">
@@ -126,8 +134,11 @@ export default function CustomerHeaderNav() {
                         <span className={cx("content__noti")}>
                           Bạn đang có thông báo mới nè!!!
                           <br />
-                          Bấm <Link href="/notifications">vào đây</Link> để kiểm
-                          tra ngay nhé!
+                          Bấm{" "}
+                          <Link rel="canonical" href="/notifications">
+                            vào đây
+                          </Link>{" "}
+                          để kiểm tra ngay nhé!
                         </span>
                       </>
                     ) : (
@@ -160,8 +171,12 @@ export default function CustomerHeaderNav() {
                       </span>
                     </div>
                     <div className={cx("unauth-content__btn")}>
-                      <Link href="/login">Đăng nhập</Link>
-                      <Link href="/register">Đăng ký</Link>
+                      <Link rel="canonical" href="/login">
+                        Đăng nhập
+                      </Link>
+                      <Link rel="canonical" href="/register">
+                        Đăng ký
+                      </Link>
                     </div>
                   </>
                 )}
@@ -178,6 +193,7 @@ export default function CustomerHeaderNav() {
                 />
               </span>
               <Link
+                rel="canonical"
                 href="/account/information"
                 className={cx("header__auth-login")}>
                 {currentUser.user_name}
@@ -189,6 +205,7 @@ export default function CustomerHeaderNav() {
                 <div className={cx("header__auth-dropdown")}>
                   {(optionsInHeaderAuth ?? []).map((option) => (
                     <Link
+                      rel="canonical"
                       key={option.text}
                       className={cx("header__auth-dropdown-item")}
                       href={option.href}
@@ -211,18 +228,27 @@ export default function CustomerHeaderNav() {
           ) : (
             <div className={cx("header__unauth")}>
               <span className="material-icons-outlined">account_circle</span>
-              <Link href="/login" className={cx("header__auth-login")}>
+              <Link
+                rel="canonical"
+                href="/login"
+                className={cx("header__auth-login")}>
                 Đăng nhập
               </Link>
               <span>|</span>
-              <Link href="/register" className={cx("header__auth-register")}>
+              <Link
+                rel="canonical"
+                href="/register"
+                className={cx("header__auth-register")}>
                 Đăng ký
               </Link>
             </div>
           )}
         </div>
         <div className={cx("header--mobile__noti-support")}>
-          <Link href="/notifications" className={cx("noti--mobile")}>
+          <Link
+            rel="canonical"
+            href="/notifications"
+            className={cx("noti--mobile")}>
             <span
               className={`material-icons ${cx("header__notification-icon")}`}
               title="Thông báo">
@@ -232,7 +258,7 @@ export default function CustomerHeaderNav() {
               )}
             </span>
           </Link>
-          <Link href="/contact" className={cx("help--mobile")}>
+          <Link rel="canonical" href="/contact" className={cx("help--mobile")}>
             <span className="material-icons-outlined" title="Hỗ trợ">
               help
             </span>
