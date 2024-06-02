@@ -100,7 +100,7 @@ const LoginForm = () => {
           // Set the localStorage and currentUser state
           localStorage.removeItem("currentUser");
           localStorage.setItem("currentUser", JSON.stringify(data.data));
-          Cookies.set("currentUser", data.token);
+          Cookies.set("currentUser", data.token, { expires: 1 / 24 });
           // window.location.href = "/"; //xác thực thành công thì điều hướng về home
           router.push("/");
         }

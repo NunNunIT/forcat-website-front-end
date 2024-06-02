@@ -198,6 +198,9 @@ export default function CustomerHeaderNav() {
                 className={cx("header__auth-login")}>
                 {currentUser.user_name}
               </Link>
+              <Link href="/admin" >
+                <span className="material-icons-outlined">admin_panel_settings</span>
+              </Link>
               <div className={cx("header__auth-dropdown-container")}>
                 <div className={cx("header__auth-dropdown")}>
                   {(optionsInHeaderAuth ?? []).map((option) => (
