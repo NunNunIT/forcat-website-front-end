@@ -258,6 +258,18 @@ export default function ArticleForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="">Thêm hình ảnh đại diện bằng tệp</FormLabel>
+                {field.value && field.value.length > 0
+                  ? <Image
+                    src={URL.createObjectURL(field.value[0])}
+                    alt={"Hình ảnh đại diện bài viết"}
+                    width={512}
+                    height={200}
+                    className="h-full aspect-video"
+                  />
+                  : <p className="text-sm text-gray-500">
+                    Chọn hình ảnh để có thể xem trước
+                  </p>
+                }
                 <FormControl>
                   <Input
                     type="file"
