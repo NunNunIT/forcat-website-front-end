@@ -34,6 +34,11 @@ const sidebarItems = [
     icon: 'shopping_bag',
   },
   {
+    path: '/admin/articles',
+    label: 'Bài viết',
+    icon: 'newspaper',
+  },
+  {
     path: '/admin/feature_development', // Placeholder for future implementation
     label: 'Khách hàng',
     icon: 'groups',
