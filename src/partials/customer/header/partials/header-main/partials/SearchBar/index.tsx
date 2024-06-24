@@ -30,7 +30,7 @@ export default function SearchBar() {
       if (inputValue) {
         fetchSearchResults(inputValue);
       }
-    }, 500);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [inputValue]);
