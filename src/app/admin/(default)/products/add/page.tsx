@@ -246,6 +246,7 @@ const addProduct = async (product: any) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     if (res.ok) location.href = "/admin/products";

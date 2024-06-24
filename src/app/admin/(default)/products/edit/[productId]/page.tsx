@@ -216,7 +216,12 @@ const handleAddSpecification = () => {
 
 const getProduct = async (productId: string) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/admin/products/${productId}`);
+    const res = await fetch(`${BACKEND_URL}/admin/products/${productId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      next: { revalidate: 60 },
+    });
 
     if (res.ok) {
       const data = await res.json();
@@ -264,6 +269,7 @@ const updateProduct = async (product: any) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
     if (res.ok) location.reload();
     else alert("Try again later!");

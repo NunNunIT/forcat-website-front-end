@@ -24,10 +24,16 @@ const getAllProducts = async (query: String, page: String) => {
   try {
     const response = await fetch(
       `${BACKEND_URL}/admin/products/getProducts?p=${page}`,
-      { next: { revalidate: 60 } }
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        next: { revalidate: 60 },
+      }
     );
 
     const data = await response.json();
+    // console.log("aaaaaaaaa", data);
 
     return data.data;
   } catch (error) {
@@ -43,6 +49,8 @@ export default async function AdminProductsPage({
   const q = searchParams.q ?? "";
   const p = searchParams.p ?? "0";
   const data = await getAllProducts(q, p);
+
+  // console.log("aaaaaaaaa", data);
 
   const products = data?.products ?? [];
   const totalPages = data?.totalPages ?? 0;
