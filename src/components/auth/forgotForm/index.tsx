@@ -321,7 +321,7 @@ const ForgotForm = () => {
             <button disabled={loading} className={cx("form-button")}>
               <h3>{loading ? "Đang xử lý..." : "Xác nhận"}</h3>
             </button>
-            <Link href="/login">
+            <Link rel="canonical" href="/login">
               <h3>Trở lại</h3>
             </Link>
           </div>
@@ -406,7 +406,11 @@ const ForgotForm = () => {
           {!isResending && !showResendMessage && (
             <div className={cx("send-again")}>
               <span>Bạn không nhận được mã OTP?</span>
-              <Link href="#" id="resendLink" onClick={handleResendOTP}>
+              <Link
+                rel="canonical"
+                href="#"
+                id="resendLink"
+                onClick={handleResendOTP}>
                 <strong>
                   <u> Gửi lại mã OTP</u>
                 </strong>
@@ -424,7 +428,7 @@ const ForgotForm = () => {
             <button disabled={loading} className={cx("form-button")}>
               <h3>{loading ? "Đang xử lý..." : "Xác nhận"}</h3>
             </button>
-            <Link href="/login">
+            <Link rel="canonical" href="/login">
               <h3>Hủy</h3>
             </Link>
           </div>
@@ -490,7 +494,7 @@ const ForgotForm = () => {
             <button disabled={loading} className={cx("form-button")}>
               <h3>{loading ? "Đang xử lý..." : "Xác nhận"}</h3>
             </button>
-            <Link href="/login">
+            <Link rel="canonical" href="/login">
               <h3>Hủy</h3>
             </Link>
           </div>

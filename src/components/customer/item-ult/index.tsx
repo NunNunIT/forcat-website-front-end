@@ -22,6 +22,7 @@ export default function CustomerHeaderItemUlt({ product }) {
     <div className={cx("header__item-ult")}>
       <div className={cx("header__item-ult__title")}>
         <Link
+          rel="canonical"
           className={cx("header__item-ult__title__link")}
           title={product.product_name}
           href={`/${product.product_slug}?pid=${product.product_id_hashed}`} // Đường dẫn của sản phẩm
@@ -36,7 +37,10 @@ export default function CustomerHeaderItemUlt({ product }) {
         </div>
       </div>
       <div className={cx("header__item-ult__thumbs")}>
-        <Link href="#" className={cx("header__item-ult__thumbs__link")}>
+        <Link
+          rel="canonical"
+          href="#"
+          className={cx("header__item-ult__thumbs__link")}>
           <CldImage
             className={cx("header__item-ult__thumbs__img")}
             src={product.product_img.link} // Sử dụng link hình ảnh từ dữ liệu sản phẩm

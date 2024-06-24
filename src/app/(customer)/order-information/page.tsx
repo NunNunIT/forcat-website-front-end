@@ -33,10 +33,10 @@ export default function SearchResultPage() {
       buyInfo = buyItems.payload;
       totalWithDiscount = buyInfo.reduce(
         (result, item) =>
-          result
-          + item.unit_price
-          * ((100 - item.discount_amount) / 100)
-          * item.quantity,
+          result +
+          item.unit_price *
+            ((100 - item.discount_amount) / 100) *
+            item.quantity,
         0
       );
       totalWithoutDiscount = buyInfo.reduce(
@@ -165,9 +165,7 @@ export default function SearchResultPage() {
 
   function handleWardChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedWardId = event.target.value;
-    const selectedWard = wards.find(
-      (ward) => ward.Id === selectedWardId
-    );
+    const selectedWard = wards.find((ward) => ward.Id === selectedWardId);
     setWard(selectedWard.Name);
   }
 
@@ -180,7 +178,7 @@ export default function SearchResultPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (paymentMethod === '1') {
+    if (paymentMethod === "1") {
       try {
         const response = await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
@@ -213,20 +211,17 @@ export default function SearchResultPage() {
 
         const data = await response.json();
 
-        if (!data?.success)
-          return;
+        if (!data?.success) return;
 
         router.push("/account/purchase-history?type=unpaid");
-      } catch (error) {
-
-      }
+      } catch (error) {}
     }
 
-    if (paymentMethod === '3') {
+    if (paymentMethod === "3") {
       try {
         const resBE = await await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             order_buyer: {
               order_name: userName,
@@ -252,21 +247,25 @@ export default function SearchResultPage() {
         });
 
         const jsonBE = await resBE.json();
-        if (!jsonBE.success)
-          throw jsonBE;
+        if (!jsonBE.success) throw jsonBE;
 
         const { orderCode } = jsonBE.data;
 
-        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", },
-          body: JSON.stringify({ amount: parseInt(totalWithDiscount), orderCode, }),
-          credentials: "include",
-        });
+        const resPayment = await fetch(
+          `${BACKEND_URL}/payment/create-payment-link`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount: parseInt(totalWithDiscount),
+              orderCode,
+            }),
+            credentials: "include",
+          }
+        );
 
         const jsonPayment = await resPayment.json();
-        if (!jsonPayment.success)
-          throw jsonPayment;
+        if (!jsonPayment.success) throw jsonPayment;
 
         const { checkoutUrl: url } = jsonPayment.data;
 
@@ -467,7 +466,7 @@ export default function SearchResultPage() {
           <div className="order-pay__submit">
             <p>
               Nhấn &quot;Đặt hàng&quot; đồng nghĩa với việc bạn đồng ý tuân theo
-              <Link href="/privacy-policy">
+              <Link rel="canonical" href="/privacy-policy">
                 {" "}
                 Điều khoản đặt hàng của Forcat.
               </Link>

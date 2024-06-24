@@ -558,6 +558,7 @@ export default function CartPage() {
                   onChange={handleCheckOne}
                 />
                 <Link
+                  rel="canonical"
                   href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
                   className="cart-item__image-div cart-item__link">
                   <CldImage
@@ -570,6 +571,7 @@ export default function CartPage() {
               </div>
               <div className="cart-item__info-div cart-item-col">
                 <Link
+                  rel="canonical"
                   href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
                   className="cart-item__link">
                   <h4
@@ -580,7 +582,7 @@ export default function CartPage() {
                     //       ? "nowrap"
                     //       : "wrap",
                     // }}
-                    >
+                  >
                     {cartItem.product.product_name}
                   </h4>
                 </Link>
@@ -721,6 +723,7 @@ export default function CartPage() {
           <div className="cart-bill-row__content">{totalPrice}</div>
         </div>
         <Link
+          rel="canonical"
           href={selectedItem > 0 ? "/order-information" : "#"}
           className="cart-bill-row cart-bill__btn"
           onClick={handleBuyItem}>
@@ -728,11 +731,17 @@ export default function CartPage() {
         </Link>
         <div className="cart-bill-row cart-bill-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-          <Link className="cart-bill-policy__link" href="/term-of-use">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/term-of-use">
             Điều khoản dịch vụ
           </Link>{" "}
           và{" "}
-          <Link className="cart-bill-policy__link" href="/privacy-policy">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/privacy-policy">
             Chính sách bảo mật
           </Link>{" "}
           của ForCat.
@@ -775,6 +784,7 @@ export default function CartPage() {
               </div>
             </div>
             <Link
+              rel="canonical"
               href={selectedItem > 0 ? "/order-information" : "#"}
               className="cart-footer-buy-group__buy-btn"
               onClick={handleBuyItem}>
@@ -784,11 +794,17 @@ export default function CartPage() {
         </div>
         <div className="cart-footer-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-          <Link className="cart-bill-policy__link" href="/term-of-use">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/term-of-use">
             Điều khoản dịch vụ
           </Link>{" "}
           và{" "}
-          <Link className="cart-bill-policy__link" href="/privacy-policy">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/privacy-policy">
             Chính sách bảo mật
           </Link>{" "}
           của ForCat.

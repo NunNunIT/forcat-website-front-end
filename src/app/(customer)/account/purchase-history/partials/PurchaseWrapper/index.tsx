@@ -42,10 +42,10 @@ const fetcher: Fetcher<IDataResponseOrder, string> = async (url: string) => {
 
 const getFullBackendURLOrders = (status: string, page: string): string => {
   return (
-    BACKEND_URL_ORDERS
-    + "?"
-    + (status === "all" ? "" : `type=${status}&`)
-    + `page=${page}&limit=3`
+    BACKEND_URL_ORDERS +
+    "?" +
+    (status === "all" ? "" : `type=${status}&`) +
+    `page=${page}&limit=3`
   );
 };
 
@@ -58,21 +58,20 @@ export default function PurchaseWrapper() {
 
   return (
     <section className="purchase-history__purchase-item-list">
-      {isLoading && (
-        <CustomerSkeletonOrderItem />
-      )}
+      {isLoading && <CustomerSkeletonOrderItem />}
       {!isLoading && (data?.orders ?? []).length === 0 ? (
         <div className="purchase-history__no-order">
           <div className="purchase-history__no-order-img-container">
-            <Image
-              src="/imgs/purchase/empty.png"
-              alt="No order"
-              fill={true}
-            />
+            <Image src="/imgs/purchase/empty.png" alt="No order" fill={true} />
           </div>
           <span className="purchase-history__no-order-text">
-            Bạn chưa có đơn hàng thuộc loại này!!!<br />
-            Hãy <Link href="/search-result?searchKey=">mua sắm ngay</Link> để có những trải nghiệm tuyệt vời nhất.
+            Bạn chưa có đơn hàng thuộc loại này!!!
+            <br />
+            Hãy{" "}
+            <Link rel="canonical" href="/search-result?searchKey=">
+              mua sắm ngay
+            </Link>{" "}
+            để có những trải nghiệm tuyệt vời nhất.
           </span>
         </div>
       ) : (
@@ -84,5 +83,5 @@ export default function PurchaseWrapper() {
       {/* Pagination */}
       <CustomerPagination maxPage={data?.maxPage ?? 1} />
     </section>
-  )
+  );
 }

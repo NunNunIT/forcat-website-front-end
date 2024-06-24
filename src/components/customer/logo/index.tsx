@@ -11,7 +11,10 @@ const cx = className.bind(style);
 export default function CustomerLogo(props: ILogoProps) {
   const { className } = props;
   return (
-    <Link href="/" className={cx("logo__container") + " " + className}>
+    <Link
+      rel="canonical"
+      href="/"
+      className={cx("logo__container") + " " + className}>
       <Image
         className={cx("logo__img")}
         src={`/logo${props.white ? "-white" : "-brown"}.webp`}

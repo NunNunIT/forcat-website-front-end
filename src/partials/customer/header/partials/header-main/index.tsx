@@ -38,6 +38,7 @@ export default function CustomerHeaderMain() {
 
       <div className={cx("dropdown-cart")}>
         <Link
+          rel="canonical"
           href="/cart"
           className={cx("header__cart-container")}
           title="Giỏ hàng">
@@ -70,7 +71,10 @@ export default function CustomerHeaderMain() {
                           />
                         </div>
                         <span className={cx("content__cart")}>
-                          Bấm <Link href="/cart">vào đây</Link>
+                          Bấm{" "}
+                          <Link rel="canonical" href="/cart">
+                            vào đây
+                          </Link>
                           <br />
                           để kiểm tra giỏ hàng nhé!
                         </span>
@@ -109,8 +113,12 @@ export default function CustomerHeaderMain() {
                   </span>
                 </div>
                 <div className={cx("unauth-content__btn")}>
-                  <Link href="/login">Đăng nhập</Link>
-                  <Link href="/register">Đăng ký</Link>
+                  <Link rel="canonical" href="/login">
+                    Đăng nhập
+                  </Link>
+                  <Link rel="canonical" href="/register">
+                    Đăng ký
+                  </Link>
                 </div>
               </>
             )}

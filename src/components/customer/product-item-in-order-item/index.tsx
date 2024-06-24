@@ -30,9 +30,9 @@ export default function ProductItemInOrderItem(
       <div className={cx("product-item__detail")}>
         <h5>
           <Link
+            rel="canonical"
             className={cx("product-item__name")}
-            href={`/${props.product_slug}?pid=${props.product_id_hashed}`}
-          >
+            href={`/${props.product_slug}?pid=${props.product_id_hashed}`}>
             {props.product_name}
           </Link>
         </h5>
