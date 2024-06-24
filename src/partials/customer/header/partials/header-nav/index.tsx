@@ -52,6 +52,7 @@ export default function CustomerHeaderNav() {
       }
 
       localStorage.removeItem("currentUser");
+      localStorage.removeItem("addCartItem");
       Cookies.remove("currentUser");
       setCurrentUser(null);
       // window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
