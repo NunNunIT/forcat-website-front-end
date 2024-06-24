@@ -1,6 +1,9 @@
+"use client";
+
 // import libs
 import React from "react";
 import Link from "next/link";
+import useSWR from "swr";
 
 // import components
 import { AdminPagination } from "@/components";
@@ -20,35 +23,51 @@ import { convertNumberToMoney } from "@/utils";
 // import css
 import "./page.css";
 
-const getAllProducts = async (query: String, page: String) => {
-  try {
-    const response = await fetch(
-      `${BACKEND_URL}/admin/products/getProducts?p=${page}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        next: { revalidate: 60 },
-      }
-    );
+const fetcher = (url: string) =>
+  fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    next: { revalidate: 60 },
+  })
+    .then((res) => res.json())
+    .then((data) => data?.data);
 
-    const data = await response.json();
-    // console.log("aaaaaaaaa", data);
+// const getAllProducts = async (query: String, page: String) => {
+//   try {
+//     const response = await fetch(
+//       `${BACKEND_URL}/admin/products/getProducts?p=${page}`,
+//       {
+//         method: "GET",
+//         headers: { "Content-Type": "application/json" },
+//         credentials: "include",
+//         next: { revalidate: 60 },
+//       }
+//     );
 
-    return data.data;
-  } catch (error) {
-    console.error("Error fetching recommend products:", error);
-  }
-};
+//     const data = await response.json();
+//     console.log("aaaaaaaaa", data);
 
-export default async function AdminProductsPage({
+//     return data.data;
+//   } catch (error) {
+//     console.error("Error fetching recommend products:", error);
+//   }
+// };
+
+export default function AdminProductsPage({
   searchParams,
 }: {
   searchParams?: { [key: string]: string };
 }) {
   const q = searchParams.q ?? "";
   const p = searchParams.p ?? "0";
-  const data = await getAllProducts(q, p);
+
+  const { data, error, isLoading } = useSWR(
+    `${BACKEND_URL}/admin/products/getProducts?p=${p}`,
+    fetcher
+  );
+
+  // const data = await getAllProducts(q, p);
 
   // console.log("aaaaaaaaa", data);
 
