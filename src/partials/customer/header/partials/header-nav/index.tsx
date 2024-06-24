@@ -53,6 +53,10 @@ export default function CustomerHeaderNav() {
 
       localStorage.removeItem("currentUser");
       localStorage.removeItem("addCartItem");
+      const headerCartQuantity = document.querySelector(".header-cart-quantity");
+      if (headerCartQuantity)
+        headerCartQuantity.outerHTML = "";
+
       Cookies.remove("currentUser");
       setCurrentUser(null);
       // window.location.reload(); // Đặt currentUser thành null sau khi đăng xuất
