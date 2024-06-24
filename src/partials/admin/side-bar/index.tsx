@@ -49,21 +49,6 @@ const sidebarItems = [
     icon: 'rate_review',
   },
   {
-    path: '/admin/feature_development', // Placeholder for future implementation
-    label: 'Kho',
-    icon: 'warehouse',
-  },
-  {
-    path: '/admin/feature_development', // Placeholder for future implementation
-    label: 'Báo cáo',
-    icon: 'bar_chart',
-  },
-  {
-    path: '/admin/feature_development', // Placeholder for future implementation
-    label: 'Cài đặt',
-    icon: 'settings',
-  },
-  {
     path: '/admin/logout',
     label: 'Đăng xuất',
     icon: 'logout',
