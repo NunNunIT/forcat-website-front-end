@@ -45,16 +45,13 @@ export default function OrderItem(props: IOrderItemProps) {
   const setCancel = async () => {
     try {
       const url: string = `${BACKEND_URL_ORDERS}/${props._id}/cancel`;
-      const JSON: IResponseJSON = await axios
-        .post(url, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        })
-        .then((res) => res.data);
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json", },
+      })
       props?.mutate();
-      return JSON;
+      return;
     } catch (err) {
       return err;
     }
