@@ -93,7 +93,9 @@ export default function NotificationWrapper() {
 
       // Gửi yêu cầu đánh dấu tất cả thông báo đã đọc
       await fetcherSetReadAll();
-
+      const currentUser: IUserLocal = JSON.parse(localStorage.getItem("currentUser"));
+      currentUser.recent_notification = [];
+      localStorage.setItem("currentUser", JSON.stringify(currentUser))
       mutate();
     }
   };
