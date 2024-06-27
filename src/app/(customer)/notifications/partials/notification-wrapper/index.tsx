@@ -51,13 +51,21 @@ const getFullBackendURLNotifications = (
 };
 
 const fetcherSetReadAll = async () => {
-  await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
+  const res = await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json", },
     credentials: "include",
   });
+
+  const json: IResponseJSON = await res.json();
+
+  if (!json.success) {
+    // Đã xử lý throw error ở phía client
+    console.error("Set read all notification failed", json);
+    return;
+  }
+
+  console.log("Set read all notification success");
 };
 
 const fethcerSetRead = async (notification_id: string) => {
