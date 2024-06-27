@@ -144,16 +144,16 @@ export default function NotificationWrapper() {
       )}
 
       {/* Fill blank */}
-      {!isLoading && data && data.maxPage > 1 && (
-        <div className="tag-make-fill-blank" />
-      )}
-
-      {/* Pagination */}
-      {!isLoading && data && (
-        <div className="noti__pagination">
-          <CustomerPagination maxPage={data.maxPage} />
-        </div>
-      )}
+      {!isLoading
+        && data
+        && data.maxPage > 1
+        && <>
+          <div className="tag-make-fill-blank" />
+          <div className="noti__pagination">
+            <CustomerPagination maxPage={data.maxPage} />
+          </div>
+        </>
+      }
     </>
   );
 }

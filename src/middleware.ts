@@ -24,7 +24,7 @@ async function fetchUser(accessToken: String) {
 
 export async function middleware(request: NextRequest) {
   const cookie = request.headers.get("Cookie");
-  let currentUserCookieValue;
+  let currentUserCookieValue: string;
 
   // Kiểm tra nếu cookie tồn tại và không rỗng
   if (cookie) {
