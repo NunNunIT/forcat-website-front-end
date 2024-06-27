@@ -204,7 +204,7 @@ body {
 
 main {
   margin: 1rem auto;
-  min-height: calc(100vh - (280px + 152px + 2rem));
+  min-height: calc(100vh - (312px + 152px + 72px + 2rem));
 }
 
 h1 {
