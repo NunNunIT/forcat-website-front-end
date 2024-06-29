@@ -22,7 +22,7 @@ export default function SearchBar() {
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(searchKey);
   const smartSearchRef = useRef(null);
 
   useEffect(() => {
@@ -92,7 +92,8 @@ export default function SearchBar() {
             id="header__search-input"
             type="search"
             name="searchKey"
-            placeholder={searchKey ?? "Bạn tìm gì..."}
+            placeholder={"Bạn tìm gì..."}
+            value={inputValue}
             onChange={handleInputChange}
           />
           <button className={cx("header__search-btn")} type="submit">
