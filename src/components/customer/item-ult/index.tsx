@@ -14,9 +14,10 @@ const cx = classNames.bind(styles);
 export default function CustomerHeaderItemUlt({ product }) {
   // Kiểm tra nếu giá lowest_price và product_price bằng nhau
   const showPrice =
-    product.lowest_price === product.product_price
-      ? product.lowest_price
-      : `${convertNumberToMoney(product.lowest_price)}đ`;
+    (product.lowest_price
+      && product.lowest_price <= product.product_price)
+      ? `${convertNumberToMoney(product.lowest_price)}đ`
+      : `${convertNumberToMoney(product.product_price)}đ`;
 
   return (
     <div className={cx("header__item-ult")}>
@@ -31,9 +32,11 @@ export default function CustomerHeaderItemUlt({ product }) {
         </Link>
         <div className={cx("header__item-ult__title__price")}>
           {showPrice}
-          {product.lowest_price !== product.product_price && ( // Kiểm tra nếu lowest_price khác product_price
-            <small>{convertNumberToMoney(product.product_price)}đ</small> // Hiển thị product_price trong thẻ small
-          )}
+          {product.lowest_price
+            && product.lowest_price < product.product_price
+            && ( // Kiểm tra nếu lowest_price khác product_price
+              <small>{convertNumberToMoney(product.product_price)}đ</small> // Hiển thị product_price trong thẻ small
+            )}
         </div>
       </div>
       <div className={cx("header__item-ult__thumbs")}>
