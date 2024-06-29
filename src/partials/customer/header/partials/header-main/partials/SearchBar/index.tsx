@@ -24,7 +24,7 @@ const cx = classNames.bind(styles);
 export default function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const searchKey = searchParams.get("searchKey");
+  const searchKey = searchParams.get("searchKey") ?? "";
 
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
