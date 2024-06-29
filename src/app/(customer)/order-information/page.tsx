@@ -25,6 +25,13 @@ let buyInfo = [],
   totalWithDiscount,
   totalWithoutDiscount;
 
+interface IProductInLocalStorageCart {
+  product_id: string;
+  quantity: number;
+  variant_id: string;
+  _id: string;
+}
+
 export default function SearchResultPage() {
   const router = useRouter();
   useEffect(() => {
@@ -33,10 +40,10 @@ export default function SearchResultPage() {
       buyInfo = buyItems.payload;
       totalWithDiscount = buyInfo.reduce(
         (result, item) =>
-          result +
-          item.unit_price *
-            ((100 - item.discount_amount) / 100) *
-            item.quantity,
+          result
+          + item.unit_price
+          * ((100 - item.discount_amount) / 100)
+          * item.quantity,
         0
       );
       totalWithoutDiscount = buyInfo.reduce(
@@ -178,6 +185,25 @@ export default function SearchResultPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) {
+      router.push("/login");
+      return;
+    }
+
+    currentUser.cart = (
+      currentUser.cart
+      ?? [] as IProductInLocalStorageCart[]
+    ).filter(
+      item => !buyInfo.find(product => product.variant_id === item.variant_id)
+    );
+
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    if (headerCartQuantity)
+      headerCartQuantity.innerHTML = currentUser?.cart?.length ?? 0;
+
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
     if (paymentMethod === "1") {
       try {
         const response = await fetch(`${BACKEND_URL}/orders/`, {
@@ -214,12 +240,12 @@ export default function SearchResultPage() {
         if (!data?.success) return;
 
         router.push("/account/purchase-history?type=unpaid");
-      } catch (error) {}
+      } catch (error) { }
     }
 
     if (paymentMethod === "3") {
       try {
-        const resBE = await await fetch(`${BACKEND_URL}/orders/`, {
+        const resBE = await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
