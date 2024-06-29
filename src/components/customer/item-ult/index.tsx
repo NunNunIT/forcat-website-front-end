@@ -16,8 +16,8 @@ export default function CustomerHeaderItemUlt({ product }) {
   const showPrice =
     (product.lowest_price
       && product.lowest_price <= product.product_price)
-      ? `${convertNumberToMoney(product.lowest_price)}đ`
-      : `${convertNumberToMoney(product.product_price)}đ`;
+      ? `${convertNumberToMoney(product.lowest_price)}`
+      : `${convertNumberToMoney(product.product_price)}`;
 
   return (
     <div className={cx("header__item-ult")}>
@@ -35,7 +35,7 @@ export default function CustomerHeaderItemUlt({ product }) {
           {product.lowest_price
             && product.lowest_price < product.product_price
             && ( // Kiểm tra nếu lowest_price khác product_price
-              <small>{convertNumberToMoney(product.product_price)}đ</small> // Hiển thị product_price trong thẻ small
+              <small>{convertNumberToMoney(product.product_price)}</small> // Hiển thị product_price trong thẻ small
             )}
         </div>
       </div>
