@@ -229,7 +229,7 @@ export default function SearchResultPage() {
               product_id_hashed: product.product_id,
               variant_id: product.variant_id,
               quantity: product.quantity,
-              unit_price: product.unit_price,
+              unit_price: product.unit_price * (1 - product.discount_amount / 100),
             })),
           }),
           credentials: "include",
