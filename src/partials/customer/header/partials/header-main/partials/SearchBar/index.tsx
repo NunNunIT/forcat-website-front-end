@@ -1,8 +1,14 @@
 // import libs
+import {
+  useState,
+  useEffect,
+  useRef,
+  FormEvent
+} from "react";
 import classNames from "classnames/bind";
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
@@ -16,6 +22,7 @@ import styles from "./search-bar.module.css";
 const cx = classNames.bind(styles);
 
 export default function SearchBar() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const searchKey = searchParams.get("searchKey");
 
@@ -24,6 +31,13 @@ export default function SearchBar() {
   const [totalSearchResults, setTotalSearchResults] = useState(0);
   const [inputValue, setInputValue] = useState(searchKey);
   const smartSearchRef = useRef(null);
+
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    router.push(`/search-result?searchKey=${formData.get("searchKey")}`);
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -84,8 +98,8 @@ export default function SearchBar() {
     <div className={cx("header__search-bar-wrapper")}>
       <form
         className={cx("header__search-bar__main")}
-        action="/search-result"
-        method="GET">
+        onSubmit={onSubmit}
+      >
         <div className={cx("header__search-bar")}>
           <input
             className={cx("header__search-input")}
