@@ -12,8 +12,8 @@ const firebaseConfig = {
   projectId: "for-cat-shop",
   storageBucket: "for-cat-shop.appspot.com",
   messagingSenderId: "410983676433",
-  appId: "1:410983676433:web:52ef8e6c4a3c3a97998fb0",
-  measurementId: "G-YKX9DMYKZ3",
+  appId: "1:410983676433:web:c31814d6aba6225e998fb0",
+  measurementId: "G-6XK9R77C1Q"
 };
 
 // Initialize Firebase
