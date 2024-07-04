@@ -29,6 +29,7 @@ export default function OAuth() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           user_name: result.user.displayName,
           user_email: result.user.email,
@@ -36,13 +37,14 @@ export default function OAuth() {
         }),
       });
 
-      const data = await res.json();
+      let data = await res.json();
 
       if (data.status === 200) {
         console.log("Login successful");
         // Set the localStorage and currentUser state
+        localStorage.removeItem("currentUser");
         localStorage.setItem("currentUser", JSON.stringify(data.data));
-        Cookies.set("currentUser", data.token);
+        Cookies.set("currentUser", data.token, { expires: 1 / 24 });
         router.push("/");
       }
     } catch (error) {
