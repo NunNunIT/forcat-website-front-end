@@ -45,7 +45,8 @@ export default function OAuth() {
         localStorage.removeItem("currentUser");
         localStorage.setItem("currentUser", JSON.stringify(data.data));
         Cookies.set("currentUser", data.token, { expires: 1 / 24 });
-        router.push("/");
+        window.location.href = "/"; //xác thực thành công thì điều hướng về home
+        // router.push("/");
       }
     } catch (error) {
       // console.log("Could not login with Google", error);
