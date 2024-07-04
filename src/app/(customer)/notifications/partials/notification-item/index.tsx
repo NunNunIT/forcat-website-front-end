@@ -55,7 +55,11 @@ export default function NotificationItem(props: INotiItemProps) {
 
       // Gửi yêu cầu đánh dấu thông báo đã đọc
       await props.fetcherSetRead(props._id);
-
+      const currentUser: IUserLocal = JSON.parse(localStorage.getItem("currentUser"));
+      currentUser.recent_notification = currentUser.recent_notification.filter(
+        (notification) => notification._id !== props._id
+      );
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
       props.mutate();
     }
   };

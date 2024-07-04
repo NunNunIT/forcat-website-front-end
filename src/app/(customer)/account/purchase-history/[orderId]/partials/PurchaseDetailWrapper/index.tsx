@@ -23,6 +23,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 interface IOrderDetailProps {
   _id: string;
   order_buyer: { order_name: string; order_phone: string };
+  order_payment: "cod" | "internet_banking";
   order_address: {
     street: string;
     ward: string;
@@ -60,6 +61,14 @@ const fetcher: Fetcher<IOrderDetailProps, string> = async (url: string) => {
     return notFound();
   }
 };
+
+function decodeOrderPaymentMethod(paymentMethod: "cod" | "internet_banking"): string {
+  const hashedPaymentMethod: { [key: string]: string } = {
+    "cod": "Thanh toán khi nhận hàng",
+    "internet_banking": "Thanh toán qua Internet Banking",
+  }
+  return hashedPaymentMethod[paymentMethod] ?? "Thanh toán khi nhận hàng";
+}
 
 export default function PurchaseDetailPage(props: { orderId: string }) {
   const fullURL: string = getFullBackendURLOrder(props.orderId);
@@ -122,7 +131,7 @@ export default function PurchaseDetailPage(props: { orderId: string }) {
           <span className="material-icons">credit_card</span>
           <span>Thông tin thanh toán</span>
         </h2>
-        <span>Thanh toán bằng thẻ tín dụng</span>
+        <span>{decodeOrderPaymentMethod(data.order_payment)}</span>
       </div>
       <div className="order-detail__products">
         <h2>

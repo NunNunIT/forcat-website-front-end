@@ -203,9 +203,9 @@ export default function CartPage() {
     const updateDeleteCartItems =
       duplicatedIndex !== -1
         ? [
-            ...cartItems.slice(0, duplicatedIndex),
-            ...cartItems.slice(duplicatedIndex + 1),
-          ]
+          ...cartItems.slice(0, duplicatedIndex),
+          ...cartItems.slice(duplicatedIndex + 1),
+        ]
         : [...cartItems];
 
     currentUser.cart = updateDeleteCartItems;
@@ -308,22 +308,22 @@ export default function CartPage() {
     const updateChangeItems =
       duplicatedIndex !== -1
         ? [
-            ...changeItems.payload.slice(0, duplicatedIndex),
-            {
-              product_id: productId,
-              variant_id: variantId,
-              quantity: quantity,
-            },
-            ...changeItems.payload.slice(duplicatedIndex + 1),
-          ]
+          ...changeItems.payload.slice(0, duplicatedIndex),
+          {
+            product_id: productId,
+            variant_id: variantId,
+            quantity: quantity,
+          },
+          ...changeItems.payload.slice(duplicatedIndex + 1),
+        ]
         : [
-            ...changeItems.payload,
-            {
-              product_id: productId,
-              variant_id: variantId,
-              quantity: quantity,
-            },
-          ];
+          ...changeItems.payload,
+          {
+            product_id: productId,
+            variant_id: variantId,
+            quantity: quantity,
+          },
+        ];
     // console.log("up", updateChangeItems);
 
     localStorage.removeItem("changeItems");
@@ -362,12 +362,12 @@ export default function CartPage() {
       duplicatedIndex !== -1
         ? deleteItems.payload
         : [
-            ...deleteItems.payload,
-            {
-              product_id: productId,
-              variant_id: variantId,
-            },
-          ];
+          ...deleteItems.payload,
+          {
+            product_id: productId,
+            variant_id: variantId,
+          },
+        ];
 
     localStorage.removeItem("deleteItems");
     localStorage.setItem(
@@ -468,8 +468,10 @@ export default function CartPage() {
           ? item.querySelector(".quantity-input-group__input").value
           : item.querySelector(".quantity-input-group__input").placeholder
       );
+
       const unitPrice = convertMoneyToNumber(
-        item.querySelector(".cart-item__unit-price-after-discount").innerHTML
+        item.querySelector(".cart-item__unit-price-before-discount del")?.innerHTML
+        ?? item.querySelector(".cart-item__unit-price-after-discount").innerHTML
       );
       const discountAmount = Number(
         item.querySelector("input[name='discount_amount']").value
@@ -558,6 +560,7 @@ export default function CartPage() {
                   onChange={handleCheckOne}
                 />
                 <Link
+                  rel="canonical"
                   href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
                   className="cart-item__image-div cart-item__link">
                   <CldImage
@@ -570,17 +573,18 @@ export default function CartPage() {
               </div>
               <div className="cart-item__info-div cart-item-col">
                 <Link
+                  rel="canonical"
                   href={`/${cartItem.product.product_slug}?pid=${cartItem.product._id}`}
                   className="cart-item__link">
                   <h4
                     className="cart-item__text-info-name"
-                    // style={{
-                    //   whiteSpace:
-                    //     (cartItem.product.product_variants ?? []).length != 0
-                    //       ? "nowrap"
-                    //       : "wrap",
-                    // }}
-                    >
+                  // style={{
+                  //   whiteSpace:
+                  //     (cartItem.product.product_variants ?? []).length != 0
+                  //       ? "nowrap"
+                  //       : "wrap",
+                  // }}
+                  >
                     {cartItem.product.product_name}
                   </h4>
                 </Link>
@@ -644,20 +648,20 @@ export default function CartPage() {
                       (100 -
                         cartItem.product.product_variants[currentVariantIndex]
                           .discount_amount)) /
-                      100
+                    100
                   )}
                 </div>
                 {cartItem.product.product_variants[currentVariantIndex]
                   .discount_amount != 0 && (
-                  <div className="cart-item__unit-price-before-discount">
-                    <del>
-                      {convertNumberToMoney(
-                        cartItem.product.product_variants[currentVariantIndex]
-                          .price
-                      )}
-                    </del>
-                  </div>
-                )}
+                    <div className="cart-item__unit-price-before-discount">
+                      <del>
+                        {convertNumberToMoney(
+                          cartItem.product.product_variants[currentVariantIndex]
+                            .price
+                        )}
+                      </del>
+                    </div>
+                  )}
               </div>
               <div className="cart-item__quantity cart-item-col">
                 <div className="quantity-input-group">
@@ -693,7 +697,7 @@ export default function CartPage() {
                       cartItem.product.product_variants[currentVariantIndex]
                         .discount_amount)) /
                     100) *
-                    cartItem.quantity
+                  cartItem.quantity
                 )}
               </div>
               <div
@@ -721,6 +725,7 @@ export default function CartPage() {
           <div className="cart-bill-row__content">{totalPrice}</div>
         </div>
         <Link
+          rel="canonical"
           href={selectedItem > 0 ? "/order-information" : "#"}
           className="cart-bill-row cart-bill__btn"
           onClick={handleBuyItem}>
@@ -728,11 +733,17 @@ export default function CartPage() {
         </Link>
         <div className="cart-bill-row cart-bill-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-          <Link className="cart-bill-policy__link" href="/term-of-use">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/term-of-use">
             Điều khoản dịch vụ
           </Link>{" "}
           và{" "}
-          <Link className="cart-bill-policy__link" href="/privacy-policy">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/privacy-policy">
             Chính sách bảo mật
           </Link>{" "}
           của ForCat.
@@ -775,6 +786,7 @@ export default function CartPage() {
               </div>
             </div>
             <Link
+              rel="canonical"
               href={selectedItem > 0 ? "/order-information" : "#"}
               className="cart-footer-buy-group__buy-btn"
               onClick={handleBuyItem}>
@@ -784,11 +796,17 @@ export default function CartPage() {
         </div>
         <div className="cart-footer-policy">
           Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{" "}
-          <Link className="cart-bill-policy__link" href="/term-of-use">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/term-of-use">
             Điều khoản dịch vụ
           </Link>{" "}
           và{" "}
-          <Link className="cart-bill-policy__link" href="/privacy-policy">
+          <Link
+            rel="canonical"
+            className="cart-bill-policy__link"
+            href="/privacy-policy">
             Chính sách bảo mật
           </Link>{" "}
           của ForCat.

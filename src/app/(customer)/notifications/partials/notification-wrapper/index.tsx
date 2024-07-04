@@ -51,13 +51,21 @@ const getFullBackendURLNotifications = (
 };
 
 const fetcherSetReadAll = async () => {
-  await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
+  const res = await fetch(`${BACKEND_URL_NOTIFICATIONS}/readAll`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json", },
     credentials: "include",
   });
+
+  const json: IResponseJSON = await res.json();
+
+  if (!json.success) {
+    // Đã xử lý throw error ở phía client
+    console.error("Set read all notification failed", json);
+    return;
+  }
+
+  console.log("Set read all notification success");
 };
 
 const fethcerSetRead = async (notification_id: string) => {
@@ -93,7 +101,9 @@ export default function NotificationWrapper() {
 
       // Gửi yêu cầu đánh dấu tất cả thông báo đã đọc
       await fetcherSetReadAll();
-
+      const currentUser: IUserLocal = JSON.parse(localStorage.getItem("currentUser"));
+      currentUser.recent_notification = [];
+      localStorage.setItem("currentUser", JSON.stringify(currentUser))
       mutate();
     }
   };
@@ -108,45 +118,50 @@ export default function NotificationWrapper() {
       </div>
       {isLoading ? (
         <CustomerSkeletonNotificationItem />
+      ) : (data?.notifications ?? []).length > 0 ? (
+        data?.notifications.map((notification: INotiItemProps) => (
+          <CustomerNotificationItem
+            key={notification._id}
+            {...notification}
+            readAll={readAll}
+            mutate={mutate}
+            fetcherSetRead={fethcerSetRead}
+          />
+        ))
       ) : (
-        ((data?.notifications ?? []).length > 0)
-          ? data?.notifications.map((notification: INotiItemProps) => (
-            <CustomerNotificationItem
-              key={notification._id}
-              {...notification}
-              readAll={readAll}
-              mutate={mutate}
-              fetcherSetRead={fethcerSetRead}
-            />
-          ))
-          : <>
-            <div className="notification__no-notification">
-              <div className="notification__no-notification-img-container">
-                <Image
-                  src="/imgs/purchase/empty.png"
-                  alt="No notification"
-                  fill={true}
-                />
-              </div>
-              <span className="notification__no-notification-text">
-                Bạn chưa có thông báo thuộc loại này!!!<br />
-                Hãy thử <Link href="/search-result?searchKey=">mua sắm</Link> để có những trải nghiệm tuyệt vời nhất.
-              </span>
+        <>
+          <div className="notification__no-notification">
+            <div className="notification__no-notification-img-container">
+              <Image
+                src="/imgs/purchase/empty.png"
+                alt="No notification"
+                fill={true}
+              />
             </div>
-          </>
+            <span className="notification__no-notification-text">
+              Bạn chưa có thông báo thuộc loại này!!!
+              <br />
+              Hãy thử{" "}
+              <Link rel="canonical" href="/search-result?searchKey=">
+                mua sắm
+              </Link>{" "}
+              để có những trải nghiệm tuyệt vời nhất.
+            </span>
+          </div>
+        </>
       )}
 
       {/* Fill blank */}
-      {!isLoading && data && data.maxPage > 1 && (
-        <div className="tag-make-fill-blank" />
-      )}
-
-      {/* Pagination */}
-      {!isLoading && data && (
-        <div className="noti__pagination">
-          <CustomerPagination maxPage={data.maxPage} />
-        </div>
-      )}
+      {!isLoading
+        && data
+        && data.maxPage > 1
+        && <>
+          <div className="tag-make-fill-blank" />
+          <div className="noti__pagination">
+            <CustomerPagination maxPage={data.maxPage} />
+          </div>
+        </>
+      }
     </>
   );
 }

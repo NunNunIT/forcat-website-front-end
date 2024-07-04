@@ -25,6 +25,13 @@ let buyInfo = [],
   totalWithDiscount,
   totalWithoutDiscount;
 
+interface IProductInLocalStorageCart {
+  product_id: string;
+  quantity: number;
+  variant_id: string;
+  _id: string;
+}
+
 export default function SearchResultPage() {
   const router = useRouter();
   useEffect(() => {
@@ -165,9 +172,7 @@ export default function SearchResultPage() {
 
   function handleWardChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedWardId = event.target.value;
-    const selectedWard = wards.find(
-      (ward) => ward.Id === selectedWardId
-    );
+    const selectedWard = wards.find((ward) => ward.Id === selectedWardId);
     setWard(selectedWard.Name);
   }
 
@@ -180,7 +185,26 @@ export default function SearchResultPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (paymentMethod === '1') {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) {
+      router.push("/login");
+      return;
+    }
+
+    currentUser.cart = (
+      currentUser.cart
+      ?? [] as IProductInLocalStorageCart[]
+    ).filter(
+      item => !buyInfo.find(product => product.variant_id === item.variant_id)
+    );
+
+    const headerCartQuantity = document.querySelector(".header-cart-quantity");
+    if (headerCartQuantity)
+      headerCartQuantity.innerHTML = currentUser?.cart?.length ?? 0;
+
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    if (paymentMethod === "1") {
       try {
         const response = await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
@@ -205,7 +229,7 @@ export default function SearchResultPage() {
               product_id_hashed: product.product_id,
               variant_id: product.variant_id,
               quantity: product.quantity,
-              unit_price: product.unit_price,
+              unit_price: product.unit_price * (1 - product.discount_amount / 100),
             })),
           }),
           credentials: "include",
@@ -213,20 +237,17 @@ export default function SearchResultPage() {
 
         const data = await response.json();
 
-        if (!data?.success)
-          return;
+        if (!data?.success) return;
 
         router.push("/account/purchase-history?type=unpaid");
-      } catch (error) {
-
-      }
+      } catch (error) { }
     }
 
-    if (paymentMethod === '3') {
+    if (paymentMethod === "3") {
       try {
-        const resBE = await await fetch(`${BACKEND_URL}/orders/`, {
+        const resBE = await fetch(`${BACKEND_URL}/orders/`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             order_buyer: {
               order_name: userName,
@@ -252,21 +273,25 @@ export default function SearchResultPage() {
         });
 
         const jsonBE = await resBE.json();
-        if (!jsonBE.success)
-          throw jsonBE;
+        if (!jsonBE.success) throw jsonBE;
 
         const { orderCode } = jsonBE.data;
 
-        const resPayment = await fetch(`${BACKEND_URL}/payment/create-payment-link`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", },
-          body: JSON.stringify({ amount: parseInt(totalWithDiscount), orderCode, }),
-          credentials: "include",
-        });
+        const resPayment = await fetch(
+          `${BACKEND_URL}/payment/create-payment-link`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount: parseInt(totalWithDiscount),
+              orderCode,
+            }),
+            credentials: "include",
+          }
+        );
 
         const jsonPayment = await resPayment.json();
-        if (!jsonPayment.success)
-          throw jsonPayment;
+        if (!jsonPayment.success) throw jsonPayment;
 
         const { checkoutUrl: url } = jsonPayment.data;
 
@@ -467,7 +492,7 @@ export default function SearchResultPage() {
           <div className="order-pay__submit">
             <p>
               Nhấn &quot;Đặt hàng&quot; đồng nghĩa với việc bạn đồng ý tuân theo
-              <Link href="/privacy-policy">
+              <Link rel="canonical" href="/privacy-policy">
                 {" "}
                 Điều khoản đặt hàng của Forcat.
               </Link>

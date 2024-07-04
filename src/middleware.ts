@@ -24,7 +24,7 @@ async function fetchUser(accessToken: String) {
 
 export async function middleware(request: NextRequest) {
   const cookie = request.headers.get("Cookie");
-  let currentUserCookieValue;
+  let currentUserCookieValue: string;
 
   // Kiểm tra nếu cookie tồn tại và không rỗng
   if (cookie) {
@@ -41,15 +41,35 @@ export async function middleware(request: NextRequest) {
       [, currentUserCookieValue] = currentUserCookie; // Lấy giá trị của cookie "currentUser"
     }
   }
-  console.log("currentUserCookie", currentUserCookieValue);
+  // console.log("currentUserCookie", currentUserCookieValue);
   const res = await fetchUser(currentUserCookieValue);
+  // console.log("res", JSON.stringify(res));
 
-  if (res.status == 200 ) {
+  // Nếu đường dẫn bắt đầu bằng "/admin" thì kiểm tra res
+  // console.log("request.nextUrl.pathname", request.nextUrl.pathname);
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    // Nếu token chính xác
+    if (res.status == 200) {
+      const { user_role } = res.data;
+      // Nếu role là "admin" thì cho phép truy cập
+      // console.log("user_role", user_role);
+      if (user_role === "admin") return NextResponse.next();
+      // Nếu role không phải là "admin" thì chuyển hướng về trang đăng nhập của admin
+    }
+
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Nếu token chính xác
+  if (res.status == 200) {
+    // Nếu đường dẫn bắt đầu không bắt đầu bằng "/admin" thì cho phép truy cập
     return NextResponse.next();
   }
+
+  // Nếu token không chính xác thì chuyển hướng về trang đăng nhập của customer
   return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
-  matcher: "/(account/.*|cart|notifications|order-information)",
+  matcher: "/(account/.*|cart|notifications|order-information|admin.*)",
 };

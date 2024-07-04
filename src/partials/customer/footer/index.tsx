@@ -57,7 +57,11 @@ export default function Footer() {
           <div className={cx("footer__list-social-media")}>
             {(linkToSocialMedias ?? []).map(
               (link: IFooterLinkProps, index: number) => (
-                <Link key={index} href={link.href} target="_blank">
+                <Link
+                  rel="canonical"
+                  key={index}
+                  href={link.href}
+                  target="_blank">
                   <span className={cx("footer__social-media-container")}>
                     <Image
                       src={link.image.src}
@@ -75,13 +79,22 @@ export default function Footer() {
             <h3>VỀ Forcat Shop</h3>
           </div>
           <div className={cx("footer__list")}>
-            <Link href="/about-us" className={cx("footer__list-item")}>
+            <Link
+              rel="canonical"
+              href="/about-us"
+              className={cx("footer__list-item")}>
               Giới thiệu về Forcat Shop
             </Link>
-            <Link href="/term-of-use" className={cx("footer__list-item")}>
+            <Link
+              rel="canonical"
+              href="/term-of-use"
+              className={cx("footer__list-item")}>
               Điều khoản chung
             </Link>
-            <Link href="/privacy-policy" className={cx("footer__list-item")}>
+            <Link
+              rel="canonical"
+              href="/privacy-policy"
+              className={cx("footer__list-item")}>
               Chính sách bảo mật
             </Link>
           </div>
@@ -91,13 +104,13 @@ export default function Footer() {
             <h3>HỖ TRỢ</h3>
           </div>
           <div className={cx("footer__list")}>
-            <Link href="#" className={cx("footer__list-item")}>
+            <Link rel="canonical" href="#" className={cx("footer__list-item")}>
               Trung tâm trợ giúp
             </Link>
-            <Link href="#" className={cx("footer__list-item")}>
+            <Link rel="canonical" href="#" className={cx("footer__list-item")}>
               Chính sách bảo hành
             </Link>
-            <Link href="#" className={cx("footer__list-item")}>
+            <Link rel="canonical" href="#" className={cx("footer__list-item")}>
               Chính sách trả hàng
             </Link>
           </div>
@@ -110,6 +123,7 @@ export default function Footer() {
             <div className={cx("footer__list-item")}>
               <span className="material-icons-outlined">location_on</span>
               <Link
+                rel="canonical"
                 href={locationURL}
                 target="_blank"
                 className={cx("footer__list-item")}>
@@ -125,6 +139,7 @@ export default function Footer() {
             <div className={cx("footer__list-item")}>
               <span className="material-icons-outlined">mail</span>
               <Link
+                rel="canonical"
                 href={`mailto:${email}`}
                 className={cx("footer__list-item")}>
                 {email}

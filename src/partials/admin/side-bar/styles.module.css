@@ -1,0 +1,140 @@
+.admin-sidebar {
+  width: 20%;
+  position: sticky;
+  top: 0;
+}
+
+.admin-sidebar__list-item {
+  display: flex;
+}
+
+.admin-sidebar {
+  grid-area: admin-sidebar;
+  height: 100vh;
+  background-color: #f8e8db;
+  background: #f8e8db;
+  background-image: url("/imgs/admin/sidebar.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden;
+  transition: all 0.5s;
+}
+
+#admin-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: blạck;
+  padding: 20px 20px;
+}
+
+.admin-sidebar__header>img {
+  width: 200px;
+}
+
+.admin-sidebar__header>span {
+  display: none;
+}
+
+.admin__logo-wrapper {
+  width: 200px;
+  aspect-ratio: 29 / 10;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  object-fit: cover;
+}
+
+.logo__img {
+  object-fit: cover;
+}
+
+.admin-sidebar__content {
+  margin-top: 10px;
+  /* padding-bottom: 50px; */
+}
+
+.admin-sidebar__profile {
+  text-align: center;
+}
+
+.profile__img {
+  height: 130px;
+  width: 130px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  display: inline-block;
+  margin: 0 auto 0.5rem auto;
+  border: 3px solid var(--primary-color-1);
+  background-color: var(--white);
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.admin-sidebar__profile h4 {
+  color: black;
+  font-weight: 500;
+}
+
+.admin-sidebar__profile small {
+  color: brown;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background-color: var(--white);
+}
+
+.admin-sidebar__list {
+  padding: 0;
+  margin-top: 15px;
+  list-style-type: none;
+}
+
+
+.admin-sidebar__list-item {
+  padding: 10px 20px 10px 20px;
+}
+
+.admin-sidebar__list-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.admin-sidebar__list-item {
+  text-decoration: none;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.admin-sidebar__list-item>span {
+  vertical-align: middle;
+}
+
+.admin-sidebar__list-item.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-responsive {
+  display: inline !important;
+  position: absolute;
+  z-index: 12 !important;
+}
+
+@media screen and (max-width: 64rem) {
+  #admin-sidebar {
+    display: none;
+  }
+
+  .admin-sidebar__header>span {
+    display: inline;
+  }
+}

@@ -1,8 +1,14 @@
 // import libs
+import {
+  useState,
+  useEffect,
+  useRef,
+  FormEvent
+} from "react";
 import classNames from "classnames/bind";
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
@@ -16,21 +22,29 @@ import styles from "./search-bar.module.css";
 const cx = classNames.bind(styles);
 
 export default function SearchBar() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const searchKey = searchParams.get("searchKey");
+  const searchKey = searchParams.get("searchKey") ?? "";
 
   const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(searchKey);
   const smartSearchRef = useRef(null);
+
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    router.push(`/search-result?searchKey=${formData.get("searchKey")}`);
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (inputValue) {
         fetchSearchResults(inputValue);
       }
-    }, 500);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [inputValue]);
@@ -84,15 +98,16 @@ export default function SearchBar() {
     <div className={cx("header__search-bar-wrapper")}>
       <form
         className={cx("header__search-bar__main")}
-        action="/search-result"
-        method="GET">
+        onSubmit={onSubmit}
+      >
         <div className={cx("header__search-bar")}>
           <input
             className={cx("header__search-input")}
             id="header__search-input"
             type="search"
             name="searchKey"
-            placeholder={searchKey ?? "Bạn tìm gì..."}
+            placeholder={"Bạn tìm gì..."}
+            value={inputValue}
             onChange={handleInputChange}
           />
           <button className={cx("header__search-btn")} type="submit">
@@ -116,15 +131,18 @@ export default function SearchBar() {
               />
             ))}
         </div>
-        <div className={cx("header__suggest-results-more")}>
-          <Link
-            className={cx("header__suggest-results-more-link")}
-            href={`/search-result?searchKey=${inputValue}`}>
-            Xem thêm{" "}
-            <span className={cx("highlight")}>{totalSearchResults}</span> sản
-            phẩm
-          </Link>
-        </div>
+        {totalSearchResults > 4
+          && <div className={cx("header__suggest-results-more")}>
+            <Link
+              rel="canonical"
+              className={cx("header__suggest-results-more-link")}
+              href={`/search-result?searchKey=${inputValue}`}
+            >
+              Xem thêm
+              <span className={cx("highlight")}> {totalSearchResults - 4} </span>
+              sản phẩm
+            </Link>
+          </div>}
       </div>
     </div>
   );

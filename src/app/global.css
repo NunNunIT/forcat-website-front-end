@@ -116,6 +116,7 @@
   --red9: #550000;
   --red10: #440000;
   --red11: #330000;
+  --red12: #d0021c;
 
   /* green */
   --green1: #e6f1d8;
@@ -173,6 +174,7 @@
 
 body {
   width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: var(--bg-white);
@@ -202,7 +204,7 @@ body {
 
 main {
   margin: 1rem auto;
-  min-height: calc(100vh - (280px + 152px + 2rem));
+  min-height: calc(100vh - (312px + 152px + 72px + 2rem));
 }
 
 h1 {

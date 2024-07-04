@@ -22,6 +22,7 @@ function CustomerHeaderMenuProductItem(
 ): JSX.Element {
   return (
     <Link
+      rel="canonical"
       className={cx("cate-dropdown__product-link")}
       href={`/${props.product_slug}?pid=${props.product_id_hashed}`}
       title={props.product_name}>
@@ -71,6 +72,7 @@ function CustomerHeaderMenuSubCategoryItem(
   return (
     <li className={cx("cate-dropdown__wrapper")}>
       <Link
+        rel="canonical"
         className={cx("cate-dropdown__info")}
         href={`/search-result?category=${props.category_name}`}>
         <span className={cx("cate-dropdown__img-container")}>
@@ -87,6 +89,7 @@ function CustomerHeaderMenuSubCategoryItem(
         <div className={cx("cate-dropdown__title")}>
           <span>Sản phẩm bán chạy nhất</span>
           <Link
+            rel="canonical"
             className={cx("cate-dropdown__title-link")}
             href={`/search-result?category=${props.category_name}`}>
             <span>Xem tất cả</span>

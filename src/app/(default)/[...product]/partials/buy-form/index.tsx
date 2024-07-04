@@ -165,22 +165,22 @@ export default function ProductBuyForm({
     const updateAddCartItems =
       duplicatedIndex !== -1
         ? [
-            ...cartItems.slice(0, duplicatedIndex),
-            {
-              product: productId,
-              variant_id: variantId,
-              quantity: quantity,
-            },
-            ...cartItems.slice(duplicatedIndex + 1),
-          ]
+          ...cartItems.slice(0, duplicatedIndex),
+          {
+            product: productId,
+            variant_id: variantId,
+            quantity: quantity,
+          },
+          ...cartItems.slice(duplicatedIndex + 1),
+        ]
         : [
-            ...cartItems,
-            {
-              product: productId,
-              variant_id: variantId,
-              quantity: quantity,
-            },
-          ];
+          ...cartItems,
+          {
+            product: productId,
+            variant_id: variantId,
+            quantity: quantity,
+          },
+        ];
 
     currentUser.cart = updateAddCartItems;
 

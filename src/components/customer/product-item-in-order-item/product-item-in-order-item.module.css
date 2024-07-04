@@ -18,7 +18,7 @@
   padding-block: .5rem;
 }
 
-.product-item__name:is(:active, :visited) {
+.product-item__name:is(:link, :active, :visited) {
   color: black;
 }
 

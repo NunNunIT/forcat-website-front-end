@@ -11,8 +11,8 @@ import {
   ProductSpecification,
   ProductReview,
 } from "./partials";
-
 import { CustomerCarouselSlider } from "@/components";
+
 // import utils
 import { BACKEND_URL } from "@/utils/commonConst";
 
