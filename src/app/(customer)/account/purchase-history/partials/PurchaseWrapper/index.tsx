@@ -5,10 +5,15 @@ import { notFound } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import useSWR, { Fetcher } from "swr";
 
 // import partials, components
-import { CustomerOrderItem, CustomerSkeletonOrderItem } from "..";
+import { CustomerSkeletonOrderItem } from "..";
+const CustomerOrderItem = dynamic(
+  () => import("../OrderItem"),
+  { ssr: false, loading: () => <CustomerSkeletonOrderItem /> }
+);
 import { CustomerPagination } from "@/components";
 
 // import utils
