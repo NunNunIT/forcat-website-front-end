@@ -1,10 +1,12 @@
 // import libs
 import type { Metadata, ResolvingMetadata } from "next";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
 // import partials
-import { CustomerTableOfContent } from "./partials";
+// import { CustomerTableOfContent } from "./partials";
+const CustomerTableOfContent = dynamic(() => import("./partials/TableOfContent"));
 import { CustomerNewsItem } from "../partials";
 
 // import utils
@@ -68,6 +70,20 @@ export async function generateMetadata(
     title: `Tin tức | ${article.article_name}`,
     description: article.article_short_description,
   };
+}
+
+export async function generateStaticParams() {
+  const res = await fetch(`${BACKEND_URL_NEWS}`);
+  if (!res.ok) return notFound();
+
+  const json: IResponseJSON = await res.json();
+  if (!json.success) return notFound();
+
+  const data = json.data as { articles: INewsItemProps[] };
+
+  return data.articles.map(
+    (newsDetail) => ({ newsSlug: newsDetail.article_slug })
+  );
 }
 
 export default async function NewsDetailPage({
