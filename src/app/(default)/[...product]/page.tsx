@@ -26,7 +26,7 @@ import "./page.css";
 async function getProduct(slug, pid) {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/product/${encodeURIComponent(pid.replaceAll(" ", "+"))}`,
+      `${BACKEND_URL}/products/${encodeURIComponent(pid.replaceAll(" ", "+"))}`,
       {
         next: { revalidate: 60 },
       }
@@ -43,7 +43,7 @@ async function getProduct(slug, pid) {
 async function getRelatedProducts(slug, pid) {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/product/getRecommend/${encodeURIComponent(
+      `${BACKEND_URL}/products/getRecommend/${encodeURIComponent(
         pid.replaceAll(" ", "+")
       )}`,
       {
@@ -87,8 +87,12 @@ export default async function ProductPage({
 }) {
   const slug = params.product;
   const { pid } = searchParams;
+
+  // console.log("test ldm", slug, encodeURIComponent(pid.replaceAll(" ", "+")));
+
   const res = await getProduct(slug, pid);
   const relatedProducts = await getRelatedProducts(slug, pid);
+  // console.log("realated", relatedProducts);
   const productInfo: IBuyForm = {
     product_id: decodeURIComponent(res.data.product.product_id_hashed).replace(
       " ",
